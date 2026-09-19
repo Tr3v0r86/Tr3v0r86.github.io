@@ -1,0 +1,568 @@
+{
+  "site": {
+    "name": "Trevor Cardozo",
+    "origin": "https://trevorcardozo.com"
+  },
+  "expectedSlugs": [
+    "turnkeep",
+    "reggio-projects",
+    "padlano",
+    "learning-and-making",
+    "elc-portal",
+    "pomodoist",
+    "project-dashboard",
+    "esp32-experiments"
+  ],
+  "projects": [
+    {
+      "slug": "turnkeep",
+      "title": "Turnkeep",
+      "descriptor": "A character case for the tabletop",
+      "status": "Open-source prototype",
+      "role": "Product design and development",
+      "order": 1,
+      "featured": true,
+      "summary": "I designed Turnkeep to bring the game back to the table: a character case that combines storage, a small display and tactile controls for tabletop play. The public prototype includes editable CAD, printable parts, firmware and build instructions so other makers can adapt it. It is a project about making things for the hobbies I love, with the next stages still being tested and developed.",
+      "cover": {
+        "src": "/media/turnkeep-product-hero-1600-e2a49b2f9a.webp",
+        "width": 1600,
+        "height": 1219,
+        "variants": [
+          {
+            "src": "/media/turnkeep-product-hero-480-8556f22d82.webp",
+            "width": 480,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/turnkeep-product-hero-960-a3f98c826e.webp",
+            "width": 960,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/turnkeep-product-hero-1600-e2a49b2f9a.webp",
+            "width": 1600,
+            "type": "image/webp"
+          }
+        ],
+        "alt": "Open Turnkeep case with storage and a small character display",
+        "caption": "Open and docked · actual CAD render"
+      },
+      "gallery": [
+        {
+          "src": "/media/turnkeep-closed-1600-2a34c4f0f3.webp",
+          "width": 1600,
+          "height": 1244,
+          "variants": [
+            {
+              "src": "/media/turnkeep-closed-480-0bf35f4668.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/turnkeep-closed-960-89cec70b62.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/turnkeep-closed-1600-2a34c4f0f3.webp",
+              "width": 1600,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Closed Turnkeep case with ribbed sliding lid",
+          "caption": "Packed for the next game · CAD render",
+          "layout": "pair"
+        },
+        {
+          "src": "/media/turnkeep-exploded-1600-7e0d82a521.webp",
+          "width": 1600,
+          "height": 1244,
+          "variants": [
+            {
+              "src": "/media/turnkeep-exploded-480-24d0685ad5.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/turnkeep-exploded-960-5e6de6e26b.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/turnkeep-exploded-1600-7e0d82a521.webp",
+              "width": 1600,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Case body, sliding lid and display module separated",
+          "caption": "The parts behind the case · CAD render",
+          "layout": "pair"
+        },
+        {
+          "src": "/media/turnkeep-screen-320-33d7956be0.webp",
+          "width": 320,
+          "height": 170,
+          "variants": [
+            {
+              "src": "/media/turnkeep-screen-320-33d7956be0.webp",
+              "width": 320,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Simulated tabletop character display with health and actions",
+          "caption": "The offline companion · firmware simulator",
+          "layout": "wide"
+        }
+      ],
+      "links": [
+        {
+          "label": "Build Turnkeep",
+          "href": "/turnkeep/"
+        },
+        {
+          "label": "View source",
+          "href": "https://github.com/Tr3v0r86/turnkeep"
+        }
+      ]
+    },
+    {
+      "slug": "reggio-projects",
+      "title": "Reggio projects",
+      "descriptor": "A decade of questions made tangible",
+      "status": "Educational practice",
+      "role": "Educational design and facilitation",
+      "order": 2,
+      "featured": true,
+      "summary": "Over the past decade, my educational work has brought materials, electronics and open-ended questions into children's project work. This selection gathers the provocations, prototypes and documentation I have designed or co-facilitated, from Arduino explorations to a Year 6 AI sprint. The objects matter, but so does the record of how ideas changed while children made, tested and discussed them.",
+      "cover": {
+        "src": "/media/arduino-object-18-960-514f3b687d.webp",
+        "width": 960,
+        "height": 765,
+        "variants": [
+          {
+            "src": "/media/arduino-object-18-480-718d1ec74c.webp",
+            "width": 480,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/arduino-object-18-960-514f3b687d.webp",
+            "width": 960,
+            "type": "image/webp"
+          }
+        ],
+        "alt": "Child-drawn diagram connecting a wire, temperature sensor and Arduino",
+        "caption": "Making sense of a circuit · child-authored drawing",
+        "credit": {
+          "text": "Learning and making by children; facilitation/documentation by Trevor Cardozo, ELC."
+        },
+        "textEquivalent": "The drawing traces the wire linking an Arduino to a temperature sensor."
+      },
+      "gallery": [
+        {
+          "src": "/media/arduino-object-21-960-462bdb5573.webp",
+          "width": 960,
+          "height": 1292,
+          "variants": [
+            {
+              "src": "/media/arduino-object-21-480-653d9397d7.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/arduino-object-21-960-462bdb5573.webp",
+              "width": 960,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Arduino and sensor connected to a moss terrarium",
+          "caption": "A question about moss becomes a working prototype",
+          "layout": "pair",
+          "credit": {
+            "text": "Learning and making by children; facilitation/documentation by Trevor Cardozo, ELC."
+          }
+        },
+        {
+          "src": "/media/arduino-object-14-1600-9a4adb76a0.webp",
+          "width": 1600,
+          "height": 1069,
+          "variants": [
+            {
+              "src": "/media/arduino-object-14-480-e675287307.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/arduino-object-14-960-ddbc653603.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/arduino-object-14-1600-9a4adb76a0.webp",
+              "width": 1600,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "An Arduino board, USB cable and blue temperature sensor",
+          "caption": "Materials for an investigation",
+          "layout": "pair",
+          "credit": {
+            "text": "Learning and making by children; facilitation/documentation by Trevor Cardozo, ELC."
+          }
+        },
+        {
+          "src": "/media/micro-fungi-480-f94a182f31.webp",
+          "width": 480,
+          "height": 172,
+          "variants": [
+            {
+              "src": "/media/micro-fungi-480-f94a182f31.webp",
+              "width": 480,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "A collection of fungi arranged for close observation",
+          "caption": "Microprojects · materials for noticing, drawing and questioning",
+          "layout": "wide",
+          "credit": {
+            "text": "Learning and making by children; facilitation/documentation by Trevor Cardozo, ELC."
+          }
+        },
+        {
+          "src": "/media/ai-critique-426-315e109d61.webp",
+          "width": 426,
+          "height": 230,
+          "variants": [
+            {
+              "src": "/media/ai-critique-426-315e109d61.webp",
+              "width": 426,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Handwritten design critique of a student newspaper website",
+          "caption": "Year 6 AI sprint · children critique their design",
+          "layout": "wide",
+          "credit": {
+            "text": "Children’s design work; co-facilitated by Trevor, Goldie and Anat, ELC."
+          },
+          "textEquivalent": "The critique asks for purposeful colours, a logo that looks more like an elephant, and a different sticky-note colour."
+        }
+      ],
+      "links": []
+    },
+    {
+      "slug": "padlano",
+      "title": "Padlano",
+      "descriptor": "Less organising. More padel.",
+      "status": "Live web app",
+      "role": "Product design and development",
+      "order": 3,
+      "featured": true,
+      "summary": "I built Padlano to make a casual padel session easier to run from one phone. It creates Americano rotations, tracks scores and ranks players fairly when someone sits out a round. The app is free to use without an account, with data stored locally unless players choose to share a session or league. It grew from wanting less administration between games and more time on court.",
+      "cover": {
+        "src": "/media/padlano-court-390-4ddf100364.webp",
+        "width": 390,
+        "height": 844,
+        "variants": [
+          {
+            "src": "/media/padlano-court-390-4ddf100364.webp",
+            "width": 390,
+            "type": "image/webp"
+          }
+        ],
+        "alt": "Padlano court scoring screen with four synthetic players",
+        "caption": "Court, score and next rounds · synthetic players"
+      },
+      "gallery": [
+        {
+          "src": "/media/padlano-players-390-21b7a19d76.webp",
+          "width": 390,
+          "height": 844,
+          "variants": [
+            {
+              "src": "/media/padlano-players-390-21b7a19d76.webp",
+              "width": 390,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Padlano player setup screen with four synthetic names",
+          "caption": "A session begins with the players",
+          "layout": "wide"
+        }
+      ],
+      "links": [
+        {
+          "label": "Use Padlano",
+          "href": "https://padlano.com/"
+        }
+      ]
+    },
+    {
+      "slug": "learning-and-making",
+      "title": "A school for making",
+      "descriptor": "An alternative middle school & community maker space",
+      "status": "In development",
+      "role": "Concept and programme design",
+      "order": 4,
+      "featured": true,
+      "summary": "I am developing a model for an alternative middle school and community maker space where practical projects connect learning with the world outside the classroom. The work brings programme design, tools and spaces together, considering how young people can investigate ideas, build things and learn alongside others. This case presents the concept and design work in progress, rather than an operating school.",
+      "cover": {
+        "src": "/media/school-space-960-3cc05a6ba4.webp",
+        "width": 960,
+        "height": 686,
+        "variants": [
+          {
+            "src": "/media/school-space-480-516552d91f.webp",
+            "width": 480,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/school-space-960-3cc05a6ba4.webp",
+            "width": 960,
+            "type": "image/webp"
+          }
+        ],
+        "alt": "Conceptual open workshop with shared tables, shelves and work surfaces",
+        "caption": "Shared workshop · original spatial concept",
+        "textEquivalent": "A conceptual shared workshop places communal worktables alongside accessible materials and display surfaces. This is not a construction plan."
+      },
+      "gallery": [
+        {
+          "src": "/media/school-learning-960-b2a6ea7a06.webp",
+          "width": 960,
+          "height": 686,
+          "variants": [
+            {
+              "src": "/media/school-learning-480-5f2703405a.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/school-learning-960-b2a6ea7a06.webp",
+              "width": 960,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Investigate, make, share and reflect around a real question",
+          "caption": "Learning through a cycle of practical inquiry",
+          "layout": "wide",
+          "textEquivalent": "A real question connects four recurring activities: investigate, make, share and reflect."
+        }
+      ],
+      "links": []
+    },
+    {
+      "slug": "elc-portal",
+      "title": "ELC Portal",
+      "descriptor": "A clearer front door to school life",
+      "status": "Live school platform",
+      "role": "Experience design and development",
+      "order": 5,
+      "featured": true,
+      "summary": "I designed and built a family-facing portal to make school life easier to navigate beyond the classroom. It brings activities, events, calendars and useful information into a consistent front door, while connecting families to the school's existing registration systems. The work combines experience design with practical school operations: helping people find the next thing they need without having to understand the systems behind it.",
+      "cover": {
+        "src": "/media/portal-home-960-856bb411c9.webp",
+        "width": 960,
+        "height": 686,
+        "variants": [
+          {
+            "src": "/media/portal-home-480-3861b6cf9c.webp",
+            "width": 480,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/portal-home-960-856bb411c9.webp",
+            "width": 960,
+            "type": "image/webp"
+          }
+        ],
+        "alt": "ELC family portal with navigation and upcoming activities",
+        "caption": "A family-facing front door",
+        "credit": {
+          "text": "ELC International Schools. Institutional content by the ELC team."
+        }
+      },
+      "gallery": [
+        {
+          "src": "/media/portal-calendar-960-a376dcdb06.webp",
+          "width": 960,
+          "height": 686,
+          "variants": [
+            {
+              "src": "/media/portal-calendar-480-bfbe093527.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/portal-calendar-960-a376dcdb06.webp",
+              "width": 960,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "ELC calendar showing school events and navigation",
+          "caption": "Finding the next thing that matters",
+          "layout": "wide",
+          "credit": {
+            "text": "ELC International Schools. Institutional content by the ELC team."
+          }
+        }
+      ],
+      "links": [
+        {
+          "label": "Visit ELC Portal",
+          "href": "https://elcportal.elc.ac.th/"
+        }
+      ]
+    },
+    {
+      "slug": "pomodoist",
+      "title": "Pomodoist",
+      "descriptor": "One small screen. One thing at a time.",
+      "status": "Hardware/software prototype",
+      "role": "Firmware and interface design",
+      "order": 6,
+      "featured": true,
+      "summary": "Pomodoist is my experiment in giving focused work a small physical interface. It brings a Pomodoro timer and Todoist tasks onto ESP32 devices, separating the shared timer logic from the screen and controls of each board. I am exploring how a dedicated object can keep one task in view without adding another full computer interface to the desk.",
+      "cover": {
+        "src": "/media/pomodoist-focus-320-f747c72e02.webp",
+        "width": 320,
+        "height": 170,
+        "variants": [
+          {
+            "src": "/media/pomodoist-focus-320-f747c72e02.webp",
+            "width": 320,
+            "type": "image/webp"
+          }
+        ],
+        "alt": "Pomodoist interface reference showing a 25-minute timer and one task",
+        "caption": "Focus face · interface reference, not a device photograph"
+      },
+      "gallery": [
+        {
+          "src": "/media/pomodoist-picker-320-2040f70312.webp",
+          "width": 320,
+          "height": 170,
+          "variants": [
+            {
+              "src": "/media/pomodoist-picker-320-2040f70312.webp",
+              "width": 320,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Pomodoist interface reference for choosing a task with two buttons",
+          "caption": "Task selection · interface reference",
+          "layout": "wide"
+        }
+      ],
+      "links": []
+    },
+    {
+      "slug": "project-dashboard",
+      "title": "Project dashboard",
+      "descriptor": "A little structure for shared work",
+      "status": "Public source",
+      "role": "Product design and development",
+      "order": 7,
+      "featured": true,
+      "summary": "I turned an internal project-management tool into a public single-file dashboard template. It brings priorities, progress and weekly updates into one place, with browser-based storage and an optional shareable view. The aim was to make a useful working tool that someone could adapt and host without setting up a server or committing to another subscription.",
+      "cover": {
+        "src": "/media/dashboard-overview-960-e1df1feec6.webp",
+        "width": 960,
+        "height": 686,
+        "variants": [
+          {
+            "src": "/media/dashboard-overview-480-82fc51abee.webp",
+            "width": 480,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/dashboard-overview-960-e1df1feec6.webp",
+            "width": 960,
+            "type": "image/webp"
+          }
+        ],
+        "alt": "Public project dashboard demo with priorities and owners",
+        "caption": "The working overview · synthetic demonstration data"
+      },
+      "gallery": [
+        {
+          "src": "/media/dashboard-weekly-960-276b0e0ccf.webp",
+          "width": 960,
+          "height": 686,
+          "variants": [
+            {
+              "src": "/media/dashboard-weekly-480-af80a40c08.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/dashboard-weekly-960-276b0e0ccf.webp",
+              "width": 960,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Weekly update view in the public dashboard template",
+          "caption": "A place for the weekly update",
+          "layout": "wide"
+        }
+      ],
+      "links": [
+        {
+          "label": "Try the demo",
+          "href": "https://trevorcardozo.com/projects-dashboard-template/"
+        },
+        {
+          "label": "View source",
+          "href": "https://github.com/Tr3v0r86/projects-dashboard-template"
+        }
+      ]
+    },
+    {
+      "slug": "esp32-experiments",
+      "title": "ESP32 experiments",
+      "descriptor": "Small devices with shared foundations",
+      "status": "Ongoing experiments",
+      "role": "Firmware, interfaces and hardware exploration",
+      "order": 8,
+      "featured": true,
+      "summary": "My ESP32 work explores how useful little devices can share the same underlying software. Timers, scoreboards and desk displays become different faces for portable app logic, with each board contributing its own screen, controls and physical constraints. This is an ongoing collection of firmware, interface and hardware experiments, built to learn from and reuse across the things I make.",
+      "cover": {
+        "src": "/media/esp-platform-960-9e711e4bd9.webp",
+        "width": 960,
+        "height": 686,
+        "variants": [
+          {
+            "src": "/media/esp-platform-480-654bf60365.webp",
+            "width": 480,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/esp-platform-960-9e711e4bd9.webp",
+            "width": 960,
+            "type": "image/webp"
+          }
+        ],
+        "alt": "Shared TrevOS app logic connects a timer, scoreboard and desk display",
+        "caption": "One software foundation, several kinds of device",
+        "textEquivalent": "Board support connects each device’s screen, controls and connections to TrevOS and reusable app logic. The diagram describes the architecture, not completed hardware support."
+      },
+      "gallery": [
+        {
+          "src": "/media/esp-launcher-320-a26ce43865.webp",
+          "width": 320,
+          "height": 170,
+          "variants": [
+            {
+              "src": "/media/esp-launcher-320-a26ce43865.webp",
+              "width": 320,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "TrevOS simulator launcher with Pomodoist, Padlano, Clock and Settings",
+          "caption": "TrevOS launcher · saved simulator baseline",
+          "layout": "wide"
+        }
+      ],
+      "links": []
+    }
+  ]
+}
