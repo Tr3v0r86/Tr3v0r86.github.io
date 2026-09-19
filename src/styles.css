@@ -7,3 +7,23 @@
 @media(max-width:1099px){.collection-layout{grid-template-columns:1fr}.preview{display:none}.collection{grid-template-columns:repeat(6,minmax(0,1fr));gap:65px 40px}.piece:nth-child(n){grid-column:span 3}.intro h1{font-size:clamp(44px,7.7vw,78px)}.case-lead{grid-template-columns:1fr}.case-story{max-width:65ch}.case-heading h1{font-size:76px}.case-meta{gap:38px}.case-story{font-size:20px}.case-gallery{margin-top:52px}}
 @media(max-width:699px){html{scroll-padding-top:20px}.site-header,main,.site-footer{padding-inline:20px}.site-header{padding-block:18px;flex-wrap:wrap;gap:5px}.signature{font-size:22px}.site-header nav{gap:24px;font-size:14px;width:100%;justify-content:space-between}.site-header nav a{min-height:44px}.intro{padding-block:30px 38px}.intro-kicker{margin-bottom:24px}.intro-kicker .eyebrow,.location{font-size:11px}.intro h1{font-size:clamp(36px,9.6vw,63px);line-height:1.08;letter-spacing:-.055em}.intro-bottom{display:block;margin-top:25px}.intro-bottom p{font-size:18px}.desktop-break{display:none}.work-jump{margin-top:22px;justify-content:space-between}.section-label{padding-bottom:22px}.section-label h2{font-size:14px}.section-label>span{font-size:11px}.collection{display:block;padding-bottom:55px}.piece:nth-child(n){margin:0 0 44px}.artifact{max-height:470px}.piece--reggio-projects .artifact{transform:none;aspect-ratio:1.16}.piece--padlano .artifact{aspect-ratio:1.15}.piece--pomodoist .artifact{aspect-ratio:1.18}.piece h3{font-size:25px}.piece-caption{margin-top:18px}.piece-open{opacity:1}.site-footer{grid-template-columns:1fr;gap:28px;padding-top:36px}.site-footer h2{font-size:50px}.footer-note{font-size:17px}.colophon{flex-wrap:wrap;margin-top:4px;font-size:12px}.colophon>span:nth-child(2){display:none}.case-topline{margin-top:8px}.case-heading{padding-top:25px}.case-heading h1{font-size:clamp(42px,12vw,72px);overflow-wrap:anywhere}.case-meta{gap:24px;flex-wrap:wrap;margin-top:25px}.case-meta dd{font-size:14px}.case-meta>div:first-child{flex-basis:100%}.case-lead{gap:30px}.case-story{font-size:18px;padding-top:20px}.case-gallery{grid-template-columns:1fr;gap:35px;margin-block:40px 60px}.gallery-item--wide{grid-column:auto}.case--padlano .hero-image,.case--padlano .gallery-image{padding:25px}.case--pomodoist .hero-image,.case--pomodoist .gallery-image{padding:25px}.case--pomodoist .hero-image img,.case--pomodoist .gallery-image img{border-width:7px}.case-pagination{padding-bottom:44px;gap:20px}.case-pagination strong{font-size:24px}.case-pagination span{font-size:12px}.elsewhere{gap:25px}.preview{display:none}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important;view-transition-name:none!important}.piece-link:hover .artifact,.piece-link:focus-visible .artifact{transform:none}@view-transition{navigation:none}}
+
+/* Real bench photographs keep their complete frames; screens keep their aspect ratios. */
+.piece--turnkeep .artifact{aspect-ratio:.95;padding:18px;background:#dce1d7}
+.piece--turnkeep .artifact img{object-fit:contain}
+.piece--reggio-projects .artifact{aspect-ratio:1.15}
+.piece--reggio-projects .artifact img{object-fit:contain}
+.piece--pomodoist .artifact{aspect-ratio:.94;border-radius:4px;padding:18px;background:#dadfd9}
+.piece--pomodoist .artifact img{width:100%;height:100%;object-fit:contain;transform:none;border:0;border-radius:0;box-shadow:none}
+.piece--esp32-experiments .artifact{aspect-ratio:.95;padding:18px}
+.piece--project-dashboard .artifact{aspect-ratio:auto;padding:14px;background:#d8d6e0}
+.piece--project-dashboard .artifact img{width:100%;height:auto;object-fit:contain;object-position:center}
+.piece--second-brain-builder .artifact{aspect-ratio:auto;padding:0;background:#232419}
+.piece--second-brain-builder .artifact img{width:100%;height:auto;object-fit:contain}
+.piece--trips .artifact{aspect-ratio:auto;padding:16px;background:#eadbd7}
+.piece--trips .artifact img{width:100%;height:auto;object-fit:contain}
+.case--pomodoist .hero-image,.case--pomodoist .gallery-image{padding:0;background:#e9e7de}
+.case--pomodoist .hero-image img,.case--pomodoist .gallery-image img{border:0;border-radius:0}
+.case--padlano .gallery-item--pair .gallery-image{padding:0;background:#e9e7de}
+.case--padlano .gallery-item--pair .gallery-image img{border:0;border-radius:0;max-height:760px;width:100%;object-fit:contain}
+@media(max-width:699px){.piece--turnkeep .artifact,.piece--pomodoist .artifact,.piece--esp32-experiments .artifact{aspect-ratio:1.05}.piece--reggio-projects .artifact{aspect-ratio:1.16}}

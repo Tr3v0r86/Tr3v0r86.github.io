@@ -8,7 +8,7 @@ import {validateCatalog,safeURL,verifyMedia} from '../scripts/build.mjs';
 import {renderCase,renderHome} from '../src/templates.mjs';
 const catalog=JSON.parse(await readFile(new URL('../content/projects.json',import.meta.url),'utf8'));
 const changed=fn=>{const c=structuredClone(catalog);fn(c);return c;};
-test('real catalog has all eight required cases and decoded media',async()=>{const p=validateCatalog(catalog);assert.equal(p.length,8);await verifyMedia(p);});
+test('real catalog includes the complete requested collection and decoded media',async()=>{const p=validateCatalog(catalog);assert.deepEqual(p.map(p=>p.slug),catalog.expectedSlugs);assert(p.some(p=>p.slug==='second-brain-builder'));assert(p.some(p=>p.slug==='trips'));assert(!p.some(p=>/face-tracking|espcam/.test(p.slug)));await verifyMedia(p);});
 test('invalid content fails with an actionable field',()=>{
  for(const [change,match] of [
   [c=>c.projects[1].slug=c.projects[0].slug,/slug/],

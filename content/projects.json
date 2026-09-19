@@ -11,7 +11,9 @@
     "elc-portal",
     "pomodoist",
     "project-dashboard",
-    "esp32-experiments"
+    "esp32-experiments",
+    "second-brain-builder",
+    "trips"
   ],
   "projects": [
     {
@@ -24,30 +26,55 @@
       "featured": true,
       "summary": "I designed Turnkeep to bring the game back to the table: a character case that combines storage, a small display and tactile controls for tabletop play. The public prototype includes editable CAD, printable parts, firmware and build instructions so other makers can adapt it. It is a project about making things for the hobbies I love, with the next stages still being tested and developed.",
       "cover": {
-        "src": "/media/turnkeep-product-hero-1600-e2a49b2f9a.webp",
-        "width": 1600,
-        "height": 1219,
+        "src": "/media/turnkeep-prototype-1000-07cfc67341.webp",
+        "width": 1000,
+        "height": 1773,
         "variants": [
           {
-            "src": "/media/turnkeep-product-hero-480-8556f22d82.webp",
+            "src": "/media/turnkeep-prototype-480-1ec2f159be.webp",
             "width": 480,
             "type": "image/webp"
           },
           {
-            "src": "/media/turnkeep-product-hero-960-a3f98c826e.webp",
+            "src": "/media/turnkeep-prototype-960-7783a47665.webp",
             "width": 960,
             "type": "image/webp"
           },
           {
-            "src": "/media/turnkeep-product-hero-1600-e2a49b2f9a.webp",
-            "width": 1600,
+            "src": "/media/turnkeep-prototype-1000-07cfc67341.webp",
+            "width": 1000,
             "type": "image/webp"
           }
         ],
-        "alt": "Open Turnkeep case with storage and a small character display",
-        "caption": "Open and docked · actual CAD render"
+        "alt": "Physical Turnkeep prototype open on the workbench with dice and character components",
+        "caption": "The physical prototype, on the workbench"
       },
       "gallery": [
+        {
+          "src": "/media/turnkeep-product-hero-1600-e2a49b2f9a.webp",
+          "width": 1600,
+          "height": 1219,
+          "variants": [
+            {
+              "src": "/media/turnkeep-product-hero-480-8556f22d82.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/turnkeep-product-hero-960-a3f98c826e.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/turnkeep-product-hero-1600-e2a49b2f9a.webp",
+              "width": 1600,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Open Turnkeep case with storage and a small character display",
+          "caption": "Open and docked · actual CAD render",
+          "layout": "wide"
+        },
         {
           "src": "/media/turnkeep-closed-1600-2a34c4f0f3.webp",
           "width": 1600,
@@ -135,97 +162,280 @@
       "featured": true,
       "summary": "Over the past decade, my educational work has brought materials, electronics and open-ended questions into children's project work. This selection gathers the provocations, prototypes and documentation I have designed or co-facilitated, from Arduino explorations to a Year 6 AI sprint. The objects matter, but so does the record of how ideas changed while children made, tested and discussed them.",
       "cover": {
-        "src": "/media/arduino-object-18-960-514f3b687d.webp",
-        "width": 960,
-        "height": 765,
+        "src": "/media/reggioprojects8-1600-e5d235ba01.webp",
+        "width": 1600,
+        "height": 1205,
         "variants": [
           {
-            "src": "/media/arduino-object-18-480-718d1ec74c.webp",
+            "src": "/media/reggioprojects8-480-5dc93f3069.webp",
             "width": 480,
             "type": "image/webp"
           },
           {
-            "src": "/media/arduino-object-18-960-514f3b687d.webp",
+            "src": "/media/reggioprojects8-960-6a2ca8f237.webp",
             "width": 960,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/reggioprojects8-1600-e5d235ba01.webp",
+            "width": 1600,
             "type": "image/webp"
           }
         ],
-        "alt": "Child-drawn diagram connecting a wire, temperature sensor and Arduino",
-        "caption": "Making sense of a circuit · child-authored drawing",
+        "alt": "A micro:bit connected to motors, a battery and wiring on a project table",
+        "caption": "Small components, open-ended possibilities",
         "credit": {
-          "text": "Learning and making by children; facilitation/documentation by Trevor Cardozo, ELC."
-        },
-        "textEquivalent": "The drawing traces the wire linking an Arduino to a temperature sensor."
+          "text": "Children’s project work; educational facilitation/documentation by Trevor Cardozo, ELC."
+        }
       },
       "gallery": [
         {
-          "src": "/media/arduino-object-21-960-462bdb5573.webp",
-          "width": 960,
-          "height": 1292,
+          "src": "/media/reggioprojects-1000-b261a8719c.webp",
+          "width": 1000,
+          "height": 1778,
           "variants": [
             {
-              "src": "/media/arduino-object-21-480-653d9397d7.webp",
+              "src": "/media/reggioprojects-480-71814c5f6e.webp",
               "width": 480,
               "type": "image/webp"
             },
             {
-              "src": "/media/arduino-object-21-960-462bdb5573.webp",
+              "src": "/media/reggioprojects-960-52fcf758a5.webp",
               "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/reggioprojects-1000-b261a8719c.webp",
+              "width": 1000,
               "type": "image/webp"
             }
           ],
-          "alt": "Arduino and sensor connected to a moss terrarium",
-          "caption": "A question about moss becomes a working prototype",
+          "alt": "A projected pattern falls across a constructed model",
+          "caption": "Light, shadow and a constructed world",
           "layout": "pair",
           "credit": {
-            "text": "Learning and making by children; facilitation/documentation by Trevor Cardozo, ELC."
+            "text": "Children’s project work; educational facilitation/documentation by Trevor Cardozo, ELC."
           }
         },
         {
-          "src": "/media/arduino-object-14-1600-9a4adb76a0.webp",
-          "width": 1600,
-          "height": 1069,
+          "src": "/media/reggioprojects2-1000-a6f1551f56.webp",
+          "width": 1000,
+          "height": 1778,
           "variants": [
             {
-              "src": "/media/arduino-object-14-480-e675287307.webp",
+              "src": "/media/reggioprojects2-480-c709aa13bb.webp",
               "width": 480,
               "type": "image/webp"
             },
             {
-              "src": "/media/arduino-object-14-960-ddbc653603.webp",
+              "src": "/media/reggioprojects2-960-65f95e6da3.webp",
               "width": 960,
               "type": "image/webp"
             },
             {
-              "src": "/media/arduino-object-14-1600-9a4adb76a0.webp",
+              "src": "/media/reggioprojects2-1000-a6f1551f56.webp",
+              "width": 1000,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "An atelier table holding sketches, electronics and making materials",
+          "caption": "The project table, mid-investigation",
+          "layout": "pair",
+          "credit": {
+            "text": "Children’s project work; educational facilitation/documentation by Trevor Cardozo, ELC."
+          }
+        },
+        {
+          "src": "/media/reggioprojects3-1000-8c3a398471.webp",
+          "width": 1000,
+          "height": 1778,
+          "variants": [
+            {
+              "src": "/media/reggioprojects3-480-a2ea0a1562.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/reggioprojects3-960-5e4ad0bb99.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/reggioprojects3-1000-8c3a398471.webp",
+              "width": 1000,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Terrariums sit alongside electronics and project documentation",
+          "caption": "Living systems meet digital materials",
+          "layout": "pair",
+          "credit": {
+            "text": "Children’s project work; educational facilitation/documentation by Trevor Cardozo, ELC."
+          }
+        },
+        {
+          "src": "/media/reggioprojects4-1000-453937794e.webp",
+          "width": 1000,
+          "height": 1778,
+          "variants": [
+            {
+              "src": "/media/reggioprojects4-480-1f3c09bcc9.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/reggioprojects4-960-51ad64a997.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/reggioprojects4-1000-453937794e.webp",
+              "width": 1000,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Deconstructed electronic components and circuit drawings on display",
+          "caption": "Taking things apart to see how they work",
+          "layout": "pair",
+          "credit": {
+            "text": "Children’s project work; educational facilitation/documentation by Trevor Cardozo, ELC."
+          }
+        },
+        {
+          "src": "/media/reggioprojects5-1000-5f35d982dd.webp",
+          "width": 1000,
+          "height": 1333,
+          "variants": [
+            {
+              "src": "/media/reggioprojects5-480-c8f5123ff5.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/reggioprojects5-960-ee21435ac4.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/reggioprojects5-1000-5f35d982dd.webp",
+              "width": 1000,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "A terrarium linked to an Arduino, humidity sensor and display",
+          "caption": "A living system, made measurable",
+          "layout": "pair",
+          "credit": {
+            "text": "Children’s project work; educational facilitation/documentation by Trevor Cardozo, ELC."
+          }
+        },
+        {
+          "src": "/media/reggioprojects7-1000-c8f9be7b93.webp",
+          "width": 1000,
+          "height": 1351,
+          "variants": [
+            {
+              "src": "/media/reggioprojects7-480-9df43bedb8.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/reggioprojects7-960-6a90a0494b.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/reggioprojects7-1000-c8f9be7b93.webp",
+              "width": 1000,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "A LEGO robot with sensors in front of a drawn design",
+          "caption": "From a drawn idea to a moving machine",
+          "layout": "pair",
+          "credit": {
+            "text": "Children’s project work; educational facilitation/documentation by Trevor Cardozo, ELC."
+          }
+        },
+        {
+          "src": "/media/reggioprojects6-1600-9a70a18050.webp",
+          "width": 1600,
+          "height": 371,
+          "variants": [
+            {
+              "src": "/media/reggioprojects6-480-958d7ffb93.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/reggioprojects6-960-d3cd33f3ee.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/reggioprojects6-1600-9a70a18050.webp",
               "width": 1600,
               "type": "image/webp"
             }
           ],
-          "alt": "An Arduino board, USB cable and blue temperature sensor",
-          "caption": "Materials for an investigation",
-          "layout": "pair",
+          "alt": "An exposed electronic circuit connected to a long illuminated LED strip",
+          "caption": "An investigation in light and electronics",
+          "layout": "wide",
           "credit": {
-            "text": "Learning and making by children; facilitation/documentation by Trevor Cardozo, ELC."
+            "text": "Children’s project work; educational facilitation/documentation by Trevor Cardozo, ELC."
           }
         },
         {
-          "src": "/media/micro-fungi-480-f94a182f31.webp",
-          "width": 480,
-          "height": 172,
+          "src": "/media/reggioprojects9-1600-f063ca8fac.webp",
+          "width": 1600,
+          "height": 900,
           "variants": [
             {
-              "src": "/media/micro-fungi-480-f94a182f31.webp",
+              "src": "/media/reggioprojects9-480-90939c45da.webp",
               "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/reggioprojects9-960-77529d0583.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/reggioprojects9-1600-f063ca8fac.webp",
+              "width": 1600,
               "type": "image/webp"
             }
           ],
-          "alt": "A collection of fungi arranged for close observation",
-          "caption": "Microprojects · materials for noticing, drawing and questioning",
+          "alt": "Arduino, breadboard and sensor alongside a circuit explanation",
+          "caption": "Connecting diagrams with something you can test",
           "layout": "wide",
           "credit": {
-            "text": "Learning and making by children; facilitation/documentation by Trevor Cardozo, ELC."
+            "text": "Children’s project work; educational facilitation/documentation by Trevor Cardozo, ELC."
           }
+        },
+        {
+          "src": "/media/arduino-object-18-960-514f3b687d.webp",
+          "width": 960,
+          "height": 765,
+          "variants": [
+            {
+              "src": "/media/arduino-object-18-480-718d1ec74c.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/arduino-object-18-960-514f3b687d.webp",
+              "width": 960,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Child-drawn diagram connecting a wire, temperature sensor and Arduino",
+          "caption": "Making sense of a circuit · child-authored drawing",
+          "credit": {
+            "text": "Learning and making by children; facilitation/documentation by Trevor Cardozo, ELC."
+          },
+          "textEquivalent": "The drawing traces the wire linking an Arduino to a temperature sensor.",
+          "layout": "pair"
         },
         {
           "src": "/media/ai-critique-426-315e109d61.webp",
@@ -240,7 +450,7 @@
           ],
           "alt": "Handwritten design critique of a student newspaper website",
           "caption": "Year 6 AI sprint · children critique their design",
-          "layout": "wide",
+          "layout": "pair",
           "credit": {
             "text": "Children’s design work; co-facilitated by Trevor, Goldie and Anat, ELC."
           },
@@ -287,6 +497,31 @@
           "alt": "Padlano player setup screen with four synthetic names",
           "caption": "A session begins with the players",
           "layout": "wide"
+        },
+        {
+          "src": "/media/padlanoplanning-1000-7d2a61fbc5.webp",
+          "width": 1000,
+          "height": 1778,
+          "variants": [
+            {
+              "src": "/media/padlanoplanning-480-a3f3430b6e.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/padlanoplanning-960-75d84d4e71.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/padlanoplanning-1000-7d2a61fbc5.webp",
+              "width": 1000,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Padlano device components laid out beside handwritten plans",
+          "caption": "The hardware companion, worked out on paper",
+          "layout": "pair"
         }
       ],
       "links": [
@@ -423,20 +658,70 @@
       "featured": true,
       "summary": "Pomodoist is my experiment in giving focused work a small physical interface. It brings a Pomodoro timer and Todoist tasks onto ESP32 devices, separating the shared timer logic from the screen and controls of each board. I am exploring how a dedicated object can keep one task in view without adding another full computer interface to the desk.",
       "cover": {
-        "src": "/media/pomodoist-focus-320-f747c72e02.webp",
-        "width": 320,
-        "height": 170,
+        "src": "/media/pomodoist-video-still-1000-976f973d80.webp",
+        "width": 1000,
+        "height": 1778,
         "variants": [
           {
-            "src": "/media/pomodoist-focus-320-f747c72e02.webp",
-            "width": 320,
+            "src": "/media/pomodoist-video-still-480-a796b66b23.webp",
+            "width": 480,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/pomodoist-video-still-960-b89eb0e1bd.webp",
+            "width": 960,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/pomodoist-video-still-1000-976f973d80.webp",
+            "width": 1000,
             "type": "image/webp"
           }
         ],
-        "alt": "Pomodoist interface reference showing a 25-minute timer and one task",
-        "caption": "Focus face · interface reference, not a device photograph"
+        "alt": "Physical Pomodoist device in a printed enclosure, showing its break timer",
+        "caption": "The working device · still from prototype footage"
       },
       "gallery": [
+        {
+          "src": "/media/pomodoist-prototype-1000-fdc6fe6925.webp",
+          "width": 1000,
+          "height": 1773,
+          "variants": [
+            {
+              "src": "/media/pomodoist-prototype-480-2d2d6590ae.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/pomodoist-prototype-960-6b2b0cbad3.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/pomodoist-prototype-1000-fdc6fe6925.webp",
+              "width": 1000,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Wired display and electronics on a blue work mat",
+          "caption": "The electronics before the enclosure",
+          "layout": "pair"
+        },
+        {
+          "src": "/media/pomodoist-focus-320-f747c72e02.webp",
+          "width": 320,
+          "height": 170,
+          "variants": [
+            {
+              "src": "/media/pomodoist-focus-320-f747c72e02.webp",
+              "width": 320,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Pomodoist interface reference showing a 25-minute timer and one task",
+          "caption": "Focus face · interface reference, not a device photograph",
+          "layout": "pair"
+        },
         {
           "src": "/media/pomodoist-picker-320-2040f70312.webp",
           "width": 320,
@@ -526,26 +811,101 @@
       "featured": true,
       "summary": "My ESP32 work explores how useful little devices can share the same underlying software. Timers, scoreboards and desk displays become different faces for portable app logic, with each board contributing its own screen, controls and physical constraints. This is an ongoing collection of firmware, interface and hardware experiments, built to learn from and reuse across the things I make.",
       "cover": {
-        "src": "/media/esp-platform-960-9e711e4bd9.webp",
-        "width": 960,
-        "height": 686,
+        "src": "/media/espprojects-1000-90e2849eac.webp",
+        "width": 1000,
+        "height": 1778,
         "variants": [
           {
-            "src": "/media/esp-platform-480-654bf60365.webp",
+            "src": "/media/espprojects-480-1d604fc160.webp",
             "width": 480,
             "type": "image/webp"
           },
           {
-            "src": "/media/esp-platform-960-9e711e4bd9.webp",
+            "src": "/media/espprojects-960-989eb5cfbe.webp",
             "width": 960,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/espprojects-1000-90e2849eac.webp",
+            "width": 1000,
             "type": "image/webp"
           }
         ],
-        "alt": "Shared TrevOS app logic connects a timer, scoreboard and desk display",
-        "caption": "One software foundation, several kinds of device",
-        "textEquivalent": "Board support connects each device’s screen, controls and connections to TrevOS and reusable app logic. The diagram describes the architecture, not completed hardware support."
+        "alt": "Three ESP32 development boards on top of handwritten project plans",
+        "caption": "A family of boards and possible projects"
       },
       "gallery": [
+        {
+          "src": "/media/espdev2-1000-3a43c2176d.webp",
+          "width": 1000,
+          "height": 1773,
+          "variants": [
+            {
+              "src": "/media/espdev2-480-e7eb34c1b2.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/espdev2-960-f235ae36ad.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/espdev2-1000-3a43c2176d.webp",
+              "width": 1000,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Electronic modules and wiring on a green cutting mat",
+          "caption": "Components under the magnifying lamp",
+          "layout": "pair"
+        },
+        {
+          "src": "/media/espdev-1000-242248135e.webp",
+          "width": 1000,
+          "height": 1778,
+          "variants": [
+            {
+              "src": "/media/espdev-480-cfc5b95bfc.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/espdev-960-5791d42a03.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/espdev-1000-242248135e.webp",
+              "width": 1000,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "A development desk with device sketches and an interface on-screen",
+          "caption": "From the sketchbook to the screen",
+          "layout": "pair"
+        },
+        {
+          "src": "/media/esp-platform-960-9e711e4bd9.webp",
+          "width": 960,
+          "height": 686,
+          "variants": [
+            {
+              "src": "/media/esp-platform-480-654bf60365.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/esp-platform-960-9e711e4bd9.webp",
+              "width": 960,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Shared TrevOS app logic connects a timer, scoreboard and desk display",
+          "caption": "One software foundation, several kinds of device",
+          "textEquivalent": "Board support connects each device’s screen, controls and connections to TrevOS and reusable app logic. The diagram describes the architecture, not completed hardware support.",
+          "layout": "wide"
+        },
         {
           "src": "/media/esp-launcher-320-a26ce43865.webp",
           "width": 320,
@@ -563,6 +923,149 @@
         }
       ],
       "links": []
+    },
+    {
+      "slug": "second-brain-builder",
+      "title": "Second Brain Builder",
+      "descriptor": "A personal system, made personal",
+      "status": "Live web app",
+      "role": "System design and development",
+      "order": 9,
+      "featured": true,
+      "summary": "I made Second Brain Builder to help friends shape a knowledge system around their own work and habits. Each personalised build guides someone through questions about how they think, plan and keep track of things, then creates a plain-text blueprint for an AI-assisted workspace. It turns the structure behind my own second brain into something another person can make their own.",
+      "cover": {
+        "src": "/media/brain-home-1400-29313c533d.webp",
+        "width": 1400,
+        "height": 1000,
+        "variants": [
+          {
+            "src": "/media/brain-home-480-dcd68829ca.webp",
+            "width": 480,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/brain-home-960-d1c286dc05.webp",
+            "width": 960,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/brain-home-1400-29313c533d.webp",
+            "width": 1400,
+            "type": "image/webp"
+          }
+        ],
+        "alt": "Second Brain Builder website with its personalised-build entry form",
+        "caption": "The builder’s public front door"
+      },
+      "gallery": [
+        {
+          "src": "/media/brain-blueprint-1400-db204f782e.webp",
+          "width": 1400,
+          "height": 960,
+          "variants": [
+            {
+              "src": "/media/brain-blueprint-480-ee5fa1ad91.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/brain-blueprint-960-ee6d8dc6e1.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/brain-blueprint-1400-db204f782e.webp",
+              "width": 1400,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "A person’s context leads through guided questions to a plain-text workspace blueprint",
+          "caption": "From personal context to a working blueprint",
+          "layout": "wide",
+          "textEquivalent": "The builder uses a person’s habits, work and context, asks guided questions, and generates BLUEPRINT.md with instructions for folders, routines and boundaries."
+        }
+      ],
+      "links": [
+        {
+          "label": "See the builder",
+          "href": "https://brain.trevorcardozo.com/"
+        },
+        {
+          "label": "View source",
+          "href": "https://github.com/Tr3v0r86/brain-builder"
+        }
+      ]
+    },
+    {
+      "slug": "trips",
+      "title": "Trips",
+      "descriptor": "Custom apps for friends and loved ones",
+      "status": "Live web app",
+      "role": "Experience design and development",
+      "order": 10,
+      "featured": true,
+      "summary": "I make small, custom apps for friends and loved ones. Trips brings a shared day out into one easy-to-use guide: places to stop, the story behind each one, practical details and a checklist that stays in sync. Built as installable web pages with offline access, it puts the plan in everyone’s pocket and leaves room to enjoy the day together.",
+      "cover": {
+        "src": "/media/trips-itinerary-1400-5cedd15c67.webp",
+        "width": 1400,
+        "height": 1000,
+        "variants": [
+          {
+            "src": "/media/trips-itinerary-480-ac2523f8d3.webp",
+            "width": 480,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/trips-itinerary-960-1a7b0fea7b.webp",
+            "width": 960,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/trips-itinerary-1400-5cedd15c67.webp",
+            "width": 1400,
+            "type": "image/webp"
+          }
+        ],
+        "alt": "Trips day guide with a route, practical notes and the first stop",
+        "caption": "A day out, gathered into one shared guide"
+      },
+      "gallery": [
+        {
+          "src": "/media/trips-home-1400-5261eb4d23.webp",
+          "width": 1400,
+          "height": 1000,
+          "variants": [
+            {
+              "src": "/media/trips-home-480-a9b8c380e8.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/trips-home-960-c772dccbb5.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/trips-home-1400-5261eb4d23.webp",
+              "width": 1400,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Trips website listing a family day-trip guide",
+          "caption": "A small home for shared adventures",
+          "layout": "wide"
+        }
+      ],
+      "links": [
+        {
+          "label": "Explore Trips",
+          "href": "https://trips.trevorcardozo.com/"
+        },
+        {
+          "label": "View source",
+          "href": "https://github.com/Tr3v0r86/trips"
+        }
+      ]
     }
   ]
 }

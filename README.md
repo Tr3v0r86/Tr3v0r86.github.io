@@ -1,6 +1,6 @@
 # Trevor Cardozo · a working collection
 
-A static portfolio of tools, objects and learning experiences. Eight selected projects, native case-page navigation, and optional desktop previews. Node 24.14.1 generates the site from one validated JSON catalog. No runtime framework, backend or third-party requests.
+A static portfolio of tools, objects and learning experiences. Ten selected projects, native case-page navigation, and optional desktop previews. Node 24.14.1 generates the site from one validated JSON catalog. No runtime framework, backend or third-party requests.
 
 ## Local development
 
@@ -16,7 +16,7 @@ Open `http://127.0.0.1:4173`. Edit templates/styles in `src/`, then run `npm run
 
 ## Add or change a project
 
-Edit `content/projects.json`. Copy an existing record, use a unique kebab-case slug and positive `order`, add its slug to `expectedSlugs`, and set `featured` deliberately. Required fields: title, descriptor, role, status, one summary paragraph (maximum 90 words), cover, at least one distinct gallery image and a links array. Keep eight featured entries as the collection expands. Additional entries still get direct case URLs and appear in case navigation; an archive index is a later addition.
+Edit `content/projects.json`. Copy an existing record, use a unique kebab-case slug and positive `order`, add its slug to `expectedSlugs`, and set `featured` deliberately. Required fields: title, descriptor, role, status, one summary paragraph (maximum 90 words), cover, at least one distinct gallery image and a links array. The current ten entries are featured; select deliberately as the collection expands. Additional entries still get direct case URLs and appear in case navigation; an archive index is a later addition.
 
 Allowed statuses: Live web app; Live school platform; Open-source prototype; Educational practice; In development; Hardware/software prototype; Public source; Ongoing experiments. Label photos, CAD, interface references, simulator captures and concepts accurately. The school case must remain anonymous and undated, with no external links. Preserve institution/collaborator credits on other relevant work. Keep private sources and approval records outside this repository.
 
@@ -36,6 +36,6 @@ Budgets: JS 20KB gzip, CSS 30KB gzip, fonts 180KB; initial transfer under 900KB 
 
 No deploy runs on pull requests or main pushes. They only build/test and attach a preview artifact. `.github/workflows/pages.yml` deploys `dist/` only on manual dispatch from main, after the build job, with scoped Pages permissions. Local commits are not publication permission.
 
-On explicit publish authorization: record the current root commit/Pages settings, inspect the complete diff and media, finish visual/content review, then push the approved branch and merge through the chosen review path. Change root Pages from legacy main/root to GitHub Actions as part of that authorized release. Keep `trevorcardozo.com`, HTTPS and DNS unchanged. Dispatch the workflow and verify `/`, eight `/work/<slug>/` routes and `404.html`. Verify existing `/turnkeep/`, `/turnkeep/setup.html` and `/projects-dashboard-template/` remain live. The build must never create a root `turnkeep/` directory.
+On explicit publish authorization: record the current root commit/Pages settings, inspect the complete diff and media, finish visual/content review, then push the approved branch and merge through the chosen review path. Change root Pages from legacy main/root to GitHub Actions as part of that authorized release. Keep `trevorcardozo.com`, HTTPS and DNS unchanged. Dispatch the workflow and verify `/`, all `/work/<slug>/` routes and `404.html`. Verify existing `/turnkeep/`, `/turnkeep/setup.html` and `/projects-dashboard-template/` remain live. The build must never create a root `turnkeep/` directory.
 
 Baseline: root commit `f3eac5043200c7ff92ef00a67059d67163ac42b0`, legacy main/root, CNAME `trevorcardozo.com`, HTTPS enforced. Roll back by redeploying the previous artifact; for the first migration, use a new revert commit restoring the previous root content and restore Pages to legacy main/root. Never force-push or change DNS as a rollback shortcut. Recheck root and inherited project routes afterward.
