@@ -1320,6 +1320,15 @@
       },
       "gallery": [
         {
+          "src": "/media/trips-product-concept.svg",
+          "width": 900,
+          "height": 1400,
+          "alt": "Trips illustrative product interface with fictional example content",
+          "caption": "Travel-journal interface concept · illustrative day plan",
+          "layout": "detail",
+          "textEquivalent": "Concept for a personal island guide with an illustrative route, six stops, a story card and a shared checklist. Not the current live app interface."
+        },
+        {
           "src": "/media/trips-mobile-home-390-75e7097f18.webp",
           "width": 390,
           "height": 844,
@@ -1344,7 +1353,16 @@
           "label": "View source",
           "href": "https://github.com/Tr3v0r86/trips"
         }
-      ]
+      ],
+      "collectionCover": {
+        "src": "/media/trips-product-concept.svg",
+        "width": 900,
+        "height": 1400,
+        "alt": "Trips illustrative product interface with fictional example content",
+        "caption": "Travel-journal interface concept · illustrative day plan",
+        "layout": "detail",
+        "textEquivalent": "Concept for a personal island guide with an illustrative route, six stops, a story card and a shared checklist. Not the current live app interface."
+      }
     },
     {
       "slug": "bodybrain",
@@ -1383,6 +1401,15 @@
       },
       "gallery": [
         {
+          "src": "/media/bodybrain-product-concept.svg",
+          "width": 900,
+          "height": 1400,
+          "alt": "Bodybrain illustrative product interface with fictional example content",
+          "caption": "Product interface concept · fictional example content",
+          "layout": "detail",
+          "textEquivalent": "Concept coaching overview with fictional weekly trends, training, nutrition and movement measures; MacroFactor, InBody, Hevy, Google Fit and bloodwork as proposed sources; a prompt to add context for the next coaching conversation. No live integrations shown."
+        },
+        {
           "src": "/media/bodybrain-coaching-1400-9788cc76ad.webp",
           "width": 1400,
           "height": 1000,
@@ -1411,13 +1438,13 @@
       ],
       "links": [],
       "collectionCover": {
-        "src": "/media/bodybrain-portrait.svg",
+        "src": "/media/bodybrain-product-concept.svg",
         "width": 900,
-        "height": 1200,
-        "alt": "Five illustrative cards for nutrition, body composition, strength training, daily movement and bloodwork lead to one coaching conversation",
-        "caption": "Five sources, one coaching conversation · illustrative data",
-        "layout": "wide",
-        "textEquivalent": "MacroFactor represents nutrition, InBody body composition, Hevy strength training, Google Fit daily movement, and bloodwork dated laboratory results. These fictional source cards explain the proposed intersection; they are not screenshots or a claim of five live integrations."
+        "height": 1400,
+        "alt": "Bodybrain illustrative product interface with fictional example content",
+        "caption": "Product interface concept · fictional example content",
+        "layout": "detail",
+        "textEquivalent": "Concept coaching overview with fictional weekly trends, training, nutrition and movement measures; MacroFactor, InBody, Hevy, Google Fit and bloodwork as proposed sources; a prompt to add context for the next coaching conversation. No live integrations shown."
       }
     },
     {
@@ -1457,6 +1484,15 @@
       },
       "gallery": [
         {
+          "src": "/media/custom-media-databank-product-concept.svg",
+          "width": 900,
+          "height": 1400,
+          "alt": "Custom Media Databank illustrative product interface with fictional example content",
+          "caption": "Product interface concept · fictional example content",
+          "layout": "detail",
+          "textEquivalent": "Concept editorial library with search, photos, artwork and quotes. Fictional records retain source-page references and pass through attribution, permissions and publication-context review."
+        },
+        {
           "src": "/media/custom-media-databank-workflow-1400-7a844f31ce.webp",
           "width": 1400,
           "height": 1000,
@@ -1485,13 +1521,13 @@
       ],
       "links": [],
       "collectionCover": {
-        "src": "/media/databank-portrait.svg",
+        "src": "/media/custom-media-databank-product-concept.svg",
         "width": 900,
-        "height": 1200,
-        "alt": "An anonymised illustrative media library with search, type filters, artwork, source-page references and attribution checks",
-        "caption": "Anonymised interface study · fictional records and artwork",
-        "layout": "wide",
-        "textEquivalent": "The databank groups extracted photos, artwork and quotes into a searchable editorial library, with source-page references, quality flags and attribution checks. This interface study uses invented records and drawings."
+        "height": 1400,
+        "alt": "Custom Media Databank illustrative product interface with fictional example content",
+        "caption": "Product interface concept · fictional example content",
+        "layout": "detail",
+        "textEquivalent": "Concept editorial library with search, photos, artwork and quotes. Fictional records retain source-page references and pass through attribution, permissions and publication-context review."
       }
     }
   ]

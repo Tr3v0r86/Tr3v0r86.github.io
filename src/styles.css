@@ -147,3 +147,5 @@ button,a,summary{-webkit-tap-highlight-color:transparent}
 .home .piece--bodybrain .artifact img,.home .piece--custom-media-databank .artifact img{width:100%;height:100%;object-fit:contain}
 @media(min-width:700px){.home .piece .artifact{height:clamp(420px,58svh,680px)}}
 .home .piece .phone-frame img{width:100%;height:auto;max-height:none;object-fit:contain}
+/* Trips concept uses its own portrait screen proportions. */
+.home .piece--trips .phone-frame{aspect-ratio:900/1400}
