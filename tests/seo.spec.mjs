@@ -5,7 +5,7 @@ const catalog=JSON.parse(await readFile(new URL('../content/projects.json',impor
 
 test('every public page has a distinct title, description, canonical and parseable identity data',async({page})=>{
  const titles=new Set(),descriptions=new Set();
- for(const route of ['/',...catalog.projects.map(p=>`/work/${p.slug}/`)]){
+ for(const route of ['/','/about/',...catalog.projects.map(p=>`/work/${p.slug}/`)]){
   await page.goto(route);
   const title=await page.title();expect(title).toContain('Trevor Cardozo');expect(titles.has(title)).toBe(false);titles.add(title);
   const description=await page.locator('meta[name="description"]').getAttribute('content');expect(description.length).toBeGreaterThan(60);expect(descriptions.has(description)).toBe(false);descriptions.add(description);

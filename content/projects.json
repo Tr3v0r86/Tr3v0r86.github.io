@@ -13,7 +13,9 @@
     "project-dashboard",
     "esp32-experiments",
     "second-brain-builder",
-    "trips"
+    "trips",
+    "bodybrain",
+    "plj-databank"
   ],
   "projects": [
     {
@@ -150,17 +152,42 @@
           "label": "View source",
           "href": "https://github.com/Tr3v0r86/turnkeep"
         }
-      ]
+      ],
+      "collectionCover": {
+        "src": "/media/turnkeep-tabletop-concept-1536-e985d9a939.webp",
+        "width": 1536,
+        "height": 1024,
+        "variants": [
+          {
+            "src": "/media/turnkeep-tabletop-concept-480-ca8730a515.webp",
+            "width": 480,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/turnkeep-tabletop-concept-960-c5fff88955.webp",
+            "width": 960,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/turnkeep-tabletop-concept-1536-e985d9a939.webp",
+            "width": 1536,
+            "type": "image/webp"
+          }
+        ],
+        "alt": "AI-generated Turnkeep concept with dice and a character display on a gaming table",
+        "caption": "AI-generated concept · physical prototype inside",
+        "layout": "wide"
+      }
     },
     {
       "slug": "reggio-projects",
       "title": "Reggio projects",
-      "descriptor": "Ten years of learning through materials and making",
+      "descriptor": "15 years of learning through materials and making",
       "status": "Educational practice",
       "role": "Provocations, documentation and co-facilitation",
       "order": 2,
       "featured": true,
-      "summary": "For a decade, I have designed and co-facilitated Reggio-inspired investigations with children in Bangkok, thinking through materials. A terrarium becomes a way to explore sensors; a drawing becomes a circuit or moving machine; a Year 6 AI sprint becomes a chance to question a digital design. My contribution is to prepare the conditions, introduce tools and document how ideas change. The work here belongs to a dialogue between children, educators and the things they make.",
+      "summary": "For 15 years, I have designed and co-facilitated Reggio-inspired investigations with children in Bangkok, thinking through materials. A terrarium becomes a way to explore sensors; a drawing becomes a circuit or moving machine; a Year 6 AI sprint becomes a chance to question a digital design. My contribution is to prepare the conditions, introduce tools and document how ideas change. The work here belongs to a dialogue between children, educators and the things they make.",
       "cover": {
         "src": "/media/reggio-garden-installation-1000-f434cac676.webp",
         "width": 1000,
@@ -651,24 +678,28 @@
           }
         },
         {
-          "src": "/media/school-space-960-3cc05a6ba4.webp",
-          "width": 960,
-          "height": 686,
+          "src": "/media/school-space-corrected-1400-f448782044.webp",
+          "width": 1400,
+          "height": 1000,
           "variants": [
             {
-              "src": "/media/school-space-480-516552d91f.webp",
+              "src": "/media/school-space-corrected-480-875ff10d3c.webp",
               "width": 480,
               "type": "image/webp"
             },
             {
-              "src": "/media/school-space-960-3cc05a6ba4.webp",
+              "src": "/media/school-space-corrected-960-6e5036c13c.webp",
               "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/school-space-corrected-1400-f448782044.webp",
+              "width": 1400,
               "type": "image/webp"
             }
           ],
-          "alt": "Conceptual open workshop with shared tables, shelves and work surfaces",
+          "alt": "Spatial concept with two worktables inside a shared workshop; front walls correctly conceal the table legs",
           "caption": "Shared workshop · original spatial concept",
-          "textEquivalent": "A conceptual shared workshop places communal worktables alongside accessible materials and display surfaces. This is not a construction plan.",
           "layout": "pair"
         },
         {
@@ -691,6 +722,35 @@
           "caption": "Learning through a cycle of practical inquiry",
           "layout": "pair",
           "textEquivalent": "A real question connects four recurring activities: investigate, make, share and reflect."
+        },
+        {
+          "src": "/media/corita-art-department-rules-901-e7b4f0d6f1.webp",
+          "width": 901,
+          "height": 1222,
+          "variants": [
+            {
+              "src": "/media/corita-art-department-rules-480-1e10d7820f.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/corita-art-department-rules-901-e7b4f0d6f1.webp",
+              "width": 901,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Corita Kent’s Immaculate Heart College Art Department Rules poster",
+          "caption": "A reference for the culture of the workshop",
+          "layout": "pair",
+          "credit": {
+            "text": "Corita Kent, Immaculate Heart College Art Department Rules. © Corita Art Center. Reference, not my work.",
+            "url": "https://www.corita.org/tenrules"
+          },
+          "accessibleLink": {
+            "label": "Read the art-department rules at Corita Art Center",
+            "href": "https://www.corita.org/tenrules"
+          },
+          "textEquivalent": "A guiding reference for a workshop culture built on trust, experimentation, sustained practice and learning with other people. The linked source provides the complete rules."
         }
       ],
       "links": []
@@ -1226,6 +1286,136 @@
           "href": "https://github.com/Tr3v0r86/trips"
         }
       ]
+    },
+    {
+      "slug": "bodybrain",
+      "title": "Bodybrain",
+      "descriptor": "Training, nutrition and recovery in one coaching conversation",
+      "status": "In development",
+      "role": "Data system, product thesis and coaching workflow",
+      "order": 11,
+      "featured": true,
+      "summary": "Bodybrain began as a way to read my training, nutrition and recovery together, instead of opening separate apps and guessing how the pieces connect. I am developing that personal data system into a coaching platform: bringing context to a conversation, agreeing a plan and adjusting it as someone’s life changes. MacroFactor, InBody, Hevy and Google Fit show the kinds of information I want to connect. The screens here are illustrative; the coaching platform is in active development.",
+      "cover": {
+        "src": "/media/bodybrain-intersection-1400-38dfb57415.webp",
+        "width": 1400,
+        "height": 1000,
+        "variants": [
+          {
+            "src": "/media/bodybrain-intersection-480-b7e2d96d06.webp",
+            "width": 480,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/bodybrain-intersection-960-877da679f1.webp",
+            "width": 960,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/bodybrain-intersection-1400-38dfb57415.webp",
+            "width": 1400,
+            "type": "image/webp"
+          }
+        ],
+        "alt": "Four illustrative cards for nutrition, body composition, strength training and daily movement lead to one coaching conversation",
+        "caption": "Four sources, one coaching conversation · illustrative data",
+        "layout": "wide",
+        "textEquivalent": "MacroFactor represents nutrition, InBody body composition, Hevy strength training, and Google Fit daily movement. These fictional source cards explain the proposed intersection; they are not screenshots or a claim of four live integrations."
+      },
+      "gallery": [
+        {
+          "src": "/media/bodybrain-coaching-1400-9788cc76ad.webp",
+          "width": 1400,
+          "height": 1000,
+          "variants": [
+            {
+              "src": "/media/bodybrain-coaching-480-d37449f77c.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/bodybrain-coaching-960-b063a15fc5.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/bodybrain-coaching-1400-9788cc76ad.webp",
+              "width": 1400,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Illustrative weekly coaching review: notice a pattern, discuss context, agree a change, review next week",
+          "caption": "The coaching direction · concept interface, fictional example",
+          "layout": "wide",
+          "textEquivalent": "Proposed coaching loop: notice patterns across sources, discuss the person’s context, agree one adjustment, and review it together. This is a concept interface, not a released coaching product."
+        }
+      ],
+      "links": []
+    },
+    {
+      "slug": "plj-databank",
+      "title": "PLJ Databank",
+      "descriptor": "Bringing learning documentation back into use",
+      "status": "Internal working tool",
+      "role": "Extraction pipeline, media library and editorial workflow",
+      "order": 12,
+      "featured": true,
+      "summary": "I built PLJ Databank to bring the best photographs, artwork and quotes out of project learning publications at a design-focused, Reggio-inspired school. It turns finished PDFs into a searchable editorial library, with source references, duplicate handling and quality flags, so strong material can be found again for publications and social media. Security and children’s safety shape the workflow: access stays behind institutional authentication, and attribution and reuse need human review. The examples here are fictional and anonymised.",
+      "cover": {
+        "src": "/media/plj-databank-demo-1400-2324d9e52b.webp",
+        "width": 1400,
+        "height": 1000,
+        "variants": [
+          {
+            "src": "/media/plj-databank-demo-480-ed3bbf946e.webp",
+            "width": 480,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/plj-databank-demo-960-2760936c88.webp",
+            "width": 960,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/plj-databank-demo-1400-2324d9e52b.webp",
+            "width": 1400,
+            "type": "image/webp"
+          }
+        ],
+        "alt": "An anonymised illustrative media library with search, type filters, artwork, source-page references and attribution checks",
+        "caption": "Anonymised interface study · fictional records and artwork",
+        "layout": "wide",
+        "textEquivalent": "The databank groups extracted photos, artwork and quotes into a searchable editorial library, with source-page references, quality flags and attribution checks. This interface study uses invented records and drawings."
+      },
+      "gallery": [
+        {
+          "src": "/media/plj-databank-workflow-1400-c15929f9e5.webp",
+          "width": 1400,
+          "height": 1000,
+          "variants": [
+            {
+              "src": "/media/plj-databank-workflow-480-387e8951b0.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/plj-databank-workflow-960-8137c01774.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/plj-databank-workflow-1400-c15929f9e5.webp",
+              "width": 1400,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Extract, organise, review and reuse, with hosting-managed access and human editorial decisions",
+          "caption": "The workflow · source context and human review stay attached",
+          "layout": "wide",
+          "textEquivalent": "Extract photos, artwork and quotes from publications; classify and deduplicate; retain source references and originals; review ownership, attribution and quality; select for reuse. Authentication is provided by the hosting environment."
+        }
+      ],
+      "links": []
     }
   ]
 }

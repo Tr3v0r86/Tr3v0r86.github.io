@@ -1,0 +1,27 @@
+{
+  "portrait": {
+    "src": "/media/trevor-about-1000-6d194a1b29.webp",
+    "width": 1000,
+    "height": 1778,
+    "variants": [
+      {
+        "src": "/media/trevor-about-480-33cf98a61b.webp",
+        "width": 480,
+        "type": "image/webp"
+      },
+      {
+        "src": "/media/trevor-about-960-92b491e803.webp",
+        "width": 960,
+        "type": "image/webp"
+      },
+      {
+        "src": "/media/trevor-about-1000-6d194a1b29.webp",
+        "width": 1000,
+        "type": "image/webp"
+      }
+    ],
+    "alt": "Trevor Cardozo travelling, standing in front of a wooden shrine",
+    "caption": "Away from the workbench",
+    "layout": "wide"
+  }
+}

@@ -2,9 +2,10 @@ import {readFile,writeFile,mkdir,cp,rm,readdir,stat} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import sharp from 'sharp';
-import {renderHome,renderCase,render404,escape} from '../src/templates.mjs';
+import {renderHome,renderCase,renderAbout,render404,escape} from '../src/templates.mjs';
+import about from '../content/about.json' with {type:'json'};
 export const root=path.resolve(fileURLToPath(new URL('..',import.meta.url)));
-const statuses=new Set(['Live web app','Live school platform','Open-source prototype','Educational practice','In development','Hardware/software prototype','Public source','Ongoing experiments']);
+const statuses=new Set(['Live web app','Live school platform','Open-source prototype','Educational practice','In development','Hardware/software prototype','Public source','Ongoing experiments','Internal working tool']);
 function fail(context,message){throw new Error(`${context}: ${message}`);}
 const str=(value,context)=>{if(typeof value!=='string'||!value.trim())fail(context,'must be a non-empty string');};
 const keys=(value,allowed,context)=>{for(const key of Object.keys(value))if(!allowed.includes(key))fail(context+'.'+key,'unknown/private field must not enter public catalog');};
@@ -42,10 +43,11 @@ export function validateCatalog(catalog){
   if(p.dateLabel!==undefined)str(p.dateLabel,ctx+'.dateLabel');
   if(p.summary.trim().split(/\s+/).length>90||/[\r\n]/.test(p.summary))fail(ctx+'.summary','one paragraph, maximum 90 words');
   if(!Array.isArray(p.gallery)||!p.gallery.length)fail(ctx+'.gallery','at least one distinct additional view required');
-  media(p.cover,ctx+'.cover');p.gallery.forEach((m,i)=>media(m,ctx+'.gallery['+i+']'));
+  media(p.cover,ctx+'.cover');if(p.collectionCover)media(p.collectionCover,ctx+'.collectionCover');p.gallery.forEach((m,i)=>media(m,ctx+'.gallery['+i+']'));
   if(new Set([p.cover.src,...p.gallery.map(m=>m.src)]).size<2)fail(ctx+'.gallery','must contain a distinct view');
   if(!Array.isArray(p.links))fail(ctx+'.links','array required');p.links.forEach((l,i)=>link(l,ctx+'.links['+i+']'));
-  const allowed=new Set(['slug','title','descriptor','status','role','order','featured','summary','cover','gallery','links','dateLabel']);for(const k of Object.keys(p))if(!allowed.has(k))fail(ctx+'.'+k,'unknown/private field must not enter public catalog');
+  const allowed=new Set(['slug','title','descriptor','status','role','order','featured','summary','cover','collectionCover','gallery','links','dateLabel']);for(const k of Object.keys(p))if(!allowed.has(k))fail(ctx+'.'+k,'unknown/private field must not enter public catalog');
+  if(p.slug==='plj-databank'&&(p.links.length||/\belc\b|elc\.ac\.th|tauquil|payal/i.test(JSON.stringify(p))))fail(ctx,'databank case must remain anonymous');
   if(p.slug==='learning-and-making'&&(p.dateLabel||p.links.length||/\belc\b|tauquil|payal|bangkok|elc\.ac\.th/i.test(JSON.stringify(p))))fail(ctx,'school case must remain anonymous and undated');
  }
  if(catalog.expectedSlugs.length!==ids.size||catalog.expectedSlugs.some(id=>!ids.has(id)))fail('catalog','release slug manifest differs from projects');
@@ -53,23 +55,24 @@ export function validateCatalog(catalog){
  return [...catalog.projects].sort((a,b)=>a.order-b.order);
 }
 export async function verifyMedia(projects,publicDir=path.join(root,'public')){
- const seen=new Set();for(const p of projects)for(const m of [p.cover,...p.gallery])for(const item of [{src:m.src,width:m.width,height:m.height},...(m.variants||[])]){
+ const seen=new Set();for(const p of projects)for(const m of [p.cover,...(p.collectionCover?[p.collectionCover]:[]),...p.gallery])for(const item of [{src:m.src,width:m.width,height:m.height},...(m.variants||[])]){
   const key=item.src+':'+item.width;if(seen.has(key))continue;seen.add(key);const file=path.join(publicDir,item.src.slice(1));
   try{const meta=await sharp(file).metadata();await sharp(file).raw().toBuffer();if(meta.width!==item.width||(item.height&&meta.height!==item.height))fail(p.slug,item.src+' dimensions disagree with image');}catch(err){fail(p.slug,item.src+' invalid or missing media: '+err.message);}
  }
 }
 export async function build(){
  let catalog;try{catalog=JSON.parse(await readFile(path.join(root,'content/projects.json'),'utf8'));}catch(err){fail('catalog','cannot read/parse content/projects.json: '+err.message);}
- const projects=validateCatalog(catalog);await verifyMedia(projects);
+ const projects=validateCatalog(catalog);await verifyMedia([...projects,{slug:'about',cover:about.portrait,gallery:[]}]);
  const publicDir=path.join(root,'public');if((await readFile(path.join(publicDir,'CNAME'),'utf8')).trim()!=='trevorcardozo.com')fail('CNAME','must remain trevorcardozo.com');
  if((await readdir(publicDir)).includes('turnkeep'))fail('public','must not shadow the existing Turnkeep project');
  const dest=path.join(root,'dist');await rm(dest,{recursive:true,force:true});await mkdir(dest,{recursive:true});await cp(publicDir,dest,{recursive:true});await mkdir(path.join(dest,'assets'),{recursive:true});
  for(const f of ['styles.css','collection.js'])await cp(path.join(root,'src',f),path.join(dest,'assets',f));
  await writeFile(path.join(dest,'index.html'),renderHome(projects));await writeFile(path.join(dest,'404.html'),render404());
+ await mkdir(path.join(dest,'about'),{recursive:true});await writeFile(path.join(dest,'about/index.html'),renderAbout());
  for(const p of projects){const dir=path.join(dest,'work',p.slug);await mkdir(dir,{recursive:true});await writeFile(path.join(dir,'index.html'),renderCase(p,projects));}
- await writeFile(path.join(dest,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${['/',...projects.map(p=>'/work/'+p.slug+'/')].map(p=>`<url><loc>https://trevorcardozo.com${escape(p)}</loc></url>`).join('')}</urlset>`);
+ await writeFile(path.join(dest,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${['/','/about/',...projects.map(p=>'/work/'+p.slug+'/')].map(p=>`<url><loc>https://trevorcardozo.com${escape(p)}</loc></url>`).join('')}</urlset>`);
  await writeFile(path.join(dest,'robots.txt'),'User-agent: *\nAllow: /\nSitemap: https://trevorcardozo.com/sitemap.xml\n');await writeFile(path.join(dest,'.nojekyll'),'');
- const allowed=new Set(['media','fonts','assets','work','index.html','404.html','favicon.svg','CNAME','robots.txt','sitemap.xml','.nojekyll']);for(const name of await readdir(dest))if(!allowed.has(name))fail('artifact','unapproved output '+name);
+ const allowed=new Set(['media','fonts','assets','work','about','index.html','404.html','favicon.svg','CNAME','robots.txt','sitemap.xml','.nojekyll']);for(const name of await readdir(dest))if(!allowed.has(name))fail('artifact','unapproved output '+name);
  console.log(`Built ${projects.length} cases. Media decoded, content validated, Turnkeep route preserved.`);
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url))build().catch(err=>{console.error(err.message);process.exitCode=1;});

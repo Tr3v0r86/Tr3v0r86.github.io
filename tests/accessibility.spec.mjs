@@ -4,7 +4,7 @@ import {readFile} from 'node:fs/promises';
 const catalog=JSON.parse(await readFile(new URL('../content/projects.json',import.meta.url),'utf8'));
 test('all pages have no serious or critical automated accessibility violations',async({page})=>{
  test.setTimeout(60000);await page.setViewportSize({width:390,height:844});
- for(const route of ['/',...catalog.projects.map(p=>'/work/'+p.slug+'/')]){
+ for(const route of ['/','/about/',...catalog.projects.map(p=>'/work/'+p.slug+'/')]){
   await page.goto(route);const result=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();
   expect(result.violations.filter(v=>['serious','critical'].includes(v.impact)).map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)})),route).toEqual([]);
  }
