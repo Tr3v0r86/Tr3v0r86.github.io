@@ -5,16 +5,16 @@
   },
   "expectedSlugs": [
     "turnkeep",
-    "reggio-projects",
     "padlano",
-    "learning-and-making",
     "elc-portal",
+    "second-brain-builder",
+    "bodybrain",
+    "reggio-projects",
+    "learning-and-making",
     "pomodoist",
     "project-dashboard",
     "esp32-experiments",
-    "second-brain-builder",
     "trips",
-    "bodybrain",
     "custom-media-databank"
   ],
   "projects": [
@@ -185,7 +185,7 @@
       "descriptor": "Children are makers · 15 years of Reggio-inspired projects",
       "status": "Educational practice",
       "role": "Creating the conditions, sharing expertise and co-facilitating",
-      "order": 2,
+      "order": 6,
       "featured": true,
       "summary": "Children are makers. Given time, trust and access to expertise, they can design, make and publish work at the intersection of creativity and functionality. For 15 years, I have explored that belief through Reggio-inspired projects with children in Bangkok: drawings become working circuits and moving machines; a Year 6 AI sprint becomes a student newspaper website. My role is to create the conditions, share tools and expertise, and document the process while keeping children’s ideas and authorship at the centre.",
       "cover": {
@@ -520,7 +520,7 @@
       "descriptor": "Padel rotations, scoring and leagues from one phone",
       "status": "Live web app",
       "role": "Web app design and development",
-      "order": 3,
+      "order": 2,
       "featured": true,
       "summary": "I built Padlano for the organising that happens between games of padel. From one phone, it creates Americano rotations, records scores and ranks players by average points when someone sits out. Players can use it without an account, keep a session on their device or choose to share sessions and leagues. The notebook and electronics shown here belong to a related scoring-device experiment; the web app is live.",
       "cover": {
@@ -618,7 +618,7 @@
       "descriptor": "An alternative middle school & community maker space",
       "status": "In development",
       "role": "Learning model, programme and spatial concept",
-      "order": 4,
+      "order": 7,
       "featured": true,
       "summary": "This alternative middle school and community maker-space concept brings together my training in alternative education, professional work in school operations and practice as a maker. Young people investigate questions by designing, building and testing things in shared workshops. I am connecting that learning model with the programme, tools, materials and spaces it needs. The woodshop and fablab renders explore those conditions; the diagrams show the inquiry cycle. These are concept visualisations for a school in development.",
       "cover": {
@@ -823,7 +823,7 @@
       "descriptor": "Activities, events and calendars in one family portal",
       "status": "Live school platform",
       "role": "Family experience design and web development",
-      "order": 5,
+      "order": 3,
       "featured": true,
       "summary": "I designed and built a parent portal around a parent's practical questions: what is happening, what can my child join, and where do I go next? It brings school activities, events, calendars and useful information into one family-facing website, with links to the existing registration systems. My work joins school operations with interface design: organising the information and building a consistent route through it. The mobile views are de-identified for this portfolio.",
       "cover": {
@@ -879,7 +879,7 @@
       "descriptor": "A physical focus timer connected to Todoist",
       "status": "Hardware/software prototype",
       "role": "Device interfaces and timer firmware",
-      "order": 6,
+      "order": 8,
       "featured": true,
       "summary": "I made Pomodoist to keep one task and a focus timer on a small screen beside me. It connects today’s Todoist tasks with a Pomodoro timer, using the device’s own buttons or touch controls. The photographs show the electronics and an enclosed prototype; the separate interface references show the focus and task-selection screens. This is the dedicated desk object, while my wider ESP32 work develops the software it can share with other devices.",
       "cover": {
@@ -1022,7 +1022,7 @@
       "descriptor": "A project-management tool in a single HTML file",
       "status": "Public source",
       "role": "Dashboard design, development and public template",
-      "order": 7,
+      "order": 9,
       "featured": true,
       "summary": "I turned a tool from my school operations work into a single HTML file that other people can adapt and host. The dashboard keeps priorities, completion and weekly progress notes together, with browser storage and an optional shareable view. There is no server to set up for the basic version. The public demo uses sample projects, and the source includes instructions for making it your own.",
       "cover": {
@@ -1107,7 +1107,7 @@
       "descriptor": "TrevOS: a shared foundation for small devices",
       "status": "Ongoing experiments",
       "role": "Board integration, firmware and interface experiments",
-      "order": 8,
+      "order": 10,
       "featured": true,
       "summary": "I am building TrevOS, a shared launcher and software foundation for my ESP32 devices. A timer, a padel scoreboard and a desk display can reuse app logic while each board supplies its own screen and controls. This collection shows the work underneath individual products: board experiments, interface sketches and a saved launcher simulation. The aim is to carry what I learn from one device into the next, instead of starting again with every screen.",
       "cover": {
@@ -1280,7 +1280,7 @@
       "descriptor": "Guided questions that become a personal AI workspace",
       "status": "Live web app",
       "role": "Question flow, system design and development",
-      "order": 9,
+      "order": 4,
       "featured": true,
       "summary": "I made Second Brain Builder to turn the structure of my own knowledge system into a starting point for someone else. A personalised question flow asks how they work, plan and keep track of things, then produces a plain-text blueprint for an AI-assisted workspace. Each journey is prepared for its recipient. The public page is the entry point to those individual builds; the source shows how the builder works.",
       "cover": {
@@ -1453,7 +1453,7 @@
       "descriptor": "Custom apps for friends and loved ones",
       "status": "Live web app",
       "role": "Personal guide design and web development",
-      "order": 10,
+      "order": 11,
       "featured": true,
       "summary": "I build small apps for friends and loved ones around something we want to do together. Trips turns a day out into an installable guide with stops, stories, practical details and a shared checklist. The Île d’Orléans guide shown here brings those pieces into a page people can keep on their phone and use offline. It is a small piece of software made for a particular occasion and the people sharing it.",
       "cover": {
@@ -1605,7 +1605,7 @@
       "descriptor": "Training, nutrition, recovery and bloodwork in context",
       "status": "In development",
       "role": "Data system, product thesis and coaching workflow",
-      "order": 11,
+      "order": 5,
       "featured": true,
       "summary": "Bodybrain began as a way to read my training, nutrition and recovery together, instead of opening separate apps and guessing how the pieces connect. I am developing that personal data system into a coaching platform: bringing context to a conversation, agreeing a plan and adjusting it as someone’s life changes. MacroFactor, InBody, Hevy, Google Fit and bloodwork show the kinds of information I want to connect. The screens here are illustrative; the coaching platform is in active development.",
       "cover": {
