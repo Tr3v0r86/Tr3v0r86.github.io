@@ -1284,22 +1284,77 @@
       "featured": true,
       "summary": "I made Second Brain Builder to turn the structure of my own knowledge system into a starting point for someone else. A personalised question flow asks how they work, plan and keep track of things, then produces a plain-text blueprint for an AI-assisted workspace. Each journey is prepared for its recipient. The public page is the entry point to those individual builds; the source shows how the builder works.",
       "cover": {
-        "src": "/media/brain-blueprint-builder-v2.svg",
-        "width": 900,
-        "height": 1200,
-        "alt": "Guided builder concept showing one working-rhythm question and a draft blueprint",
-        "caption": "Guided-builder concept · fictional answers",
-        "textEquivalent": "One contextual question is shown alongside a plain-text blueprint preview. Example folders and review routines are fictional and illustrate the intended question-to-workspace flow; no private recipient or build is shown."
+        "src": "/media/second-brain-builder-app-v3-1440.webp",
+        "width": 1440,
+        "height": 2850,
+        "alt": "Second Brain Builder interactive interface concept: workspace file tree, file preview and blueprint controls.",
+        "caption": "Interactive interface concept · fictional data",
+        "variants": [
+          {
+            "src": "/media/second-brain-builder-app-v3-480.webp",
+            "width": 480,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/second-brain-builder-app-v3-960.webp",
+            "width": 960,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/second-brain-builder-app-v3-1440.webp",
+            "width": 1440,
+            "type": "image/webp"
+          }
+        ]
       },
       "gallery": [
         {
-          "src": "/media/brain-output-v2.svg",
-          "width": 900,
-          "height": 1200,
-          "alt": "A plain-text blueprint · illustrative output",
-          "caption": "A plain-text blueprint · illustrative output",
-          "layout": "detail",
-          "textEquivalent": "One contextual question is shown alongside a plain-text blueprint preview. Example folders and review routines are fictional and illustrate the intended question-to-workspace flow; no private recipient or build is shown."
+          "src": "/media/second-brain-builder-detail-v3-1440.webp",
+          "width": 1440,
+          "height": 2850,
+          "alt": "Second Brain Builder interactive interface concept: secondary app view with fictional sample content.",
+          "caption": "Generated blueprint · downloadable sample",
+          "variants": [
+            {
+              "src": "/media/second-brain-builder-detail-v3-480.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/second-brain-builder-detail-v3-960.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/second-brain-builder-detail-v3-1440.webp",
+              "width": 1440,
+              "type": "image/webp"
+            }
+          ]
+        },
+        {
+          "src": "/media/second-brain-builder-detail-v3-1440.webp",
+          "width": 1440,
+          "height": 2850,
+          "alt": "Second Brain Builder interactive interface concept: secondary app view with fictional sample content.",
+          "caption": "Generated blueprint · downloadable sample",
+          "variants": [
+            {
+              "src": "/media/second-brain-builder-detail-v3-480.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/second-brain-builder-detail-v3-960.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/second-brain-builder-detail-v3-1440.webp",
+              "width": 1440,
+              "type": "image/webp"
+            }
+          ]
         },
         {
           "src": "/media/brain-home-retina-4200.webp",
@@ -1355,6 +1410,10 @@
       ],
       "links": [
         {
+          "label": "Try the interface concept",
+          "href": "/prototypes/second-brain-builder/"
+        },
+        {
           "label": "Visit the personalised entry page",
           "href": "https://brain.trevorcardozo.com/"
         },
@@ -1364,12 +1423,28 @@
         }
       ],
       "collectionCover": {
-        "src": "/media/brain-blueprint-builder-v2.svg",
-        "width": 900,
-        "height": 1200,
-        "alt": "Guided builder concept showing one working-rhythm question and a draft blueprint",
-        "caption": "Guided-builder concept · fictional answers",
-        "textEquivalent": "One contextual question is shown alongside a plain-text blueprint preview. Example folders and review routines are fictional and illustrate the intended question-to-workspace flow; no private recipient or build is shown."
+        "src": "/media/second-brain-builder-app-v3-1440.webp",
+        "width": 1440,
+        "height": 2850,
+        "alt": "Second Brain Builder interactive interface concept: workspace file tree, file preview and blueprint controls.",
+        "caption": "Interactive interface concept · fictional data",
+        "variants": [
+          {
+            "src": "/media/second-brain-builder-app-v3-480.webp",
+            "width": 480,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/second-brain-builder-app-v3-960.webp",
+            "width": 960,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/second-brain-builder-app-v3-1440.webp",
+            "width": 1440,
+            "type": "image/webp"
+          }
+        ]
       }
     },
     {
@@ -1382,22 +1457,77 @@
       "featured": true,
       "summary": "I build small apps for friends and loved ones around something we want to do together. Trips turns a day out into an installable guide with stops, stories, practical details and a shared checklist. The Île d’Orléans guide shown here brings those pieces into a page people can keep on their phone and use offline. It is a small piece of software made for a particular occasion and the people sharing it.",
       "cover": {
-        "src": "/media/trips-field-guide-v2.svg",
-        "width": 900,
-        "height": 1200,
-        "alt": "Photograph-led personal travel guide concept with an unhurried connected itinerary",
-        "caption": "Travel guide concept · AI-generated mood photograph",
-        "textEquivalent": "A personal travel guide uses an AI-generated landscape mood photograph, connected stops, stories and a shared preparation checklist. The image is not a photograph of the actual destination; this is not a navigational map."
+        "src": "/media/trips-app-v3-1440.webp",
+        "width": 1440,
+        "height": 2850,
+        "alt": "Trips interactive interface concept: island map, selectable stops and visit tracking.",
+        "caption": "Interactive interface concept · fictional data",
+        "variants": [
+          {
+            "src": "/media/trips-app-v3-480.webp",
+            "width": 480,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/trips-app-v3-960.webp",
+            "width": 960,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/trips-app-v3-1440.webp",
+            "width": 1440,
+            "type": "image/webp"
+          }
+        ]
       },
       "gallery": [
         {
-          "src": "/media/trips-story-v2.svg",
-          "width": 900,
-          "height": 1200,
-          "alt": "A story and shared checklist · interface study",
-          "caption": "A story and shared checklist · interface study",
-          "layout": "detail",
-          "textEquivalent": "A personal travel guide uses an AI-generated landscape mood photograph, connected stops, stories and a shared preparation checklist. The image is not a photograph of the actual destination; this is not a navigational map."
+          "src": "/media/trips-detail-v3-1440.webp",
+          "width": 1440,
+          "height": 2850,
+          "alt": "Trips interactive interface concept: secondary app view with fictional sample content.",
+          "caption": "Packing checklist · interactive concept",
+          "variants": [
+            {
+              "src": "/media/trips-detail-v3-480.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/trips-detail-v3-960.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/trips-detail-v3-1440.webp",
+              "width": 1440,
+              "type": "image/webp"
+            }
+          ]
+        },
+        {
+          "src": "/media/trips-detail-v3-1440.webp",
+          "width": 1440,
+          "height": 2850,
+          "alt": "Trips interactive interface concept: secondary app view with fictional sample content.",
+          "caption": "Packing checklist · interactive concept",
+          "variants": [
+            {
+              "src": "/media/trips-detail-v3-480.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/trips-detail-v3-960.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/trips-detail-v3-1440.webp",
+              "width": 1440,
+              "type": "image/webp"
+            }
+          ]
         },
         {
           "src": "/media/trips-mobile-guide-390-fbf846d349.webp",
@@ -1432,6 +1562,10 @@
       ],
       "links": [
         {
+          "label": "Try the interface concept",
+          "href": "/prototypes/trips/"
+        },
+        {
           "label": "Explore Trips",
           "href": "https://trips.trevorcardozo.com/"
         },
@@ -1441,12 +1575,28 @@
         }
       ],
       "collectionCover": {
-        "src": "/media/trips-field-guide-v2.svg",
-        "width": 900,
-        "height": 1200,
-        "alt": "Photograph-led personal travel guide concept with an unhurried connected itinerary",
-        "caption": "Travel guide concept · AI-generated mood photograph",
-        "textEquivalent": "A personal travel guide uses an AI-generated landscape mood photograph, connected stops, stories and a shared preparation checklist. The image is not a photograph of the actual destination; this is not a navigational map."
+        "src": "/media/trips-app-v3-1440.webp",
+        "width": 1440,
+        "height": 2850,
+        "alt": "Trips interactive interface concept: island map, selectable stops and visit tracking.",
+        "caption": "Interactive interface concept · fictional data",
+        "variants": [
+          {
+            "src": "/media/trips-app-v3-480.webp",
+            "width": 480,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/trips-app-v3-960.webp",
+            "width": 960,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/trips-app-v3-1440.webp",
+            "width": 1440,
+            "type": "image/webp"
+          }
+        ]
       }
     },
     {
@@ -1459,22 +1609,77 @@
       "featured": true,
       "summary": "Bodybrain began as a way to read my training, nutrition and recovery together, instead of opening separate apps and guessing how the pieces connect. I am developing that personal data system into a coaching platform: bringing context to a conversation, agreeing a plan and adjusting it as someone’s life changes. MacroFactor, InBody, Hevy, Google Fit and bloodwork show the kinds of information I want to connect. The screens here are illustrative; the coaching platform is in active development.",
       "cover": {
-        "src": "/media/bodybrain-journal-v2.svg",
-        "width": 900,
-        "height": 1200,
-        "alt": "A weekly coaching journal concept with aligned source tracks and a context note",
-        "caption": "Weekly journal concept · fictional data",
-        "textEquivalent": "A fictional weekly review aligns training sessions with nutrition, movement, body composition and dated bloodwork. A note adds life context before discussing an adjustment with a coach. No health score or diagnostic interpretation."
+        "src": "/media/bodybrain-app-v3-1440.webp",
+        "width": 1440,
+        "height": 2850,
+        "alt": "Bodybrain interactive interface concept: training ring, weekly chart and check-in note.",
+        "caption": "Interactive interface concept · fictional data",
+        "variants": [
+          {
+            "src": "/media/bodybrain-app-v3-480.webp",
+            "width": 480,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/bodybrain-app-v3-960.webp",
+            "width": 960,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/bodybrain-app-v3-1440.webp",
+            "width": 1440,
+            "type": "image/webp"
+          }
+        ]
       },
       "gallery": [
         {
-          "src": "/media/bodybrain-review-v2.svg",
-          "width": 900,
-          "height": 1200,
-          "alt": "Notice, add context, agree one next step",
-          "caption": "Notice, add context, agree one next step",
-          "layout": "detail",
-          "textEquivalent": "A fictional weekly review aligns training sessions with nutrition, movement, body composition and dated bloodwork. A note adds life context before discussing an adjustment with a coach. No health score or diagnostic interpretation."
+          "src": "/media/bodybrain-detail-v3-1440.webp",
+          "width": 1440,
+          "height": 2850,
+          "alt": "Bodybrain interactive interface concept: secondary app view with fictional sample content.",
+          "caption": "Data source view · concept, no accounts connected",
+          "variants": [
+            {
+              "src": "/media/bodybrain-detail-v3-480.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/bodybrain-detail-v3-960.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/bodybrain-detail-v3-1440.webp",
+              "width": 1440,
+              "type": "image/webp"
+            }
+          ]
+        },
+        {
+          "src": "/media/bodybrain-detail-v3-1440.webp",
+          "width": 1440,
+          "height": 2850,
+          "alt": "Bodybrain interactive interface concept: secondary app view with fictional sample content.",
+          "caption": "Data source view · concept, no accounts connected",
+          "variants": [
+            {
+              "src": "/media/bodybrain-detail-v3-480.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/bodybrain-detail-v3-960.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/bodybrain-detail-v3-1440.webp",
+              "width": 1440,
+              "type": "image/webp"
+            }
+          ]
         },
         {
           "src": "/media/bodybrain-intersection-1400-51a18ab051.webp",
@@ -1529,14 +1734,35 @@
           "textEquivalent": "Proposed coaching loop: notice patterns across sources, discuss the person’s context, agree one adjustment, and review it together. This is a concept interface, not a released coaching product."
         }
       ],
-      "links": [],
+      "links": [
+        {
+          "label": "Try the interface concept",
+          "href": "/prototypes/bodybrain/"
+        }
+      ],
       "collectionCover": {
-        "src": "/media/bodybrain-journal-v2.svg",
-        "width": 900,
-        "height": 1200,
-        "alt": "A weekly coaching journal concept with aligned source tracks and a context note",
-        "caption": "Weekly journal concept · fictional data",
-        "textEquivalent": "A fictional weekly review aligns training sessions with nutrition, movement, body composition and dated bloodwork. A note adds life context before discussing an adjustment with a coach. No health score or diagnostic interpretation."
+        "src": "/media/bodybrain-app-v3-1440.webp",
+        "width": 1440,
+        "height": 2850,
+        "alt": "Bodybrain interactive interface concept: training ring, weekly chart and check-in note.",
+        "caption": "Interactive interface concept · fictional data",
+        "variants": [
+          {
+            "src": "/media/bodybrain-app-v3-480.webp",
+            "width": 480,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/bodybrain-app-v3-960.webp",
+            "width": 960,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/bodybrain-app-v3-1440.webp",
+            "width": 1440,
+            "type": "image/webp"
+          }
+        ]
       }
     },
     {

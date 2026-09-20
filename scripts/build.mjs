@@ -72,7 +72,7 @@ export async function build(){
  for(const p of projects){const dir=path.join(dest,'work',p.slug);await mkdir(dir,{recursive:true});await writeFile(path.join(dir,'index.html'),renderCase(p,projects));}
  await writeFile(path.join(dest,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${['/','/about/',...projects.map(p=>'/work/'+p.slug+'/')].map(p=>`<url><loc>https://trevorcardozo.com${escape(p)}</loc></url>`).join('')}</urlset>`);
  await writeFile(path.join(dest,'robots.txt'),'User-agent: *\nAllow: /\nSitemap: https://trevorcardozo.com/sitemap.xml\n');await writeFile(path.join(dest,'.nojekyll'),'');
- const allowed=new Set(['media','fonts','assets','work','about','index.html','404.html','favicon.svg','favicon.png','apple-touch-icon.png','icon-credits.txt','CNAME','robots.txt','sitemap.xml','.nojekyll']);for(const name of await readdir(dest))if(!allowed.has(name))fail('artifact','unapproved output '+name);
+ const allowed=new Set(['media','fonts','assets','work','about','prototypes','index.html','404.html','favicon.svg','favicon.png','apple-touch-icon.png','icon-credits.txt','CNAME','robots.txt','sitemap.xml','.nojekyll']);for(const name of await readdir(dest))if(!allowed.has(name))fail('artifact','unapproved output '+name);
  console.log(`Built ${projects.length} cases. Media decoded, content validated, Turnkeep route preserved.`);
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url))build().catch(err=>{console.error(err.message);process.exitCode=1;});
