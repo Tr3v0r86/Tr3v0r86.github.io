@@ -620,7 +620,7 @@
       "role": "Learning model, programme and spatial concept",
       "order": 4,
       "featured": true,
-      "summary": "I am developing an alternative middle school and community maker space around shared workshops, where young people investigate questions by designing, building and testing things. My work connects the learning programme with the tools, materials and spaces it needs. The woodshop and fablab renders explore how hand tools, digital fabrication and shared worktables could support that learning; the diagrams show the inquiry cycle behind it. These are concept visualisations for a school in development.",
+      "summary": "This alternative middle school and community maker-space concept brings together my training in alternative education, professional work in school operations and practice as a maker. Young people investigate questions by designing, building and testing things in shared workshops. I am connecting that learning model with the programme, tools, materials and spaces it needs. The woodshop and fablab renders explore those conditions; the diagrams show the inquiry cycle. These are concept visualisations for a school in development.",
       "cover": {
         "src": "/media/school-woodshop-concept-1600-d327961310.webp",
         "width": 1600,
@@ -973,7 +973,7 @@
       "role": "Dashboard design, development and public template",
       "order": 7,
       "featured": true,
-      "summary": "I turned a tool from my own project-management work into a single HTML file that other people can adapt and host. The dashboard keeps priorities, completion and weekly progress notes together, with browser storage and an optional shareable view. There is no server to set up for the basic version. The public demo uses sample projects, and the source includes instructions for making it your own.",
+      "summary": "I turned a tool from my school operations work into a single HTML file that other people can adapt and host. The dashboard keeps priorities, completion and weekly progress notes together, with browser storage and an optional shareable view. There is no server to set up for the basic version. The public demo uses sample projects, and the source includes instructions for making it your own.",
       "cover": {
         "src": "/media/dashboard-overview-960-e1df1feec6.webp",
         "width": 960,

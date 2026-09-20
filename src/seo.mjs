@@ -2,10 +2,10 @@ const origin='https://trevorcardozo.com';
 const personId=origin+'/#person';
 const websiteId=origin+'/#website';
 const descriptions={
- '/about/':'Meet Trevor Cardozo, an educator and maker based in Bangkok. 15 years of Reggio-inspired project work, useful tools and learning through making.',
+ '/about/':'Meet Trevor Cardozo: trained alternative educator, professional school operator, hobbyist maker and amateur designer based in Bangkok.',
  '/work/bodybrain/':'Bodybrain by Trevor Cardozo connects training, nutrition, recovery and bloodwork. An active personal data project developing into a coaching platform.',
  '/work/custom-media-databank/':'Custom Media Databank by Trevor Cardozo turns learning publications into a searchable editorial media library, with source context, quality checks and human review.',
- '/':'Trevor Cardozo is an educator and maker in Bangkok. Explore Reggio-inspired learning projects, school and maker-space concepts, useful apps and physical prototypes.',
+ '/':'Trevor Cardozo: trained alternative educator, professional school operator, hobbyist maker and amateur designer in Bangkok. Explore the work.',
  '/work/reggio-projects/':'Children are makers. 15 years of Reggio-inspired projects in Bangkok, supported by Trevor Cardozo: time, trust and expertise to design, make and publish.',
  '/work/learning-and-making/':'An alternative middle school and community maker-space concept by Trevor Cardozo, with woodshop and fablab visualisations. A learning model in development.',
  '/work/turnkeep/':'Turnkeep by Trevor Cardozo: a printed tabletop character case with a digital companion. Explore the physical prototype, editable CAD, firmware and build files.',
@@ -18,7 +18,7 @@ const descriptions={
  '/work/trips/':'Trips by Trevor Cardozo: small custom apps for friends and loved ones, with shared day-trip guides, stories, checklists and offline access.'
 };
 export function searchMetadata({title,description,path,cover}){
- if(path==='/')title='Trevor Cardozo | Educator & Maker in Bangkok';
+ if(path==='/')title='Trevor Cardozo | Alternative Educator & School Operator, Bangkok';
  if(path==='/work/reggio-projects/')title='Reggio-inspired Projects in Bangkok | Trevor Cardozo';
  if(path==='/work/learning-and-making/')title='Alternative School & Maker Space Concept | Trevor Cardozo';
  description=descriptions[path]||description;
@@ -28,7 +28,7 @@ export function searchMetadata({title,description,path,cover}){
  const graph=[page];
  if(path==='/'){
   page.mainEntity={'@id':personId};
-  graph.push({'@type':'Person','@id':personId,name:'Trevor Cardozo',url:origin+'/',jobTitle:'Educator',description:'Educator and maker based in Bangkok, working across Reggio-inspired learning, tools and learning environments.',homeLocation:{'@type':'Place',name:'Bangkok, Thailand'},sameAs:['https://www.linkedin.com/in/tcardozo/','https://trevorcardozo.substack.com/','https://github.com/Tr3v0r86']});
+  graph.push({'@type':'Person','@id':personId,name:'Trevor Cardozo',url:origin+'/',jobTitle:'School operator',description:'Trained alternative educator, professional school operator, hobbyist maker and amateur designer based in Bangkok.',homeLocation:{'@type':'Place',name:'Bangkok, Thailand'},sameAs:['https://www.linkedin.com/in/tcardozo/','https://trevorcardozo.substack.com/','https://github.com/Tr3v0r86']});
   graph.push({'@type':'WebSite','@id':websiteId,url:origin+'/',name:'Trevor Cardozo',publisher:{'@id':personId},inLanguage:'en'});
  }else{
   const breadcrumbId=origin+path+'#breadcrumb';page.breadcrumb={'@id':breadcrumbId};
