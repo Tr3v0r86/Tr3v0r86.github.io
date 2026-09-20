@@ -908,6 +908,32 @@
       },
       "gallery": [
         {
+          "src": "/media/pomodoist-desk-concept-1122.webp",
+          "width": 1122,
+          "height": 1402,
+          "variants": [
+            {
+              "src": "/media/pomodoist-desk-concept-480.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/pomodoist-desk-concept-960.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/pomodoist-desk-concept-1122.webp",
+              "width": 1122,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "AI-generated desk scene of the Pomodoist timer enclosure and development boards",
+          "caption": "AI-generated desk concept · real prototype photographs inside",
+          "textEquivalent": "Concept arrangement based on the project board inventory: grey printed timer enclosure, rectangular and round display boards, puck, ESP32/C3 devkits and an unlit camera board. Illustrated screens and arrangement are not proof of simultaneous firmware support.",
+          "layout": "wide"
+        },
+        {
           "src": "/media/pomodoist-prototype-1000-fdc6fe6925.webp",
           "width": 1000,
           "height": 1773,
@@ -963,7 +989,32 @@
           "layout": "wide"
         }
       ],
-      "links": []
+      "links": [],
+      "collectionCover": {
+        "src": "/media/pomodoist-desk-concept-1122.webp",
+        "width": 1122,
+        "height": 1402,
+        "variants": [
+          {
+            "src": "/media/pomodoist-desk-concept-480.webp",
+            "width": 480,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/pomodoist-desk-concept-960.webp",
+            "width": 960,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/pomodoist-desk-concept-1122.webp",
+            "width": 1122,
+            "type": "image/webp"
+          }
+        ],
+        "alt": "AI-generated desk scene of the Pomodoist timer enclosure and development boards",
+        "caption": "AI-generated desk concept · real prototype photographs inside",
+        "textEquivalent": "Concept arrangement based on the project board inventory: grey printed timer enclosure, rectangular and round display boards, puck, ESP32/C3 devkits and an unlit camera board. Illustrated screens and arrangement are not proof of simultaneous firmware support."
+      }
     },
     {
       "slug": "project-dashboard",
@@ -1233,30 +1284,48 @@
       "featured": true,
       "summary": "I made Second Brain Builder to turn the structure of my own knowledge system into a starting point for someone else. A personalised question flow asks how they work, plan and keep track of things, then produces a plain-text blueprint for an AI-assisted workspace. Each journey is prepared for its recipient. The public page is the entry point to those individual builds; the source shows how the builder works.",
       "cover": {
-        "src": "/media/brain-home-retina-4200.webp",
-        "width": 4200,
-        "height": 3000,
-        "variants": [
-          {
-            "src": "/media/brain-home-retina-1400.webp",
-            "width": 1400,
-            "type": "image/webp"
-          },
-          {
-            "src": "/media/brain-home-retina-2800.webp",
-            "width": 2800,
-            "type": "image/webp"
-          },
-          {
-            "src": "/media/brain-home-retina-4200.webp",
-            "width": 4200,
-            "type": "image/webp"
-          }
-        ],
-        "alt": "Second Brain Builder website with its personalised-build entry form",
-        "caption": "The builder’s public front door"
+        "src": "/media/brain-blueprint-builder-v2.svg",
+        "width": 900,
+        "height": 1200,
+        "alt": "Guided builder concept showing one working-rhythm question and a draft blueprint",
+        "caption": "Guided-builder concept · fictional answers",
+        "textEquivalent": "One contextual question is shown alongside a plain-text blueprint preview. Example folders and review routines are fictional and illustrate the intended question-to-workspace flow; no private recipient or build is shown."
       },
       "gallery": [
+        {
+          "src": "/media/brain-output-v2.svg",
+          "width": 900,
+          "height": 1200,
+          "alt": "A plain-text blueprint · illustrative output",
+          "caption": "A plain-text blueprint · illustrative output",
+          "layout": "detail",
+          "textEquivalent": "One contextual question is shown alongside a plain-text blueprint preview. Example folders and review routines are fictional and illustrate the intended question-to-workspace flow; no private recipient or build is shown."
+        },
+        {
+          "src": "/media/brain-home-retina-4200.webp",
+          "width": 4200,
+          "height": 3000,
+          "variants": [
+            {
+              "src": "/media/brain-home-retina-1400.webp",
+              "width": 1400,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/brain-home-retina-2800.webp",
+              "width": 2800,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/brain-home-retina-4200.webp",
+              "width": 4200,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Second Brain Builder website with its personalised-build entry form",
+          "caption": "The builder’s public front door",
+          "layout": "wide"
+        },
         {
           "src": "/media/brain-blueprint-1400-db204f782e.webp",
           "width": 1400,
@@ -1293,7 +1362,15 @@
           "label": "View source",
           "href": "https://github.com/Tr3v0r86/brain-builder"
         }
-      ]
+      ],
+      "collectionCover": {
+        "src": "/media/brain-blueprint-builder-v2.svg",
+        "width": 900,
+        "height": 1200,
+        "alt": "Guided builder concept showing one working-rhythm question and a draft blueprint",
+        "caption": "Guided-builder concept · fictional answers",
+        "textEquivalent": "One contextual question is shown alongside a plain-text blueprint preview. Example folders and review routines are fictional and illustrate the intended question-to-workspace flow; no private recipient or build is shown."
+      }
     },
     {
       "slug": "trips",
@@ -1305,28 +1382,37 @@
       "featured": true,
       "summary": "I build small apps for friends and loved ones around something we want to do together. Trips turns a day out into an installable guide with stops, stories, practical details and a shared checklist. The Île d’Orléans guide shown here brings those pieces into a page people can keep on their phone and use offline. It is a small piece of software made for a particular occasion and the people sharing it.",
       "cover": {
-        "src": "/media/trips-mobile-guide-390-fbf846d349.webp",
-        "width": 390,
-        "height": 844,
-        "variants": [
-          {
-            "src": "/media/trips-mobile-guide-390-fbf846d349.webp",
-            "width": 390,
-            "type": "image/webp"
-          }
-        ],
-        "alt": "Trips guide viewed on a phone: the day plan and why the basilica comes first",
-        "caption": "The day guide, designed to travel on a phone"
+        "src": "/media/trips-field-guide-v2.svg",
+        "width": 900,
+        "height": 1200,
+        "alt": "Photograph-led personal travel guide concept with an unhurried connected itinerary",
+        "caption": "Travel guide concept · AI-generated mood photograph",
+        "textEquivalent": "A personal travel guide uses an AI-generated landscape mood photograph, connected stops, stories and a shared preparation checklist. The image is not a photograph of the actual destination; this is not a navigational map."
       },
       "gallery": [
         {
-          "src": "/media/trips-product-concept.svg",
+          "src": "/media/trips-story-v2.svg",
           "width": 900,
-          "height": 1400,
-          "alt": "Trips illustrative product interface with fictional example content",
-          "caption": "Travel-journal interface concept · illustrative day plan",
+          "height": 1200,
+          "alt": "A story and shared checklist · interface study",
+          "caption": "A story and shared checklist · interface study",
           "layout": "detail",
-          "textEquivalent": "Concept for a personal island guide with an illustrative route, six stops, a story card and a shared checklist. Not the current live app interface."
+          "textEquivalent": "A personal travel guide uses an AI-generated landscape mood photograph, connected stops, stories and a shared preparation checklist. The image is not a photograph of the actual destination; this is not a navigational map."
+        },
+        {
+          "src": "/media/trips-mobile-guide-390-fbf846d349.webp",
+          "width": 390,
+          "height": 844,
+          "variants": [
+            {
+              "src": "/media/trips-mobile-guide-390-fbf846d349.webp",
+              "width": 390,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Trips guide viewed on a phone: the day plan and why the basilica comes first",
+          "caption": "The day guide, designed to travel on a phone",
+          "layout": "wide"
         },
         {
           "src": "/media/trips-mobile-home-390-75e7097f18.webp",
@@ -1355,13 +1441,12 @@
         }
       ],
       "collectionCover": {
-        "src": "/media/trips-product-concept.svg",
+        "src": "/media/trips-field-guide-v2.svg",
         "width": 900,
-        "height": 1400,
-        "alt": "Trips illustrative product interface with fictional example content",
-        "caption": "Travel-journal interface concept · illustrative day plan",
-        "layout": "detail",
-        "textEquivalent": "Concept for a personal island guide with an illustrative route, six stops, a story card and a shared checklist. Not the current live app interface."
+        "height": 1200,
+        "alt": "Photograph-led personal travel guide concept with an unhurried connected itinerary",
+        "caption": "Travel guide concept · AI-generated mood photograph",
+        "textEquivalent": "A personal travel guide uses an AI-generated landscape mood photograph, connected stops, stories and a shared preparation checklist. The image is not a photograph of the actual destination; this is not a navigational map."
       }
     },
     {
@@ -1374,40 +1459,48 @@
       "featured": true,
       "summary": "Bodybrain began as a way to read my training, nutrition and recovery together, instead of opening separate apps and guessing how the pieces connect. I am developing that personal data system into a coaching platform: bringing context to a conversation, agreeing a plan and adjusting it as someone’s life changes. MacroFactor, InBody, Hevy, Google Fit and bloodwork show the kinds of information I want to connect. The screens here are illustrative; the coaching platform is in active development.",
       "cover": {
-        "src": "/media/bodybrain-intersection-1400-51a18ab051.webp",
-        "width": 1400,
-        "height": 1000,
-        "variants": [
-          {
-            "src": "/media/bodybrain-intersection-480-b6b5d07884.webp",
-            "width": 480,
-            "type": "image/webp"
-          },
-          {
-            "src": "/media/bodybrain-intersection-960-34b3d1ca70.webp",
-            "width": 960,
-            "type": "image/webp"
-          },
-          {
-            "src": "/media/bodybrain-intersection-1400-51a18ab051.webp",
-            "width": 1400,
-            "type": "image/webp"
-          }
-        ],
-        "alt": "Five illustrative cards for nutrition, body composition, strength training, daily movement and bloodwork lead to one coaching conversation",
-        "caption": "Five sources, one coaching conversation · illustrative data",
-        "layout": "wide",
-        "textEquivalent": "MacroFactor represents nutrition, InBody body composition, Hevy strength training, Google Fit daily movement, and bloodwork dated laboratory results. These fictional source cards explain the proposed intersection; they are not screenshots or a claim of five live integrations."
+        "src": "/media/bodybrain-journal-v2.svg",
+        "width": 900,
+        "height": 1200,
+        "alt": "A weekly coaching journal concept with aligned source tracks and a context note",
+        "caption": "Weekly journal concept · fictional data",
+        "textEquivalent": "A fictional weekly review aligns training sessions with nutrition, movement, body composition and dated bloodwork. A note adds life context before discussing an adjustment with a coach. No health score or diagnostic interpretation."
       },
       "gallery": [
         {
-          "src": "/media/bodybrain-product-concept.svg",
+          "src": "/media/bodybrain-review-v2.svg",
           "width": 900,
-          "height": 1400,
-          "alt": "Bodybrain illustrative product interface with fictional example content",
-          "caption": "Product interface concept · fictional example content",
+          "height": 1200,
+          "alt": "Notice, add context, agree one next step",
+          "caption": "Notice, add context, agree one next step",
           "layout": "detail",
-          "textEquivalent": "Concept coaching overview with fictional weekly trends, training, nutrition and movement measures; MacroFactor, InBody, Hevy, Google Fit and bloodwork as proposed sources; a prompt to add context for the next coaching conversation. No live integrations shown."
+          "textEquivalent": "A fictional weekly review aligns training sessions with nutrition, movement, body composition and dated bloodwork. A note adds life context before discussing an adjustment with a coach. No health score or diagnostic interpretation."
+        },
+        {
+          "src": "/media/bodybrain-intersection-1400-51a18ab051.webp",
+          "width": 1400,
+          "height": 1000,
+          "variants": [
+            {
+              "src": "/media/bodybrain-intersection-480-b6b5d07884.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/bodybrain-intersection-960-34b3d1ca70.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/bodybrain-intersection-1400-51a18ab051.webp",
+              "width": 1400,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Five illustrative cards for nutrition, body composition, strength training, daily movement and bloodwork lead to one coaching conversation",
+          "caption": "Five sources, one coaching conversation · illustrative data",
+          "layout": "wide",
+          "textEquivalent": "MacroFactor represents nutrition, InBody body composition, Hevy strength training, Google Fit daily movement, and bloodwork dated laboratory results. These fictional source cards explain the proposed intersection; they are not screenshots or a claim of five live integrations."
         },
         {
           "src": "/media/bodybrain-coaching-1400-9788cc76ad.webp",
@@ -1438,13 +1531,12 @@
       ],
       "links": [],
       "collectionCover": {
-        "src": "/media/bodybrain-product-concept.svg",
+        "src": "/media/bodybrain-journal-v2.svg",
         "width": 900,
-        "height": 1400,
-        "alt": "Bodybrain illustrative product interface with fictional example content",
-        "caption": "Product interface concept · fictional example content",
-        "layout": "detail",
-        "textEquivalent": "Concept coaching overview with fictional weekly trends, training, nutrition and movement measures; MacroFactor, InBody, Hevy, Google Fit and bloodwork as proposed sources; a prompt to add context for the next coaching conversation. No live integrations shown."
+        "height": 1200,
+        "alt": "A weekly coaching journal concept with aligned source tracks and a context note",
+        "caption": "Weekly journal concept · fictional data",
+        "textEquivalent": "A fictional weekly review aligns training sessions with nutrition, movement, body composition and dated bloodwork. A note adds life context before discussing an adjustment with a coach. No health score or diagnostic interpretation."
       }
     },
     {
@@ -1457,40 +1549,48 @@
       "featured": true,
       "summary": "I built Custom Media Databank to bring the best photographs, artwork and quotes out of project learning publications at a design-focused, Reggio-inspired school. It turns finished PDFs into a searchable editorial library, with source references, duplicate handling and quality flags, so strong material can be found again for publications and social media. Security and children’s safety shape the workflow: access stays behind institutional authentication, and attribution and reuse need human review. The examples here are fictional and anonymised.",
       "cover": {
-        "src": "/media/custom-media-databank-demo-1400-362b13e6dd.webp",
-        "width": 1400,
-        "height": 1000,
-        "variants": [
-          {
-            "src": "/media/custom-media-databank-demo-480-5087950e42.webp",
-            "width": 480,
-            "type": "image/webp"
-          },
-          {
-            "src": "/media/custom-media-databank-demo-960-95732bfe65.webp",
-            "width": 960,
-            "type": "image/webp"
-          },
-          {
-            "src": "/media/custom-media-databank-demo-1400-362b13e6dd.webp",
-            "width": 1400,
-            "type": "image/webp"
-          }
-        ],
-        "alt": "An anonymised illustrative media library with search, type filters, artwork, source-page references and attribution checks",
-        "caption": "Anonymised interface study · fictional records and artwork",
-        "layout": "wide",
-        "textEquivalent": "The databank groups extracted photos, artwork and quotes into a searchable editorial library, with source-page references, quality flags and attribution checks. This interface study uses invented records and drawings."
+        "src": "/media/databank-contact-sheet-v2.svg",
+        "width": 900,
+        "height": 1200,
+        "alt": "Editorial contact-sheet concept with material photographs and a selected item",
+        "caption": "Contact-sheet concept · AI-generated material studies",
+        "textEquivalent": "A fictional editorial contact sheet shows AI-generated material studies, source-page references and selected candidates. The inspector keeps original source, attribution and permission review visible. Selecting an image does not approve it for publication."
       },
       "gallery": [
         {
-          "src": "/media/custom-media-databank-product-concept.svg",
+          "src": "/media/databank-inspector-v2.svg",
           "width": 900,
-          "height": 1400,
-          "alt": "Custom Media Databank illustrative product interface with fictional example content",
-          "caption": "Product interface concept · fictional example content",
+          "height": 1200,
+          "alt": "Source, attribution and permissions stay beside the selection",
+          "caption": "Source, attribution and permissions stay beside the selection",
           "layout": "detail",
-          "textEquivalent": "Concept editorial library with search, photos, artwork and quotes. Fictional records retain source-page references and pass through attribution, permissions and publication-context review."
+          "textEquivalent": "A fictional editorial contact sheet shows AI-generated material studies, source-page references and selected candidates. The inspector keeps original source, attribution and permission review visible. Selecting an image does not approve it for publication."
+        },
+        {
+          "src": "/media/custom-media-databank-demo-1400-362b13e6dd.webp",
+          "width": 1400,
+          "height": 1000,
+          "variants": [
+            {
+              "src": "/media/custom-media-databank-demo-480-5087950e42.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/custom-media-databank-demo-960-95732bfe65.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/custom-media-databank-demo-1400-362b13e6dd.webp",
+              "width": 1400,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "An anonymised illustrative media library with search, type filters, artwork, source-page references and attribution checks",
+          "caption": "Anonymised interface study · fictional records and artwork",
+          "layout": "wide",
+          "textEquivalent": "The databank groups extracted photos, artwork and quotes into a searchable editorial library, with source-page references, quality flags and attribution checks. This interface study uses invented records and drawings."
         },
         {
           "src": "/media/custom-media-databank-workflow-1400-7a844f31ce.webp",
@@ -1521,13 +1621,12 @@
       ],
       "links": [],
       "collectionCover": {
-        "src": "/media/custom-media-databank-product-concept.svg",
+        "src": "/media/databank-contact-sheet-v2.svg",
         "width": 900,
-        "height": 1400,
-        "alt": "Custom Media Databank illustrative product interface with fictional example content",
-        "caption": "Product interface concept · fictional example content",
-        "layout": "detail",
-        "textEquivalent": "Concept editorial library with search, photos, artwork and quotes. Fictional records retain source-page references and pass through attribution, permissions and publication-context review."
+        "height": 1200,
+        "alt": "Editorial contact-sheet concept with material photographs and a selected item",
+        "caption": "Contact-sheet concept · AI-generated material studies",
+        "textEquivalent": "A fictional editorial contact sheet shows AI-generated material studies, source-page references and selected candidates. The inspector keeps original source, attribution and permission review visible. Selecting an image does not approve it for publication."
       }
     }
   ]

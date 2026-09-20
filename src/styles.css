@@ -149,3 +149,11 @@ button,a,summary{-webkit-tap-highlight-color:transparent}
 .home .piece .phone-frame img{width:100%;height:auto;max-height:none;object-fit:contain}
 /* Trips concept uses its own portrait screen proportions. */
 .home .piece--trips .phone-frame{aspect-ratio:900/1400}
+
+/* Distinct product studies retain their own composition instead of shared chrome. */
+.home .piece--trips .artifact{padding:0}
+.home .piece--trips .artifact img,.home .piece--second-brain-builder .artifact img,.home .piece--pomodoist .artifact img{width:100%;height:100%;object-fit:contain}
+.case--bodybrain .hero-image{background:#fcfcf9}.case--bodybrain .case-heading h1{font-family:Georgia,serif}
+.case--trips .hero-image{background:#f7f1e6}.case--trips .case-heading h1{font-family:Georgia,serif;font-style:italic}
+.case--custom-media-databank .hero-image{background:#e9e9e5}.case--custom-media-databank .case-heading h1{letter-spacing:-.065em}
+.case--second-brain-builder .hero-image{background:#f4f5fa}.case--second-brain-builder .case-icon-label{color:#414c9a}

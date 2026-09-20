@@ -1,0 +1,29 @@
+# Product identity studies · 20 September 2026
+
+Design was planned before editing the page. Each product uses a different task and composition: Bodybrain weekly journal and coaching review; Trips photograph-led guide and story/checklist; Databank contact sheet and provenance inspector; Second Brain question-to-blueprint wizard and output. These are portfolio concepts, not changes to the live products. Actual screenshots, earlier explanatory infographics and prototype photographs remain in the cases. Rebuild the native studies with `node scripts/generate-identity-studies.mjs`.
+
+## Generated assets
+
+Built-in image_gen mode; no API/CLI fallback. Selected outputs copied/converted into this repository, with480/960/1122px WebP variants. Render captions and text equivalents disclose their status.
+
+- `public/media/pomodoist-desk-concept-1122.webp`: homepage hardware scene. References: `pomodoist-video-still-1000-976f973d80.webp` for enclosure shape; `pomodoist-prototype-1000-fdc6fe6925.webp` for workbench atmosphere. Board inventory and display language read from esp-devwork README, board CONTEXTs and DESIGN. Physical layouts and screens remain a concept, not evidence of simultaneous firmware support.
+- `public/media/trips-landscape-mood-1122.webp`: generated landscape mood photograph, embedded in the native guide studies. Not a photograph of an actual visit or precise location.
+- `public/media/databank-material-studies-1122.webp`: generated sample material contact sheet, embedded in the contact-sheet/inspector studies. No children, school records or identifying institutional data.
+
+## Final generation prompts
+
+### Pomodoist
+
+Create a high quality photorealistic product-mockup image for Pomodoist, portrait 4:5 composition. Reference1 is the actual grey 3D printed prototype shape/material, reference2 is maker workbench atmosphere, not an edit target. A real pale oak desk in warm side window light, photographed from above at a 45 degree angle. Main subject in central lower half: grey printed rectangular timer enclosure like reference1, small upright portrait display showing elegant warm paper/black ink/coral UI with large 25:00, small POMODOIST and one task 'WRITE THE FIRST DRAFT'. Around it, deliberately arranged but physically plausible developer board family: a small naked black LilyGo T-Display-S3 with narrow rectangular display and two buttons; yellow-backed CYD rectangular touch-display board; a round 1.85 inch timer display on a black exposed circular PCB; a second round display in a low black puck enclosure; two small ESP32/C3 breadboard devkits with metal RF shields and pin headers; an unlit ESP32-CAM with tiny camera lens. Timer displays show a coherent warm paper and coral Pomodoist face, one alternate dark amber break display 05:00. Not every board needs a lit screen. Correct tiny component scale, rational USB cables connected at real ports, boards resting on desk, no floating parts or impossible wires. A blue silicone workmat partially under the exposed boards and an open graph-paper notebook, pencil and one small screwdriver at the margins. All main devices visible uncropped in portrait safe area, meaningful varied heights, product still-life rather than a catalogue grid. No laptop, no hands, no people, no large text overlays, no extra logos, no chrome sci-fi graphics. Show the product as one task and a timer in small physical desk objects. This will be labelled AI-generated concept render by the website.
+
+### Trips
+
+Editorial travel photography mood image for a personal Quebec island day-trip guide, portrait 4:5. Atmospheric natural late-summer morning photograph of a quiet curving rural road alongside the Saint Lawrence River, broad pale blue river horizon, green orchard, modest white farmhouse far away, red wildflowers close to the lens at lower right, soft overcast warm sun, subtle film grain, rich real foliage and understated colors. Eye-level intimate observation not drone view. Upper third mostly calm soft sky and distant river for an overlaid serif title later. Lower half road and orchard with beautiful textural detail. No people, no text, no phone, no UI, no landmark claimed to be exact. Must feel like a personal travel journal, not a resort ad. Photographic and quiet. It will be labelled AI-generated mood imagery on the portfolio.
+
+### Databank
+
+A photographic editorial contact sheet, portrait 4:5, composed of exactly six distinct rectangular studio photographs in a 2 column by 3 row grid with narrow clean white gutters, no words or borders beyond gutters. Each tile is a close-up material study for an anonymous education documentation media library. Top left: translucent orange and blue acetate sheets overlapping in sunlight on white paper. Top right: smooth river stones and curved bent copper wire on charcoal paper. Middle left: expressive charcoal loops and a graphite drawing of a leaf on textured cream paper, with pencil at edge. Middle right: folded ochre paper architectural forms lit from side on pale pink ground. Bottom left: a small blue-and-white ceramic clay study with real handmade texture, tabletop closeup. Bottom right: spool of scarlet thread, wooden rings and fine mesh casting a shadow on ivory paper. Rich actual photographic tactile detail, elegant exhibition contact-sheet aesthetic, varying compositions, no hands, people, children, faces, names, logos, branding, text, screens. These are generated sample material images, not documentation of a real school project.
+
+## Validation
+
+Eight distinct SVG layouts, not one reskinned UI. Viewed five homepage heroes at390px and four case detail studies at1440px using gstack. npm run check8 + test:e2e22 pass. Initial transfer461081B at390px,546503B at1440px; CLS0. Existing carousel touch/keyboard/no-JS, accessibility, image decoding, mobile overflow and search tests pass.
