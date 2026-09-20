@@ -819,79 +819,58 @@
     },
     {
       "slug": "elc-portal",
-      "title": "ELC Portal",
+      "title": "Parent Portal",
       "descriptor": "Activities, events and calendars in one family portal",
       "status": "Live school platform",
       "role": "Family experience design and web development",
       "order": 5,
       "featured": true,
-      "summary": "I designed and built ELC Portal around a parent's practical questions: what is happening, what can my child join, and where do I go next? It brings school activities, events, calendars and useful information into one family-facing website, with links to the existing registration systems. My work joins school operations with interface design: organising the information and building a consistent route through it. The screenshots show the public activities and calendar pages.",
+      "summary": "I designed and built a parent portal around a parent's practical questions: what is happening, what can my child join, and where do I go next? It brings school activities, events, calendars and useful information into one family-facing website, with links to the existing registration systems. My work joins school operations with interface design: organising the information and building a consistent route through it. The mobile views are de-identified for this portfolio.",
       "cover": {
-        "src": "/media/portal-home-960-856bb411c9.webp",
-        "width": 960,
-        "height": 686,
-        "variants": [
-          {
-            "src": "/media/portal-home-480-3861b6cf9c.webp",
-            "width": 480,
-            "type": "image/webp"
-          },
-          {
-            "src": "/media/portal-home-960-856bb411c9.webp",
-            "width": 960,
-            "type": "image/webp"
-          }
-        ],
-        "alt": "ELC family portal with navigation and upcoming activities",
-        "caption": "A family-facing front door",
-        "credit": {
-          "text": "ELC International Schools. Institutional content by the ELC team."
-        }
-      },
-      "gallery": [
-        {
-          "src": "/media/portal-calendar-960-a376dcdb06.webp",
-          "width": 960,
-          "height": 686,
-          "variants": [
-            {
-              "src": "/media/portal-calendar-480-bfbe093527.webp",
-              "width": 480,
-              "type": "image/webp"
-            },
-            {
-              "src": "/media/portal-calendar-960-a376dcdb06.webp",
-              "width": 960,
-              "type": "image/webp"
-            }
-          ],
-          "alt": "ELC calendar showing school events and navigation",
-          "caption": "School dates gathered into one calendar",
-          "layout": "wide",
-          "credit": {
-            "text": "ELC International Schools. Institutional content by the ELC team."
-          }
-        }
-      ],
-      "links": [
-        {
-          "label": "Visit ELC Portal",
-          "href": "https://elcportal.elc.ac.th/"
-        }
-      ],
-      "collectionCover": {
-        "src": "/media/portal-mobile-home-390-0feaf12408.webp",
+        "src": "/media/parent-portal-mobile-390.webp",
         "width": 390,
         "height": 844,
         "variants": [
           {
-            "src": "/media/portal-mobile-home-390-0feaf12408.webp",
+            "src": "/media/parent-portal-mobile-390.webp",
             "width": 390,
             "type": "image/webp"
           }
         ],
-        "alt": "ELC Portal homepage at mobile size",
-        "caption": "The family portal on mobile"
+        "alt": "De-identified parent portal on mobile, showing school updates and upcoming events",
+        "caption": "Mobile home · de-identified for this portfolio"
+      },
+      "gallery": [
+        {
+          "src": "/media/parent-portal-calendar-390.webp",
+          "width": 390,
+          "height": 844,
+          "variants": [
+            {
+              "src": "/media/parent-portal-calendar-390.webp",
+              "width": 390,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "De-identified mobile school calendar with event categories",
+          "caption": "School calendar · de-identified mobile view",
+          "layout": "detail"
+        }
+      ],
+      "links": [],
+      "collectionCover": {
+        "src": "/media/parent-portal-mobile-390.webp",
+        "width": 390,
+        "height": 844,
+        "variants": [
+          {
+            "src": "/media/parent-portal-mobile-390.webp",
+            "width": 390,
+            "type": "image/webp"
+          }
+        ],
+        "alt": "De-identified parent portal on mobile, showing school updates and upcoming events",
+        "caption": "Mobile home · de-identified for this portfolio"
       }
     },
     {

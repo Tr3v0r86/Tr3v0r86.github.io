@@ -10,7 +10,7 @@ const descriptions={
  '/work/learning-and-making/':'An alternative middle school and community maker-space concept by Trevor Cardozo, with woodshop and fablab visualisations. A learning model in development.',
  '/work/turnkeep/':'Turnkeep by Trevor Cardozo: a printed tabletop character case with a digital companion. Explore the physical prototype, editable CAD, firmware and build files.',
  '/work/padlano/':'Padlano by Trevor Cardozo: a live padel app for Americano rotations, scoring and shared leagues, alongside sketches for a physical scoring companion.',
- '/work/elc-portal/':'ELC Portal by Trevor Cardozo brings school activities, events, calendars and registration links into one family-facing website.',
+ '/work/elc-portal/':'Parent Portal by Trevor Cardozo brings school activities, events, calendars and registration links into one family-facing website.',
  '/work/pomodoist/':'Pomodoist by Trevor Cardozo puts Todoist tasks and a Pomodoro timer on a small ESP32 desk device. See the physical prototype and interface designs.',
  '/work/project-dashboard/':'A single-file project-management dashboard by Trevor Cardozo, with priorities, progress and weekly notes. Explore the public demo and adaptable source.',
  '/work/esp32-experiments/':'TrevOS and ESP32 experiments by Trevor Cardozo: shared software for timers, scoreboards and desk displays, from notebook sketches to hardware prototypes.',
