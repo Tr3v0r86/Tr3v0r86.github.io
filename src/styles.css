@@ -120,3 +120,20 @@ button,a,summary{-webkit-tap-highlight-color:transparent}
 @media(min-width:700px){.home .collection{padding-inline:22%;gap:7%;scroll-padding-inline:22%}.home .piece .artifact{height:clamp(340px,52svh,640px);padding:24px}.home .piece h3{min-height:1.2em}.carousel-ready .piece{opacity:.5;transform:scale(.88)!important;transform-origin:center 65%;transition:transform 300ms,opacity 300ms}.carousel-ready .piece.is-active{opacity:1;transform:scale(1)!important}.home .piece-caption{min-height:100px}.home .piece .artifact img{max-height:100%}.slide-popover{padding:30px;font-size:18px}.carousel-controls{margin-inline:22%}}
 @media(max-width:699px){html{scroll-padding-top:16px}.home .intro{padding-block:18px 22px}.home .intro-bottom{margin-top:16px}.home .intro-bottom p{font-size:17px}.home .work-jump{margin-top:8px}.home .section-label>span{font-size:11px}.carousel-controls{gap:14px}.project-picker{flex-basis:100%;max-width:none}.home .site-footer{padding-top:28px}.case-heading{padding-bottom:22px}.case-gallery{margin-block:36px 48px;gap:28px}.case-story{line-height:1.55}.case-pagination a{min-height:48px}.home .piece h3{min-height:2.2em}}
 @media(prefers-reduced-motion:reduce){.carousel-ready .piece{transition:none!important;transform:none!important}.home .collection{scroll-behavior:auto}.slide-details[open] summary>span{transform:none}}
+
+/* Project-specific framing belongs to the collection, not the case evidence. */
+.home .piece--padlano .artifact,.home .piece--learning-and-making .artifact{background:transparent}
+.phone-frame{height:100%;max-width:100%;aspect-ratio:390/844;box-sizing:border-box;border:6px solid #24271f;border-radius:28px;overflow:hidden;background:#24271f;box-shadow:0 10px 24px #20231c24}
+.home .piece .phone-frame img{width:100%;height:100%;object-fit:contain}
+.school-stack{height:100%;width:100%;display:flex;flex-direction:column;gap:16px;align-items:center;justify-content:center}
+.home .piece .school-stack img{height:calc((100% - 16px)/2);width:auto;max-width:100%;object-fit:contain;margin:0}
+.brain-focus{height:100%;max-width:100%;aspect-ratio:1;position:relative;overflow:hidden;background:#1c1a0f}
+.home .piece .brain-focus img{position:absolute;max-width:none;max-height:none;width:233.333%;height:auto;left:50%;top:50%;transform:translate(-50%,-50%);margin:0}
+.home .piece--second-brain-builder .artifact{background:transparent}
+@media(max-width:699px){
+ .home .piece--turnkeep .artifact,.home .piece--padlano .artifact,.home .piece--learning-and-making .artifact{height:clamp(320px,48svh,460px)}
+ .home .piece--turnkeep .artifact{padding:0;background:transparent}
+ .home .piece--turnkeep .artifact img{width:100%;height:100%;object-fit:cover;object-position:52% 50%}
+ .home .piece--padlano .artifact{padding:8px}
+ .home .piece--learning-and-making .artifact{padding:0}
+}
