@@ -15,7 +15,7 @@ function document({title, description, path, cover, body, kind='home'}){
 function collectionHero(p,i){
  const options={eager:i===0,cover:true};
  if(p.slug==='learning-and-making')return `<div class="school-stack">${image(p.gallery.find(m=>m.src.includes('school-fablab-concept')),options)}${image(p.cover,options)}</div>`;
- if(p.slug==='padlano')return `<div class="phone-frame">${image(p.collectionCover||p.cover,options)}</div>`;
+ if(['padlano','elc-portal','trips','project-dashboard'].includes(p.slug))return `<div class="phone-frame">${image(p.collectionCover||p.cover,options)}</div>`;
  if(p.slug==='second-brain-builder')return `<div class="brain-focus">${image(p.collectionCover||p.cover,options).replace('(max-width: 699px) 82vw, 56vw','(max-width: 699px) 190vw, 1400px')}</div>`;
  return image(p.collectionCover||p.cover,options);
 }

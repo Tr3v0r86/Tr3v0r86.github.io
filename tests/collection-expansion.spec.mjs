@@ -21,6 +21,6 @@ test('new cases distinguish illustrative evidence and preserve institutional ano
 test('Reggio duration is consistent across discovery, case and about',async({page})=>{
  await page.goto('/');await expect(page.locator('[data-project="reggio-projects"]')).toContainText('15 years');
  await page.goto('/work/reggio-projects/');await expect(page.locator('.case-story')).toContainText('For 15 years');
- await expect(page.locator('meta[name="description"]')).toHaveAttribute('content',/^15 years/);
+ await expect(page.locator('meta[name="description"]')).toHaveAttribute('content',/Children are makers.*15 years/);
  await page.getByRole('link',{name:'About',exact:true}).click();await expect(page.locator('.about-story')).toContainText('For 15 years');await expect(page.locator('.about-portrait img')).toBeVisible();
 });

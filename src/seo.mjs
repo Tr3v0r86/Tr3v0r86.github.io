@@ -6,7 +6,7 @@ const descriptions={
  '/work/bodybrain/':'Bodybrain by Trevor Cardozo connects training, nutrition, recovery and bloodwork. An active personal data project developing into a coaching platform.',
  '/work/custom-media-databank/':'Custom Media Databank by Trevor Cardozo turns learning publications into a searchable editorial media library, with source context, quality checks and human review.',
  '/':'Trevor Cardozo is an educator and maker in Bangkok. Explore Reggio-inspired learning projects, school and maker-space concepts, useful apps and physical prototypes.',
- '/work/reggio-projects/':'15 years of Reggio-inspired projects with children in Bangkok: materials, micro:bit, Arduino and AI, facilitated and documented by educator Trevor Cardozo.',
+ '/work/reggio-projects/':'Children are makers. 15 years of Reggio-inspired projects in Bangkok, supported by Trevor Cardozo: time, trust and expertise to design, make and publish.',
  '/work/learning-and-making/':'An alternative middle school and community maker-space concept by Trevor Cardozo, with woodshop and fablab visualisations. A learning model in development.',
  '/work/turnkeep/':'Turnkeep by Trevor Cardozo: a printed tabletop character case with a digital companion. Explore the physical prototype, editable CAD, firmware and build files.',
  '/work/padlano/':'Padlano by Trevor Cardozo: a live padel app for Americano rotations, scoring and shared leagues, alongside sketches for a physical scoring companion.',

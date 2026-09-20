@@ -182,12 +182,12 @@
     {
       "slug": "reggio-projects",
       "title": "Reggio projects",
-      "descriptor": "15 years of learning through materials and making",
+      "descriptor": "Children are makers · 15 years of Reggio-inspired projects",
       "status": "Educational practice",
-      "role": "Provocations, documentation and co-facilitation",
+      "role": "Creating the conditions, sharing expertise and co-facilitating",
       "order": 2,
       "featured": true,
-      "summary": "For 15 years, I have designed and co-facilitated Reggio-inspired investigations with children in Bangkok, thinking through materials. A terrarium becomes a way to explore sensors; a drawing becomes a circuit or moving machine; a Year 6 AI sprint becomes a chance to question a digital design. My contribution is to prepare the conditions, introduce tools and document how ideas change. The work here belongs to a dialogue between children, educators and the things they make.",
+      "summary": "Children are makers. Given time, trust and access to expertise, they can design, make and publish work at the intersection of creativity and functionality. For 15 years, I have explored that belief through Reggio-inspired projects with children in Bangkok: drawings become working circuits and moving machines; a Year 6 AI sprint becomes a student newspaper website. My role is to create the conditions, share tools and expertise, and document the process while keeping children’s ideas and authorship at the centre.",
       "cover": {
         "src": "/media/reggio-garden-installation-1000-f434cac676.webp",
         "width": 1000,
@@ -1024,7 +1024,31 @@
           "label": "View source",
           "href": "https://github.com/Tr3v0r86/projects-dashboard-template"
         }
-      ]
+      ],
+      "collectionCover": {
+        "src": "/media/dashboard-mobile-1170.webp",
+        "width": 1170,
+        "height": 2532,
+        "variants": [
+          {
+            "src": "/media/dashboard-mobile-390.webp",
+            "width": 390,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/dashboard-mobile-780.webp",
+            "width": 780,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/dashboard-mobile-1170.webp",
+            "width": 1170,
+            "type": "image/webp"
+          }
+        ],
+        "alt": "Actual project dashboard mobile demo showing project cards, owners and priorities",
+        "caption": "Mobile dashboard · synthetic demonstration data"
+      }
     },
     {
       "slug": "esp32-experiments",
@@ -1209,23 +1233,23 @@
       "featured": true,
       "summary": "I made Second Brain Builder to turn the structure of my own knowledge system into a starting point for someone else. A personalised question flow asks how they work, plan and keep track of things, then produces a plain-text blueprint for an AI-assisted workspace. Each journey is prepared for its recipient. The public page is the entry point to those individual builds; the source shows how the builder works.",
       "cover": {
-        "src": "/media/brain-home-1400-29313c533d.webp",
-        "width": 1400,
-        "height": 1000,
+        "src": "/media/brain-home-retina-4200.webp",
+        "width": 4200,
+        "height": 3000,
         "variants": [
           {
-            "src": "/media/brain-home-480-dcd68829ca.webp",
-            "width": 480,
-            "type": "image/webp"
-          },
-          {
-            "src": "/media/brain-home-960-d1c286dc05.webp",
-            "width": 960,
-            "type": "image/webp"
-          },
-          {
-            "src": "/media/brain-home-1400-29313c533d.webp",
+            "src": "/media/brain-home-retina-1400.webp",
             "width": 1400,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/brain-home-retina-2800.webp",
+            "width": 2800,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/brain-home-retina-4200.webp",
+            "width": 4200,
             "type": "image/webp"
           }
         ],
@@ -1385,7 +1409,16 @@
           "textEquivalent": "Proposed coaching loop: notice patterns across sources, discuss the person’s context, agree one adjustment, and review it together. This is a concept interface, not a released coaching product."
         }
       ],
-      "links": []
+      "links": [],
+      "collectionCover": {
+        "src": "/media/bodybrain-portrait.svg",
+        "width": 900,
+        "height": 1200,
+        "alt": "Five illustrative cards for nutrition, body composition, strength training, daily movement and bloodwork lead to one coaching conversation",
+        "caption": "Five sources, one coaching conversation · illustrative data",
+        "layout": "wide",
+        "textEquivalent": "MacroFactor represents nutrition, InBody body composition, Hevy strength training, Google Fit daily movement, and bloodwork dated laboratory results. These fictional source cards explain the proposed intersection; they are not screenshots or a claim of five live integrations."
+      }
     },
     {
       "slug": "custom-media-databank",
@@ -1450,7 +1483,16 @@
           "textEquivalent": "Extract photos, artwork and quotes from publications; classify and deduplicate; retain source references and originals; review ownership, attribution and quality; select for reuse. Authentication is provided by the hosting environment."
         }
       ],
-      "links": []
+      "links": [],
+      "collectionCover": {
+        "src": "/media/databank-portrait.svg",
+        "width": 900,
+        "height": 1200,
+        "alt": "An anonymised illustrative media library with search, type filters, artwork, source-page references and attribution checks",
+        "caption": "Anonymised interface study · fictional records and artwork",
+        "layout": "wide",
+        "textEquivalent": "The databank groups extracted photos, artwork and quotes into a searchable editorial library, with source-page references, quality flags and attribution checks. This interface study uses invented records and drawings."
+      }
     }
   ]
 }
