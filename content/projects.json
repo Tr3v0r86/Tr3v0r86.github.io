@@ -160,35 +160,63 @@
       "role": "Provocations, documentation and co-facilitation",
       "order": 2,
       "featured": true,
-      "summary": "For a decade, I have designed and co-facilitated Reggio-inspired investigations in which children think with materials. A terrarium becomes a way to explore sensors; a drawing becomes a circuit or moving machine; a Year 6 AI sprint becomes a chance to question a digital design. My contribution is to prepare the conditions, introduce tools and document how ideas change. The work here belongs to a dialogue between children, educators and the things they make.",
+      "summary": "For a decade, I have designed and co-facilitated Reggio-inspired investigations with children in Bangkok, thinking through materials. A terrarium becomes a way to explore sensors; a drawing becomes a circuit or moving machine; a Year 6 AI sprint becomes a chance to question a digital design. My contribution is to prepare the conditions, introduce tools and document how ideas change. The work here belongs to a dialogue between children, educators and the things they make.",
       "cover": {
-        "src": "/media/reggioprojects8-1600-e5d235ba01.webp",
-        "width": 1600,
-        "height": 1205,
+        "src": "/media/reggio-garden-installation-1000-f434cac676.webp",
+        "width": 1000,
+        "height": 1320,
         "variants": [
           {
-            "src": "/media/reggioprojects8-480-5dc93f3069.webp",
+            "src": "/media/reggio-garden-installation-480-dbe81a470a.webp",
             "width": 480,
             "type": "image/webp"
           },
           {
-            "src": "/media/reggioprojects8-960-6a2ca8f237.webp",
+            "src": "/media/reggio-garden-installation-960-d28ba1db35.webp",
             "width": 960,
             "type": "image/webp"
           },
           {
-            "src": "/media/reggioprojects8-1600-e5d235ba01.webp",
-            "width": 1600,
+            "src": "/media/reggio-garden-installation-1000-f434cac676.webp",
+            "width": 1000,
             "type": "image/webp"
           }
         ],
-        "alt": "A micro:bit connected to motors, a battery and wiring on a project table",
-        "caption": "A micro:bit, motors and a question to investigate",
+        "alt": "A micro:bit, tubing and planted glass bowl beside a transparent panel of leaf drawings",
+        "caption": "Drawing, plants and electronics in one outdoor investigation",
         "credit": {
           "text": "Children’s project work; educational facilitation/documentation by Trevor Cardozo, ELC."
         }
       },
       "gallery": [
+        {
+          "src": "/media/reggioprojects8-1600-e5d235ba01.webp",
+          "width": 1600,
+          "height": 1205,
+          "variants": [
+            {
+              "src": "/media/reggioprojects8-480-5dc93f3069.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/reggioprojects8-960-6a2ca8f237.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/reggioprojects8-1600-e5d235ba01.webp",
+              "width": 1600,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "A micro:bit connected to motors, a battery and wiring on a project table",
+          "caption": "A micro:bit, motors and a question to investigate",
+          "credit": {
+            "text": "Children’s project work; educational facilitation/documentation by Trevor Cardozo, ELC."
+          },
+          "layout": "wide"
+        },
         {
           "src": "/media/reggioprojects-1000-b261a8719c.webp",
           "width": 1000,
@@ -522,6 +550,32 @@
           "alt": "Padlano device components laid out beside handwritten plans",
           "caption": "The hardware companion, worked out on paper",
           "layout": "pair"
+        },
+        {
+          "src": "/media/padlano-puck-sketches-1000-c9ae3a2df0.webp",
+          "width": 1000,
+          "height": 1778,
+          "variants": [
+            {
+              "src": "/media/padlano-puck-sketches-480-f4599d3fb8.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/padlano-puck-sketches-960-c51da83bf7.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/padlano-puck-sketches-1000-c9ae3a2df0.webp",
+              "width": 1000,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Hand-drawn Padlano Puck screens for scoring, rounds and standings beside a round display",
+          "caption": "Working out the Padlano Puck on paper",
+          "layout": "pair",
+          "textEquivalent": "The notebook explores a circular scoring interface, round previews, player names, standings and a pre-game view. These are sketches for the hardware companion, not features claimed for the live web app."
         }
       ],
       "links": [
@@ -539,28 +593,84 @@
       "role": "Learning model, programme and spatial concept",
       "order": 4,
       "featured": true,
-      "summary": "I am developing an alternative middle school and community maker space around a shared workshop: a place where young people investigate questions by designing, building and testing things. My work connects the learning programme with the tools, materials and spaces it needs. These concept diagrams show that relationship at an early stage, from a shared worktable to a cycle of investigation, making, sharing and reflection. The school is in development.",
+      "summary": "I am developing an alternative middle school and community maker space around shared workshops, where young people investigate questions by designing, building and testing things. My work connects the learning programme with the tools, materials and spaces it needs. The woodshop and fablab renders explore how hand tools, digital fabrication and shared worktables could support that learning; the diagrams show the inquiry cycle behind it. These are concept visualisations for a school in development.",
       "cover": {
-        "src": "/media/school-space-960-3cc05a6ba4.webp",
-        "width": 960,
-        "height": 686,
+        "src": "/media/school-woodshop-concept-1600-d327961310.webp",
+        "width": 1600,
+        "height": 902,
         "variants": [
           {
-            "src": "/media/school-space-480-516552d91f.webp",
+            "src": "/media/school-woodshop-concept-480-ae00b8f641.webp",
             "width": 480,
             "type": "image/webp"
           },
           {
-            "src": "/media/school-space-960-3cc05a6ba4.webp",
+            "src": "/media/school-woodshop-concept-960-bcad3a5188.webp",
             "width": 960,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/school-woodshop-concept-1600-d327961310.webp",
+            "width": 1600,
             "type": "image/webp"
           }
         ],
-        "alt": "Conceptual open workshop with shared tables, shelves and work surfaces",
-        "caption": "Shared workshop · original spatial concept",
-        "textEquivalent": "A conceptual shared workshop places communal worktables alongside accessible materials and display surfaces. This is not a construction plan."
+        "alt": "Concept render of a woodshop with shared benches, hand tools, materials storage and protective equipment",
+        "caption": "Woodshop · AI-assisted concept render, not a completed space",
+        "credit": {
+          "text": "Concept direction: Trevor Cardozo. AI-assisted visualisation."
+        }
       },
       "gallery": [
+        {
+          "src": "/media/school-fablab-concept-1600-e99e55720b.webp",
+          "width": 1600,
+          "height": 902,
+          "variants": [
+            {
+              "src": "/media/school-fablab-concept-480-ea41cf4396.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/school-fablab-concept-960-9f179382a2.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/school-fablab-concept-1600-e99e55720b.webp",
+              "width": 1600,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Concept render of a fabrication studio with sewing machines, 3D printers and shared making tables",
+          "caption": "Fablab · AI-assisted concept render, not a completed space",
+          "layout": "wide",
+          "credit": {
+            "text": "Concept direction: Trevor Cardozo. AI-assisted visualisation."
+          }
+        },
+        {
+          "src": "/media/school-space-960-3cc05a6ba4.webp",
+          "width": 960,
+          "height": 686,
+          "variants": [
+            {
+              "src": "/media/school-space-480-516552d91f.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/school-space-960-3cc05a6ba4.webp",
+              "width": 960,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Conceptual open workshop with shared tables, shelves and work surfaces",
+          "caption": "Shared workshop · original spatial concept",
+          "textEquivalent": "A conceptual shared workshop places communal worktables alongside accessible materials and display surfaces. This is not a construction plan.",
+          "layout": "pair"
+        },
         {
           "src": "/media/school-learning-960-b2a6ea7a06.webp",
           "width": 960,
@@ -579,7 +689,7 @@
           ],
           "alt": "Investigate, make, share and reflect around a real question",
           "caption": "Learning through a cycle of practical inquiry",
-          "layout": "wide",
+          "layout": "pair",
           "textEquivalent": "A real question connects four recurring activities: investigate, make, share and reflect."
         }
       ],
@@ -886,6 +996,31 @@
           "layout": "pair"
         },
         {
+          "src": "/media/esp32-prototype-case-1000-8a7b82ffec.webp",
+          "width": 1000,
+          "height": 1778,
+          "variants": [
+            {
+              "src": "/media/esp32-prototype-case-480-95b345558c.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/esp32-prototype-case-960-54e057b24e.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/esp32-prototype-case-1000-8a7b82ffec.webp",
+              "width": 1000,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "A small display in a foam-lined plastic case with ESP32 boards on the workbench",
+          "caption": "A display, a simple enclosure and the next prototype",
+          "layout": "pair"
+        },
+        {
           "src": "/media/esp-platform-960-9e711e4bd9.webp",
           "width": 960,
           "height": 686,
@@ -919,6 +1054,31 @@
           ],
           "alt": "TrevOS simulator launcher with Pomodoist, Padlano, Clock and Settings",
           "caption": "TrevOS launcher · saved simulator baseline",
+          "layout": "wide"
+        },
+        {
+          "src": "/media/maker-workbench-1600-a20745feeb.webp",
+          "width": 1600,
+          "height": 706,
+          "variants": [
+            {
+              "src": "/media/maker-workbench-480-e1f7fbd8ff.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/maker-workbench-960-9ef5688390.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/maker-workbench-1600-a20745feeb.webp",
+              "width": 1600,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Trevor’s workbench with a 3D printer, cutting mat, electronics and handheld devices",
+          "caption": "The workbench behind these experiments",
           "layout": "wide"
         }
       ],
