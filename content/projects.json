@@ -15,7 +15,7 @@
     "second-brain-builder",
     "trips",
     "bodybrain",
-    "plj-databank"
+    "custom-media-databank"
   ],
   "projects": [
     {
@@ -1290,37 +1290,37 @@
     {
       "slug": "bodybrain",
       "title": "Bodybrain",
-      "descriptor": "Training, nutrition and recovery in one coaching conversation",
+      "descriptor": "Training, nutrition, recovery and bloodwork in context",
       "status": "In development",
       "role": "Data system, product thesis and coaching workflow",
       "order": 11,
       "featured": true,
-      "summary": "Bodybrain began as a way to read my training, nutrition and recovery together, instead of opening separate apps and guessing how the pieces connect. I am developing that personal data system into a coaching platform: bringing context to a conversation, agreeing a plan and adjusting it as someone’s life changes. MacroFactor, InBody, Hevy and Google Fit show the kinds of information I want to connect. The screens here are illustrative; the coaching platform is in active development.",
+      "summary": "Bodybrain began as a way to read my training, nutrition and recovery together, instead of opening separate apps and guessing how the pieces connect. I am developing that personal data system into a coaching platform: bringing context to a conversation, agreeing a plan and adjusting it as someone’s life changes. MacroFactor, InBody, Hevy, Google Fit and bloodwork show the kinds of information I want to connect. The screens here are illustrative; the coaching platform is in active development.",
       "cover": {
-        "src": "/media/bodybrain-intersection-1400-38dfb57415.webp",
+        "src": "/media/bodybrain-intersection-1400-51a18ab051.webp",
         "width": 1400,
         "height": 1000,
         "variants": [
           {
-            "src": "/media/bodybrain-intersection-480-b7e2d96d06.webp",
+            "src": "/media/bodybrain-intersection-480-b6b5d07884.webp",
             "width": 480,
             "type": "image/webp"
           },
           {
-            "src": "/media/bodybrain-intersection-960-877da679f1.webp",
+            "src": "/media/bodybrain-intersection-960-34b3d1ca70.webp",
             "width": 960,
             "type": "image/webp"
           },
           {
-            "src": "/media/bodybrain-intersection-1400-38dfb57415.webp",
+            "src": "/media/bodybrain-intersection-1400-51a18ab051.webp",
             "width": 1400,
             "type": "image/webp"
           }
         ],
-        "alt": "Four illustrative cards for nutrition, body composition, strength training and daily movement lead to one coaching conversation",
-        "caption": "Four sources, one coaching conversation · illustrative data",
+        "alt": "Five illustrative cards for nutrition, body composition, strength training, daily movement and bloodwork lead to one coaching conversation",
+        "caption": "Five sources, one coaching conversation · illustrative data",
         "layout": "wide",
-        "textEquivalent": "MacroFactor represents nutrition, InBody body composition, Hevy strength training, and Google Fit daily movement. These fictional source cards explain the proposed intersection; they are not screenshots or a claim of four live integrations."
+        "textEquivalent": "MacroFactor represents nutrition, InBody body composition, Hevy strength training, Google Fit daily movement, and bloodwork dated laboratory results. These fictional source cards explain the proposed intersection; they are not screenshots or a claim of five live integrations."
       },
       "gallery": [
         {
@@ -1353,31 +1353,31 @@
       "links": []
     },
     {
-      "slug": "plj-databank",
-      "title": "PLJ Databank",
+      "slug": "custom-media-databank",
+      "title": "Custom Media Databank",
       "descriptor": "Bringing learning documentation back into use",
       "status": "Internal working tool",
       "role": "Extraction pipeline, media library and editorial workflow",
       "order": 12,
       "featured": true,
-      "summary": "I built PLJ Databank to bring the best photographs, artwork and quotes out of project learning publications at a design-focused, Reggio-inspired school. It turns finished PDFs into a searchable editorial library, with source references, duplicate handling and quality flags, so strong material can be found again for publications and social media. Security and children’s safety shape the workflow: access stays behind institutional authentication, and attribution and reuse need human review. The examples here are fictional and anonymised.",
+      "summary": "I built Custom Media Databank to bring the best photographs, artwork and quotes out of project learning publications at a design-focused, Reggio-inspired school. It turns finished PDFs into a searchable editorial library, with source references, duplicate handling and quality flags, so strong material can be found again for publications and social media. Security and children’s safety shape the workflow: access stays behind institutional authentication, and attribution and reuse need human review. The examples here are fictional and anonymised.",
       "cover": {
-        "src": "/media/plj-databank-demo-1400-2324d9e52b.webp",
+        "src": "/media/custom-media-databank-demo-1400-362b13e6dd.webp",
         "width": 1400,
         "height": 1000,
         "variants": [
           {
-            "src": "/media/plj-databank-demo-480-ed3bbf946e.webp",
+            "src": "/media/custom-media-databank-demo-480-5087950e42.webp",
             "width": 480,
             "type": "image/webp"
           },
           {
-            "src": "/media/plj-databank-demo-960-2760936c88.webp",
+            "src": "/media/custom-media-databank-demo-960-95732bfe65.webp",
             "width": 960,
             "type": "image/webp"
           },
           {
-            "src": "/media/plj-databank-demo-1400-2324d9e52b.webp",
+            "src": "/media/custom-media-databank-demo-1400-362b13e6dd.webp",
             "width": 1400,
             "type": "image/webp"
           }
@@ -1389,22 +1389,22 @@
       },
       "gallery": [
         {
-          "src": "/media/plj-databank-workflow-1400-c15929f9e5.webp",
+          "src": "/media/custom-media-databank-workflow-1400-7a844f31ce.webp",
           "width": 1400,
           "height": 1000,
           "variants": [
             {
-              "src": "/media/plj-databank-workflow-480-387e8951b0.webp",
+              "src": "/media/custom-media-databank-workflow-480-8a1635e2da.webp",
               "width": 480,
               "type": "image/webp"
             },
             {
-              "src": "/media/plj-databank-workflow-960-8137c01774.webp",
+              "src": "/media/custom-media-databank-workflow-960-0bec3fe860.webp",
               "width": 960,
               "type": "image/webp"
             },
             {
-              "src": "/media/plj-databank-workflow-1400-c15929f9e5.webp",
+              "src": "/media/custom-media-databank-workflow-1400-7a844f31ce.webp",
               "width": 1400,
               "type": "image/webp"
             }

@@ -13,8 +13,8 @@ test('Turnkeep uses its concept on the index and preserves physical evidence ins
 
 test('new cases distinguish illustrative evidence and preserve institutional anonymity',async({page})=>{
  await page.goto('/work/bodybrain/');await expect(page.locator('.case-meta')).toContainText('In development');await expect(page.locator('.case-story')).toContainText('illustrative');
- await page.goto('/work/plj-databank/');await expect(page.locator('.case-story')).toContainText('fictional and anonymised');
- expect(JSON.stringify(projects.find(p=>p.slug==='plj-databank'))).not.toMatch(/\belc\b|elc\.ac\.th|drive\.google/i);
+ await page.goto('/work/custom-media-databank/');await expect(page.locator('.case-story')).toContainText('fictional and anonymised');
+ expect(JSON.stringify(projects.find(p=>p.slug==='custom-media-databank'))).not.toMatch(/\belc\b|elc\.ac\.th|drive\.google/i);
  await expect(page.locator('.case-gallery')).toContainText('hosting environment');
 });
 

@@ -47,7 +47,7 @@ export function validateCatalog(catalog){
   if(new Set([p.cover.src,...p.gallery.map(m=>m.src)]).size<2)fail(ctx+'.gallery','must contain a distinct view');
   if(!Array.isArray(p.links))fail(ctx+'.links','array required');p.links.forEach((l,i)=>link(l,ctx+'.links['+i+']'));
   const allowed=new Set(['slug','title','descriptor','status','role','order','featured','summary','cover','collectionCover','gallery','links','dateLabel']);for(const k of Object.keys(p))if(!allowed.has(k))fail(ctx+'.'+k,'unknown/private field must not enter public catalog');
-  if(p.slug==='plj-databank'&&(p.links.length||/\belc\b|elc\.ac\.th|tauquil|payal/i.test(JSON.stringify(p))))fail(ctx,'databank case must remain anonymous');
+  if(p.slug==='custom-media-databank'&&(p.links.length||/\belc\b|elc\.ac\.th|tauquil|payal/i.test(JSON.stringify(p))))fail(ctx,'databank case must remain anonymous');
   if(p.slug==='learning-and-making'&&(p.dateLabel||p.links.length||/\belc\b|tauquil|payal|bangkok|elc\.ac\.th/i.test(JSON.stringify(p))))fail(ctx,'school case must remain anonymous and undated');
  }
  if(catalog.expectedSlugs.length!==ids.size||catalog.expectedSlugs.some(id=>!ids.has(id)))fail('catalog','release slug manifest differs from projects');

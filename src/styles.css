@@ -117,5 +117,5 @@ button,a,summary{-webkit-tap-highlight-color:transparent}
 .about-portrait{max-width:560px}.about-portrait img{width:auto;height:auto;max-height:780px;margin:auto}.about-portrait figcaption{font-size:14px;color:var(--muted);margin-top:14px;text-align:center}
 .about-story h1{font-size:clamp(56px,7vw,108px);letter-spacing:-.06em;margin-block:22px 32px}
 .about-story>p{max-width:48ch}.about-story>p+p{margin-top:24px}.about-identity{font:500 clamp(23px,2.2vw,34px)/1.2 Bricolage,Arial,sans-serif;color:var(--olive)}
-@media(min-width:1100px){.piece--bodybrain{grid-column:2/7;margin-top:20px}.piece--plj-databank{grid-column:8/13;margin-top:110px}}
+@media(min-width:1100px){.piece--bodybrain{grid-column:2/7;margin-top:20px}.piece--custom-media-databank{grid-column:8/13;margin-top:110px}}
 @media(max-width:699px){.about-layout{display:flex;flex-direction:column;gap:32px;padding-block:30px 56px}.about-story{order:-1}.about-story h1{font-size:66px}.about-portrait{max-width:100%}.about-portrait img{max-height:650px;width:auto;margin:auto}}

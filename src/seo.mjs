@@ -3,8 +3,8 @@ const personId=origin+'/#person';
 const websiteId=origin+'/#website';
 const descriptions={
  '/about/':'Meet Trevor Cardozo, an educator and maker based in Bangkok. 15 years of Reggio-inspired project work, useful tools and learning through making.',
- '/work/bodybrain/':'Bodybrain by Trevor Cardozo connects the context of training, nutrition and recovery. An active personal data project developing into a coaching platform.',
- '/work/plj-databank/':'PLJ Databank by Trevor Cardozo turns learning publications into a searchable editorial media library, with source context, quality checks and human review.',
+ '/work/bodybrain/':'Bodybrain by Trevor Cardozo connects training, nutrition, recovery and bloodwork. An active personal data project developing into a coaching platform.',
+ '/work/custom-media-databank/':'Custom Media Databank by Trevor Cardozo turns learning publications into a searchable editorial media library, with source context, quality checks and human review.',
  '/':'Trevor Cardozo is an educator and maker in Bangkok. Explore Reggio-inspired learning projects, school and maker-space concepts, useful apps and physical prototypes.',
  '/work/reggio-projects/':'15 years of Reggio-inspired projects with children in Bangkok: materials, micro:bit, Arduino and AI, facilitated and documented by educator Trevor Cardozo.',
  '/work/learning-and-making/':'An alternative middle school and community maker-space concept by Trevor Cardozo, with woodshop and fablab visualisations. A learning model in development.',
