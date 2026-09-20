@@ -724,18 +724,23 @@
           "textEquivalent": "A real question connects four recurring activities: investigate, make, share and reflect."
         },
         {
-          "src": "/media/corita-art-department-rules-901-e7b4f0d6f1.webp",
-          "width": 901,
-          "height": 1222,
+          "src": "/media/corita-rules-clean-1000-2606447f11.webp",
+          "width": 1000,
+          "height": 1357,
           "variants": [
             {
-              "src": "/media/corita-art-department-rules-480-1e10d7820f.webp",
+              "src": "/media/corita-rules-clean-480-85c354b8b4.webp",
               "width": 480,
               "type": "image/webp"
             },
             {
-              "src": "/media/corita-art-department-rules-901-e7b4f0d6f1.webp",
-              "width": 901,
+              "src": "/media/corita-rules-clean-960-eefe9a9358.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/corita-rules-clean-1000-2606447f11.webp",
+              "width": 1000,
               "type": "image/webp"
             }
           ],
@@ -816,7 +821,21 @@
           "label": "Visit ELC Portal",
           "href": "https://elcportal.elc.ac.th/"
         }
-      ]
+      ],
+      "collectionCover": {
+        "src": "/media/portal-mobile-home-390-0feaf12408.webp",
+        "width": 390,
+        "height": 844,
+        "variants": [
+          {
+            "src": "/media/portal-mobile-home-390-0feaf12408.webp",
+            "width": 390,
+            "type": "image/webp"
+          }
+        ],
+        "alt": "ELC Portal homepage at mobile size",
+        "caption": "The family portal on mobile"
+      }
     },
     {
       "slug": "pomodoist",
@@ -1226,54 +1245,34 @@
       "featured": true,
       "summary": "I build small apps for friends and loved ones around something we want to do together. Trips turns a day out into an installable guide with stops, stories, practical details and a shared checklist. The Île d’Orléans guide shown here brings those pieces into a page people can keep on their phone and use offline. It is a small piece of software made for a particular occasion and the people sharing it.",
       "cover": {
-        "src": "/media/trips-itinerary-1400-5cedd15c67.webp",
-        "width": 1400,
-        "height": 1000,
+        "src": "/media/trips-mobile-guide-390-fbf846d349.webp",
+        "width": 390,
+        "height": 844,
         "variants": [
           {
-            "src": "/media/trips-itinerary-480-ac2523f8d3.webp",
-            "width": 480,
-            "type": "image/webp"
-          },
-          {
-            "src": "/media/trips-itinerary-960-1a7b0fea7b.webp",
-            "width": 960,
-            "type": "image/webp"
-          },
-          {
-            "src": "/media/trips-itinerary-1400-5cedd15c67.webp",
-            "width": 1400,
+            "src": "/media/trips-mobile-guide-390-fbf846d349.webp",
+            "width": 390,
             "type": "image/webp"
           }
         ],
-        "alt": "Trips day guide with a route, practical notes and the first stop",
-        "caption": "A day out, gathered into one shared guide"
+        "alt": "Trips guide viewed on a phone: the day plan and why the basilica comes first",
+        "caption": "The day guide, designed to travel on a phone"
       },
       "gallery": [
         {
-          "src": "/media/trips-home-1400-5261eb4d23.webp",
-          "width": 1400,
-          "height": 1000,
+          "src": "/media/trips-mobile-home-390-75e7097f18.webp",
+          "width": 390,
+          "height": 844,
           "variants": [
             {
-              "src": "/media/trips-home-480-a9b8c380e8.webp",
-              "width": 480,
-              "type": "image/webp"
-            },
-            {
-              "src": "/media/trips-home-960-c772dccbb5.webp",
-              "width": 960,
-              "type": "image/webp"
-            },
-            {
-              "src": "/media/trips-home-1400-5261eb4d23.webp",
-              "width": 1400,
+              "src": "/media/trips-mobile-home-390-75e7097f18.webp",
+              "width": 390,
               "type": "image/webp"
             }
           ],
-          "alt": "Trips website listing a family day-trip guide",
-          "caption": "The collection of personal day-trip guides",
-          "layout": "wide"
+          "alt": "Trips mobile homepage with a family day-trip guide",
+          "caption": "The personal guide collection on mobile",
+          "layout": "pair"
         }
       ],
       "links": [
