@@ -678,6 +678,63 @@
           }
         },
         {
+          "src": "/media/school-concept-desk-1600-aa864b0c84.webp",
+          "width": 1600,
+          "height": 903,
+          "variants": [
+            {
+              "src": "/media/school-concept-desk-480-08ffd4d631.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/school-concept-desk-960-24cc00625c.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/school-concept-desk-1600-aa864b0c84.webp",
+              "width": 1600,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "A laptop showing an atelier moodboard beside notebook layout sketches, pens and making tools",
+          "caption": "At the desk: references, sketches and the first spatial ideas",
+          "layout": "wide",
+          "credit": {
+            "text": "Trevor Cardozo · process photograph; AI-assisted crop removes browser details"
+          }
+        },
+        {
+          "src": "/media/school-concept-room-planning-1600-9220f168fb.webp",
+          "width": 1600,
+          "height": 791,
+          "variants": [
+            {
+              "src": "/media/school-concept-room-planning-480-65c8a770a1.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/school-concept-room-planning-960-9bfd25046f.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/school-concept-room-planning-1600-9220f168fb.webp",
+              "width": 1600,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Hand-drawn workshop layout connecting a fablab, studio, workshop, garden and common room, with materials and equipment notes",
+          "caption": "Mapping the rooms, tools and shared spaces on paper",
+          "layout": "wide",
+          "credit": {
+            "text": "Trevor Cardozo · working concept study"
+          },
+          "textEquivalent": "A working layout connects specialist making rooms with a shared common space. Handwritten notes explore tools, storage, seating and circulation. These are planning notes, not a completed space or opening schedule."
+        },
+        {
           "src": "/media/school-space-corrected-1400-f448782044.webp",
           "width": 1400,
           "height": 1000,
