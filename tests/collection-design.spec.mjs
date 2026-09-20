@@ -1,31 +1,18 @@
 import {test,expect} from '@playwright/test';
-
-test('selection number and visual marker follow keyboard precedence',async({page})=>{
-  await page.setViewportSize({width:1440,height:1000});
-  await page.goto('/');
-  const first=page.locator('[data-project="turnkeep"]');
-  const second=page.locator('[data-project="reggio-projects"]');
-  await first.focus();
-  await second.hover();
-  await expect(page.locator('[data-preview-number]')).toHaveText('01');
-  await expect(first).toHaveClass(/is-selected/);
-  await expect(second).not.toHaveClass(/is-selected/);
-  await first.evaluate(el=>el.blur());
-  await expect(page.locator('[data-preview-number]')).toHaveText('02');
-  await expect(second).toHaveClass(/is-selected/);
-  await page.mouse.move(1,1);
-  await expect(page.locator('[data-preview-number]')).toHaveText('—');
-  await expect(second).not.toHaveClass(/is-selected/);
+test('buttons, picker and keyboard reach every project',async({page})=>{
+ await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/');await expect(page.getByRole('button',{name:'Previous project'})).toBeDisabled();
+ await page.getByRole('button',{name:'Next project'}).click();await expect(page.locator('[data-carousel-count]')).toHaveText('02 / 12');await expect(page.locator('[data-project="reggio-projects"]')).toHaveAttribute('aria-current','true');
+ await page.getByLabel('Choose a project').selectOption('11');await expect(page.locator('[data-carousel-count]')).toHaveText('12 / 12');await expect(page.getByRole('button',{name:'Next project'})).toBeDisabled();
+ await page.locator('.collection').focus();await page.keyboard.press('Home');await expect(page.locator('[data-carousel-count]')).toHaveText('01 / 12');await page.keyboard.press('ArrowRight');await expect(page.locator('[data-carousel-count]')).toHaveText('02 / 12');await page.locator('[data-project="reggio-projects"]').click();await expect(page).toHaveURL(/\/work\/reggio-projects\/$/);
 });
-
-test('reduced motion keeps selected objects still, including Reggio',async({page})=>{
-  await page.emulateMedia({reducedMotion:'reduce'});
-  await page.setViewportSize({width:1440,height:1000});
-  await page.goto('/');
-  const reggio=page.locator('[data-project="reggio-projects"]');
-  await reggio.hover();
-  await expect(page.locator('[data-preview-number]')).toHaveText('02');
-  expect(await reggio.locator('.artifact').evaluate(el=>getComputedStyle(el).transform)).toBe('none');
-  await reggio.focus();
-  expect(await reggio.locator('.artifact').evaluate(el=>getComputedStyle(el).transform)).toBe('none');
+test('details open on tap, dismiss and close when selection changes',async({page})=>{
+ await page.setViewportSize({width:390,height:844});await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/');const detail=page.locator('.piece').first().locator('details');await detail.locator('summary').click();await expect(detail).toHaveAttribute('open','');await expect(detail.locator('.slide-popover')).toBeVisible();await page.keyboard.press('Escape');await expect(detail).not.toHaveAttribute('open','');await detail.locator('summary').click();await page.getByRole('button',{name:'Next project'}).click();await expect(detail).not.toHaveAttribute('open','');
+});
+test('touch swipe changes projects while vertical gestures scroll the page',async({browser})=>{
+ const context=await browser.newContext({viewport:{width:390,height:844},hasTouch:true,isMobile:true,reducedMotion:'reduce'}),page=await context.newPage();await page.goto('http://127.0.0.1:4173/');await page.locator('#work').scrollIntoViewIfNeeded();const client=await context.newCDPSession(page),box=await page.locator('.artifact').first().boundingBox(),y=Math.max(180,Math.min(550,box.y+box.height/2));
+ async function swipe(x1,y1,x2,y2){await client.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:x1,y:y1}]});for(let i=1;i<=8;i++){await client.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:x1+(x2-x1)*i/8,y:y1+(y2-y1)*i/8}]});await page.waitForTimeout(25);}await client.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});}
+ await swipe(320,y,75,y);await expect(page.locator('[data-carousel-count]')).not.toHaveText('01 / 12');const before=await page.evaluate(()=>scrollY);await swipe(190,620,190,240);await expect.poll(()=>page.evaluate(()=>scrollY)).toBeGreaterThan(before+80);await context.close();
+});
+test('mouse drag does not navigate and resize preserves reduced-motion selection',async({page})=>{
+ await page.emulateMedia({reducedMotion:'reduce'});await page.setViewportSize({width:1440,height:1000});await page.goto('/');await page.locator('#work').scrollIntoViewIfNeeded();const b=await page.locator('.artifact').first().boundingBox();await page.mouse.move(b.x+b.width*.8,b.y+b.height/2);await page.mouse.down();await page.mouse.move(b.x+b.width*.2,b.y+b.height/2,{steps:10});await page.mouse.up();await expect(page).toHaveURL('http://127.0.0.1:4173/');await page.getByLabel('Choose a project').selectOption('4');await page.setViewportSize({width:390,height:844});await expect(page.locator('[data-carousel-count]')).toHaveText('05 / 12');expect(await page.locator('.piece.is-active').evaluate(e=>getComputedStyle(e).transform)).toBe('none');
 });

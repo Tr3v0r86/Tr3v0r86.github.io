@@ -9,12 +9,6 @@ for(const width of [320,390,768,1440])test(`all routes render without overflow a
   const imgs=page.locator('main img');for(let i=0;i<await imgs.count();i++){await imgs.nth(i).scrollIntoViewIfNeeded();await expect(imgs.nth(i)).toHaveJSProperty('complete',true);expect(await imgs.nth(i).evaluate(img=>img.naturalWidth)).toBeGreaterThan(0);}
  }
 });
-test('focus wins over hover; leaving mouse does not clear focused preview',async({page})=>{
- await page.setViewportSize({width:1440,height:1000});await page.goto('/');const first=page.locator('[data-project="turnkeep"]'),second=page.locator('[data-project="reggio-projects"]');
- await first.focus();await expect(page.locator('[data-preview-title]')).toHaveText('Turnkeep');await second.hover();await expect(page.locator('[data-preview-title]')).toHaveText('Turnkeep');
- await first.evaluate(el=>el.blur());await expect(page.locator('[data-preview-title]')).toHaveText('Reggio projects');await page.mouse.move(1,1);await expect(page.locator('[data-preview-title]')).toContainText('Choose a piece');
- await first.focus();await page.keyboard.press('Enter');await expect(page).toHaveURL(/\/work\/turnkeep\/$/);await page.goBack();await expect(first).toBeVisible();
-});
 test('all cases remain accessible with JavaScript disabled',async({browser})=>{
  const context=await browser.newContext({javaScriptEnabled:false});const page=await context.newPage();await page.goto('http://127.0.0.1:4173/');await expect(page.locator('.piece-link')).toHaveCount(catalog.projects.filter(p=>p.featured).length);await page.locator('[data-project="reggio-projects"]').click();await expect(page.locator('h1')).toHaveText('Reggio projects');await page.getByRole('link',{name:'Back to collection',exact:false}).first().click();await expect(page).toHaveURL(/\/#work$/);await context.close();
 });

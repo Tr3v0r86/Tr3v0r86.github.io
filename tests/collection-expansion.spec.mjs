@@ -5,7 +5,7 @@ const {projects}=JSON.parse(await readFile(new URL('../content/projects.json',im
 test('Turnkeep uses its concept on the index and preserves physical evidence inside',async({page})=>{
  const p=projects.find(p=>p.slug==='turnkeep');await page.goto('/');
  await expect(page.locator('[data-project="turnkeep"] img')).toHaveAttribute('src',p.collectionCover.src);
- await expect(page.locator('[data-project="turnkeep"]')).toContainText('AI-generated concept');
+ await expect(page.locator('.piece--turnkeep')).toContainText('AI-generated concept');
  await page.locator('[data-project="turnkeep"]').click();
  await expect(page.locator('.case-hero img')).toHaveAttribute('src',p.cover.src);
  for(const m of p.gallery)await expect(page.locator(`main img[src="${m.src}"]`)).toHaveCount(1);
