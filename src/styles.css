@@ -65,6 +65,7 @@ button,a,summary{-webkit-tap-highlight-color:transparent}
 .case--pomodoist .gallery-item--pair:nth-of-type(1){grid-column:2/7}.case--pomodoist .gallery-item--pair:nth-of-type(2){grid-column:8/-1;margin-top:160px}
 .case--pomodoist .gallery-item--wide,.case--esp32-experiments .gallery-item--wide:last-child,.case--turnkeep .gallery-item--wide:last-child{grid-column:3/11}
 .case--pomodoist .gallery-item--wide img,.case--esp32-experiments .gallery-item--wide:last-child img,.case--turnkeep .gallery-item--wide:last-child img{max-width:640px;margin:auto;image-rendering:auto}
+:is(.case--trevos,.case--pomodoist,.case--cal) img[width="360"]{max-width:360px;margin-inline:auto}
 .image-description{font-size:16px;color:var(--muted);margin-top:12px;max-width:65ch}.image-description summary{cursor:pointer;min-height:44px;align-content:center}.image-description p{padding-bottom:12px}
 .case-pagination{border-top:1px solid var(--ink);padding-block:28px 70px;display:grid;grid-template-columns:1fr 1fr;gap:35px}.case-pagination a{text-decoration:none;min-width:0;overflow-wrap:anywhere}.case-pagination a:last-child{text-align:right}.case-pagination span{display:block;font-size:14px;color:var(--muted);margin-bottom:16px}.case-pagination strong{font:500 clamp(28px,4vw,58px)/1.08 Bricolage,Arial,sans-serif;letter-spacing:-.05em}
 .image-failed{opacity:0}.image-fallback{position:absolute;inset:0;padding:20px;display:grid;place-items:center;text-align:center;color:var(--muted);font-size:16px;background:#e9e7de}

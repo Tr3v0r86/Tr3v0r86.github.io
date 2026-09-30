@@ -11,7 +11,9 @@
     "bodybrain",
     "reggio-projects",
     "learning-and-making",
+    "trevos",
     "pomodoist",
+    "cal",
     "project-dashboard",
     "esp32-experiments",
     "trips",
@@ -876,144 +878,87 @@
     {
       "slug": "pomodoist",
       "title": "Pomodoist",
-      "descriptor": "A physical focus timer connected to Todoist",
+      "descriptor": "Todoist tasks and a focus timer, within reach",
       "status": "Hardware/software prototype",
-      "role": "Device interfaces and timer firmware",
-      "order": 8,
+      "role": "Firmware, Todoist integration and interaction design",
+      "order": 9,
       "featured": true,
-      "summary": "I made Pomodoist to keep one task and a focus timer on a small screen beside me. It connects today’s Todoist tasks with a Pomodoro timer, using the device’s own buttons or touch controls. The photographs show the electronics and an enclosed prototype; the separate interface references show the focus and task-selection screens. This is the dedicated desk object, while my wider ESP32 work develops the software it can share with other devices.",
+      "summary": "Pomodoist keeps one chosen task and a focus timer on my desk. I turn the puck’s dial to choose a Todoist task and session length, then work without reopening my task list on a laptop or phone. It runs as an independent app inside TrevOS, alongside Cal. The public source includes the app and its shared dependencies so other makers can adapt it to their own focus device.",
       "cover": {
-        "src": "/media/pomodoist-video-still-1000-976f973d80.webp",
-        "width": 1000,
-        "height": 1778,
+        "src": "/media/trevos-focus-360-6d063f99c1.webp",
+        "width": 360,
+        "height": 360,
         "variants": [
           {
-            "src": "/media/pomodoist-video-still-480-a796b66b23.webp",
-            "width": 480,
-            "type": "image/webp"
-          },
-          {
-            "src": "/media/pomodoist-video-still-960-b89eb0e1bd.webp",
-            "width": 960,
-            "type": "image/webp"
-          },
-          {
-            "src": "/media/pomodoist-video-still-1000-976f973d80.webp",
-            "width": 1000,
+            "src": "/media/trevos-focus-360-6d063f99c1.webp",
+            "width": 360,
             "type": "image/webp"
           }
         ],
-        "alt": "Physical Pomodoist device in a printed enclosure, showing its break timer",
-        "caption": "The working device · still from prototype footage"
+        "alt": "Pomodoist firmware simulator with a fictional writing task and 25-minute timer",
+        "caption": "Focus · firmware simulator · synthetic data",
+        "layout": "pair"
       },
       "gallery": [
         {
-          "src": "/media/pomodoist-desk-concept-1122.webp",
-          "width": 1122,
-          "height": 1402,
+          "src": "/media/trevos-picker-360-f484f9f792.webp",
+          "width": 360,
+          "height": 360,
           "variants": [
             {
-              "src": "/media/pomodoist-desk-concept-480.webp",
-              "width": 480,
-              "type": "image/webp"
-            },
-            {
-              "src": "/media/pomodoist-desk-concept-960.webp",
-              "width": 960,
-              "type": "image/webp"
-            },
-            {
-              "src": "/media/pomodoist-desk-concept-1122.webp",
-              "width": 1122,
+              "src": "/media/trevos-picker-360-f484f9f792.webp",
+              "width": 360,
               "type": "image/webp"
             }
           ],
-          "alt": "AI-generated desk scene of the Pomodoist timer enclosure and development boards",
-          "caption": "AI-generated desk concept · real prototype photographs inside",
-          "textEquivalent": "Concept arrangement based on the project board inventory: grey printed timer enclosure, rectangular and round display boards, puck, ESP32/C3 devkits and an unlit camera board. Illustrated screens and arrangement are not proof of simultaneous firmware support.",
-          "layout": "wide"
-        },
-        {
-          "src": "/media/pomodoist-prototype-1000-fdc6fe6925.webp",
-          "width": 1000,
-          "height": 1773,
-          "variants": [
-            {
-              "src": "/media/pomodoist-prototype-480-2d2d6590ae.webp",
-              "width": 480,
-              "type": "image/webp"
-            },
-            {
-              "src": "/media/pomodoist-prototype-960-6b2b0cbad3.webp",
-              "width": 960,
-              "type": "image/webp"
-            },
-            {
-              "src": "/media/pomodoist-prototype-1000-fdc6fe6925.webp",
-              "width": 1000,
-              "type": "image/webp"
-            }
-          ],
-          "alt": "Wired display and electronics on a blue work mat",
-          "caption": "The electronics before the enclosure",
+          "alt": "Pomodoist task picker in the firmware simulator with fictional tasks",
+          "caption": "Choose a task · firmware simulator · synthetic data",
           "layout": "pair"
         },
         {
-          "src": "/media/pomodoist-focus-320-f747c72e02.webp",
-          "width": 320,
-          "height": 170,
+          "src": "/media/trevos-break-360-66a2a7309f.webp",
+          "width": 360,
+          "height": 360,
           "variants": [
             {
-              "src": "/media/pomodoist-focus-320-f747c72e02.webp",
-              "width": 320,
+              "src": "/media/trevos-break-360-66a2a7309f.webp",
+              "width": 360,
               "type": "image/webp"
             }
           ],
-          "alt": "Pomodoist interface reference showing a 25-minute timer and one task",
-          "caption": "Focus face · interface reference, not a device photograph",
+          "alt": "Pomodoist break timer in the firmware simulator",
+          "caption": "Take a break · firmware simulator · synthetic data",
           "layout": "pair"
-        },
-        {
-          "src": "/media/pomodoist-picker-320-2040f70312.webp",
-          "width": 320,
-          "height": 170,
-          "variants": [
-            {
-              "src": "/media/pomodoist-picker-320-2040f70312.webp",
-              "width": 320,
-              "type": "image/webp"
-            }
-          ],
-          "alt": "Pomodoist interface reference for choosing a task with two buttons",
-          "caption": "Task selection · interface reference",
-          "layout": "wide"
         }
       ],
-      "links": [],
+      "links": [
+        {
+          "label": "View source",
+          "href": "https://github.com/Tr3v0r86/trevos-esp32-s3-knob/tree/main/apps/pomodoist"
+        },
+        {
+          "label": "Explore TrevOS",
+          "href": "/work/trevos/"
+        },
+        {
+          "label": "Explore Cal",
+          "href": "/work/cal/"
+        }
+      ],
       "collectionCover": {
-        "src": "/media/pomodoist-desk-concept-1122.webp",
-        "width": 1122,
-        "height": 1402,
+        "src": "/media/trevos-focus-360-6d063f99c1.webp",
+        "width": 360,
+        "height": 360,
         "variants": [
           {
-            "src": "/media/pomodoist-desk-concept-480.webp",
-            "width": 480,
-            "type": "image/webp"
-          },
-          {
-            "src": "/media/pomodoist-desk-concept-960.webp",
-            "width": 960,
-            "type": "image/webp"
-          },
-          {
-            "src": "/media/pomodoist-desk-concept-1122.webp",
-            "width": 1122,
+            "src": "/media/trevos-focus-360-6d063f99c1.webp",
+            "width": 360,
             "type": "image/webp"
           }
         ],
-        "alt": "AI-generated desk scene of the Pomodoist timer enclosure and development boards",
-        "caption": "AI-generated desk concept · real prototype photographs inside",
-        "textEquivalent": "Concept arrangement based on the project board inventory: grey printed timer enclosure, rectangular and round display boards, puck, ESP32/C3 devkits and an unlit camera board. Illustrated screens and arrangement are not proof of simultaneous firmware support."
+        "alt": "Pomodoist firmware simulator with a fictional writing task and 25-minute timer",
+        "caption": "Focus · firmware simulator · synthetic data",
+        "layout": "pair"
       }
     },
     {
@@ -1022,7 +967,7 @@
       "descriptor": "A project-management tool in a single HTML file",
       "status": "Public source",
       "role": "Dashboard design, development and public template",
-      "order": 9,
+      "order": 11,
       "featured": true,
       "summary": "I turned a tool from my school operations work into a single HTML file that other people can adapt and host. The dashboard keeps priorities, completion and weekly progress notes together, with browser storage and an optional shareable view. There is no server to set up for the basic version. The public demo uses sample projects, and the source includes instructions for making it your own.",
       "cover": {
@@ -1107,7 +1052,7 @@
       "descriptor": "TrevOS: a shared foundation for small devices",
       "status": "Ongoing experiments",
       "role": "Board integration, firmware and interface experiments",
-      "order": 10,
+      "order": 12,
       "featured": true,
       "summary": "I am building TrevOS, a shared launcher and software foundation for my ESP32 devices. A timer, a padel scoreboard and a desk display can reuse app logic while each board supplies its own screen and controls. This collection shows the work underneath individual products: board experiments, interface sketches and a saved launcher simulation. The aim is to carry what I learn from one device into the next, instead of starting again with every screen.",
       "cover": {
@@ -1272,7 +1217,12 @@
           "layout": "wide"
         }
       ],
-      "links": []
+      "links": [
+        {
+          "label": "Explore the TrevOS desk puck",
+          "href": "/work/trevos/"
+        }
+      ]
     },
     {
       "slug": "second-brain-builder",
@@ -1453,7 +1403,7 @@
       "descriptor": "Custom apps for friends and loved ones",
       "status": "Live web app",
       "role": "Personal guide design and web development",
-      "order": 11,
+      "order": 13,
       "featured": true,
       "summary": "I build small apps for friends and loved ones around something we want to do together. Trips turns a day out into an installable guide with stops, stories, practical details and a shared checklist. The Île d’Orléans guide shown here brings those pieces into a page people can keep on their phone and use offline. It is a small piece of software made for a particular occasion and the people sharing it.",
       "cover": {
@@ -1771,7 +1721,7 @@
       "descriptor": "Bringing learning documentation back into use",
       "status": "Internal working tool",
       "role": "Extraction pipeline, media library and editorial workflow",
-      "order": 12,
+      "order": 14,
       "featured": true,
       "summary": "I built Custom Media Databank to bring the best photographs, artwork and quotes out of project learning publications at a design-focused, Reggio-inspired school. It turns finished PDFs into a searchable editorial library, with source references, duplicate handling and quality flags, so strong material can be found again for publications and social media. Security and children’s safety shape the workflow: access stays behind institutional authentication, and attribution and reuse need human review. The examples here are fictional and anonymised.",
       "cover": {
@@ -1854,6 +1804,286 @@
         "caption": "Contact-sheet concept · AI-generated material studies",
         "textEquivalent": "A fictional editorial contact sheet shows AI-generated material studies, source-page references and selected candidates. The inspector keeps original source, attribution and permission review visible. Selecting an image does not approve it for publication."
       }
+    },
+    {
+      "slug": "trevos",
+      "title": "TrevOS",
+      "descriptor": "A focus device for the desk, built around a physical dial",
+      "status": "Hardware/software prototype",
+      "role": "Firmware, interaction design and design system",
+      "order": 8,
+      "featured": true,
+      "summary": "I wanted my plan within sight without opening another laptop tab or reaching for my phone. TrevOS puts that idea on a small desk puck: turn the dial, choose a task, and stay with it. Built for the Waveshare ESP32-S3-Knob-Touch-LCD-1.8 hardware family, its shared shell and design system host Pomodoist for Todoist focus sessions and Cal for a calendar glance. Makers can build the whole device or adapt one app.",
+      "cover": {
+        "src": "/media/trevos-product-concept-1536-d674f8d2f2.webp",
+        "width": 1536,
+        "height": 1024,
+        "variants": [
+          {
+            "src": "/media/trevos-product-concept-480-f5f5d5495e.webp",
+            "width": 480,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/trevos-product-concept-960-2f006d92e1.webp",
+            "width": 960,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/trevos-product-concept-1536-d674f8d2f2.webp",
+            "width": 1536,
+            "type": "image/webp"
+          }
+        ],
+        "alt": "AI-generated concept of the TrevOS desk puck with a blue dial and launcher screen",
+        "caption": "AI-generated product concept · illustrative enclosure",
+        "layout": "wide",
+        "textEquivalent": "AI-generated concept render. The enclosure and materials are illustrative; this is not a photograph of the physical device."
+      },
+      "collectionCover": {
+        "src": "/media/trevos-desk-morning-concept-1536-db032bebe3.webp",
+        "width": 1536,
+        "height": 1024,
+        "variants": [
+          {
+            "src": "/media/trevos-desk-morning-concept-480-8a6cfe35e0.webp",
+            "width": 480,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/trevos-desk-morning-concept-960-1ab4936173.webp",
+            "width": 960,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/trevos-desk-morning-concept-1536-db032bebe3.webp",
+            "width": 1536,
+            "type": "image/webp"
+          }
+        ],
+        "alt": "AI-generated desk concept with the blue TrevOS puck beside a notebook",
+        "caption": "AI-generated morning desk concept · illustrative enclosure",
+        "layout": "wide",
+        "textEquivalent": "AI-generated desk concept showing a possible arrangement. Enclosure and materials are illustrative; this is not a photograph of the physical device."
+      },
+      "gallery": [
+        {
+          "src": "/media/trevos-home-360-caa385b899.webp",
+          "width": 360,
+          "height": 360,
+          "variants": [
+            {
+              "src": "/media/trevos-home-360-caa385b899.webp",
+              "width": 360,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "TrevOS ring launcher in the firmware simulator",
+          "caption": "Ring launcher · firmware simulator · synthetic data",
+          "layout": "pair"
+        },
+        {
+          "src": "/media/trevos-focus-360-6d063f99c1.webp",
+          "width": 360,
+          "height": 360,
+          "variants": [
+            {
+              "src": "/media/trevos-focus-360-6d063f99c1.webp",
+              "width": 360,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Pomodoist firmware simulator with a fictional writing task and 25-minute timer",
+          "caption": "Focus · firmware simulator · synthetic data",
+          "layout": "pair"
+        },
+        {
+          "src": "/media/trevos-cal-360-705b825f7c.webp",
+          "width": 360,
+          "height": 360,
+          "variants": [
+            {
+              "src": "/media/trevos-cal-360-705b825f7c.webp",
+              "width": 360,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Cal firmware simulator with a fictional day for making and activities",
+          "caption": "Calendar glance · firmware simulator · synthetic data",
+          "layout": "pair"
+        },
+        {
+          "src": "/media/trevos-settings-360-d169b84070.webp",
+          "width": 360,
+          "height": 360,
+          "variants": [
+            {
+              "src": "/media/trevos-settings-360-d169b84070.webp",
+              "width": 360,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "TrevOS shared settings in the firmware simulator, showing brightness and idle timings",
+          "caption": "Shared settings · firmware simulator · synthetic data",
+          "layout": "pair"
+        },
+        {
+          "src": "/media/trevos-desk-morning-concept-1536-db032bebe3.webp",
+          "width": 1536,
+          "height": 1024,
+          "variants": [
+            {
+              "src": "/media/trevos-desk-morning-concept-480-8a6cfe35e0.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/trevos-desk-morning-concept-960-1ab4936173.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/trevos-desk-morning-concept-1536-db032bebe3.webp",
+              "width": 1536,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "AI-generated desk concept with the blue TrevOS puck beside a notebook",
+          "caption": "AI-generated morning desk concept · illustrative enclosure",
+          "layout": "wide",
+          "textEquivalent": "AI-generated desk concept showing a possible arrangement. Enclosure and materials are illustrative; this is not a photograph of the physical device."
+        },
+        {
+          "src": "/media/trevos-desk-evening-concept-1536-b61b12158e.webp",
+          "width": 1536,
+          "height": 1024,
+          "variants": [
+            {
+              "src": "/media/trevos-desk-evening-concept-480-5384a61eed.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/trevos-desk-evening-concept-960-2b1dceadc6.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/trevos-desk-evening-concept-1536-b61b12158e.webp",
+              "width": 1536,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "AI-generated evening desk scene with a TrevOS focus puck, notebook and keyboard",
+          "caption": "AI-generated evening desk concept · illustrative enclosure",
+          "layout": "wide",
+          "textEquivalent": "AI-generated desk concept using a fictional writing task. Enclosure, materials and desk arrangement are illustrative; this is not a photograph of the physical device."
+        }
+      ],
+      "links": [
+        {
+          "label": "View source",
+          "href": "https://github.com/Tr3v0r86/trevos-esp32-s3-knob"
+        },
+        {
+          "label": "Explore Pomodoist",
+          "href": "/work/pomodoist/"
+        },
+        {
+          "label": "Explore Cal",
+          "href": "/work/cal/"
+        },
+        {
+          "label": "Design system",
+          "href": "https://github.com/Tr3v0r86/trevos-esp32-s3-knob/tree/main/design"
+        }
+      ]
+    },
+    {
+      "slug": "cal",
+      "title": "Cal",
+      "descriptor": "The shape of the day, one glance away",
+      "status": "Hardware/software prototype",
+      "role": "Calendar integration and glanceable interface design",
+      "order": 10,
+      "featured": true,
+      "summary": "Cal gives my day a small, dedicated place on the desk. A glance at the puck shows calendar context without pulling me into a browser or phone. It runs beside Pomodoist in TrevOS, but the two apps stay independent: the calendar does not change my focus timer. The public module gives other makers a starting point for their own calendar display.",
+      "cover": {
+        "src": "/media/trevos-cal-360-705b825f7c.webp",
+        "width": 360,
+        "height": 360,
+        "variants": [
+          {
+            "src": "/media/trevos-cal-360-705b825f7c.webp",
+            "width": 360,
+            "type": "image/webp"
+          }
+        ],
+        "alt": "Cal firmware simulator with a fictional day for making and activities",
+        "caption": "Calendar glance · firmware simulator · synthetic data",
+        "layout": "pair"
+      },
+      "collectionCover": {
+        "src": "/media/trevos-cal-360-705b825f7c.webp",
+        "width": 360,
+        "height": 360,
+        "variants": [
+          {
+            "src": "/media/trevos-cal-360-705b825f7c.webp",
+            "width": 360,
+            "type": "image/webp"
+          }
+        ],
+        "alt": "Cal firmware simulator with a fictional day for making and activities",
+        "caption": "Calendar glance · firmware simulator · synthetic data",
+        "layout": "pair"
+      },
+      "gallery": [
+        {
+          "src": "/media/trevos-cal-next-360-252c235b39.webp",
+          "width": 360,
+          "height": 360,
+          "variants": [
+            {
+              "src": "/media/trevos-cal-next-360-252c235b39.webp",
+              "width": 360,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Cal firmware simulator showing fictional lunch and reading activities",
+          "caption": "Turn through the day · firmware simulator · synthetic data",
+          "layout": "pair"
+        },
+        {
+          "src": "/media/trevos-home-360-caa385b899.webp",
+          "width": 360,
+          "height": 360,
+          "variants": [
+            {
+              "src": "/media/trevos-home-360-caa385b899.webp",
+              "width": 360,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "TrevOS ring launcher in the firmware simulator",
+          "caption": "Ring launcher · firmware simulator · synthetic data",
+          "layout": "pair"
+        }
+      ],
+      "links": [
+        {
+          "label": "View source",
+          "href": "https://github.com/Tr3v0r86/trevos-esp32-s3-knob/tree/main/apps/cal"
+        },
+        {
+          "label": "Explore TrevOS",
+          "href": "/work/trevos/"
+        },
+        {
+          "label": "Explore Pomodoist",
+          "href": "/work/pomodoist/"
+        }
+      ]
     }
   ]
 }
