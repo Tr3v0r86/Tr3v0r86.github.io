@@ -4,6 +4,7 @@
     "origin": "https://trevorcardozo.com"
   },
   "expectedSlugs": [
+    "trevos",
     "turnkeep",
     "padlano",
     "elc-portal",
@@ -11,7 +12,6 @@
     "bodybrain",
     "reggio-projects",
     "learning-and-making",
-    "trevos",
     "pomodoist",
     "cal",
     "project-dashboard",
@@ -26,7 +26,7 @@
       "descriptor": "A printed character case with a digital companion",
       "status": "Open-source prototype",
       "role": "Case design, CAD and firmware",
-      "order": 1,
+      "order": 2,
       "featured": true,
       "summary": "I designed Turnkeep to put dice, a character display and the things I reach for during a tabletop game into one printed case. The physical prototype sits alongside an open design: editable CAD, printable parts, firmware and build instructions that other makers can adapt. The case is taking shape on the workbench; phone import and transfer are still simulated in the public demo.",
       "cover": {
@@ -187,7 +187,7 @@
       "descriptor": "Children are makers · 15 years of Reggio-inspired projects",
       "status": "Educational practice",
       "role": "Creating the conditions, sharing expertise and co-facilitating",
-      "order": 6,
+      "order": 7,
       "featured": true,
       "summary": "Children are makers. Given time, trust and access to expertise, they can design, make and publish work at the intersection of creativity and functionality. For 15 years, I have explored that belief through Reggio-inspired projects with children in Bangkok: drawings become working circuits and moving machines; a Year 6 AI sprint becomes a student newspaper website. My role is to create the conditions, share tools and expertise, and document the process while keeping children’s ideas and authorship at the centre.",
       "cover": {
@@ -522,7 +522,7 @@
       "descriptor": "Padel rotations, scoring and leagues from one phone",
       "status": "Live web app",
       "role": "Web app design and development",
-      "order": 2,
+      "order": 3,
       "featured": true,
       "summary": "I built Padlano for the organising that happens between games of padel. From one phone, it creates Americano rotations, records scores and ranks players by average points when someone sits out. Players can use it without an account, keep a session on their device or choose to share sessions and leagues. The notebook and electronics shown here belong to a related scoring-device experiment; the web app is live.",
       "cover": {
@@ -620,7 +620,7 @@
       "descriptor": "An alternative middle school & community maker space",
       "status": "In development",
       "role": "Learning model, programme and spatial concept",
-      "order": 7,
+      "order": 8,
       "featured": true,
       "summary": "This alternative middle school and community maker-space concept brings together my training in alternative education, professional work in school operations and practice as a maker. Young people investigate questions by designing, building and testing things in shared workshops. I am connecting that learning model with the programme, tools, materials and spaces it needs. The woodshop and fablab renders explore those conditions; the diagrams show the inquiry cycle. These are concept visualisations for a school in development.",
       "cover": {
@@ -825,7 +825,7 @@
       "descriptor": "Activities, events and calendars in one family portal",
       "status": "Live school platform",
       "role": "Family experience design and web development",
-      "order": 3,
+      "order": 4,
       "featured": true,
       "summary": "I designed and built a parent portal around a parent's practical questions: what is happening, what can my child join, and where do I go next? It brings school activities, events, calendars and useful information into one family-facing website, with links to the existing registration systems. My work joins school operations with interface design: organising the information and building a consistent route through it. The mobile views are de-identified for this portfolio.",
       "cover": {
@@ -1230,7 +1230,7 @@
       "descriptor": "Guided questions that become a personal AI workspace",
       "status": "Live web app",
       "role": "Question flow, system design and development",
-      "order": 4,
+      "order": 5,
       "featured": true,
       "summary": "I made Second Brain Builder to turn the structure of my own knowledge system into a starting point for someone else. A personalised question flow asks how they work, plan and keep track of things, then produces a plain-text blueprint for an AI-assisted workspace. Each journey is prepared for its recipient. The public page is the entry point to those individual builds; the source shows how the builder works.",
       "cover": {
@@ -1555,7 +1555,7 @@
       "descriptor": "Training, nutrition, recovery and bloodwork in context",
       "status": "In development",
       "role": "Data system, product thesis and coaching workflow",
-      "order": 5,
+      "order": 6,
       "featured": true,
       "summary": "Bodybrain began as a way to read my training, nutrition and recovery together, instead of opening separate apps and guessing how the pieces connect. I am developing that personal data system into a coaching platform: bringing context to a conversation, agreeing a plan and adjusting it as someone’s life changes. MacroFactor, InBody, Hevy, Google Fit and bloodwork show the kinds of information I want to connect. The screens here are illustrative; the coaching platform is in active development.",
       "cover": {
@@ -1811,7 +1811,7 @@
       "descriptor": "A focus device for the desk, built around a physical dial",
       "status": "Hardware/software prototype",
       "role": "Firmware, interaction design and design system",
-      "order": 8,
+      "order": 1,
       "featured": true,
       "summary": "I wanted my plan within sight without opening another laptop tab or reaching for my phone. TrevOS puts that idea on a small desk puck: turn the dial, choose a task, and stay with it. Built for the Waveshare ESP32-S3-Knob-Touch-LCD-1.8 hardware family, its shared shell and design system host Pomodoist for Todoist focus sessions and Cal for a calendar glance. Makers can build the whole device or adapt one app.",
       "cover": {

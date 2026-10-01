@@ -1,9 +1,9 @@
 import {test,expect} from '@playwright/test';
 test('buttons, picker and keyboard reach every project',async({page})=>{
  await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/');await expect(page.getByRole('button',{name:'Previous project'})).toBeDisabled();
- await page.getByRole('button',{name:'Next project'}).click();await expect(page.locator('[data-carousel-count]')).toHaveText('02 / 14');await expect(page.locator('[data-project="padlano"]')).toHaveAttribute('aria-current','true');
+ await page.getByRole('button',{name:'Next project'}).click();await expect(page.locator('[data-carousel-count]')).toHaveText('02 / 14');await expect(page.locator('[data-project="turnkeep"]')).toHaveAttribute('aria-current','true');
  await page.getByLabel('Choose a project').selectOption('13');await expect(page.locator('[data-carousel-count]')).toHaveText('14 / 14');await expect(page.getByRole('button',{name:'Next project'})).toBeDisabled();
- await page.locator('.collection').focus();await page.keyboard.press('Home');await expect(page.locator('[data-carousel-count]')).toHaveText('01 / 14');await page.keyboard.press('ArrowRight');await expect(page.locator('[data-carousel-count]')).toHaveText('02 / 14');await page.locator('[data-project="padlano"]').click();await expect(page).toHaveURL(/\/work\/padlano\/$/);
+ await page.locator('.collection').focus();await page.keyboard.press('Home');await expect(page.locator('[data-carousel-count]')).toHaveText('01 / 14');await page.keyboard.press('ArrowRight');await expect(page.locator('[data-carousel-count]')).toHaveText('02 / 14');await page.locator('[data-project="turnkeep"]').click();await expect(page).toHaveURL(/\/work\/turnkeep\/$/);
 });
 test('details open on tap, dismiss and close when selection changes',async({page})=>{
  await page.setViewportSize({width:390,height:844});await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/');const detail=page.locator('.piece').first().locator('details');await detail.locator('summary').click();await expect(detail).toHaveAttribute('open','');await expect(detail.locator('.slide-popover')).toBeVisible();await page.keyboard.press('Escape');await expect(detail).not.toHaveAttribute('open','');await detail.locator('summary').click();await page.getByRole('button',{name:'Next project'}).click();await expect(detail).not.toHaveAttribute('open','');
