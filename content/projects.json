@@ -7,6 +7,7 @@
     "trevos",
     "turnkeep",
     "padlano",
+    "papercolor-cal",
     "elc-portal",
     "second-brain-builder",
     "bodybrain",
@@ -196,7 +197,7 @@
       "descriptor": "Children are makers · 15 years of Reggio-inspired projects",
       "status": "Educational practice",
       "role": "Creating the conditions, sharing expertise and co-facilitating",
-      "order": 7,
+      "order": 8,
       "featured": true,
       "summary": "Children are makers. Given time, trust and access to expertise, they can design, make and publish work at the intersection of creativity and functionality. For 15 years, I have explored that belief through Reggio-inspired projects with children in Bangkok: drawings become working circuits and moving machines; a Year 6 AI sprint becomes a student newspaper website. My role is to create the conditions, share tools and expertise, and document the process while keeping children’s ideas and authorship at the centre.",
       "cover": {
@@ -624,12 +625,127 @@
       ]
     },
     {
+      "slug": "papercolor-cal",
+      "title": "PaperColor Calendar",
+      "descriptor": "A once-a-day calendar on a colour E Ink fridge display",
+      "status": "Open-source prototype",
+      "role": "Firmware, calendar data path and cradle design",
+      "order": 4,
+      "featured": true,
+      "summary": "PaperColor Calendar puts the day's Google Calendar on our fridge. An M5Stack PaperColor wakes itself at 04:00, fetches two weeks of events, draws today in six flat E Ink colours and powers off completely until the next morning. Three buttons walk through the days. There is no sign-in on the device: a small Apps Script on my own account serves the data. A 3D-printed magnetic cradle holds it on the door. It has run daily since late September; the firmware, tests and cradle files are public.",
+      "cover": {
+        "src": "/media/papercolor-cal-fridge-1128-f2a8b4e42c.webp",
+        "width": 1128,
+        "height": 2000,
+        "variants": [
+          {
+            "src": "/media/papercolor-cal-fridge-480-e33eac5818.webp",
+            "width": 480,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/papercolor-cal-fridge-960-e3d8f00a68.webp",
+            "width": 960,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/papercolor-cal-fridge-1128-f2a8b4e42c.webp",
+            "width": 1128,
+            "type": "image/webp"
+          }
+        ],
+        "alt": "M5Stack PaperColor on a steel fridge door showing a green date band and three events",
+        "caption": "On the fridge · actual photo"
+      },
+      "gallery": [
+        {
+          "src": "/media/papercolor-cal-face-720-7b0d032830.webp",
+          "width": 720,
+          "height": 640,
+          "variants": [
+            {
+              "src": "/media/papercolor-cal-face-480-ae1242a45b.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/papercolor-cal-face-720-7b0d032830.webp",
+              "width": 720,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Close view of the E Ink face with the date, TOMORROW label and timed events",
+          "caption": "The face · six flat colours, no dithering",
+          "layout": "detail"
+        },
+        {
+          "src": "/media/papercolor-cal-cradle-1600-08c0b59811.webp",
+          "width": 1600,
+          "height": 1000,
+          "variants": [
+            {
+              "src": "/media/papercolor-cal-cradle-480-b06a614b10.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/papercolor-cal-cradle-960-738044d5d4.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/papercolor-cal-cradle-1600-08c0b59811.webp",
+              "width": 1600,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Front and back of the 3D-printed fridge cradle with retainers and magnet pockets",
+          "caption": "Magnetic fridge cradle · CAD render",
+          "layout": "wide"
+        }
+      ],
+      "links": [
+        {
+          "label": "View source",
+          "href": "https://github.com/Tr3v0r86/papercolor-cal"
+        },
+        {
+          "label": "Cradle files",
+          "href": "https://github.com/Tr3v0r86/papercolor-cal/tree/main/case"
+        }
+      ],
+      "collectionCover": {
+        "src": "/media/papercolor-cal-card-1000-23498b9653.webp",
+        "width": 1000,
+        "height": 1250,
+        "variants": [
+          {
+            "src": "/media/papercolor-cal-card-480-fc2813424e.webp",
+            "width": 480,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/papercolor-cal-card-960-e6db4a0912.webp",
+            "width": 960,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/papercolor-cal-card-1000-23498b9653.webp",
+            "width": 1000,
+            "type": "image/webp"
+          }
+        ],
+        "alt": "PaperColor Calendar on the fridge door showing the day and its events",
+        "caption": "On the fridge · actual photo"
+      }
+    },
+    {
       "slug": "learning-and-making",
       "title": "A school for making",
       "descriptor": "An alternative middle school & community maker space",
       "status": "In development",
       "role": "Learning model, programme and spatial concept",
-      "order": 8,
+      "order": 9,
       "featured": true,
       "summary": "This alternative middle school and community maker-space concept brings together my training in alternative education, professional work in school operations and practice as a maker. Young people investigate questions by designing, building and testing things in shared workshops. I am connecting that learning model with the programme, tools, materials and spaces it needs. The woodshop and fablab renders explore those conditions; the diagrams show the inquiry cycle. These are concept visualisations for a school in development.",
       "cover": {
@@ -834,7 +950,7 @@
       "descriptor": "Activities, events and calendars in one family portal",
       "status": "Live school platform",
       "role": "Family experience design and web development",
-      "order": 4,
+      "order": 5,
       "featured": true,
       "summary": "I designed and built a parent portal around a parent's practical questions: what is happening, what can my child join, and where do I go next? It brings school activities, events, calendars and useful information into one family-facing website, with links to the existing registration systems. My work joins school operations with interface design: organising the information and building a consistent route through it. The mobile views are de-identified for this portfolio.",
       "cover": {
@@ -890,7 +1006,7 @@
       "descriptor": "Todoist tasks and a focus timer, within reach",
       "status": "Hardware/software prototype",
       "role": "Firmware, Todoist integration and interaction design",
-      "order": 9,
+      "order": 10,
       "featured": true,
       "summary": "Pomodoist keeps one chosen task and a focus timer on my desk. I turn the puck’s dial to choose a Todoist task and session length, then work without reopening my task list on a laptop or phone. It runs as an independent app inside TrevOS, alongside Cal. The public source includes the app and its shared dependencies so other makers can adapt it to their own focus device.",
       "cover": {
@@ -987,7 +1103,7 @@
       "descriptor": "A project-management tool in a single HTML file",
       "status": "Public source",
       "role": "Dashboard design, development and public template",
-      "order": 11,
+      "order": 12,
       "featured": true,
       "summary": "I turned a tool from my school operations work into a single HTML file that other people can adapt and host. The dashboard keeps priorities, completion and weekly progress notes together, with browser storage and an optional shareable view. There is no server to set up for the basic version. The public demo uses sample projects, and the source includes instructions for making it your own.",
       "cover": {
@@ -1072,7 +1188,7 @@
       "descriptor": "TrevOS: a shared foundation for small devices",
       "status": "Ongoing experiments",
       "role": "Board integration, firmware and interface experiments",
-      "order": 12,
+      "order": 13,
       "featured": true,
       "summary": "I am building TrevOS, a shared launcher and software foundation for my ESP32 devices. A timer, a padel scoreboard and a desk display can reuse app logic while each board supplies its own screen and controls. This collection shows the work underneath individual products: board experiments, interface sketches and a saved launcher simulation. The aim is to carry what I learn from one device into the next, instead of starting again with every screen.",
       "cover": {
@@ -1250,7 +1366,7 @@
       "descriptor": "Guided questions that become a personal AI workspace",
       "status": "Live web app",
       "role": "Question flow, system design and development",
-      "order": 5,
+      "order": 6,
       "featured": true,
       "summary": "I made Second Brain Builder to turn the structure of my own knowledge system into a starting point for someone else. A personalised question flow asks how they work, plan and keep track of things, then produces a plain-text blueprint for an AI-assisted workspace. Each journey is prepared for its recipient. The public page is the entry point to those individual builds; the source shows how the builder works.",
       "cover": {
@@ -1423,7 +1539,7 @@
       "descriptor": "Custom apps for friends and loved ones",
       "status": "Live web app",
       "role": "Personal guide design and web development",
-      "order": 13,
+      "order": 14,
       "featured": true,
       "summary": "I build small apps for friends and loved ones around something we want to do together. Trips turns a day out into an installable guide with stops, stories, practical details and a shared checklist. The Île d’Orléans guide shown here brings those pieces into a page people can keep on their phone and use offline. It is a small piece of software made for a particular occasion and the people sharing it.",
       "cover": {
@@ -1575,7 +1691,7 @@
       "descriptor": "Training, nutrition, recovery and bloodwork in context",
       "status": "In development",
       "role": "Data system, product thesis and coaching workflow",
-      "order": 6,
+      "order": 7,
       "featured": true,
       "summary": "Bodybrain began as a way to read my training, nutrition and recovery together, instead of opening separate apps and guessing how the pieces connect. I am developing that personal data system into a coaching platform: bringing context to a conversation, agreeing a plan and adjusting it as someone’s life changes. MacroFactor, InBody, Hevy, Google Fit and bloodwork show the kinds of information I want to connect. The screens here are illustrative; the coaching platform is in active development.",
       "cover": {
@@ -1741,7 +1857,7 @@
       "descriptor": "Bringing learning documentation back into use",
       "status": "Internal working tool",
       "role": "Extraction pipeline, media library and editorial workflow",
-      "order": 14,
+      "order": 15,
       "featured": true,
       "summary": "I built Custom Media Databank to bring the best photographs, artwork and quotes out of project learning publications at a design-focused, Reggio-inspired school. It turns finished PDFs into a searchable editorial library, with source references, duplicate handling and quality flags, so strong material can be found again for publications and social media. Security and children’s safety shape the workflow: access stays behind institutional authentication, and attribution and reuse need human review. The examples here are fictional and anonymised.",
       "cover": {
@@ -2023,7 +2139,7 @@
       "descriptor": "The shape of the day, one glance away",
       "status": "Hardware/software prototype",
       "role": "Calendar integration and glanceable interface design",
-      "order": 10,
+      "order": 11,
       "featured": true,
       "summary": "Cal gives my day a small, dedicated place on the desk. A glance at the puck shows calendar context without pulling me into a browser or phone. It runs beside Pomodoist in TrevOS, but the two apps stay independent: the calendar does not change my focus timer. The public module gives other makers a starting point for their own calendar display.",
       "cover": {

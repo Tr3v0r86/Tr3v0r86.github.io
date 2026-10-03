@@ -19,8 +19,8 @@ test('invalid content fails with an actionable field',()=>{
   [c=>c.projects[0].links[0].href='javascript:alert(1)',/href/],
   [c=>c.projects[0].privateNotes='do not publish',/unknown\/private/],
   [c=>c.projects[0].status='Shipped to thousands',/status/],
-  [c=>c.projects[3].dateLabel='2026',/anonymous/],
-  [c=>c.projects[3].summary='A school at ELC',/anonymous/],
+  [c=>c.projects.find(p=>p.slug==='learning-and-making').dateLabel='2026',/anonymous/],
+  [c=>c.projects.find(p=>p.slug==='learning-and-making').summary='A school at ELC',/anonymous/],
   [c=>c.projects.pop(),/manifest/]
  ])assert.throws(()=>validateCatalog(changed(change)),match);
 });
