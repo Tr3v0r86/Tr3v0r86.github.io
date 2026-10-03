@@ -24,3 +24,14 @@ test('Reggio duration is consistent across discovery, case and about',async({pag
  await expect(page.locator('meta[name="description"]')).toHaveAttribute('content',/Children are makers.*15 years/);
  await page.getByRole('link',{name:'About',exact:true}).click();await expect(page.locator('.about-story')).toContainText('For 15 years');await expect(page.locator('.about-portrait img')).toBeVisible();
 });
+
+test('Turnkeep video plays while on screen and pauses when scrolled away',async({page})=>{
+ await page.goto('/work/turnkeep/');const v=page.locator('main video');
+ expect(await v.evaluate(v=>v.paused)).toBe(true);
+ await v.scrollIntoViewIfNeeded();await expect.poll(()=>v.evaluate(v=>!v.paused&&v.currentTime>0)).toBe(true);
+ await page.evaluate(()=>scrollTo(0,0));await expect.poll(()=>v.evaluate(v=>v.paused)).toBe(true);
+});
+test('reduced-motion visitors are not autoplayed',async({browser})=>{
+ const page=await browser.newPage({reducedMotion:'reduce'});await page.goto('/work/turnkeep/');const v=page.locator('main video');
+ await v.scrollIntoViewIfNeeded();await page.waitForTimeout(800);expect(await v.evaluate(v=>v.paused)).toBe(true);await page.close();
+});

@@ -955,28 +955,30 @@
         }
       ],
       "collectionCover": {
-        "src": "/media/pomodoist-desk-photo-1128-00763d91b9.webp",
-        "width": 1128,
-        "height": 2000,
+        "src": "/media/trevos-desk-morning-concept-1536-db032bebe3.webp",
+        "width": 1536,
+        "height": 1024,
         "variants": [
           {
-            "src": "/media/pomodoist-desk-photo-480-ee466476aa.webp",
+            "src": "/media/trevos-desk-morning-concept-480-8a6cfe35e0.webp",
             "width": 480,
             "type": "image/webp"
           },
           {
-            "src": "/media/pomodoist-desk-photo-960-27cde3bcc8.webp",
+            "src": "/media/trevos-desk-morning-concept-960-1ab4936173.webp",
             "width": 960,
             "type": "image/webp"
           },
           {
-            "src": "/media/pomodoist-desk-photo-1128-00763d91b9.webp",
-            "width": 1128,
+            "src": "/media/trevos-desk-morning-concept-1536-db032bebe3.webp",
+            "width": 1536,
             "type": "image/webp"
           }
         ],
-        "alt": "Pomodoist running on a red dial puck on a desk beside stacked books",
-        "caption": "Pomodoist on the desk · actual photo"
+        "alt": "AI-generated desk concept with the blue TrevOS puck beside a notebook",
+        "caption": "AI-generated morning desk concept · illustrative enclosure",
+        "layout": "wide",
+        "textEquivalent": "AI-generated desk concept showing a possible arrangement. Enclosure and materials are illustrative; this is not a photograph of the physical device."
       }
     },
     {
@@ -1859,30 +1861,28 @@
         "textEquivalent": "AI-generated concept render. The enclosure and materials are illustrative; this is not a photograph of the physical device."
       },
       "collectionCover": {
-        "src": "/media/trevos-desk-morning-concept-1536-db032bebe3.webp",
-        "width": 1536,
-        "height": 1024,
+        "src": "/media/pomodoist-desk-photo-1128-00763d91b9.webp",
+        "width": 1128,
+        "height": 2000,
         "variants": [
           {
-            "src": "/media/trevos-desk-morning-concept-480-8a6cfe35e0.webp",
+            "src": "/media/pomodoist-desk-photo-480-ee466476aa.webp",
             "width": 480,
             "type": "image/webp"
           },
           {
-            "src": "/media/trevos-desk-morning-concept-960-1ab4936173.webp",
+            "src": "/media/pomodoist-desk-photo-960-27cde3bcc8.webp",
             "width": 960,
             "type": "image/webp"
           },
           {
-            "src": "/media/trevos-desk-morning-concept-1536-db032bebe3.webp",
-            "width": 1536,
+            "src": "/media/pomodoist-desk-photo-1128-00763d91b9.webp",
+            "width": 1128,
             "type": "image/webp"
           }
         ],
-        "alt": "AI-generated desk concept with the blue TrevOS puck beside a notebook",
-        "caption": "AI-generated morning desk concept · illustrative enclosure",
-        "layout": "wide",
-        "textEquivalent": "AI-generated desk concept showing a possible arrangement. Enclosure and materials are illustrative; this is not a photograph of the physical device."
+        "alt": "TrevOS running Pomodoist on a red dial puck on a desk beside stacked books",
+        "caption": "TrevOS on the desk · actual photo"
       },
       "gallery": [
         {

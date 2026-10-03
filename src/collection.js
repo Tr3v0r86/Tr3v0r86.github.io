@@ -24,4 +24,6 @@
  }
  const failed=img=>{img.classList.add('image-failed');if(img.parentElement.querySelector('.image-fallback'))return;const label=document.createElement('span');label.className='image-fallback';label.textContent=img.alt;img.parentElement.append(label);};
  document.querySelectorAll('img').forEach(img=>{img.addEventListener('error',()=>failed(img));if(img.complete&&!img.naturalWidth)failed(img);});
+ // Gallery videos play while on screen; reduced-motion visitors use the controls.
+ if(!matchMedia('(prefers-reduced-motion:reduce)').matches&&'IntersectionObserver' in window){const io=new IntersectionObserver(es=>es.forEach(en=>en.isIntersecting?en.target.play().catch(()=>{}):en.target.pause()),{threshold:.5});document.querySelectorAll('.gallery-image video').forEach(v=>io.observe(v));}
 })();
