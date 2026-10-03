@@ -55,6 +55,15 @@
       },
       "gallery": [
         {
+          "src": "/media/turnkeep-in-hand-be14fb95f3.mp4",
+          "poster": "/media/turnkeep-in-hand-poster-478-0054db0128.webp",
+          "width": 478,
+          "height": 850,
+          "alt": "Hands tapping through damage, character and spell screens on the Turnkeep display, then opening the case to the dice tray",
+          "caption": "In hand · the prototype in use",
+          "layout": "detail"
+        },
+        {
           "src": "/media/turnkeep-product-hero-1600-e2a49b2f9a.webp",
           "width": 1600,
           "height": 1219,
@@ -946,19 +955,28 @@
         }
       ],
       "collectionCover": {
-        "src": "/media/trevos-focus-360-6d063f99c1.webp",
-        "width": 360,
-        "height": 360,
+        "src": "/media/pomodoist-desk-photo-1128-00763d91b9.webp",
+        "width": 1128,
+        "height": 2000,
         "variants": [
           {
-            "src": "/media/trevos-focus-360-6d063f99c1.webp",
-            "width": 360,
+            "src": "/media/pomodoist-desk-photo-480-ee466476aa.webp",
+            "width": 480,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/pomodoist-desk-photo-960-27cde3bcc8.webp",
+            "width": 960,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/pomodoist-desk-photo-1128-00763d91b9.webp",
+            "width": 1128,
             "type": "image/webp"
           }
         ],
-        "alt": "Pomodoist firmware simulator with a fictional writing task and 25-minute timer",
-        "caption": "Focus · firmware simulator · synthetic data",
-        "layout": "pair"
+        "alt": "Pomodoist running on a red dial puck on a desk beside stacked books",
+        "caption": "Pomodoist on the desk · actual photo"
       }
     },
     {

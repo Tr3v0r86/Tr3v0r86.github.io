@@ -22,10 +22,11 @@ export function validateCatalog(catalog){
  keys(catalog.site,['name','origin'],'site');
  const ids=new Set(),orders=new Set();
  const link=(l,ctx)=>{str(l?.label,ctx+'.label');if(!safeURL(l.href))fail(ctx+'.href','use a safe root path or HTTPS URL');keys(l,['label','href'],ctx);};
- const asset=(src,ctx)=>{if(typeof src!=='string'||!/^\/media\/[a-zA-Z0-9][a-zA-Z0-9._-]*\.(webp|avif|png|jpg|svg)$/.test(src)||src.includes('..'))fail(ctx,'use a file directly inside public/media');};
+ const asset=(src,ctx)=>{if(typeof src!=='string'||!/^\/media\/[a-zA-Z0-9][a-zA-Z0-9._-]*\.(webp|avif|png|jpg|svg|mp4)$/.test(src)||src.includes('..'))fail(ctx,'use a file directly inside public/media');};
  const media=(m,ctx)=>{
    if(!m||typeof m!=='object')fail(ctx,'media record required');asset(m.src,ctx+'.src');str(m.alt,ctx+'.alt');
-   keys(m,['src','width','height','alt','caption','layout','credit','textEquivalent','accessibleLink','variants'],ctx);
+   keys(m,['src','width','height','alt','caption','layout','credit','textEquivalent','accessibleLink','variants','poster'],ctx);
+   if(m.src.endsWith('.mp4')!==(m.poster!==undefined))fail(ctx+'.poster','required for video, only for video');if(m.poster!==undefined){asset(m.poster,ctx+'.poster');if(m.poster.endsWith('.mp4')||m.variants)fail(ctx+'.poster','video needs an image poster and no variants');}
    for(const dimension of ['width','height'])if(!Number.isSafeInteger(m[dimension])||m[dimension]<1||m[dimension]>20000)fail(ctx+'.'+dimension,'positive dimensions required');
    if(m.caption!==undefined){str(m.caption,ctx+'.caption');if(m.caption.trim().split(/\s+/).length>12)fail(ctx+'.caption','maximum 12 words');}
    if(m.layout&&!['wide','pair','detail'].includes(m.layout))fail(ctx+'.layout','unknown layout');
@@ -43,7 +44,7 @@ export function validateCatalog(catalog){
   if(p.dateLabel!==undefined)str(p.dateLabel,ctx+'.dateLabel');
   if(p.summary.trim().split(/\s+/).length>90||/[\r\n]/.test(p.summary))fail(ctx+'.summary','one paragraph, maximum 90 words');
   if(!Array.isArray(p.gallery)||!p.gallery.length)fail(ctx+'.gallery','at least one distinct additional view required');
-  media(p.cover,ctx+'.cover');if(p.collectionCover)media(p.collectionCover,ctx+'.collectionCover');p.gallery.forEach((m,i)=>media(m,ctx+'.gallery['+i+']'));
+  media(p.cover,ctx+'.cover');if(p.collectionCover)media(p.collectionCover,ctx+'.collectionCover');if([p.cover,p.collectionCover].some(m=>m?.poster))fail(ctx+'.cover','video belongs in the gallery');p.gallery.forEach((m,i)=>media(m,ctx+'.gallery['+i+']'));
   if(new Set([p.cover.src,...p.gallery.map(m=>m.src)]).size<2)fail(ctx+'.gallery','must contain a distinct view');
   if(!Array.isArray(p.links))fail(ctx+'.links','array required');p.links.forEach((l,i)=>link(l,ctx+'.links['+i+']'));
   const allowed=new Set(['slug','title','descriptor','status','role','order','featured','summary','cover','collectionCover','gallery','links','dateLabel']);for(const k of Object.keys(p))if(!allowed.has(k))fail(ctx+'.'+k,'unknown/private field must not enter public catalog');
@@ -55,14 +56,14 @@ export function validateCatalog(catalog){
  return [...catalog.projects].sort((a,b)=>a.order-b.order);
 }
 export async function verifyMedia(projects,publicDir=path.join(root,'public')){
- const seen=new Set();for(const p of projects)for(const m of [p.cover,...(p.collectionCover?[p.collectionCover]:[]),...p.gallery])for(const item of [{src:m.src,width:m.width,height:m.height},...(m.variants||[])]){
+ const seen=new Set();for(const p of projects)for(const m of [p.cover,...(p.collectionCover?[p.collectionCover]:[]),...p.gallery])for(const item of [{src:m.poster||m.src,width:m.width,height:m.height},...(m.variants||[])]){
   const key=item.src+':'+item.width;if(seen.has(key))continue;seen.add(key);const file=path.join(publicDir,item.src.slice(1));
   try{const meta=await sharp(file).metadata();await sharp(file).raw().toBuffer();if(meta.width!==item.width||(item.height&&meta.height!==item.height))fail(p.slug,item.src+' dimensions disagree with image');}catch(err){fail(p.slug,item.src+' invalid or missing media: '+err.message);}
  }
 }
 export async function build(){
  let catalog;try{catalog=JSON.parse(await readFile(path.join(root,'content/projects.json'),'utf8'));}catch(err){fail('catalog','cannot read/parse content/projects.json: '+err.message);}
- const projects=validateCatalog(catalog);await verifyMedia([...projects,{slug:'about',cover:about.portrait,gallery:[]}]);
+ const projects=validateCatalog(catalog);for(const p of projects)for(const m of p.gallery)if(m.poster)await stat(path.join(root,'public',m.src.slice(1))).catch(()=>fail(p.slug,m.src+' missing video'));await verifyMedia([...projects,{slug:'about',cover:about.portrait,gallery:[]}]);
  const publicDir=path.join(root,'public');if((await readFile(path.join(publicDir,'CNAME'),'utf8')).trim()!=='trevorcardozo.com')fail('CNAME','must remain trevorcardozo.com');
  if((await readdir(publicDir)).includes('turnkeep'))fail('public','must not shadow the existing Turnkeep project');
  const dest=path.join(root,'dist');await rm(dest,{recursive:true,force:true});await mkdir(dest,{recursive:true});await cp(publicDir,dest,{recursive:true});await mkdir(path.join(dest,'assets'),{recursive:true});

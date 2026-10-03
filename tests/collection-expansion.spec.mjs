@@ -8,7 +8,7 @@ test('Turnkeep uses its concept on the index and preserves physical evidence ins
  await expect(page.locator('.piece--turnkeep')).toContainText('AI-generated concept');
  await page.getByLabel('Choose a project').selectOption('1');await page.locator('[data-project="turnkeep"]').click();
  await expect(page.locator('.case-hero img')).toHaveAttribute('src',p.cover.src);
- for(const m of p.gallery)await expect(page.locator(`main img[src="${m.src}"]`)).toHaveCount(1);
+ for(const m of p.gallery)await expect(page.locator(`main ${m.poster?"video":"img"}[src="${m.src}"]`)).toHaveCount(1);
 });
 
 test('new cases distinguish illustrative evidence and preserve institutional anonymity',async({page})=>{

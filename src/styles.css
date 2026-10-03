@@ -158,3 +158,5 @@ button,a,summary{-webkit-tap-highlight-color:transparent}
 .case--trips .hero-image{background:#f7f1e6}.case--trips .case-heading h1{font-family:Georgia,serif;font-style:italic}
 .case--custom-media-databank .hero-image{background:#e9e9e5}.case--custom-media-databank .case-heading h1{letter-spacing:-.065em}
 .case--second-brain-builder .hero-image{background:#f4f5fa}.case--second-brain-builder .case-icon-label{color:#414c9a}
+.gallery-image video{display:block;width:auto;max-width:100%;height:auto;max-height:min(760px,80svh);margin:auto;background:#000}
+.home .piece--pomodoist .artifact img{object-fit:cover;object-position:50% 72%}
