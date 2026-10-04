@@ -68,7 +68,7 @@ export async function build(){
  const publicDir=path.join(root,'public');if((await readFile(path.join(publicDir,'CNAME'),'utf8')).trim()!=='trevorcardozo.com')fail('CNAME','must remain trevorcardozo.com');
  if((await readdir(publicDir)).includes('turnkeep'))fail('public','must not shadow the existing Turnkeep project');
  const dest=path.join(root,'dist');await rm(dest,{recursive:true,force:true});await mkdir(dest,{recursive:true});await cp(publicDir,dest,{recursive:true});await mkdir(path.join(dest,'assets'),{recursive:true});
- for(const f of ['styles.css','collection.js'])await cp(path.join(root,'src',f),path.join(dest,'assets',f));
+ for(const f of ['styles.css','collection.js','moss.css','moss.js'])await cp(path.join(root,'src',f),path.join(dest,'assets',f));
  await writeFile(path.join(dest,'index.html'),renderHome(projects));await writeFile(path.join(dest,'404.html'),render404());
  await mkdir(path.join(dest,'about'),{recursive:true});await writeFile(path.join(dest,'about/index.html'),renderAbout());
  for(const p of projects){const dir=path.join(dest,'work',p.slug);await mkdir(dir,{recursive:true});let html=renderCase(p,projects);

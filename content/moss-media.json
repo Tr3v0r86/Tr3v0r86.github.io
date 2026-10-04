@@ -1,0 +1,474 @@
+{
+  "provenance": "AI-assisted pixel art generated for Moss and prepared for the game; no stock or third-party sprite assets.",
+  "hero": {
+    "src": "/media/moss-garden.webp",
+    "width": 1440,
+    "height": 900,
+    "alt": "The Moss garden rendered with five test creatures, a cottage, pond, bridge and a seating nook",
+    "caption": "In-game garden with test creatures.",
+    "variants": [
+      {
+        "src": "/media/moss-garden-720.webp",
+        "width": 720,
+        "type": "image/webp"
+      },
+      {
+        "src": "/media/moss-garden.webp",
+        "width": 1440,
+        "type": "image/webp"
+      }
+    ]
+  },
+  "deviceViews": [
+    {
+      "src": "/media/moss-device-home.webp",
+      "width": 360,
+      "height": 360,
+      "alt": "Moss simulator home screen with a woodland egg, zero completed focuses and a Focus button",
+      "caption": "Simulator: a new woodland egg."
+    },
+    {
+      "src": "/media/moss-device-focus.webp",
+      "width": 360,
+      "height": 360,
+      "alt": "Moss simulator focus screen with a 24:59 countdown and resting woodland creature",
+      "caption": "Simulator: a quiet, locked focus session."
+    },
+    {
+      "src": "/media/moss-device-reward.webp",
+      "width": 360,
+      "height": 360,
+      "alt": "Moss simulator completion screen celebrating one completed focus session",
+      "caption": "Simulator: completed focus earns growth."
+    }
+  ],
+  "species": [
+    {
+      "id": 1,
+      "slug": "woodland",
+      "name": "Woodland spirit",
+      "tier": "common",
+      "description": "A tiny sprout grows into a leafy companion with branching wooden antlers.",
+      "stages": [
+        {
+          "name": "Hatchling",
+          "frames": [
+            "/media/moss-woodland-stage-1-idle-0.png",
+            "/media/moss-woodland-stage-1-idle-1.png"
+          ]
+        },
+        {
+          "name": "Youngster",
+          "frames": [
+            "/media/moss-woodland-stage-2-idle-0.png",
+            "/media/moss-woodland-stage-2-idle-1.png"
+          ]
+        },
+        {
+          "name": "Guardian",
+          "frames": [
+            "/media/moss-woodland-stage-3-idle-0.png",
+            "/media/moss-woodland-stage-3-idle-1.png"
+          ]
+        },
+        {
+          "name": "Mature",
+          "frames": [
+            "/media/moss-woodland-stage-4-idle-0.png",
+            "/media/moss-woodland-stage-4-idle-1.png"
+          ]
+        }
+      ],
+      "habitat": {
+        "src": "/media/moss-habitat-woodland.webp",
+        "width": 360,
+        "height": 360,
+        "alt": "Woodland clearing, the woodland spirit's native habitat artwork"
+      }
+    },
+    {
+      "id": 2,
+      "slug": "brook",
+      "name": "Brook spirit",
+      "tier": "common",
+      "description": "A small, low-slung companion with leaf-like ears and a broad curled tail.",
+      "stages": [
+        {
+          "name": "Hatchling",
+          "frames": [
+            "/media/moss-brook-stage-1-idle-0.png",
+            "/media/moss-brook-stage-1-idle-1.png"
+          ]
+        },
+        {
+          "name": "Youngster",
+          "frames": [
+            "/media/moss-brook-stage-2-idle-0.png",
+            "/media/moss-brook-stage-2-idle-1.png"
+          ]
+        },
+        {
+          "name": "Guardian",
+          "frames": [
+            "/media/moss-brook-stage-3-idle-0.png",
+            "/media/moss-brook-stage-3-idle-1.png"
+          ]
+        },
+        {
+          "name": "Mature",
+          "frames": [
+            "/media/moss-brook-stage-4-idle-0.png",
+            "/media/moss-brook-stage-4-idle-1.png"
+          ]
+        }
+      ],
+      "habitat": {
+        "src": "/media/moss-habitat-brook.webp",
+        "width": 360,
+        "height": 360,
+        "alt": "Stream bank, the brook spirit's native habitat artwork"
+      }
+    },
+    {
+      "id": 3,
+      "slug": "ember-moss",
+      "name": "Ember-moss spirit",
+      "tier": "common",
+      "description": "A warm-toned sprout grows taller, with a pale face and layered leaves.",
+      "stages": [
+        {
+          "name": "Hatchling",
+          "frames": [
+            "/media/moss-ember-moss-stage-1-idle-0.png",
+            "/media/moss-ember-moss-stage-1-idle-1.png"
+          ]
+        },
+        {
+          "name": "Youngster",
+          "frames": [
+            "/media/moss-ember-moss-stage-2-idle-0.png",
+            "/media/moss-ember-moss-stage-2-idle-1.png"
+          ]
+        },
+        {
+          "name": "Guardian",
+          "frames": [
+            "/media/moss-ember-moss-stage-3-idle-0.png",
+            "/media/moss-ember-moss-stage-3-idle-1.png"
+          ]
+        },
+        {
+          "name": "Mature",
+          "frames": [
+            "/media/moss-ember-moss-stage-4-idle-0.png",
+            "/media/moss-ember-moss-stage-4-idle-1.png"
+          ]
+        }
+      ],
+      "habitat": {
+        "src": "/media/moss-habitat-ember-moss.webp",
+        "width": 360,
+        "height": 360,
+        "alt": "Sunny hillside, the ember-moss spirit's native habitat artwork"
+      }
+    },
+    {
+      "id": 4,
+      "slug": "antler",
+      "name": "Antler spirit",
+      "tier": "rare",
+      "description": "A round woodland face framed by spreading antlers and new leaves.",
+      "stages": [
+        {
+          "name": "Hatchling",
+          "frames": [
+            "/media/moss-antler-stage-1-idle-0.png",
+            "/media/moss-antler-stage-1-idle-1.png"
+          ]
+        },
+        {
+          "name": "Youngster",
+          "frames": [
+            "/media/moss-antler-stage-2-idle-0.png",
+            "/media/moss-antler-stage-2-idle-1.png"
+          ]
+        },
+        {
+          "name": "Guardian",
+          "frames": [
+            "/media/moss-antler-stage-3-idle-0.png",
+            "/media/moss-antler-stage-3-idle-1.png"
+          ]
+        },
+        {
+          "name": "Mature",
+          "frames": [
+            "/media/moss-antler-stage-4-idle-0.png",
+            "/media/moss-antler-stage-4-idle-1.png"
+          ]
+        }
+      ],
+      "habitat": {
+        "src": "/media/moss-habitat-antler.webp",
+        "width": 360,
+        "height": 360,
+        "alt": "Misty pine edge, the antler spirit's native habitat artwork"
+      }
+    },
+    {
+      "id": 5,
+      "slug": "hollow-lantern",
+      "name": "Hollow-lantern spirit",
+      "tier": "legendary",
+      "description": "A pointed leafy hood shelters a pale face and a softly glowing belly.",
+      "stages": [
+        {
+          "name": "Hatchling",
+          "frames": [
+            "/media/moss-hollow-lantern-stage-1-idle-0.png",
+            "/media/moss-hollow-lantern-stage-1-idle-1.png"
+          ]
+        },
+        {
+          "name": "Youngster",
+          "frames": [
+            "/media/moss-hollow-lantern-stage-2-idle-0.png",
+            "/media/moss-hollow-lantern-stage-2-idle-1.png"
+          ]
+        },
+        {
+          "name": "Guardian",
+          "frames": [
+            "/media/moss-hollow-lantern-stage-3-idle-0.png",
+            "/media/moss-hollow-lantern-stage-3-idle-1.png"
+          ]
+        },
+        {
+          "name": "Mature",
+          "frames": [
+            "/media/moss-hollow-lantern-stage-4-idle-0.png",
+            "/media/moss-hollow-lantern-stage-4-idle-1.png"
+          ]
+        }
+      ],
+      "habitat": {
+        "src": "/media/moss-habitat-hollow-lantern.webp",
+        "width": 360,
+        "height": 360,
+        "alt": "Moonlit grove, the hollow-lantern spirit's native habitat artwork"
+      }
+    }
+  ],
+  "legendaries": [
+    {
+      "slug": "fire",
+      "name": "Fire Legendary",
+      "element": "Fire",
+      "color": "#D95645",
+      "forms": [
+        {
+          "name": "Hatchling",
+          "src": "/media/moss-fire-stage-1-idle-0.png"
+        },
+        {
+          "name": "Youngster",
+          "src": "/media/moss-fire-stage-2-idle-0.png"
+        },
+        {
+          "name": "Guardian",
+          "src": "/media/moss-fire-stage-3-idle-0.png"
+        },
+        {
+          "name": "Mature",
+          "src": "/media/moss-fire-stage-4-idle-0.png"
+        }
+      ],
+      "habitat": {
+        "src": "/media/moss-habitat-fire.webp",
+        "width": 360,
+        "height": 360,
+        "alt": "Hearth courtyard, habitat artwork for the planned Fire Legendary"
+      }
+    },
+    {
+      "slug": "water",
+      "name": "Water Legendary",
+      "element": "Water",
+      "color": "#559FCF",
+      "forms": [
+        {
+          "name": "Hatchling",
+          "src": "/media/moss-water-stage-1-idle-0.png"
+        },
+        {
+          "name": "Youngster",
+          "src": "/media/moss-water-stage-2-idle-0.png"
+        },
+        {
+          "name": "Guardian",
+          "src": "/media/moss-water-stage-3-idle-0.png"
+        },
+        {
+          "name": "Mature",
+          "src": "/media/moss-water-stage-4-idle-0.png"
+        }
+      ],
+      "habitat": {
+        "src": "/media/moss-habitat-water.webp",
+        "width": 360,
+        "height": 360,
+        "alt": "Tidepool shore, habitat artwork for the planned Water Legendary"
+      }
+    },
+    {
+      "slug": "electric",
+      "name": "Electric Legendary",
+      "element": "Electric",
+      "color": "#EDC84B",
+      "forms": [
+        {
+          "name": "Hatchling",
+          "src": "/media/moss-electric-stage-1-idle-0.png"
+        },
+        {
+          "name": "Youngster",
+          "src": "/media/moss-electric-stage-2-idle-0.png"
+        },
+        {
+          "name": "Guardian",
+          "src": "/media/moss-electric-stage-3-idle-0.png"
+        },
+        {
+          "name": "Mature",
+          "src": "/media/moss-electric-stage-4-idle-0.png"
+        }
+      ],
+      "habitat": {
+        "src": "/media/moss-habitat-electric.webp",
+        "width": 360,
+        "height": 360,
+        "alt": "Sunlit workshop, habitat artwork for the planned Electric Legendary"
+      }
+    },
+    {
+      "slug": "ghost",
+      "name": "Ghost Legendary",
+      "element": "Ghost",
+      "color": "#A88AC7",
+      "forms": [
+        {
+          "name": "Hatchling",
+          "src": "/media/moss-ghost-stage-1-idle-0.png"
+        },
+        {
+          "name": "Youngster",
+          "src": "/media/moss-ghost-stage-2-idle-0.png"
+        },
+        {
+          "name": "Guardian",
+          "src": "/media/moss-ghost-stage-3-idle-0.png"
+        },
+        {
+          "name": "Mature",
+          "src": "/media/moss-ghost-stage-4-idle-0.png"
+        }
+      ],
+      "habitat": {
+        "src": "/media/moss-habitat-ghost.webp",
+        "width": 360,
+        "height": 360,
+        "alt": "Lantern hollow, habitat artwork for the planned Ghost Legendary"
+      }
+    },
+    {
+      "slug": "earth",
+      "name": "Earth Legendary",
+      "element": "Earth",
+      "color": "#A47C55",
+      "forms": [
+        {
+          "name": "Hatchling",
+          "src": "/media/moss-earth-stage-1-idle-0.png"
+        },
+        {
+          "name": "Youngster",
+          "src": "/media/moss-earth-stage-2-idle-0.png"
+        },
+        {
+          "name": "Guardian",
+          "src": "/media/moss-earth-stage-3-idle-0.png"
+        },
+        {
+          "name": "Mature",
+          "src": "/media/moss-earth-stage-4-idle-0.png"
+        }
+      ],
+      "habitat": {
+        "src": "/media/moss-habitat-earth.webp",
+        "width": 360,
+        "height": 360,
+        "alt": "Sandstone terrace, habitat artwork for the planned Earth Legendary"
+      }
+    },
+    {
+      "slug": "air",
+      "name": "Air Legendary",
+      "element": "Air",
+      "color": "#F7F5EE",
+      "forms": [
+        {
+          "name": "Hatchling",
+          "src": "/media/moss-air-stage-1-idle-0.png"
+        },
+        {
+          "name": "Youngster",
+          "src": "/media/moss-air-stage-2-idle-0.png"
+        },
+        {
+          "name": "Guardian",
+          "src": "/media/moss-air-stage-3-idle-0.png"
+        },
+        {
+          "name": "Mature",
+          "src": "/media/moss-air-stage-4-idle-0.png"
+        }
+      ],
+      "habitat": {
+        "src": "/media/moss-habitat-air.webp",
+        "width": 360,
+        "height": 360,
+        "alt": "Cloud garden, habitat artwork for the planned Air Legendary"
+      }
+    },
+    {
+      "slug": "space",
+      "name": "Space Legendary",
+      "element": "Space",
+      "color": "#E9D275",
+      "forms": [
+        {
+          "name": "Hatchling",
+          "src": "/media/moss-space-stage-1-idle-0.png"
+        },
+        {
+          "name": "Youngster",
+          "src": "/media/moss-space-stage-2-idle-0.png"
+        },
+        {
+          "name": "Guardian",
+          "src": "/media/moss-space-stage-3-idle-0.png"
+        },
+        {
+          "name": "Mature",
+          "src": "/media/moss-space-stage-4-idle-0.png"
+        }
+      ],
+      "habitat": {
+        "src": "/media/moss-habitat-space.webp",
+        "width": 360,
+        "height": 360,
+        "alt": "Star observatory, habitat artwork for the planned Space Legendary"
+      }
+    }
+  ]
+}

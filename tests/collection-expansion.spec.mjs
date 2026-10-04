@@ -6,7 +6,7 @@ test('Turnkeep uses its concept on the index and preserves physical evidence ins
  const p=projects.find(p=>p.slug==='turnkeep');await page.goto('/');
  await expect(page.locator('[data-project="turnkeep"] img')).toHaveAttribute('src',p.collectionCover.src);
  await expect(page.locator('.piece--turnkeep')).toContainText('AI-generated concept');
- await page.getByLabel('Choose a project').selectOption('2');await page.locator('[data-project="turnkeep"]').click();
+ await page.getByLabel('Choose a project').selectOption('3');await page.locator('[data-project="turnkeep"]').click();
  await expect(page.locator('.case-hero img')).toHaveAttribute('src',p.cover.src);
  for(const m of p.gallery)await expect(page.locator(`main ${m.poster?"video":"img"}[src="${m.src}"]`)).toHaveCount(1);
 });
