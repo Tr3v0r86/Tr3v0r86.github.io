@@ -2295,12 +2295,7 @@
           "layout": "pair"
         }
       ],
-      "links": [
-        {
-          "label": "Explore the design",
-          "href": "/prototypes/pocketframe/"
-        }
-      ]
+      "links": []
     }
   ]
 }

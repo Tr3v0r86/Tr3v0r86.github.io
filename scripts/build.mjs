@@ -2,6 +2,7 @@ import {readFile,writeFile,mkdir,cp,rm,readdir,stat} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import sharp from 'sharp';
+import {searchMetadata} from '../src/seo.mjs';
 import {renderHome,renderCase,renderAbout,render404,escape} from '../src/templates.mjs';
 import about from '../content/about.json' with {type:'json'};
 export const root=path.resolve(fileURLToPath(new URL('..',import.meta.url)));
@@ -70,7 +71,14 @@ export async function build(){
  for(const f of ['styles.css','collection.js'])await cp(path.join(root,'src',f),path.join(dest,'assets',f));
  await writeFile(path.join(dest,'index.html'),renderHome(projects));await writeFile(path.join(dest,'404.html'),render404());
  await mkdir(path.join(dest,'about'),{recursive:true});await writeFile(path.join(dest,'about/index.html'),renderAbout());
- for(const p of projects){const dir=path.join(dest,'work',p.slug);await mkdir(dir,{recursive:true});await writeFile(path.join(dir,'index.html'),renderCase(p,projects));}
+ for(const p of projects){const dir=path.join(dest,'work',p.slug);await mkdir(dir,{recursive:true});let html=renderCase(p,projects);
+  if(p.slug==='pocketframe'){
+   const url='https://trevorcardozo.com/work/pocketframe/';
+   const seo=searchMetadata({title:'Pocketframe · Trevor Cardozo',description:p.summary,path:'/work/pocketframe/',cover:p.cover});
+   const metadata=`<title>${escape(seo.title)}</title><meta name="description" content="${escape(seo.description)}"><meta name="robots" content="${seo.robots}"><link rel="canonical" href="${url}"><meta property="og:title" content="${escape(seo.title)}"><meta property="og:description" content="${escape(seo.description)}"><meta property="og:url" content="${url}"><meta property="og:image" content="https://trevorcardozo.com${p.cover.src}"><script type="application/ld+json">${seo.jsonLd}</script>`;
+   html=(await readFile(path.join(root,'content/pocketframe.html'),'utf8')).replace('<!-- PROJECT_METADATA -->',metadata);
+  }
+  await writeFile(path.join(dir,'index.html'),html);}
  await writeFile(path.join(dest,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${['/','/about/',...projects.map(p=>'/work/'+p.slug+'/')].map(p=>`<url><loc>https://trevorcardozo.com${escape(p)}</loc></url>`).join('')}</urlset>`);
  await writeFile(path.join(dest,'robots.txt'),'User-agent: *\nAllow: /\nSitemap: https://trevorcardozo.com/sitemap.xml\n');await writeFile(path.join(dest,'.nojekyll'),'');
  const allowed=new Set(['media','fonts','assets','work','about','prototypes','index.html','404.html','favicon.svg','favicon.png','apple-touch-icon.png','icon-credits.txt','CNAME','robots.txt','sitemap.xml','.nojekyll']);for(const name of await readdir(dest))if(!allowed.has(name))fail('artifact','unapproved output '+name);

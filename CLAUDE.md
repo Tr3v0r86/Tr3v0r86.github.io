@@ -1,6 +1,6 @@
 # Portfolio implementation
 
-One static catalog and generator. Keep case narratives to one paragraph, maximum 90 words. Use original cleared media and honest project status. The school/maker-space case is anonymous, including metadata and links. Never include private source paths, source-deck IDs, or internal planning content.
+One static catalog and generator. Each product or idea has one complete page: keep its narrative, media, demos and CAD together at its /work/<slug>/ URL, without an extra design or prototype landing page. Old secondary URLs may redirect to that page. Keep case narratives to one paragraph, maximum 90 words. Use original cleared media and honest project status. The school/maker-space case is anonymous, including metadata and links. Never include private source paths, source-deck IDs, or internal planning content.
 
 Run npm run check and npm run test:e2e before completion. Use gstack browse for interactive browser inspection. Preserve CNAME trevorcardozo.com. Never generate a root turnkeep directory: the separate project owns /turnkeep/ and /turnkeep/setup.html.
 
