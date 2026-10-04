@@ -1,6 +1,6 @@
 import {test,expect} from '@playwright/test';
 test('buttons, picker and keyboard reach every project',async({page})=>{
- await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/');await expect(page.getByRole('button',{name:'Previous project'})).toBeDisabled();
+ await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/?order=catalog');await expect(page.getByRole('button',{name:'Previous project'})).toBeDisabled();
  await page.getByRole('button',{name:'Next project'}).click();await expect(page.locator('[data-carousel-count]')).toHaveText('02 / 17');await expect(page.locator('[data-project="pocketframe"]')).toHaveAttribute('aria-current','true');
  await page.getByLabel('Choose a project').selectOption('16');await expect(page.locator('[data-carousel-count]')).toHaveText('17 / 17');await expect(page.getByRole('button',{name:'Next project'})).toBeDisabled();
  await page.locator('.collection').focus();await page.keyboard.press('Home');await expect(page.locator('[data-carousel-count]')).toHaveText('01 / 17');await page.keyboard.press('ArrowRight');await expect(page.locator('[data-carousel-count]')).toHaveText('02 / 17');await page.locator('[data-project="pocketframe"]').click();await expect(page).toHaveURL(/\/work\/pocketframe\/$/);
