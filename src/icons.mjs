@@ -1,5 +1,5 @@
 import {readFileSync} from 'node:fs';
-const projectIcons={turnkeep:'dices','reggio-projects':'sprout',padlano:'trophy','learning-and-making':'school','elc-portal':'panels-top-left',trevos:'cpu',cal:'panels-top-left',pomodoist:'timer','papercolor-cal':'calendar','project-dashboard':'columns-3','esp32-experiments':'cpu','second-brain-builder':'brain',trips:'map',bodybrain:'activity','custom-media-databank':'images'};
+const projectIcons={pocketframe:'images',turnkeep:'dices','reggio-projects':'sprout',padlano:'trophy','learning-and-making':'school','elc-portal':'panels-top-left',trevos:'cpu',cal:'panels-top-left',pomodoist:'timer','papercolor-cal':'calendar','project-dashboard':'columns-3','esp32-experiments':'cpu','second-brain-builder':'brain',trips:'map',bodybrain:'activity','custom-media-databank':'images'};
 const brands=['linkedin','substack','github'];
 const sources=Object.fromEntries([...new Set([...Object.values(projectIcons),...brands])].map(name=>{
  const source=readFileSync(new URL(`./icon-sources/${name}.svg`,import.meta.url),'utf8');
