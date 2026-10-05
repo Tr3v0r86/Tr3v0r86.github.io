@@ -15,7 +15,7 @@
   prev.addEventListener('click',()=>go(current-1));next.addEventListener('click',()=>go(current+1));
   if(picker)picker.addEventListener('change',()=>go(Number(picker.value)));
   track.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();go(e.key==='Home'?0:e.key==='End'?N-1:current+(e.key==='ArrowRight'?1:-1));slides[current].querySelector('[data-project]').focus({preventScroll:true});}});
-  track.addEventListener('focusin',e=>{const s=e.target.closest('.piece');if(s)go(slides.indexOf(s),true);});
+  track.addEventListener('focusin',e=>{if(!e.target.matches(':focus-visible'))return;const s=e.target.closest('.piece');if(s)go(slides.indexOf(s),true);});
   // Native touch scrolling handles both axes. Mouse dragging is an enhancement only.
   track.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse'||e.button!==0)return;drag={x:e.clientX,left:track.scrollLeft};dragged=false;});
   track.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.x;if(Math.abs(dx)>6){dragged=true;track.classList.add('is-dragging');track.setPointerCapture(e.pointerId);track.scrollLeft=drag.left-dx;}});
