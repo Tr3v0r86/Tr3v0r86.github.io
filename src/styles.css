@@ -177,3 +177,17 @@ a:focus-visible,button:focus-visible,select:focus-visible,summary:focus-visible{
 @media(max-width:520px){.carousel-controls{width:100%;justify-content:space-between}.project-picker{flex:1 1 100%;min-width:0}.project-picker select{flex:1;min-width:0;max-width:100%}.home .piece .artifact-open{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){.home .piece,.home .piece .artifact,.carousel-progress i{transition:none!important}}
 .home .piece-link,.home .piece-link:visited{color:inherit}
+
+/* desktop reading scale for case, about and footer: type and media scale with viewport height too, body capped near 65ch */
+@media(min-width:700px){
+.case-heading{padding-block:clamp(16px,3vh,30px) clamp(24px,4vh,40px)}
+.case-heading h1,.about-story h1{font-size:clamp(40px,min(5vw,8vh),76px)}
+.case-story{font-size:clamp(17px,min(1.25vw,2.3vh),20px);line-height:1.55;max-width:62ch}
+.hero-image img{max-height:min(780px,75vh)}.case--portrait .hero-image img{max-height:min(700px,75vh)}
+.gallery-image img{max-height:min(760px,78vh)}
+.case-pagination strong{font-size:clamp(22px,min(2.6vw,4.4vh),38px)}
+.about-layout{padding-block:clamp(32px,6vh,64px) 80px}
+.about-identity{font-size:clamp(19px,min(1.6vw,2.8vh),26px)}
+.about-portrait img{max-height:min(780px,80vh)}
+.site-footer h2,.home .site-footer h2{font-size:clamp(36px,min(4.4vw,7.5vh),68px)}
+}
