@@ -15,7 +15,7 @@ export function renderMossBody(project,projects,{escape:e,image}){
  <div class="case-topline"><a href="/#work">← Back to collection</a><span>${String(index+1).padStart(2,'0')} / ${String(projects.length).padStart(2,'0')}</span></div>
  <section class="moss-hero" aria-labelledby="moss-title">
   <div class="moss-title-row"><div><p class="moss-kicker">A physical focus companion</p><h1 id="moss-title">Moss</h1></div><p class="moss-tagline">A little life<br>for your focus.</p></div>
-  <figure class="moss-garden">${image(media.hero,{eager:true})}<figcaption>The working web farm, shown with test creatures. AI-assisted native pixel art.</figcaption></figure>
+  <figure class="moss-garden">${image(media.hero,{eager:true})}<figcaption>Farm redesign concept for phone. AI-generated concept art; the live farm is still being built toward it.</figcaption></figure>
   <div class="moss-introduction"><div><p class="moss-status"><span aria-hidden="true"></span>Working prototype · October 2026</p><p class="moss-contribution">Game design, pixel world, firmware &amp; web farm</p><a class="moss-link" href="https://moss.trevorcardozo.com">Visit the invite-only farm <span aria-hidden="true">↗</span></a></div><p class="moss-narrative">${e(project.summary)}</p></div>
   <nav class="moss-page-nav" aria-label="On this page"><a href="#moss-preview">Try the idea</a><a href="#moss-guide">Meet the companions</a><a href="#moss-notebook">Inside the build</a><a href="#moss-next">What’s growing next</a></nav>
  </section>

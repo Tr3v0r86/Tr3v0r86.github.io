@@ -1,20 +1,25 @@
 {
   "provenance": "AI-assisted pixel art generated for Moss and prepared for the game; no stock or third-party sprite assets.",
   "hero": {
-    "src": "/media/moss-garden.webp",
-    "width": 1440,
-    "height": 900,
-    "alt": "The Moss garden rendered with five test creatures, a cottage, pond, bridge and a seating nook",
-    "caption": "In-game garden with test creatures.",
+    "src": "/media/moss-farm-concept-1300-550a487ba3.webp",
+    "width": 1300,
+    "height": 1210,
+    "alt": "Two phone screens of the Moss farm redesign: a cosy pixel garden with a cottage, pond and five woodland companions, and a backgrounds panel previewing a moonlit grove",
+    "caption": "Farm redesign concept, phone views.",
     "variants": [
       {
-        "src": "/media/moss-garden-720.webp",
-        "width": 720,
+        "src": "/media/moss-farm-concept-480-7d6ada58a9.webp",
+        "width": 480,
         "type": "image/webp"
       },
       {
-        "src": "/media/moss-garden.webp",
-        "width": 1440,
+        "src": "/media/moss-farm-concept-960-98dd56ce63.webp",
+        "width": 960,
+        "type": "image/webp"
+      },
+      {
+        "src": "/media/moss-farm-concept-1300-550a487ba3.webp",
+        "width": 1300,
         "type": "image/webp"
       }
     ]
