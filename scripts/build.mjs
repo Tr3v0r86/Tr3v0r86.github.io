@@ -48,7 +48,10 @@ export function validateCatalog(catalog){
   media(p.cover,ctx+'.cover');if(p.collectionCover)media(p.collectionCover,ctx+'.collectionCover');if([p.cover,p.collectionCover].some(m=>m?.poster))fail(ctx+'.cover','video belongs in the gallery');p.gallery.forEach((m,i)=>media(m,ctx+'.gallery['+i+']'));
   if(new Set([p.cover.src,...p.gallery.map(m=>m.src)]).size<2)fail(ctx+'.gallery','must contain a distinct view');
   if(!Array.isArray(p.links))fail(ctx+'.links','array required');p.links.forEach((l,i)=>link(l,ctx+'.links['+i+']'));
-  const allowed=new Set(['slug','title','descriptor','status','role','order','featured','summary','cover','collectionCover','gallery','links','dateLabel']);for(const k of Object.keys(p))if(!allowed.has(k))fail(ctx+'.'+k,'unknown/private field must not enter public catalog');
+  const allowed=new Set(['slug','title','descriptor','status','role','order','featured','summary','cover','collectionCover','collectionFrame','collectionTint','gallery','links','dateLabel']);for(const k of Object.keys(p))if(!allowed.has(k))fail(ctx+'.'+k,'unknown/private field must not enter public catalog');
+  if(p.collectionFrame!==undefined&&!['photo','screen'].includes(p.collectionFrame))fail(ctx+'.collectionFrame','must be photo or screen');
+  if(p.collectionTint!==undefined&&!['sea','persimmon','cobalt','plum','chartreuse','sky'].includes(p.collectionTint))fail(ctx+'.collectionTint','must be sea, persimmon, cobalt, plum, chartreuse or sky');
+  if(p.collectionFrame==='screen'&&p.collectionTint===undefined)fail(ctx+'.collectionTint','required when collectionFrame is screen');
   if(p.slug==='custom-media-databank'&&(p.links.length||/\belc\b|elc\.ac\.th|tauquil|payal/i.test(JSON.stringify(p))))fail(ctx,'databank case must remain anonymous');
   if(p.slug==='learning-and-making'&&(p.dateLabel||p.links.length||/\belc\b|tauquil|payal|bangkok|elc\.ac\.th/i.test(JSON.stringify(p))))fail(ctx,'school case must remain anonymous and undated');
  }

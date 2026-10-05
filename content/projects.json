@@ -31,6 +31,7 @@
       "role": "Case design, CAD and firmware",
       "order": 4,
       "featured": true,
+      "collectionFrame": "photo",
       "summary": "I designed Turnkeep to put dice, a character display and the things I reach for during a tabletop game into one printed case. The physical prototype sits alongside an open design: editable CAD, printable parts, firmware and build instructions that other makers can adapt. The case is taking shape on the workbench; phone import and transfer are still simulated in the public demo.",
       "cover": {
         "src": "/media/turnkeep-prototype-1000-07cfc67341.webp",
@@ -201,6 +202,7 @@
       "role": "Creating the conditions, sharing expertise and co-facilitating",
       "order": 10,
       "featured": true,
+      "collectionFrame": "photo",
       "summary": "Children are makers. Given time, trust and access to expertise, they can design, make and publish work at the intersection of creativity and functionality. For 15 years, I have explored that belief through Reggio-inspired projects with children in Bangkok: drawings become working circuits and moving machines; a Year 6 AI sprint becomes a student newspaper website. My role is to create the conditions, share tools and expertise, and document the process while keeping children’s ideas and authorship at the centre.",
       "cover": {
         "src": "/media/reggio-garden-installation-1000-f434cac676.webp",
@@ -536,6 +538,8 @@
       "role": "Web app design and development",
       "order": 5,
       "featured": true,
+      "collectionFrame": "screen",
+      "collectionTint": "chartreuse",
       "summary": "I built Padlano for the organising that happens between games of padel. From one phone, it creates Americano rotations, records scores and ranks players by average points when someone sits out. Players can use it without an account, keep a session on their device or choose to share sessions and leagues. The notebook and electronics shown here belong to a related scoring-device experiment; the web app is live.",
       "cover": {
         "src": "/media/padlano-court-390-4ddf100364.webp",
@@ -634,6 +638,7 @@
       "role": "Firmware, calendar data path and cradle design",
       "order": 6,
       "featured": true,
+      "collectionFrame": "photo",
       "summary": "PaperColor Calendar puts the day's Google Calendar on our fridge. An M5Stack PaperColor wakes itself at 04:00, fetches two weeks of events, draws today in six flat E Ink colours and powers off completely until the next morning. Three buttons walk through the days. There is no sign-in on the device: a small Apps Script on my own account serves the data. A 3D-printed magnetic cradle holds it on the door. It has run daily since late September; the firmware, tests and cradle files are public.",
       "cover": {
         "src": "/media/papercolor-cal-fridge-1128-f2a8b4e42c.webp",
@@ -749,6 +754,7 @@
       "role": "Learning model, programme and spatial concept",
       "order": 11,
       "featured": true,
+      "collectionFrame": "photo",
       "summary": "This alternative middle school and community maker-space concept brings together my training in alternative education, professional work in school operations and practice as a maker. Young people investigate questions by designing, building and testing things in shared workshops. I am connecting that learning model with the programme, tools, materials and spaces it needs. The woodshop and fablab renders explore those conditions; the diagrams show the inquiry cycle. These are concept visualisations for a school in development.",
       "cover": {
         "src": "/media/school-woodshop-concept-1600-d327961310.webp",
@@ -954,6 +960,8 @@
       "role": "Family experience design and web development",
       "order": 7,
       "featured": true,
+      "collectionFrame": "screen",
+      "collectionTint": "cobalt",
       "summary": "I designed and built a parent portal around a parent's practical questions: what is happening, what can my child join, and where do I go next? It brings school activities, events, calendars and useful information into one family-facing website, with links to the existing registration systems. My work joins school operations with interface design: organising the information and building a consistent route through it. The mobile views are de-identified for this portfolio.",
       "cover": {
         "src": "/media/parent-portal-mobile-390.webp",
@@ -1010,6 +1018,7 @@
       "role": "Firmware, Todoist integration and interaction design",
       "order": 12,
       "featured": true,
+      "collectionFrame": "photo",
       "summary": "Pomodoist keeps one chosen task and a focus timer on my desk. I turn the puck’s dial to choose a Todoist task and session length, then work without reopening my task list on a laptop or phone. It runs as an independent app inside TrevOS, alongside Cal. The public source includes the app and its shared dependencies so other makers can adapt it to their own focus device.",
       "cover": {
         "src": "/media/trevos-focus-360-6d063f99c1.webp",
@@ -1107,6 +1116,8 @@
       "role": "Dashboard design, development and public template",
       "order": 14,
       "featured": true,
+      "collectionFrame": "screen",
+      "collectionTint": "cobalt",
       "summary": "I turned a tool from my school operations work into a single HTML file that other people can adapt and host. The dashboard keeps priorities, completion and weekly progress notes together, with browser storage and an optional shareable view. There is no server to set up for the basic version. The public demo uses sample projects, and the source includes instructions for making it your own.",
       "cover": {
         "src": "/media/dashboard-overview-960-e1df1feec6.webp",
@@ -1192,6 +1203,7 @@
       "role": "Board integration, firmware and interface experiments",
       "order": 15,
       "featured": true,
+      "collectionFrame": "photo",
       "summary": "I am building TrevOS, a shared launcher and software foundation for my ESP32 devices. A timer, a padel scoreboard and a desk display can reuse app logic while each board supplies its own screen and controls. This collection shows the work underneath individual products: board experiments, interface sketches and a saved launcher simulation. The aim is to carry what I learn from one device into the next, instead of starting again with every screen.",
       "cover": {
         "src": "/media/espprojects-1000-90e2849eac.webp",
@@ -1370,6 +1382,8 @@
       "role": "Question flow, system design and development",
       "order": 8,
       "featured": true,
+      "collectionFrame": "screen",
+      "collectionTint": "plum",
       "summary": "I made Second Brain Builder to turn the structure of my own knowledge system into a starting point for someone else. A personalised question flow asks how they work, plan and keep track of things, then produces a plain-text blueprint for an AI-assisted workspace. Each journey is prepared for its recipient. The public page is the entry point to those individual builds; the source shows how the builder works.",
       "cover": {
         "src": "/media/second-brain-builder-app-v3-1440.webp",
@@ -1543,6 +1557,8 @@
       "role": "Personal guide design and web development",
       "order": 16,
       "featured": true,
+      "collectionFrame": "screen",
+      "collectionTint": "sea",
       "summary": "I build small apps for friends and loved ones around something we want to do together. Trips turns a day out into an installable guide with stops, stories, practical details and a shared checklist. The Île d’Orléans guide shown here brings those pieces into a page people can keep on their phone and use offline. It is a small piece of software made for a particular occasion and the people sharing it.",
       "cover": {
         "src": "/media/trips-app-v3-1440.webp",
@@ -1695,6 +1711,8 @@
       "role": "Data system, product thesis and coaching workflow",
       "order": 9,
       "featured": true,
+      "collectionFrame": "screen",
+      "collectionTint": "persimmon",
       "summary": "Bodybrain began as a way to read my training, nutrition and recovery together, instead of opening separate apps and guessing how the pieces connect. I am developing that personal data system into a coaching platform: bringing context to a conversation, agreeing a plan and adjusting it as someone’s life changes. MacroFactor, InBody, Hevy, Google Fit and bloodwork show the kinds of information I want to connect. The screens here are illustrative; the coaching platform is in active development.",
       "cover": {
         "src": "/media/bodybrain-app-v3-1440.webp",
@@ -1861,6 +1879,7 @@
       "role": "Extraction pipeline, media library and editorial workflow",
       "order": 17,
       "featured": true,
+      "collectionFrame": "photo",
       "summary": "I built Custom Media Databank to bring the best photographs, artwork and quotes out of project learning publications at a design-focused, Reggio-inspired school. It turns finished PDFs into a searchable editorial library, with source references, duplicate handling and quality flags, so strong material can be found again for publications and social media. Security and children’s safety shape the workflow: access stays behind institutional authentication, and attribution and reuse need human review. The examples here are fictional and anonymised.",
       "cover": {
         "src": "/media/databank-contact-sheet-v2.svg",
@@ -1951,6 +1970,7 @@
       "role": "Firmware, interaction design and design system",
       "order": 3,
       "featured": true,
+      "collectionFrame": "photo",
       "summary": "I wanted my plan within sight without opening another laptop tab or reaching for my phone. TrevOS puts that idea on a small desk puck: turn the dial, choose a task, and stay with it. Built for the Waveshare ESP32-S3-Knob-Touch-LCD-1.8 hardware family, its shared shell and design system host Pomodoist for Todoist focus sessions and Cal for a calendar glance. Makers can build the whole device or adapt one app.",
       "cover": {
         "src": "/media/trevos-product-concept-1536-d674f8d2f2.webp",
@@ -2143,6 +2163,8 @@
       "role": "Calendar integration and glanceable interface design",
       "order": 13,
       "featured": true,
+      "collectionFrame": "screen",
+      "collectionTint": "sky",
       "summary": "Cal gives my day a small, dedicated place on the desk. A glance at the puck shows calendar context without pulling me into a browser or phone. It runs beside Pomodoist in TrevOS, but the two apps stay independent: the calendar does not change my focus timer. The public module gives other makers a starting point for their own calendar display.",
       "cover": {
         "src": "/media/trevos-cal-360-705b825f7c.webp",
@@ -2229,6 +2251,7 @@
       "role": "Hardware, firmware planning and enclosure design",
       "order": 2,
       "featured": true,
+      "collectionFrame": "photo",
       "summary": "I’m building a small camera that saves photos to its own SD card and works on its own. A StickS3 becomes a wireless shutter and a pocket screen for checking what I’ve captured. The first version will run from a USB power bank; a printed enclosure, physical viewfinder and LiPo power come as the build develops. These are concept renders and draft CAD; firmware and physical fit are next.",
       "cover": {
         "src": "/media/pocketframe-concept-1536.webp",
@@ -2306,6 +2329,7 @@
       "role": "Game design, firmware and web farm",
       "order": 1,
       "featured": true,
+      "collectionFrame": "photo",
       "dateLabel": "2026 — ongoing",
       "summary": "Moss is a small physical focus companion. Finish a 25-minute session and a pixel creature grows a little. I’m building a round-screen device for the desk and an invite-only web farm where raised companions can settle into a collection. The first five woodland species are running in the prototype, with seven elemental Legendaries waiting in the wings. It is a gentler reason to return to focused work: something alive to come back to, with no penalty for stepping away.",
       "cover": {

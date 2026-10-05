@@ -1,0 +1,81 @@
+/* trevorcardozo.com · home v2 · Host Grotesk + filmstrip collection
+   Replaces the home rules in src/styles.css. Case pages keep their own rules
+   but inherit the new font + palette via :root. Fonts are self-hosted. */
+@font-face{font-family:Host;src:url('/fonts/host-grotesk.woff2') format('woff2');font-weight:300 800;font-style:normal;font-display:swap}
+:root{--paper:#F3F1EC;--card:#E6E3DB;--ink:#17181C;--muted:#55575E;--line:#D3D0C7;--accent:#2D46D6;
+--sea:#1C6B66;--persimmon:#E2552E;--cobalt:#2D46D6;--plum:#5E2750;--chartreuse:#D4E157;--sky:#A9D2EC;
+--gutter:clamp(20px,4vw,64px);--font:Host,system-ui,sans-serif}
+body{font:400 18px/1.5 var(--font)}
+h1,h2,h3{font-family:var(--font)}
+a:hover{color:var(--accent)}
+a:focus-visible,button:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+
+/* header */
+.home .site-header{border-bottom:0}
+.home .signature{font:800 24px var(--font);letter-spacing:-.035em}
+.home .site-header nav{font-weight:500}
+
+/* intro: compact so the collection sits in the first viewport */
+.home .intro{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:24px 6%;align-items:end;padding-block:clamp(28px,5vw,64px) clamp(28px,4vw,48px);border-top:1.5px solid var(--ink)}
+.home .intro-kicker{grid-column:1/-1;display:flex;justify-content:space-between;margin:0;font-size:14px;font-weight:500;color:var(--muted)}
+.home .intro h1{font-size:clamp(38px,5.2vw,84px);line-height:.95;letter-spacing:-.045em;font-weight:700;text-wrap:balance}
+.home .intro h1>span{display:block;color:inherit}.home .intro h1>span:nth-child(even){color:var(--muted)}
+.home .intro-bottom{max-width:none}.home .intro-bottom p{font-size:clamp(19px,1.6vw,24px);line-height:1.35;letter-spacing:-.015em;max-width:30ch}
+.home .work-jump{display:none}
+
+/* collection header */
+.home .work-section{margin:0;padding:0}
+.home .section-label{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin:0 auto;max-width:1600px;padding:clamp(20px,3vw,36px) var(--gutter) 20px;border-top:1px solid var(--line)}
+.home .section-label h2{font:800 clamp(34px,4vw,60px)/.95 var(--font);letter-spacing:-.04em}
+.home .section-label h2 small{display:block;font-size:15px;letter-spacing:0;font-weight:500;color:var(--muted);margin-top:10px}
+.carousel-controls{display:none;align-items:flex-end;gap:clamp(16px,2.5vw,32px);margin:0}
+.carousel-ready .carousel-controls{display:flex}
+[data-carousel-count]{font:800 clamp(40px,4.6vw,72px)/.85 var(--font);letter-spacing:-.04em;font-variant-numeric:tabular-nums;white-space:nowrap;min-width:0;text-align:left}
+[data-carousel-count] span{color:var(--muted);font-weight:400}
+.carousel-navigation{display:flex;gap:10px}
+.carousel-navigation button{width:52px;height:52px;border-radius:50%;border:1.5px solid var(--ink);background:transparent;color:var(--ink);font:500 22px var(--font);cursor:pointer;display:grid;place-items:center;transition:background .2s,color .2s}
+.carousel-navigation button:hover:not(:disabled){background:var(--ink);color:var(--paper)}.carousel-navigation button:disabled{opacity:.3;cursor:default}
+.carousel-hint{display:none}
+
+/* filmstrip track: native scroll-snap, cards run off the right edge */
+.home .collection{--slide:clamp(260px,27vw,400px);display:flex;gap:clamp(16px,1.8vw,26px);overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gutter);padding:8px var(--gutter) 28px;margin:0 auto;max-width:1600px;list-style:none;scrollbar-width:none;overscroll-behavior-x:contain;touch-action:pan-x pan-y pinch-zoom;cursor:grab;background:none}
+.home .collection::-webkit-scrollbar{display:none}
+.home .collection::after{content:"";flex:0 0 calc(100% - var(--slide) - var(--gutter) * 2)}
+.home .collection.is-dragging{scroll-snap-type:none;cursor:grabbing;user-select:none}
+.home .piece:nth-child(n){flex:0 0 var(--slide);min-width:0;margin:0;scroll-snap-align:start;transform:none!important;opacity:1;transition:opacity .35s}
+.carousel-ready .piece.is-past{opacity:.3}
+.home .piece-link{display:block;text-decoration:none}.home .piece-link:hover{color:inherit}
+
+/* one holding frame for every cover: photos crop, screens sit whole on a tint */
+.home .piece .artifact{position:relative;aspect-ratio:8/9;height:auto;width:100%;max-width:none;margin:0;padding:0;border-radius:24px;overflow:hidden;background:var(--card);display:block;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.home .piece-link:hover .artifact{transform:translateY(-4px)}
+.home .piece .artifact img{width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;margin:0;border:0;border-radius:0;pointer-events:none}
+.home .piece .artifact--screen{display:flex;align-items:center;justify-content:center;padding:8%;background:color-mix(in oklch,var(--tint,var(--sky)) 50%,var(--paper))}
+.home .piece .artifact--screen img{width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;border-radius:14px;box-shadow:0 18px 40px #17181c38}
+.home .piece .artifact-open{position:absolute;right:14px;top:14px;width:44px;height:44px;border-radius:50%;background:var(--paper);color:var(--ink);display:grid;place-items:center;font-size:18px;opacity:0;transform:scale(.8);transition:opacity .25s,transform .25s}
+.home .piece-link:hover .artifact-open,.home .piece-link:focus-visible .artifact-open{opacity:1;transform:none}
+.home .artifact-note{display:none}
+.tint-sea{--tint:var(--sea)}.tint-persimmon{--tint:var(--persimmon)}.tint-cobalt{--tint:var(--cobalt)}.tint-plum{--tint:var(--plum)}.tint-chartreuse{--tint:var(--chartreuse)}.tint-sky{--tint:var(--sky)}
+
+/* caption */
+.home .piece-caption{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;padding:16px 0 0;margin:0;min-height:0;border:0}
+.home .piece h3{font:700 clamp(22px,1.8vw,27px)/1.1 var(--font);letter-spacing:-.025em;min-height:0;margin:0;display:block}
+.home .piece .index{font-size:13px;font-weight:500;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:5px;background:none}
+.home .piece-caption p{grid-column:1/-1;font-size:16px;line-height:1.35;color:var(--muted);max-width:34ch;margin:0}
+.home .project-status{grid-column:1/-1;justify-self:start;font-size:12px;font-weight:600;letter-spacing:.02em;margin-top:8px;padding:4px 10px;border-radius:99px;border:1px solid var(--line)}
+
+/* jump picker + progress */
+.collection-foot{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;max-width:1600px;margin:0 auto;padding:0 var(--gutter) clamp(48px,7vw,96px)}
+.project-picker{display:flex;gap:12px;align-items:center;font-size:14px;color:var(--muted);max-width:none;flex:none}
+.project-picker select{font:500 16px var(--font);color:var(--ink);background:transparent;border:0;border-bottom:1.5px solid var(--ink);min-height:44px;width:auto}
+.carousel-progress{flex:1;max-width:420px;height:3px;background:var(--line);border-radius:2px;overflow:hidden}.carousel-progress i{display:block;height:100%;width:0;background:var(--ink);transition:width .35s}
+
+/* about + footer */
+.home .site-footer{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px 8%;padding-block:clamp(40px,6vw,80px) 0;border-top:1.5px solid var(--ink)}
+.home .site-footer h2{font:800 clamp(52px,7vw,112px)/.88 var(--font);letter-spacing:-.055em}
+.home .footer-note{font-size:clamp(18px,1.5vw,21px);align-self:end}
+.home .elsewhere{font-weight:500}
+
+@media(max-width:820px){.home .intro,.home .site-footer{grid-template-columns:1fr}.home .collection{--slide:min(78vw,360px)}[data-carousel-count]{font-size:44px}.carousel-navigation button{width:46px;height:46px}.home .section-label{align-items:flex-start}}
+@media(max-width:520px){.carousel-controls{width:100%;justify-content:space-between}.home .piece .artifact-open{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.home .piece,.home .piece .artifact,.carousel-progress i{transition:none!important}}

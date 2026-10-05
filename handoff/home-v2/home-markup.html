@@ -1,0 +1,58 @@
+<!-- Target markup for the home page. The generator should emit exactly this shape.
+     One <li class="piece"> per featured project in catalog order. -->
+<section class="intro">
+  <div class="intro-kicker"><span class="eyebrow">A practice in making</span><span class="location">Bangkok, Thailand</span></div>
+  <h1><span>Trained alternative educator.</span> <span>Professional school operator.</span> <span>Hobbyist maker.</span> <span>Amateur designer.</span></h1>
+  <div class="intro-bottom"><p>I make tools, objects and places that help people learn, play and make things.</p></div>
+</section>
+
+<section class="work-section" id="work" aria-labelledby="work-title">
+  <div class="section-label">
+    <h2 id="work-title">The collection<small>17 pieces · an open notebook</small></h2>
+    <div class="carousel-controls">
+      <div data-carousel-count aria-live="polite">01<span> / 17</span></div>
+      <div class="carousel-navigation">
+        <button type="button" data-prev aria-label="Previous project">←</button>
+        <button type="button" data-next aria-label="Next project">→</button>
+      </div>
+    </div>
+  </div>
+
+  <ol class="collection" tabindex="0" aria-label="Projects, scroll sideways">
+    <!-- photo cover -->
+    <li class="piece piece--moss">
+      <a class="piece-link" href="/work/moss/" data-project>
+        <div class="artifact artifact--photo">
+          <img src="/media/moss-garden-720.webp" srcset="/media/moss-garden-720.webp 720w, /media/moss-garden.webp 1440w" sizes="(max-width:820px) 78vw, 27vw" width="1440" height="900" alt="The Moss garden rendered with five test creatures, a cottage, pond, bridge and a seating nook" draggable="false">
+          <span class="artifact-open" aria-hidden="true">↗</span>
+        </div>
+        <div class="piece-caption">
+          <h3>Moss</h3><span class="index">01</span>
+          <p>A little life for your focus</p>
+          <span class="project-status">Hardware/software prototype</span>
+        </div>
+      </a>
+    </li>
+    <!-- screen cover: whole image on a tint -->
+    <li class="piece piece--padlano">
+      <a class="piece-link" href="/work/padlano/" data-project>
+        <div class="artifact artifact--screen tint-chartreuse">
+          <img src="/media/padlano-court-390-4ddf100364.webp" width="390" height="844" loading="lazy" alt="Padlano court scoring screen with four synthetic players" draggable="false">
+          <span class="artifact-open" aria-hidden="true">↗</span>
+        </div>
+        <div class="piece-caption">
+          <h3>Padlano</h3><span class="index">05</span>
+          <p>Padel rotations, scoring and leagues from one phone</p>
+          <span class="project-status">Live web app</span>
+        </div>
+      </a>
+    </li>
+  </ol>
+
+  <div class="collection-foot">
+    <label class="project-picker">Jump to a project
+      <select><option value="0">01 · Moss</option><!-- … one per piece --></select>
+    </label>
+    <div class="carousel-progress" aria-hidden="true"><i></i></div>
+  </div>
+</section>

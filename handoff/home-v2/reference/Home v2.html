@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trevor Cardozo | Alternative Educator &amp; School Operator, Bangkok</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F3F1EC;--card:#E6E3DB;--ink:#17181C;--muted:#55575E;--line:#D3D0C7;--cobalt:#2D46D6;--persimmon:#E2552E;--chartreuse:#D4E157;--plum:#5E2750;--sea:#1C6B66;--sky:#A9D2EC;--gutter:clamp(20px,4vw,64px);--font:'Host Grotesk',system-ui,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.5 var(--font);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-underline-offset:5px}a:hover{color:var(--cobalt)}
+a:focus-visible,button:focus-visible,select:focus-visible,.track:focus-visible{outline:2px solid var(--cobalt);outline-offset:4px}
+h1,h2,h3,p{margin:0}img{display:block;max-width:100%}
+.wrap{max-width:1600px;margin:0 auto;padding-inline:var(--gutter)}
+.skip{position:absolute;top:-100px;left:24px;background:var(--ink);color:var(--paper);padding:12px;z-index:20}.skip:focus{top:12px}
+/* header */
+.site-header{display:flex;justify-content:space-between;align-items:center;gap:24px;padding-block:22px}
+.signature{font-weight:800;font-size:24px;letter-spacing:-.035em;text-decoration:none;min-height:44px;display:flex;align-items:center}
+.site-header nav{display:flex;gap:clamp(18px,3vw,36px);font-size:16px;font-weight:500}.site-header nav a{text-decoration:none;min-height:44px;display:flex;align-items:center}
+/* intro */
+.intro{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:24px 6%;align-items:end;padding-block:clamp(28px,5vw,64px) clamp(28px,4vw,48px);border-top:1.5px solid var(--ink)}
+.kicker{grid-column:1/-1;display:flex;justify-content:space-between;font-size:14px;font-weight:500;color:var(--muted)}
+.intro h1{font-size:clamp(38px,5.2vw,84px);line-height:.95;letter-spacing:-.045em;font-weight:700;text-wrap:balance}
+.intro h1 span{display:block}.intro h1 span:nth-child(even){color:var(--muted)}
+.intro-side p{font-size:clamp(19px,1.6vw,24px);line-height:1.35;letter-spacing:-.015em;max-width:30ch}
+/* collection header */
+.collection-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;padding-block:clamp(20px,3vw,36px) 20px;border-top:1px solid var(--line)}
+.collection-head h2{font-size:clamp(34px,4vw,60px);line-height:.95;letter-spacing:-.04em;font-weight:800}
+.collection-head h2 small{display:block;font-size:15px;letter-spacing:0;font-weight:500;color:var(--muted);margin-top:10px}
+.controls{display:flex;align-items:flex-end;gap:clamp(16px,2.5vw,32px)}
+.count{font-size:clamp(40px,4.6vw,72px);line-height:.85;font-weight:800;letter-spacing:-.04em;font-variant-numeric:tabular-nums;white-space:nowrap}.count span{color:var(--muted);font-weight:400}
+.arrows{display:flex;gap:10px}
+.arrows button{width:52px;height:52px;border-radius:50%;border:1.5px solid var(--ink);background:transparent;color:var(--ink);font:500 22px var(--font);cursor:pointer;display:grid;place-items:center;transition:background .2s,color .2s}
+.arrows button:hover:not(:disabled){background:var(--ink);color:var(--paper)}.arrows button:disabled{opacity:.3;cursor:default}
+/* filmstrip */
+.track{--card:clamp(260px,27vw,400px);display:flex;gap:clamp(16px,1.8vw,26px);overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gutter);padding:8px var(--gutter) 28px;max-width:1600px;margin:0 auto;scrollbar-width:none;overscroll-behavior-x:contain;cursor:grab}
+.track::-webkit-scrollbar{display:none}.track.is-dragging{scroll-snap-type:none;cursor:grabbing;user-select:none}
+.track::after{content:"";flex:0 0 calc(100% - var(--card) - var(--gutter) * 2)}
+.piece{flex:0 0 var(--card);scroll-snap-align:start;min-width:0;transition:opacity .35s}
+.piece a{text-decoration:none;display:block}.piece a:hover{color:inherit}
+.frame{position:relative;aspect-ratio:8/9;border-radius:24px;overflow:hidden;background:var(--card);transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.piece a:hover .frame{transform:translateY(-4px)}
+.frame img{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.frame.screen{display:flex;align-items:center;justify-content:center;padding:8%}
+.frame.screen img{width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;border-radius:14px;box-shadow:0 18px 40px rgba(23,24,28,.22)}
+.frame .open{position:absolute;right:14px;top:14px;width:44px;height:44px;border-radius:50%;background:var(--paper);color:var(--ink);display:grid;place-items:center;font-size:18px;opacity:0;transform:scale(.8);transition:opacity .25s,transform .25s}
+.piece a:hover .open,.piece a:focus-visible .open{opacity:1;transform:none}
+.cap{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;padding-top:16px}
+.cap h3{font-size:clamp(22px,1.8vw,27px);font-weight:700;letter-spacing:-.025em;line-height:1.1}
+.cap .n{font-size:13px;font-weight:500;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:5px}
+.cap p{grid-column:1/-1;font-size:16px;line-height:1.35;color:var(--muted);max-width:34ch}
+.cap .status{grid-column:1/-1;display:inline-flex;justify-self:start;font-size:12px;font-weight:600;letter-spacing:.02em;margin-top:8px;padding:4px 10px;border-radius:99px;border:1px solid var(--line)}
+.js .piece.is-past{opacity:.3}
+.picker{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding-bottom:clamp(48px,7vw,96px)}
+.picker label{display:flex;gap:12px;align-items:center;font-size:14px;color:var(--muted)}
+.picker select{font:500 16px var(--font);color:var(--ink);background:transparent;border:0;border-bottom:1.5px solid var(--ink);min-height:44px;padding-right:8px}
+.progress{flex:1;max-width:420px;height:3px;background:var(--line);border-radius:2px;overflow:hidden}.progress i{display:block;height:100%;background:var(--ink);transition:width .35s}
+/* about + footer */
+.about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px 8%;padding-block:clamp(40px,6vw,80px);border-top:1.5px solid var(--ink)}
+.about .label{font-size:14px;font-weight:500;color:var(--muted);margin-bottom:18px}
+.about h2{font-size:clamp(52px,7vw,112px);line-height:.88;letter-spacing:-.055em;font-weight:800}
+.about-copy{font-size:clamp(18px,1.5vw,21px);line-height:1.5;max-width:52ch;align-self:end}.about-copy p+p{margin-top:18px}
+.elsewhere{display:flex;flex-wrap:wrap;gap:24px;margin-top:28px;font-size:16px;font-weight:500}.elsewhere a{min-height:44px;display:flex;align-items:center}
+.colophon{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:20px 28px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}.colophon a{text-decoration:none}
+@media(max-width:820px){.intro,.about{grid-template-columns:1fr}.track{--card:min(78vw,360px)}.count{font-size:44px}.arrows button{width:46px;height:46px}.collection-head{align-items:flex-start}}
+@media(max-width:520px){.site-header nav a:nth-child(2){display:none}.controls{width:100%;justify-content:space-between}.frame .open{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style></head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="wrap site-header"><a class="signature" href="https://trevorcardozo.com/">Trevor Cardozo</a><nav><a href="#work">Work ↓</a><a href="https://trevorcardozo.com/about/">About</a><a href="mailto:trevor.cardozo@gmail.com">Say hello ↗</a></nav></header>
+<main id="main">
+<section class="wrap intro" data-screen-label="Intro">
+<div class="kicker"><span>A practice in making</span><span>Bangkok, Thailand</span></div>
+<h1><span>Trained alternative educator.</span><span>Professional school operator.</span><span>Hobbyist maker.</span><span>Amateur designer.</span></h1>
+<div class="intro-side"><p>I make tools, objects and places that help people learn, play and make things.</p></div>
+</section>
+<section id="work" aria-labelledby="work-title" data-screen-label="Collection">
+<div class="wrap collection-head">
+<h2 id="work-title">The collection<small><span data-total>17</span> pieces · an open notebook</small></h2>
+<div class="controls"><div class="count" aria-live="polite"><b data-count>01</b><span> / <span data-total>17</span></span></div><div class="arrows"><button type="button" data-prev aria-label="Previous project">←</button><button type="button" data-next aria-label="Next project">→</button></div></div>
+</div>
+<ol class="track" tabindex="0" aria-label="Projects, scroll sideways" style="list-style:none;margin-block:0"></ol>
+<div class="wrap picker"><label for="jump">Jump to a project <select id="jump"></select></label><div class="progress" aria-hidden="true"><i></i></div></div>
+</section>
+<section class="wrap about" data-screen-label="About">
+<div><div class="label">A little about me</div><h2>Made for real life.</h2></div>
+<div class="about-copy"><p>I'm Trevor Cardozo, based in Bangkok. My training is in alternative education; my professional work is in school operations. Making and design connect the two, from the conditions children need to create to the systems families and school teams use every day. Away from school, I make things for friends, games and everyday life.</p><p>If something here connects with what you're making, <a href="mailto:trevor.cardozo@gmail.com">say hello ↗</a></p>
+<div class="elsewhere"><a href="https://trevorcardozo.com/about/">More about me ↗</a><a href="https://www.linkedin.com/in/tcardozo/">LinkedIn ↗</a><a href="https://trevorcardozo.substack.com/">Substack ↗</a><a href="https://github.com/Tr3v0r86">GitHub ↗</a></div></div>
+</section>
+</main>
+<footer class="wrap colophon"><span>Trevor Cardozo © 2026</span><span>Always something in the making.</span><a href="#main">Back to top ↑</a></footer>
+<script>
+const M='assets/site-media/';
+const P=[
+["moss","Moss","A little life for your focus","Hardware/software prototype","moss-garden.webp","photo","The Moss garden rendered with five test creatures, a cottage, pond, bridge and a seating nook"],
+["pocketframe","Pocketframe","A little camera with a wireless shutter and review screen","In development","pocketframe-concept-960.webp","photo","AI-generated concept of an olive Pocketframe camera beside a StickS3 remote"],
+["trevos","TrevOS","A focus device for the desk, built around a physical dial","Hardware/software prototype","pomodoist-desk-photo-960-27cde3bcc8.webp","photo","TrevOS running Pomodoist on a red dial puck on a desk beside stacked books"],
+["turnkeep","Turnkeep","A printed character case with a digital companion","Open-source prototype","turnkeep-tabletop-concept-960-c5fff88955.webp","photo","AI-generated Turnkeep concept with dice and a character display on a gaming table"],
+["padlano","Padlano","Padel rotations, scoring and leagues from one phone","Live web app","padlano-court-390-4ddf100364.webp","screen","Padlano court scoring screen with four synthetic players"],
+["papercolor-cal","PaperColor Calendar","A once-a-day calendar on a colour E Ink fridge display","Open-source prototype","papercolor-cal-card-960-e6db4a0912.webp","photo","PaperColor Calendar on the fridge door showing the day and its events"],
+["elc-portal","Parent Portal","Activities, events and calendars in one family portal","Live school platform","parent-portal-mobile-390.webp","screen","De-identified parent portal on mobile, showing school updates and upcoming events"],
+["second-brain-builder","Second Brain Builder","Guided questions that become a personal AI workspace","Live web app","second-brain-builder-app-v3-960.webp","screen","Second Brain Builder interface concept: workspace file tree, file preview and blueprint controls"],
+["bodybrain","Bodybrain","Training, nutrition, recovery and bloodwork in context","In development","bodybrain-app-v3-960.webp","screen","Bodybrain interface concept: training ring, weekly chart and check-in note"],
+["reggio-projects","Reggio projects","Children are makers · 15 years of Reggio-inspired projects","Educational practice","reggio-garden-installation-960-d28ba1db35.webp","photo","A micro:bit, tubing and planted glass bowl beside a transparent panel of leaf drawings"],
+["learning-and-making","A school for making","An alternative middle school & community maker space","In development","school-woodshop-concept-960-bcad3a5188.webp","photo","Concept render of a woodshop with shared benches, hand tools, materials storage and protective equipment"],
+["pomodoist","Pomodoist","Todoist tasks and a focus timer, within reach","Hardware/software prototype","trevos-desk-morning-concept-960-1ab4936173.webp","photo","AI-generated desk concept with the blue TrevOS puck beside a notebook"],
+["cal","Cal","The shape of the day, one glance away","Hardware/software prototype","trevos-cal-360-705b825f7c.webp","screen","Cal firmware simulator with a fictional day for making and activities"],
+["project-dashboard","Project dashboard","A project-management tool in a single HTML file","Public source","dashboard-mobile-780.webp","screen","Actual project dashboard mobile demo showing project cards, owners and priorities"],
+["esp32-experiments","ESP32 experiments","TrevOS: a shared foundation for small devices","Ongoing experiments","espprojects-960-989eb5cfbe.webp","photo","Three ESP32 development boards on top of handwritten project plans"],
+["trips","Trips","Custom apps for friends and loved ones","Live web app","trips-app-v3-960.webp","screen","Trips interface concept: island map, selectable stops and visit tracking"],
+["custom-media-databank","Custom Media Databank","Bringing learning documentation back into use","Internal working tool","databank-material-studies-960.webp","photo","Editorial contact-sheet concept with material photographs and a selected item"]
+];
+const tints=['sea','persimmon','cobalt','plum','chartreuse','sky'];
+const pad=n=>String(n).padStart(2,'0'),N=P.length;
+const track=document.querySelector('.track'),jump=document.getElementById('jump');
+track.innerHTML=P.map(([slug,t,d,s,img,k,alt],i)=>`<li class="piece"><a href="https://trevorcardozo.com/work/${slug}/" data-project><div class="frame ${k}"${k==='screen'?` style="background:color-mix(in oklch,var(--${tints[i%6]}) 50%,var(--paper))"`:''}><img src="${M+img}" alt="${alt}" ${i>3?'loading="lazy"':''} draggable="false"><span class="open" aria-hidden="true">↗</span></div><div class="cap"><h3>${t}</h3><span class="n">${pad(i+1)}</span><p>${d}</p><span class="status">${s}</span></div></a></li>`).join('');
+jump.innerHTML=P.map((p,i)=>`<option value="${i}">${pad(i+1)} · ${p[1]}</option>`).join('');
+document.querySelectorAll('[data-total]').forEach(e=>e.textContent=N);
+document.documentElement.classList.add('js');
+(()=>{const slides=[...track.children],prev=document.querySelector('[data-prev]'),next=document.querySelector('[data-next]'),count=document.querySelector('[data-count]'),bar=document.querySelector('.progress i');
+const reduced=matchMedia('(prefers-reduced-motion:reduce)');let current=0,frame=0,drag=null,dragged=false;
+const set=i=>{current=i;slides.forEach((s,k)=>{s.classList.toggle('is-past',k<i);const a=s.querySelector('a');k===i?a.setAttribute('aria-current','true'):a.removeAttribute('aria-current')});count.textContent=pad(i+1);jump.value=i;prev.disabled=i===0;next.disabled=i===N-1;bar.style.width=((i+1)/N*100)+'%'};
+const pos=i=>slides[i].offsetLeft-parseFloat(getComputedStyle(track).scrollPaddingLeft||0);
+const go=(i,instant)=>{i=Math.max(0,Math.min(N-1,i));set(i);track.scrollTo({left:pos(i),behavior:instant||reduced.matches?'instant':'smooth'})};
+const nearest=()=>{const x=track.scrollLeft;let best=0,d=Infinity;slides.forEach((s,k)=>{const dd=Math.abs(pos(k)-x);if(dd<d){d=dd;best=k}});return best};
+track.addEventListener('scroll',()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>{const n=nearest();if(n!==current)set(n)})},{passive:true});
+prev.onclick=()=>go(current-1);next.onclick=()=>go(current+1);jump.onchange=()=>go(+jump.value);
+track.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();go(e.key==='Home'?0:e.key==='End'?N-1:current+(e.key==='ArrowRight'?1:-1))}});
+track.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse'||e.button!==0)return;drag={x:e.clientX,left:track.scrollLeft};dragged=false});
+track.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.x;if(Math.abs(dx)>6){dragged=true;track.classList.add('is-dragging');track.scrollLeft=drag.left-dx}});
+const end=()=>{if(!drag)return;drag=null;track.classList.remove('is-dragging');if(dragged)go(nearest())};
+track.addEventListener('pointerup',end);track.addEventListener('pointerleave',end);
+track.addEventListener('click',e=>{if(dragged){e.preventDefault();dragged=false}},true);
+new ResizeObserver(()=>go(current,true)).observe(track);set(0)})();
+</script>
+</body></html>

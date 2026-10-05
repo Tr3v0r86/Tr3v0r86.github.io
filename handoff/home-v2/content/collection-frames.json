@@ -1,0 +1,20 @@
+{
+  "_note": "Add these two optional fields to each project in content/projects.json. collectionFrame: 'photo' crops to the 8:9 holding frame; 'screen' shows the whole image on a tint. collectionTint is used only for screens. Validate both in the content check.",
+  "moss": {"collectionFrame": "photo"},
+  "pocketframe": {"collectionFrame": "photo"},
+  "trevos": {"collectionFrame": "photo"},
+  "turnkeep": {"collectionFrame": "photo"},
+  "padlano": {"collectionFrame": "screen", "collectionTint": "chartreuse"},
+  "papercolor-cal": {"collectionFrame": "photo"},
+  "elc-portal": {"collectionFrame": "screen", "collectionTint": "cobalt"},
+  "second-brain-builder": {"collectionFrame": "screen", "collectionTint": "plum"},
+  "bodybrain": {"collectionFrame": "screen", "collectionTint": "persimmon"},
+  "reggio-projects": {"collectionFrame": "photo"},
+  "learning-and-making": {"collectionFrame": "photo"},
+  "pomodoist": {"collectionFrame": "photo"},
+  "cal": {"collectionFrame": "screen", "collectionTint": "sky"},
+  "project-dashboard": {"collectionFrame": "screen", "collectionTint": "cobalt"},
+  "esp32-experiments": {"collectionFrame": "photo"},
+  "trips": {"collectionFrame": "screen", "collectionTint": "sea"},
+  "custom-media-databank": {"collectionFrame": "photo"}
+}
