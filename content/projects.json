@@ -2329,24 +2329,30 @@
       "role": "Game design, firmware and web farm",
       "order": 1,
       "featured": true,
-      "collectionFrame": "photo",
+      "collectionFrame": "screen",
+      "collectionTint": "chartreuse",
       "dateLabel": "2026 — ongoing",
       "summary": "Moss is a small physical focus companion. Finish a 25-minute session and a pixel creature grows a little. I’m building a round-screen device for the desk and an invite-only web farm where raised companions can settle into a collection. The first five woodland species are running in the prototype, with seven elemental Legendaries waiting in the wings. It is a gentler reason to return to focused work: something alive to come back to, with no penalty for stepping away.",
       "cover": {
-        "src": "/media/moss-garden.webp",
-        "width": 1440,
-        "height": 900,
-        "alt": "The Moss garden rendered with five test creatures, a cottage, pond, bridge and a seating nook",
-        "caption": "In-game garden with test creatures.",
+        "src": "/media/moss-farm-concept-1300-550a487ba3.webp",
+        "width": 1300,
+        "height": 1210,
+        "alt": "Two phone screens of the Moss farm redesign: a cosy pixel garden with a cottage, pond and five woodland companions, and a backgrounds panel previewing a moonlit grove",
+        "caption": "Farm redesign concept, phone views.",
         "variants": [
           {
-            "src": "/media/moss-garden-720.webp",
-            "width": 720,
+            "src": "/media/moss-farm-concept-480-7d6ada58a9.webp",
+            "width": 480,
             "type": "image/webp"
           },
           {
-            "src": "/media/moss-garden.webp",
-            "width": 1440,
+            "src": "/media/moss-farm-concept-960-98dd56ce63.webp",
+            "width": 960,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/moss-farm-concept-1300-550a487ba3.webp",
+            "width": 1300,
             "type": "image/webp"
           }
         ]
