@@ -159,6 +159,20 @@ a:focus-visible,button:focus-visible,select:focus-visible,summary:focus-visible{
 .home .footer-note{font-size:clamp(18px,1.5vw,21px);align-self:end}
 .home .elsewhere{font-weight:500}
 
+/* desktop first viewport: headline + carousel share one screen; type scales with height too, not width alone */
+@media(min-width:821px){
+.home .intro{padding-block:clamp(16px,3vh,32px)}
+.home .intro h1{font-size:clamp(28px,min(3.2vw,5.4vh),52px);line-height:1.02;letter-spacing:-.04em}
+.home .intro h1>span{display:inline}
+.home .intro-bottom p{font-size:clamp(16px,min(1.3vw,2.4vh),20px)}
+.home .section-label{padding-block:clamp(14px,2.4vh,24px) 14px}
+.home .section-label h2{font-size:clamp(22px,min(2.4vw,4vh),36px)}
+[data-carousel-count]{font-size:clamp(24px,min(2.6vw,4.4vh),40px)}
+.carousel-navigation button{width:44px;height:44px;font-size:18px}
+.home .collection{--slide:clamp(220px,min(24vw,38vh),360px)}
+.home .piece h3{font-size:clamp(18px,1.4vw,22px)}
+}
+
 @media(max-width:820px){.home .intro,.home .site-footer{grid-template-columns:1fr}.home .collection{--slide:min(78vw,360px)}[data-carousel-count]{font-size:44px}.carousel-navigation button{width:46px;height:46px}.home .section-label{align-items:flex-start}}
 @media(max-width:520px){.carousel-controls{width:100%;justify-content:space-between}.project-picker{flex:1 1 100%;min-width:0}.project-picker select{flex:1;min-width:0;max-width:100%}.home .piece .artifact-open{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){.home .piece,.home .piece .artifact,.carousel-progress i{transition:none!important}}
