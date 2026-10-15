@@ -1384,7 +1384,7 @@
       "featured": true,
       "collectionFrame": "screen",
       "collectionTint": "plum",
-      "summary": "I made Second Brain Builder to turn the structure of my own knowledge system into a starting point for someone else. A personalised question flow asks how they work, plan and keep track of things, then produces a plain-text blueprint for an AI-assisted workspace. Each journey is prepared for its recipient. The public page is the entry point to those individual builds; the source shows how the builder works.",
+      "summary": "Second Brain Builder turns the structure of my own knowledge system into a starting point for someone else. Guided questions become a plain-text blueprint for an AI-assisted workspace. Behind it is a personal system that has evolved through five versions: a command catalog, a working journey, a persistent home, shared rules, and now clearer navigation with reliability checks. V5 is the current chapter. The builder and fictional interface concept show how those ideas can become a starting point.",
       "cover": {
         "src": "/media/second-brain-builder-app-v3-1440.webp",
         "width": 1440,
