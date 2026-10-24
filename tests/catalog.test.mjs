@@ -38,3 +38,12 @@ test('gallery video needs a poster, stays out of covers and renders as video',()
  assert.throws(()=>validateCatalog(changed(c=>tk(c).cover={...v})),/gallery/);
  const html=renderCase(tk(catalog),catalog.projects);assert(html.includes(`<video src="${v.src}" poster="${v.poster}"`));assert(!html.includes('autoplay'));});
 test('home cards follow the filmstrip structure with frame and tint classes',()=>{const home=renderHome(catalog.projects),featured=catalog.projects.filter(p=>p.featured);assert.equal(home.match(/<li class="piece /g).length,featured.length);for(const p of featured)if(p.collectionFrame==='screen')assert(home.includes(`artifact artifact--screen tint-${p.collectionTint}`),p.slug);else assert(home.includes('artifact artifact--photo'));assert(home.includes('A working collection.'));assert(!home.includes('<small>'));assert(!home.includes('<details'));assert(!home.includes('/fonts/display.woff2'));assert(home.includes('/fonts/schibsted-grotesk.woff2'));assert.equal((home.match(/loading="eager"/g)||[]).length,4);});
+test('Jarvis case stays public-safe and renders its bespoke section',()=>{
+ const p=catalog.projects.find(p=>p.slug==='jarvis'),priv=/\belc\b|(?<![-\w])\d{9,}(?![\w])|\/srv\/|\btail[0-9a-f]{4,}\b|ts\.net|tailnet|gbrain|\bssh\b|token/i;
+ assert(p);assert.equal(p.status,'In development');assert.deepEqual(p.links,[]);assert.equal(p.featured,true);
+ assert.doesNotMatch(JSON.stringify(p),priv);
+ const html=renderCase(p,validateCatalog(catalog)),section=html.match(/<section class="jarvis-harness"[\s\S]*?<\/section>/)[0];
+ assert(section.includes('Version 2 is in development, October 2026.'));
+ assert(!section.includes('—'));assert(!section.includes('!'));assert.doesNotMatch(section,priv);
+ assert(!renderCase(catalog.projects.find(p=>p.slug==='second-brain-builder'),validateCatalog(catalog)).includes('jarvis-harness'));
+});

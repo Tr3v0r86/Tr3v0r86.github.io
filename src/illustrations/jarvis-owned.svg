@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="1280" viewBox="0 0 960 1280">
+ <rect width="960" height="1280" fill="#232419"/>
+ <g fill="none" stroke="#74785a" stroke-width="2">
+  <path d="M195 420V450M480 420V450M765 420V450M480 500V560"/>
+ </g>
+ <g font-family="Arial,sans-serif" fill="#f1eedf">
+  <text x="70" y="90" font-size="21" letter-spacing="4">JARVIS · WHAT I OWN</text>
+  <text x="70" y="165" font-size="46" letter-spacing="-2">The model is a slot.</text>
+  <text x="70" y="222" font-size="46" letter-spacing="-2">The context is mine.</text>
+  <text x="70" y="282" font-size="18" fill="#cbd6a0">MODEL SLOT · SWAPPABLE</text>
+  <rect x="70" y="300" width="250" height="120" rx="16" fill="#383d2a" stroke="#cbd6a0" stroke-width="2"/>
+  <text x="95" y="342" font-size="16" fill="#cbd6a0">NOW</text>
+  <text x="95" y="388" font-size="26">Today’s model</text>
+  <rect x="355" y="300" width="250" height="120" rx="16" fill="none" stroke="#cbd6a0" stroke-width="2" stroke-dasharray="8 8"/>
+  <text x="380" y="342" font-size="16" fill="#cbd6a0">LATER</text>
+  <text x="380" y="388" font-size="26">Another model</text>
+  <rect x="640" y="300" width="250" height="120" rx="16" fill="none" stroke="#cbd6a0" stroke-width="2" stroke-dasharray="8 8"/>
+  <text x="665" y="342" font-size="16" fill="#cbd6a0">LATER</text>
+  <text x="665" y="388" font-size="26">A local model</text>
+  <rect x="70" y="450" width="820" height="50" rx="12" fill="#383d2a" stroke="#74785a" stroke-width="2"/>
+  <text x="480" y="482" font-size="18" letter-spacing="3" fill="#cbd6a0" text-anchor="middle">ONE PROVIDER INTERFACE</text>
+  <text x="500" y="537" font-size="16" fill="#bec5a3">Same tools and context for any model</text>
+  <rect x="70" y="560" width="820" height="550" rx="16" fill="#e8ebd8"/>
+  <text x="110" y="615" font-size="18" fill="#536637">STAYS WITH ME · RASPBERRY PI AT HOME</text>
+  <text x="110" y="712" font-size="34" fill="#25271d">The brain</text>
+  <text x="110" y="752" font-size="22" fill="#536637">Markdown files under Git</text>
+  <path d="M110 795H850M110 945H850" stroke="#c9cfb0" stroke-width="2"/>
+  <text x="110" y="862" font-size="34" fill="#25271d">The threads</text>
+  <text x="110" y="902" font-size="22" fill="#536637">One page per conversation, resumable</text>
+  <text x="110" y="1012" font-size="34" fill="#25271d">The log</text>
+  <text x="110" y="1052" font-size="22" fill="#536637">One line for every turn</text>
+  <text x="70" y="1190" font-size="21" fill="#bec5a3">Version 2 in development, October 2026.</text>
+ </g>
+</svg>

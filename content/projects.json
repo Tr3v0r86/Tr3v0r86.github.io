@@ -12,6 +12,7 @@
     "papercolor-cal",
     "elc-portal",
     "second-brain-builder",
+    "jarvis",
     "bodybrain",
     "reggio-projects",
     "learning-and-making",
@@ -200,7 +201,7 @@
       "descriptor": "Children are makers · 15 years of Reggio-inspired projects",
       "status": "Educational practice",
       "role": "Creating the conditions, sharing expertise and co-facilitating",
-      "order": 10,
+      "order": 11,
       "featured": true,
       "collectionFrame": "photo",
       "summary": "Children are makers. Given time, trust and access to expertise, they can design, make and publish work at the intersection of creativity and functionality. For 15 years, I have explored that belief through Reggio-inspired projects with children in Bangkok: drawings become working circuits and moving machines; a Year 6 AI sprint becomes a student newspaper website. My role is to create the conditions, share tools and expertise, and document the process while keeping children’s ideas and authorship at the centre.",
@@ -752,7 +753,7 @@
       "descriptor": "An alternative middle school & community maker space",
       "status": "In development",
       "role": "Learning model, programme and spatial concept",
-      "order": 11,
+      "order": 12,
       "featured": true,
       "collectionFrame": "photo",
       "summary": "This alternative middle school and community maker-space concept brings together my training in alternative education, professional work in school operations and practice as a maker. Young people investigate questions by designing, building and testing things in shared workshops. I am connecting that learning model with the programme, tools, materials and spaces it needs. The woodshop and fablab renders explore those conditions; the diagrams show the inquiry cycle. These are concept visualisations for a school in development.",
@@ -1016,7 +1017,7 @@
       "descriptor": "Todoist tasks and a focus timer, within reach",
       "status": "Hardware/software prototype",
       "role": "Firmware, Todoist integration and interaction design",
-      "order": 12,
+      "order": 13,
       "featured": true,
       "collectionFrame": "photo",
       "summary": "Pomodoist keeps one chosen task and a focus timer on my desk. I turn the puck’s dial to choose a Todoist task and session length, then work without reopening my task list on a laptop or phone. It runs as an independent app inside TrevOS, alongside Cal. The public source includes the app and its shared dependencies so other makers can adapt it to their own focus device.",
@@ -1114,7 +1115,7 @@
       "descriptor": "A project-management tool in a single HTML file",
       "status": "Public source",
       "role": "Dashboard design, development and public template",
-      "order": 14,
+      "order": 15,
       "featured": true,
       "collectionFrame": "screen",
       "collectionTint": "cobalt",
@@ -1201,7 +1202,7 @@
       "descriptor": "TrevOS: a shared foundation for small devices",
       "status": "Ongoing experiments",
       "role": "Board integration, firmware and interface experiments",
-      "order": 15,
+      "order": 16,
       "featured": true,
       "collectionFrame": "photo",
       "summary": "I am building TrevOS, a shared launcher and software foundation for my ESP32 devices. A timer, a padel scoreboard and a desk display can reuse app logic while each board supplies its own screen and controls. This collection shows the work underneath individual products: board experiments, interface sketches and a saved launcher simulation. The aim is to carry what I learn from one device into the next, instead of starting again with every screen.",
@@ -1550,12 +1551,92 @@
       }
     },
     {
+      "slug": "jarvis",
+      "title": "Jarvis",
+      "descriptor": "A Telegram assistant for my plain-text second brain",
+      "status": "In development",
+      "role": "Design, system and assistant development",
+      "order": 9,
+      "featured": true,
+      "collectionFrame": "screen",
+      "collectionTint": "sea",
+      "summary": "Jarvis is my personal assistant on Telegram. It runs on a Raspberry Pi at home that also holds my second brain as plain Markdown files under Git. Version 1 has run since August 2026. It keeps everything I send, transcribes voice notes with Whisper and answers questions from the whole brain inside a read-only sandbox. Version 2 makes it two-way. It reads photos, transcribes recordings, keeps each conversation as a page, suggests where a note belongs and files it only when I reply yes.",
+      "cover": {
+        "src": "/media/jarvis-harness-1400-566a20f1e8.webp",
+        "width": 1400,
+        "height": 960,
+        "variants": [
+          {
+            "src": "/media/jarvis-harness-480-8ce5f22885.webp",
+            "width": 480,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/jarvis-harness-960-7fd0bbef00.webp",
+            "width": 960,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/jarvis-harness-1400-566a20f1e8.webp",
+            "width": 1400,
+            "type": "image/webp"
+          }
+        ],
+        "alt": "Diagram of the Jarvis loop from phone to capture, understanding, filing on a yes, the brain and conversation, with a swappable model slot in the middle",
+        "caption": "The loop, from phone to plain files · original diagram",
+        "textEquivalent": "A loop runs from Telegram on my phone to an inbox that keeps every message, then to transcription and image reading, then to filing only when I reply yes, then to the brain of Markdown files in Git on a Raspberry Pi at home, then to conversation threads that return to the phone. A dashed model slot in the middle reads the brain only and can hold any frontier model."
+      },
+      "gallery": [
+        {
+          "src": "/media/jarvis-owned-960-d02d2aa5d2.webp",
+          "width": 960,
+          "height": 1280,
+          "variants": [
+            {
+              "src": "/media/jarvis-owned-480-8d2f140093.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/jarvis-owned-960-d02d2aa5d2.webp",
+              "width": 960,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Diagram of three model slots above one provider interface, with the brain, the conversation pages and the log kept on a home Raspberry Pi",
+          "caption": "The model swaps, the files stay · original diagram",
+          "layout": "detail",
+          "textEquivalent": "Three model slots sit above one provider interface: today's model, another model and a local model. Below the interface, a block marked as staying with me holds the brain as Markdown files under Git, one page per conversation and a log with one line per turn, on a Raspberry Pi at home."
+        }
+      ],
+      "links": [],
+      "collectionCover": {
+        "src": "/media/jarvis-owned-960-d02d2aa5d2.webp",
+        "width": 960,
+        "height": 1280,
+        "variants": [
+          {
+            "src": "/media/jarvis-owned-480-8d2f140093.webp",
+            "width": 480,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/jarvis-owned-960-d02d2aa5d2.webp",
+            "width": 960,
+            "type": "image/webp"
+          }
+        ],
+        "alt": "Diagram of three model slots above one provider interface, with the brain, the conversation pages and the log kept on a home Raspberry Pi",
+        "caption": "The model swaps, the files stay · original diagram"
+      }
+    },
+    {
       "slug": "trips",
       "title": "Trips",
       "descriptor": "Custom apps for friends and loved ones",
       "status": "Live web app",
       "role": "Personal guide design and web development",
-      "order": 16,
+      "order": 17,
       "featured": true,
       "collectionFrame": "screen",
       "collectionTint": "sea",
@@ -1709,7 +1790,7 @@
       "descriptor": "Training, nutrition, recovery and bloodwork in context",
       "status": "In development",
       "role": "Data system, product thesis and coaching workflow",
-      "order": 9,
+      "order": 10,
       "featured": true,
       "collectionFrame": "screen",
       "collectionTint": "persimmon",
@@ -1877,7 +1958,7 @@
       "descriptor": "Bringing learning documentation back into use",
       "status": "Internal working tool",
       "role": "Extraction pipeline, media library and editorial workflow",
-      "order": 17,
+      "order": 18,
       "featured": true,
       "collectionFrame": "photo",
       "summary": "I built Custom Media Databank to bring the best photographs, artwork and quotes out of project learning publications at a design-focused, Reggio-inspired school. It turns finished PDFs into a searchable editorial library, with source references, duplicate handling and quality flags, so strong material can be found again for publications and social media. Security and children’s safety shape the workflow: access stays behind institutional authentication, and attribution and reuse need human review. The examples here are fictional and anonymised.",
@@ -2161,7 +2242,7 @@
       "descriptor": "The shape of the day, one glance away",
       "status": "Hardware/software prototype",
       "role": "Calendar integration and glanceable interface design",
-      "order": 13,
+      "order": 14,
       "featured": true,
       "collectionFrame": "screen",
       "collectionTint": "sky",

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="960" viewBox="0 0 1400 960">
+ <rect width="1400" height="960" fill="#232419"/>
+ <g fill="none" stroke="#74785a" stroke-width="2">
+  <path d="M465 295H500M890 295H925"/>
+  <path d="M1315 295H1355V720H1325"/>
+  <path d="M935 720H900M510 720H475"/>
+  <path d="M85 720H45V295H75"/>
+ </g>
+ <g fill="#74785a">
+  <path d="M510 295l-12-7v14zM935 295l-12-7v14z"/>
+  <path d="M1315 720l12-7v14z"/>
+  <path d="M890 720l12-7v14zM465 720l12-7v14z"/>
+  <path d="M85 295l-12-7v14z"/>
+ </g>
+ <g fill="none" stroke="#cbd6a0" stroke-width="2" stroke-dasharray="8 8">
+  <rect x="510" y="445" width="380" height="130" rx="16"/>
+  <path d="M890 510H1125V375M510 510H275V640M700 575V640"/>
+ </g>
+ <g font-family="Arial,sans-serif" fill="#f1eedf">
+  <text x="85" y="90" font-size="21" letter-spacing="4">JARVIS · PERSONAL ASSISTANT</text>
+  <text x="85" y="160" font-size="50" letter-spacing="-2">A chat on my phone, a brain I own.</text>
+  <rect x="85" y="215" width="380" height="160" rx="16" fill="#383d2a"/>
+  <text x="115" y="263" font-size="18" fill="#cbd6a0">01 / PHONE</text>
+  <text x="115" y="311" font-size="30">Telegram on my phone</text>
+  <text x="115" y="349" font-size="20" fill="#bec5a3">Text, voice notes, photos</text>
+  <rect x="510" y="215" width="380" height="160" rx="16" fill="#383d2a"/>
+  <text x="540" y="263" font-size="18" fill="#cbd6a0">02 / CAPTURE</text>
+  <text x="540" y="311" font-size="30">Every message, kept</text>
+  <text x="540" y="349" font-size="20" fill="#bec5a3">Lands in an inbox first</text>
+  <rect x="935" y="215" width="380" height="160" rx="16" fill="#383d2a"/>
+  <text x="965" y="263" font-size="18" fill="#cbd6a0">03 / UNDERSTAND</text>
+  <text x="965" y="311" font-size="30">Transcribe, read images</text>
+  <text x="965" y="349" font-size="20" fill="#bec5a3">Before anything is filed</text>
+  <text x="540" y="485" font-size="18" fill="#cbd6a0">MODEL SLOT</text>
+  <text x="540" y="527" font-size="30">Any frontier model</text>
+  <text x="540" y="560" font-size="20" fill="#bec5a3">Swaps behind one interface</text>
+  <text x="715" y="613" font-size="16" fill="#bec5a3">reads only</text>
+  <rect x="935" y="640" width="380" height="160" rx="16" fill="#383d2a"/>
+  <text x="965" y="688" font-size="18" fill="#cbd6a0">04 / FILE ON A YES</text>
+  <text x="965" y="736" font-size="30">Proposes a home</text>
+  <text x="965" y="774" font-size="20" fill="#bec5a3">Writes only when I reply yes</text>
+  <rect x="510" y="640" width="380" height="160" rx="16" fill="#e8ebd8"/>
+  <text x="540" y="688" font-size="18" fill="#536637">05 / THE BRAIN · OWNED BY ME</text>
+  <text x="540" y="736" font-size="30" fill="#25271d">Markdown files in Git</text>
+  <text x="540" y="774" font-size="20" fill="#536637">On a Raspberry Pi at home</text>
+  <rect x="85" y="640" width="380" height="160" rx="16" fill="#383d2a"/>
+  <text x="115" y="688" font-size="18" fill="#cbd6a0">06 / CONVERSE</text>
+  <text x="115" y="736" font-size="30">Threads I can resume</text>
+  <text x="115" y="774" font-size="20" fill="#bec5a3">Every turn gets a log line</text>
+  <text x="85" y="890" font-size="21" fill="#bec5a3">The model can change. The files stay with me.</text>
+ </g>
+</svg>

@@ -35,3 +35,14 @@ test('reduced-motion visitors are not autoplayed',async({browser})=>{
  const page=await browser.newPage({reducedMotion:'reduce'});await page.goto('/work/turnkeep/');const v=page.locator('main video');
  await v.scrollIntoViewIfNeeded();await page.waitForTimeout(800);expect(await v.evaluate(v=>v.paused)).toBe(true);await page.close();
 });
+
+test('Jarvis case renders its status, section, media and no links',async({page})=>{
+ const p=projects.find(p=>p.slug==='jarvis');await page.goto('/work/jarvis/');
+ await expect(page.locator('.case-meta')).toContainText('In development');
+ await expect(page.locator('.jarvis-harness h3')).toHaveText(['What it does','What stays with me','Why it’s model-agnostic']);
+ await expect(page.locator('.jarvis-harness')).toContainText('Version 2 is in development, October 2026.');
+ await expect(page.locator('.project-links a')).toHaveCount(0);
+ await expect(page.locator(`main img[src="${p.cover.src}"]`)).toHaveCount(1);
+ expect(await page.locator(`main img[src="${p.gallery[0].src}"]`).count()).toBeGreaterThanOrEqual(1);
+ expect(await page.locator('main').innerText()).not.toMatch(/\belc\b|(?<![-\w])\d{9,}(?![\w])|\/srv\/|\btail[0-9a-f]{4,}\b|tailnet|ts\.net|gbrain/i);
+});

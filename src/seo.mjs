@@ -17,6 +17,7 @@ const descriptions={
  '/work/project-dashboard/':'A single-file project-management dashboard by Trevor Cardozo, with priorities, progress and weekly notes. Explore the public demo and adaptable source.',
  '/work/esp32-experiments/':'TrevOS and ESP32 experiments by Trevor Cardozo: shared software for timers, scoreboards and desk displays, from notebook sketches to hardware prototypes.',
  '/work/second-brain-builder/':'Second Brain Builder by Trevor Cardozo: personalised questions that produce a plain-text blueprint for an AI-assisted knowledge and planning workspace.',
+ '/work/jarvis/':'Jarvis by Trevor Cardozo: a Telegram assistant on a home Raspberry Pi that answers from a plain-text second brain and files notes only on a yes.',
  '/work/trips/':'Trips by Trevor Cardozo: small custom apps for friends and loved ones, with shared day-trip guides, stories, checklists and offline access.'
 };
 export function searchMetadata({title,description,path,cover}){
