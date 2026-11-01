@@ -14,11 +14,19 @@ async function screenOk(page, label) {
   expect(result.violations.filter((v) => ['serious', 'critical'].includes(v.impact)).map((v) => ({id: v.id, nodes: v.nodes.map((n) => n.target)})), label).toEqual([]);
 }
 
+async function openDemo(page) {
+  const details = page.locator('details.demo-controls');
+  if (!(await details.evaluate((el) => el.open))) await details.locator('summary').click();
+}
+
 async function fillAndBook(page, phone) {
   await page.getByRole('checkbox', {name: /Cut & style/}).check();
   await expect(page.locator('#addons')).toBeVisible();
   await page.getByRole('radio', {name: 'Sat 7 Nov'}).check();
   await page.locator('#slotbox input:not(:disabled)').first().check();
+  const chosen = page.locator('#slotbox input:checked + .vis');
+  await expect(chosen).toHaveCSS('background-color', 'rgb(196, 137, 74)');
+  await expect(chosen).toHaveCSS('color', 'rgb(43, 29, 24)');
   await page.getByLabel('Name').fill('Alex');
   await page.getByLabel('WhatsApp number').fill(phone);
   await page.getByLabel('Email').fill('alex@example.com');
@@ -31,6 +39,9 @@ test('book as a known client, as a new client, and confirm as the owner', async 
   await page.goto(CLIENT);
   await expect(page.getByRole('heading', {name: 'Book your chair.'})).toBeVisible();
   await screenOk(page, 'client form');
+  const swatches = await page.locator('.strip span').evaluateAll((els) => els.map((el) => getComputedStyle(el).backgroundColor));
+  expect(swatches).toHaveLength(6);
+  expect(swatches.every((c) => c !== 'rgba(0, 0, 0, 0)')).toBe(true);
 
   await fillAndBook(page, '081 234 5678');
   await expect(page.getByRole('heading', {name: 'Confirmed.'})).toBeVisible();
@@ -38,6 +49,7 @@ test('book as a known client, as a new client, and confirm as the owner', async 
   await page.reload();
   await expect(page.getByRole('heading', {name: 'Confirmed.'})).toBeVisible();
 
+  await openDemo(page);
   await page.getByRole('button', {name: 'Reset demo'}).click();
   await expect(page.getByRole('heading', {name: 'Book your chair.'})).toBeVisible();
   await fillAndBook(page, '089 999 0000');
@@ -61,6 +73,10 @@ test('day states, lookup failure, and the propose, accept and stale links', asyn
   }
   await page.getByRole('radio', {name: 'Mon 9 Nov'}).check();
   await expect(page.locator('#slotbox')).toHaveText('Closed');
+  // Sat 7: a timed transparent "Closed" 17:00-19:00 blocks its own hours; the morning stays open.
+  await page.getByRole('radio', {name: 'Sat 7 Nov'}).check();
+  await expect(page.locator('#slotbox input:not(:disabled)').first()).toBeVisible();
+  expect(await page.locator('#slotbox input:disabled + .vis').allTextContents()).toEqual(expect.arrayContaining(['17:00', '18:00']));
   await page.getByRole('radio', {name: 'Thu 5 Nov'}).check();
   await expect(page.locator('#slotbox input:disabled').first()).toBeVisible();
   await expect(page.locator('#slotbox input[value]:not(:disabled)').first()).toBeVisible();
@@ -68,6 +84,7 @@ test('day states, lookup failure, and the propose, accept and stale links', asyn
   const disabledLabels = await page.locator('#slotbox input:disabled + .vis').allTextContents();
   expect(disabledLabels).toEqual(expect.arrayContaining(['11:00', '14:00']));
 
+  await openDemo(page);
   await page.getByLabel('Simulate lookup failure').check();
   await expect(page.getByText('Times could not load')).toBeVisible();
   await page.getByLabel('Simulate lookup failure').uncheck();
@@ -79,7 +96,8 @@ test('day states, lookup failure, and the propose, accept and stale links', asyn
   await page.getByRole('button', {name: 'Propose another time'}).click();
   await page.locator('#proposals button').first().click();
   const link1 = await page.locator('.linkbox a').getAttribute('href');
-  await expect(page.getByText(/Proposed .*waiting for Alex/)).toBeVisible();
+  await expect(page.getByRole('heading', {level: 1, name: /^Proposed: \w{3} \d+ Nov, \d\d:\d\d$/})).toBeVisible();
+  await expect(page.getByText('Waiting for Alex to accept.')).toBeVisible();
   await page.getByRole('button', {name: 'Propose again'}).click();
   await page.locator('#proposals button').nth(1).click();
   const link2 = await page.locator('.linkbox a').getAttribute('href');
@@ -91,8 +109,12 @@ test('day states, lookup failure, and the propose, accept and stale links', asyn
   await expect(page.getByRole('heading', {name: 'Confirmed.'})).toBeVisible();
 
   // Expiry: a fresh pending hold with the clock moved to its expiry reads expired.
+  await page.goto(CLIENT);
+  await openDemo(page);
   await page.getByRole('button', {name: 'Reset demo'}).click();
+  await expect(page.getByRole('heading', {name: 'Book your chair.'})).toBeVisible();
   await page.goto(OWNER);
+  await openDemo(page);
   await page.getByLabel('Simulate expiry').check();
   await expect(page.getByText(/Expired/)).toBeVisible();
   await expect(page.getByRole('button', {name: 'Confirm'})).toHaveCount(0);

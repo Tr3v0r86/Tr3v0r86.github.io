@@ -1,7 +1,7 @@
 // Booking state machine for the Shades front-end (Stage 0). Pure: no DOM.
 // Lifecycle (ADR-0004): pending | proposed -> confirmed | declined | expired; pending and proposed both hold the slot.
 // Stage 1: validate() becomes the POST's truth check.
-import {busyFromEvents, expiresAt, isFree, dayOf} from './slots.mjs';
+import {busyFromEvents, expiresAt, isFree, dayOf, nextFits} from './slots.mjs';
 
 /**
  * @typedef {{id:string,name:string,minutes:number,price_thb:number,addon_only:boolean,consult_first:boolean,swatch?:string[]}} Service
@@ -125,8 +125,9 @@ function slotFree(b, start, end, busy) {
 }
 
 /**
- * Owner actions: confirm (pending), propose (pending or proposed), decline.
+ * Owner actions: confirm (pending or proposed), propose (pending or proposed), decline.
  * Confirm checks overlap and expiry only, never minimum notice (ADR-0004 §6).
+ * Propose refuses ("taken") a time that is no longer free or whose hold would already be over at creation.
  * @param {Booking} b @param {{type:'confirm'|'propose'|'decline',start?:number}} act
  * @param {{now:number,busy:import('./slots.mjs').CalEvent[],salon:import('./slots.mjs').Salon}} ctx
  * @returns {{booking:Booking,outcome:'ok'|'taken'|'noop'}}
@@ -136,20 +137,30 @@ export function ownerAct(b, act, {now, busy, salon}) {
   if (live !== 'pending' && live !== 'proposed') return {booking: b, outcome: 'noop'};
   if (act.type === 'decline') return {booking: {...b, status: 'declined'}, outcome: 'ok'};
   if (act.type === 'confirm') {
-    if (live !== 'pending') return {booking: b, outcome: 'noop'};
     return slotFree(b, b.start, b.end, busy) ? {booking: {...b, status: 'confirmed', expiresAt: null}, outcome: 'ok'} : {booking: b, outcome: 'taken'};
   }
   if (act.type === 'propose' && act.start !== undefined) {
-    const end = act.start + b.end - b.start;
+    const end = act.start + b.end - b.start, hold = expiresAt(now, act.start, salon);
+    if (hold <= now || !slotFree(b, act.start, end, busy)) return {booking: b, outcome: 'taken'};
     return {
       booking: {
-        ...b, start: act.start, end, status: 'proposed', expiresAt: expiresAt(now, act.start, salon),
+        ...b, start: act.start, end, status: 'proposed', expiresAt: hold,
         acceptToken: b.id + ':' + act.start, // ponytail: Stage 1 = HMAC(secret, eventId+purpose+start)
       },
       outcome: 'ok',
     };
   }
   return {booking: b, outcome: 'noop'};
+}
+
+/**
+ * Next-time suggestions for the owner: later than the current start, in order, and far enough ahead
+ * (confirm_lead + 1 h) that a fresh proposal always has an accept window.
+ * @param {Booking} b @param {{now:number,busy:import('./slots.mjs').CalEvent[],salon:import('./slots.mjs').Salon}} ctx
+ */
+export function proposalOptions(b, {now, busy, salon}) {
+  const earliest = now + (salon.confirm_lead_min + 60) * 60e3;
+  return nextFits({salon, events: busy, totalMinutes: b.totalMinutes, now, known: true, excludeId: b.id}, Math.max(b.start, earliest - 1));
 }
 
 /**

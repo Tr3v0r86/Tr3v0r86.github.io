@@ -4,6 +4,7 @@
   {"id": "demo-alex", "dayOffset": 2, "start": "13:30", "end": "15:30", "summary": "Hold: Alex", "status": "pending"},
   {"dayOffset": 3, "allDay": true, "transparent": true, "summary": "Studio day"},
   {"dayOffset": 4, "start": "14:00", "end": "15:00", "transparent": true, "summary": "Reminder"},
+  {"dayOffset": 4, "start": "17:00", "end": "19:00", "transparent": true, "summary": "Closed"},
   {"dayOffset": 5, "start": "11:00", "end": "12:00", "summary": "Overlap one"},
   {"dayOffset": 5, "start": "11:30", "end": "13:00", "summary": "Overlap two"},
   {"dayOffset": 5, "start": "15:00", "end": "16:00", "summary": "Adjacent one"},

@@ -11,7 +11,8 @@
   --line:rgba(140,129,123,.4);--tint:rgba(196,137,74,.12);
   --shade-espresso:#2B1D18;--shade-chestnut:#6B3F2A;--shade-chocolate:#4A3023;
   --shade-caramel:#C4894A;--shade-honey:#E3B976;--shade-ash:#A89C95;
-  --serif:Fraunces,Georgia,serif;--sans:Manrope,system-ui,sans-serif;
+  --sans:Manrope,system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  --serif:Fraunces,Georgia,system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif; /* baht sign is not in the latin subsets: it falls through to the system sans at the same weight */
   --bar:92px;
 }
 *{box-sizing:border-box}
@@ -34,14 +35,15 @@ svg{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:
 /* Focus: 2px caramel ring everywhere; a 1px ink edge keeps it visible on paper (caramel alone is 2.6:1). */
 :focus-visible{outline:2px solid var(--caramel);outline-offset:2px;box-shadow:0 0 0 1px var(--ink)}
 
-/* Demo banner, on every page */
-.demo{background:var(--ink);color:var(--paper);padding:12px 16px}
-.demo>div{max-width:440px;margin:0 auto}
-.demo p{margin:0 0 4px;font-size:14px}
-.demo .tools{display:flex;flex-wrap:wrap;gap:0 16px;align-items:center}
-.demo label,.demo button{display:inline-flex;align-items:center;gap:8px;min-height:44px;font:inherit;font-size:14px;color:var(--paper);cursor:pointer}
-.demo button{background:none;border:0;padding:0;text-decoration:underline;text-decoration-color:var(--caramel);text-decoration-thickness:2px;text-underline-offset:3px}
-.demo input{width:20px;height:20px;accent-color:var(--caramel)}
+/* Demo banner, on every page: one slim line. Controls live in a collapsed <details> at the page foot. */
+.demo{background:var(--ink);color:var(--paper);padding:8px 16px}
+.demo p{max-width:440px;margin:0 auto;font-size:14px;line-height:1.4}
+.demo-controls{margin-top:40px;border-top:1px solid var(--line);font-size:14px}
+.demo-controls summary{display:flex;align-items:center;min-height:44px;color:var(--ash-ink);cursor:pointer}
+.demo-controls .tools{display:flex;flex-wrap:wrap;gap:0 16px;align-items:center;padding-bottom:8px}
+.demo-controls label{display:inline-flex;align-items:center;gap:8px;min-height:44px;cursor:pointer}
+.demo-controls input{width:20px;height:20px;accent-color:var(--ink)}
+.demo-controls .btn{min-height:44px;font-size:14px}
 
 /* The shade strip: the one memorable thing */
 .strip{display:grid;grid-template-columns:repeat(6,1fr);height:56px;margin:16px 0 0;border-radius:4px;overflow:hidden}
@@ -54,9 +56,7 @@ svg{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:
 @keyframes settle{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @keyframes open{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:no-preference){
-  .strip span{animation:settle 350ms ease-out both}
-  .strip span:nth-child(2){animation-delay:40ms}.strip span:nth-child(3){animation-delay:80ms}
-  .strip span:nth-child(4){animation-delay:120ms}.strip span:nth-child(5){animation-delay:160ms}.strip span:nth-child(6){animation-delay:200ms}
+  .strip{animation:settle 350ms ease-out both}
   #addons:not([hidden]){animation:open 250ms ease-out}
 }
 
@@ -84,13 +84,13 @@ fieldset>legend{margin-bottom:8px}
 .day{min-height:60px}
 .day .vis{flex-direction:column;border:1px solid var(--line);border-radius:6px;font-size:13px;line-height:1.2;gap:2px}
 .day strong{font-family:var(--serif);font-size:20px;font-weight:500}
-.day input:checked+.vis{background:var(--caramel);border-color:var(--ink)}
+.day input:checked+.vis{background:var(--caramel);color:var(--ink);border-color:var(--caramel)}
 .day input:focus-visible+.vis,.slot input:focus-visible+.vis{outline:2px solid var(--caramel);outline-offset:2px;box-shadow:0 0 0 1px var(--ink)}
 .day input:focus-visible,.slot input:focus-visible{outline:0;box-shadow:none}
 .slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}
 .slot{min-height:48px}
 .slot .vis{border:1px solid var(--line);border-radius:6px;font-family:var(--serif);font-size:20px}
-.slot input:checked+.vis{background:var(--caramel);border-color:var(--ink)}
+.slot input:checked+.vis{background:var(--caramel);color:var(--ink);border-color:var(--caramel)}
 .slot input:disabled{cursor:not-allowed}
 .slot input:disabled+.vis{color:var(--ash-ink);text-decoration:line-through;text-decoration-color:var(--ash);border-style:dashed}
 .state-line{font-family:var(--serif);font-size:20px;margin:8px 0 0}

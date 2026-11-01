@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {initialState, reduce, addonsVisible, totals, validate, normalisePhone, effectiveStatus, ownerAct, accept} from '../public/shadesofbkk/state.mjs';
+import {initialState, reduce, addonsVisible, totals, validate, normalisePhone, effectiveStatus, ownerAct, accept, proposalOptions} from '../public/shadesofbkk/state.mjs';
 
 const menu = JSON.parse(await readFile(new URL('../public/shadesofbkk/menu.placeholder.json', import.meta.url), 'utf8'));
 const clients = JSON.parse(await readFile(new URL('../public/shadesofbkk/clients.placeholder.json', import.meta.url), 'utf8'));
@@ -103,4 +103,47 @@ test('owner actions', () => {
   const declined = ownerAct(pending, {type: 'decline'}, ctx).booking;
   assert.equal(declined.status, 'declined');
   for (const type of ['confirm', 'decline']) assert.equal(ownerAct(declined, {type}, ctx).booking, declined);
+});
+
+test('confirm works 3 h before start for an unknown client (notice is not re-applied) and on a proposed booking', () => {
+  const start = T('2026-11-07', '14:00');
+  const b = submit(filled({slot: start}), {now: start - 4 * 3600e3, okStarts: [start]}).booking;
+  assert.equal(b.status, 'pending');
+  const r = ownerAct(b, {type: 'confirm'}, {now: start - 3 * 3600e3, busy: [], salon});
+  assert.equal(r.outcome, 'ok');
+  assert.equal(r.booking.status, 'confirmed');
+
+  const ctx = {now: NOW, busy: [], salon};
+  const proposed = ownerAct(submit(filled()).booking, {type: 'propose', start: T('2026-11-07', '12:00')}, ctx).booking;
+  assert.equal(ownerAct(proposed, {type: 'confirm'}, ctx).booking.status, 'confirmed');
+  assert.equal(ownerAct(proposed, {type: 'confirm'}, {...ctx, now: proposed.expiresAt + 1}).booking, proposed);
+});
+
+test('propose is refused for a taken time, an already-expired hold, and a finished booking', () => {
+  const pending = submit(filled()).booking, ctx = {now: NOW, busy: [], salon};
+  const clash = [{id: 'x', summary: 'Mia', start: {dateTime: '2026-11-07T12:00:00+07:00'}, end: {dateTime: '2026-11-07T13:00:00+07:00'}}];
+  const r1 = ownerAct(pending, {type: 'propose', start: T('2026-11-07', '12:30')}, {...ctx, busy: clash});
+  assert.equal(r1.outcome, 'taken');
+  assert.equal(r1.booking, pending);
+  // start 1 h away: hold = start - 2 h is already in the past
+  const r2 = ownerAct(pending, {type: 'propose', start: NOW + 3600e3}, ctx);
+  assert.equal(r2.outcome, 'taken');
+  assert.equal(r2.booking, pending);
+  for (const type of ['confirm', 'decline', 'propose']) {
+    for (const status of ['confirmed', 'declined', 'expired']) {
+      const done = {...pending, status};
+      assert.equal(ownerAct(done, {type, start: T('2026-11-07', '12:00')}, ctx).booking, done, type + ' on ' + status);
+    }
+  }
+});
+
+test('next-time suggestions come in order, later than the booking, and at least confirm lead + 1 h ahead', () => {
+  const pending = submit(filled({slot: T('2026-11-03', '11:30')}), {okStarts: [T('2026-11-03', '11:30')]}).booking;
+  const ctx = {now: NOW, busy: [], salon};
+  const opts = proposalOptions(pending, ctx);
+  assert.equal(opts.length, 3);
+  const earliest = NOW + 3 * 3600e3;
+  assert(opts.every((o, i) => o.start >= earliest && o.start > pending.start && (i === 0 || o.start > opts[i - 1].start)));
+  assert.equal(opts[0].start, earliest, '12:00 is the first start three hours after 09:00');
+  for (const o of opts) assert.equal(ownerAct(pending, {type: 'propose', start: o.start}, ctx).outcome, 'ok');
 });

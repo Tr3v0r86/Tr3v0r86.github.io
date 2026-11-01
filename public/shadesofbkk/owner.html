@@ -9,25 +9,26 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="demo" role="note">
-  <div>
-    <p>Demo. Prices and times are placeholders until the menu is final.</p>
-    <div class="tools">
-      <label><input type="checkbox" id="expire"> Simulate expiry</label>
-      <button type="button" id="reset">Reset demo</button>
-    </div>
-  </div>
-</div>
+<div class="demo" role="note"><p>Demo. Prices and times are placeholders until the menu is final.</p></div>
 
 <main class="plain" id="main">
   <div class="strip" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
   <p class="brand">Shades of BKK</p>
   <div id="view"><p class="muted">Loading.</p></div>
+
+  <details class="demo-controls">
+    <summary>Demo controls</summary>
+    <div class="tools">
+      <label><input type="checkbox" id="expire"> Simulate expiry</label>
+      <button type="button" class="btn quiet" id="reset">Reset demo</button>
+    </div>
+  </details>
 </main>
 
 <script type="module">
-import {resolveBusy, parseNow, nextFits, dayOf, dayLabel, timeLabel, durationLabel, thbLabel} from './slots.mjs';
-import {ownerAct, effectiveStatus} from './state.mjs';
+import {dayOf, dayLabel, timeLabel, durationLabel, thbLabel} from './slots.mjs';
+import {parseNow, resolveBusy} from './demo.mjs';
+import {ownerAct, effectiveStatus, proposalOptions} from './state.mjs';
 
 const KEY = 'shadesofbkk.booking';
 const $ = (id) => document.getElementById(id);
@@ -51,7 +52,7 @@ if (!menu) {
   throw new Error('data failed to load');
 }
 const {salon, services} = menu;
-const busy = resolveBusy(busyRows, dayOf(now));
+const busy = resolveBusy(busyRows, dayOf(now), salon);
 
 // The booking: whatever the client page stored, else the sample hold that also sits in the placeholder calendar.
 function sample() {
@@ -97,16 +98,16 @@ function render() {
   let body = '';
   if (st === 'pending' || st === 'proposed') {
     if (st === 'proposed') {
-      body += `<p class="status hold">${icons.clock} Proposed ${when(b)}, waiting for ${esc(b.name)}</p>`
+      body += `<p class="status hold">${icons.clock} Waiting for ${esc(b.name)} to accept.</p>`
         + `<p>Send ${esc(b.name)} this link to accept:</p><p class="linkbox"><a href="${esc(acceptLink(b))}">${esc(acceptLink(b))}</a></p>`;
     }
     if (taken) body += '<p class="err">Slot now taken</p>';
     body += '<div class="actions">'
-      + (st === 'pending' ? '<button type="button" class="btn" id="confirm">Confirm</button>' : '')
+      + '<button type="button" class="btn" id="confirm">Confirm</button>'
       + `<button type="button" class="btn quiet" id="propose">${st === 'proposed' ? 'Propose again' : 'Propose another time'}</button>`
       + '<button type="button" class="btn quiet" id="decline">Decline</button></div>';
     if (proposing) {
-      const fits = nextFits({salon, events: busy, totalMinutes: b.totalMinutes, now: clock(), known: true, excludeId: b.id}, b.start);
+      const fits = proposalOptions(b, {now: clock(), busy, salon});
       body += '<div class="proposals" id="proposals">' + (fits.length
         ? fits.map((s) => `<button type="button" class="btn quiet" data-start="${s.start}">${dayLabel(dayOf(s.start))}, ${s.label}</button>`).join('')
         : '<p class="muted">No free time in the next two weeks.</p>') + '</div>';
@@ -115,8 +116,8 @@ function render() {
     const line = {confirmed: `<p class="status ok">${icons.check} Confirmed.</p>`, declined: '<p class="status err">Declined.</p>', expired: '<p class="status err">Expired. The slot is free again.</p>'}[st];
     body += line;
   }
-  $('view').innerHTML = `<h1>${esc(b.name)} wants ${when(b)}.</h1>` + rows + body
-    + '<p class="note">Events titled "Closed" and all-day events block the whole day in the calendar. Timed events marked free do not.</p>';
+  $('view').innerHTML = `<h1>${st === 'proposed' ? 'Proposed: ' + when(b) : esc(b.name) + ' wants ' + when(b) + '.'}</h1>` + rows + body
+    + '<p class="note">An all-day event closes the whole day. A timed event titled "Closed" blocks its own hours. Other timed events marked free do not block.</p>';
   $('confirm')?.addEventListener('click', () => act({type: 'confirm'}));
   $('decline')?.addEventListener('click', () => act({type: 'decline'}));
   $('propose')?.addEventListener('click', () => { proposing = true; taken = false; render(); $('proposals')?.querySelector('button')?.focus(); });

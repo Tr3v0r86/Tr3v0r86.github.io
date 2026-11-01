@@ -9,15 +9,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="demo" role="note">
-  <div>
-    <p>Demo. Prices and times are placeholders until the menu is final.</p>
-    <div class="tools">
-      <label><input type="checkbox" id="fail"> Simulate lookup failure</label>
-      <button type="button" id="reset">Reset demo</button>
-    </div>
-  </div>
-</div>
+<div class="demo" role="note"><p>Demo. Prices and times are placeholders until the menu is final.</p></div>
 
 <main id="main">
   <div class="strip" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
@@ -73,6 +65,14 @@
   </div>
 
   <div id="done" hidden></div>
+
+  <details class="demo-controls">
+    <summary>Demo controls</summary>
+    <div class="tools">
+      <label><input type="checkbox" id="fail"> Simulate lookup failure</label>
+      <button type="button" class="btn quiet" id="reset">Reset demo</button>
+    </div>
+  </details>
 </main>
 
 <div class="bar" id="bar">
@@ -83,7 +83,8 @@
 </div>
 
 <script type="module">
-import {computeSlots, isClosedDay, resolveBusy, parseNow, nextDays, dayOf, dayLabel, timeLabel, durationLabel, thbLabel} from './slots.mjs';
+import {computeSlots, isClosedDay, nextDays, dayOf, dayLabel, timeLabel, durationLabel, thbLabel} from './slots.mjs';
+import {parseNow, resolveBusy} from './demo.mjs';
 import {initialState, reduce, addonsVisible, totals, normalisePhone, effectiveStatus, accept} from './state.mjs';
 
 const KEY = 'shadesofbkk.booking';
@@ -95,7 +96,6 @@ const store = {
   clear() { try { sessionStorage.removeItem(KEY); } catch { /* nothing to clear */ } },
 };
 const icons = {
-  check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>',
   clock: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>',
   calendar: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2v4M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>',
 };
@@ -211,13 +211,13 @@ function renderDone() {
   }
   const held = b.expiresAt === null ? '' : timeLabel(b.expiresAt) + (dayOf(b.expiresAt) !== dayOf(now) ? ' on ' + dayLabel(dayOf(b.expiresAt)) : '');
   const view = {
-    confirmed: ['ok', icons.check, 'Confirmed.', 'A calendar invite with the studio address is on its way to your email.', true],
-    pending: ['hold', icons.clock, 'Request received.', `The slot is held until ${held}; ${esc(owner)} will confirm on WhatsApp.`, true],
-    proposed: ['hold', icons.clock, esc(owner) + ' proposed another time.', `${proposed(b)}. ${esc(owner)} will send you a link on WhatsApp to accept it.`, false],
+    confirmed: ['ok', '', 'Confirmed.', 'A calendar invite with the studio address is on its way to your email.', true],
+    pending: ['hold', '', 'Request received.', `The slot is held until ${held}; ${esc(owner)} will confirm on WhatsApp.`, true],
+    proposed: ['hold', '', esc(owner) + ' proposed another time.', `${proposed(b)}. ${esc(owner)} will send you a link on WhatsApp to accept it.`, false],
     declined: ['err', '', 'Not confirmed.', `${esc(owner)} could not fit this booking. Message ${esc(owner)} on WhatsApp to find another time.`, false],
     expired: ['err', '', 'Request expired.', `The hold ended before ${esc(owner)} could confirm.`, false],
   }[st];
-  el.innerHTML = `<h1 class="status ${view[0]}">${view[1]}${view[2]}</h1><p>${view[3]}</p>` + (view[4] ? details(b) : '');
+  el.innerHTML = `<h1 class="status ${view[0]}">${view[2]}</h1><p>${view[3]}</p>` + (view[4] ? details(b) : '');
 }
 
 async function onAccept() {
@@ -241,7 +241,7 @@ async function loadBusy() {
   render();
   try {
     if ($('fail').checked) throw new Error('Simulated lookup failure');
-    busy = resolveBusy(await getJSON('busy.placeholder.json'), dayOf(now));
+    busy = resolveBusy(await getJSON('busy.placeholder.json'), dayOf(now), salon);
   } catch { busyFail = true; }
   busyVersion++;
   render();

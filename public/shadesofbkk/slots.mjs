@@ -1,5 +1,11 @@
 // Slot engine for the Shades booking front-end (Stage 0). Pure: no DOM, no imports.
 // Instants are epoch ms; days are Bangkok "YYYY-MM-DD" strings.
+//
+// BUSY RULE (final, ADR-0004 §8 as amended in review):
+//   - an all-day event, whatever its title or transparency, closes the whole day;
+//   - a timed event titled "Closed" blocks its own hours, whatever its transparency (it does not close the day);
+//   - any other timed event blocks unless transparent;
+//   - bookings follow status: pending, proposed and confirmed block; declined, expired and cancelled do not.
 // Stage 1 copies this file verbatim into apps/booking (see stage0-task-plan.md).
 
 const BKK = 7 * 3600e3; // ponytail: no DST in Asia/Bangkok, so a fixed offset; labels come from tables, not Intl, so ICU versions cannot change them
@@ -50,16 +56,6 @@ export function durationLabel(minutes) {
 /** "฿1,200". @param {number} thb */
 export const thbLabel = (thb) => '฿' + thb.toLocaleString('en-US');
 
-/**
- * Demo clock. `?now=<ISO>` pins it (spec and manual review); otherwise the real time.
- * @param {string} search location.search @param {number} real Date.now()
- */
-export function parseNow(search, real) {
-  const raw = new URLSearchParams(search).get('now');
-  const t = raw ? Date.parse(raw) : NaN;
-  return Number.isNaN(t) ? real : t;
-}
-
 /** The next `n` Bangkok days starting with today. @param {number} now @param {number} n */
 export function nextDays(now, n) {
   const first = dayOf(now);
@@ -68,40 +64,21 @@ export function nextDays(now, n) {
 
 const isClosedTitle = (e) => (e.summary || '').trim().toLowerCase() === 'closed';
 
-/**
- * Placeholder busy rows -> Google events. Rows carry day offsets from "today" so the demo never goes stale.
- * Row: {id?, dayOffset, allDay?, start?, end?, summary, transparent?, status?}
- * @param {Array<Record<string,any>>} rows @param {string} today Bangkok day
- * @returns {CalEvent[]}
- */
-export function resolveBusy(rows, today) {
-  return rows.map((r, i) => {
-    const day = addDays(today, r.dayOffset);
-    /** @type {CalEvent} */
-    const e = {
-      id: r.id || 'placeholder-' + i,
-      summary: r.summary,
-      transparency: r.transparent ? 'transparent' : 'opaque',
-      start: r.allDay ? {date: day} : {dateTime: `${day}T${r.start}:00+07:00`},
-      end: r.allDay ? {date: addDays(day, 1)} : {dateTime: `${day}T${r.end}:00+07:00`},
-    };
-    if (r.status) e.extendedProperties = {private: {status: r.status}};
-    return e;
-  });
-}
+/** Statuses that no longer hold a slot. Events without a status (plain calendar entries) are live. @param {CalEvent} e */
+const inactive = (e) => e.status === 'cancelled' || ['declined', 'expired'].includes(e.extendedProperties?.private?.status || '');
+
+/** True when the salon has a rostered window on `day`'s weekday. @param {string} day @param {Salon} salon */
+export const isRostered = (day, salon) => windowsFor(day, salon).length > 0;
 
 /**
- * True when the whole day is shut: an all-day event, an event titled "Closed", or no rostered window.
+ * True when the whole day is shut: no rostered window, or an all-day event (any title).
  * @param {{day:string,salon:Salon,events:CalEvent[]}} a
  */
 export function isClosedDay({day, salon, events}) {
-  if (!windowsFor(day, salon).length) return true;
+  if (!isRostered(day, salon)) return true;
   const d0 = dayStart(day), d1 = d0 + 864e5;
-  return events.some((e) => {
-    if (e.status === 'cancelled') return false;
-    if (e.start.date) return Date.parse(e.start.date + 'T00:00:00Z') - BKK < d1 && Date.parse(e.end.date + 'T00:00:00Z') - BKK > d0;
-    return isClosedTitle(e) && Date.parse(e.start.dateTime) < d1 && Date.parse(e.end.dateTime) > d0;
-  });
+  return events.some((e) => !inactive(e) && !!e.start.date
+    && Date.parse(e.start.date + 'T00:00:00Z') - BKK < d1 && Date.parse(e.end.date + 'T00:00:00Z') - BKK > d0);
 }
 
 /** @param {string} day @param {Salon} salon @returns {Interval[]} */
@@ -111,14 +88,13 @@ function windowsFor(day, salon) {
 }
 
 /**
- * Busy intervals on `day`, clipped to it. All-day and "Closed" events are busy whatever their
- * transparency; other timed events are busy unless transparent.
+ * Busy intervals on `day`, clipped to it, per the busy rule at the top of this file.
  * @param {CalEvent[]} events @param {string} day @returns {Interval[]}
  */
 export function busyFromEvents(events, day) {
   const d0 = dayStart(day), d1 = d0 + 864e5, out = [];
   for (const e of events) {
-    if (e.status === 'cancelled') continue;
+    if (inactive(e)) continue;
     let s, t;
     if (e.start.date) {
       s = Date.parse(e.start.date + 'T00:00:00Z') - BKK;
