@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
 <title>Book your chair</title>
-<link rel="preload" href="fonts/fraunces-opsz.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/young-serif.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,32 +14,53 @@
 <main id="main">
   <div class="strip" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
   <p class="brand">Shades of BKK</p>
+  <noscript><p>Booking needs JavaScript. <a class="link44" href="https://wa.me/66800000000">Message James on WhatsApp</a> instead.</p></noscript>
 
   <div id="flow">
     <h1>Book your chair.</h1>
-    <p class="sub">Pick what you need, pick a time. The slot is the real length of the job.</p>
+    <div class="intro">
+      <svg class="avatar" viewBox="0 0 64 64" role="img" aria-label="Photo of James (placeholder)"><circle cx="32" cy="24" r="11" fill="#6B3F2A"/><path d="M10 64c2-14 12-22 22-22s20 8 22 22z" fill="#6B3F2A"/></svg>
+      <div><p id="intro-text"></p><a class="link44" id="ig" href="#">@shadesofbkk</a></div>
+    </div>
 
     <form id="form" novalidate>
+      <fieldset id="numset">
+        <legend>Your number</legend>
+        <div class="field">
+          <label for="phone">WhatsApp number</label>
+          <p class="hint" id="hint-phone">James confirms here. Starts with 0? We'll read it as a Thai number.</p>
+          <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+66 81 234 5678" aria-describedby="hint-phone recog err-phone">
+          <p class="recog" id="recog" aria-live="polite"></p>
+          <p class="err" id="err-phone"></p>
+        </div>
+      </fieldset>
+
       <fieldset id="svcs">
         <legend>What do you need?</legend>
         <div id="mains"></div>
+        <p class="hint" id="svc-note"></p>
         <p class="err" id="err-services" role="alert"></p>
       </fieldset>
 
-      <fieldset id="addons" hidden>
-        <legend>Add to it</legend>
-        <div id="addon-rows"></div>
+      <fieldset id="addons">
+        <legend>Add-ons for this visit</legend>
+        <p class="hint" id="addon-hint">Add-ons appear after you pick a service.</p>
+        <div id="addon-rows" hidden></div>
       </fieldset>
 
       <fieldset>
         <legend>Day</legend>
-        <p class="muted" id="range"></p>
+        <p class="hint" id="range"></p>
+        <div id="nextavail"></div>
         <div class="days" id="days"></div>
       </fieldset>
 
       <fieldset id="slotset">
         <legend>Time</legend>
+        <p class="hint">The slot is the real length of the job.</p>
+        <p class="hint" id="earlier">Enter your number to see earlier times.</p>
         <div id="slotbox" aria-live="polite"></div>
+        <p class="ready" id="ready" aria-live="polite"></p>
         <p class="err" id="err-slot" role="alert"></p>
       </fieldset>
 
@@ -51,20 +72,22 @@
           <p class="err" id="err-name"></p>
         </div>
         <div class="field">
-          <label for="phone">WhatsApp number</label>
-          <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" aria-describedby="err-phone">
-          <p class="err" id="err-phone"></p>
+          <label for="email" id="lbl-email">Email</label>
+          <p class="hint" id="hint-email">Your calendar invite and the address go here. Nothing else.</p>
+          <input id="email" name="email" type="email" autocomplete="email" aria-describedby="hint-email err-email">
+          <p class="err" id="err-email"></p>
         </div>
         <div class="field">
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" autocomplete="email" aria-describedby="err-email">
-          <p class="err" id="err-email"></p>
+          <label for="note">Anything James should know? (optional)</label>
+          <textarea id="note" name="note" maxlength="300" rows="3"></textarea>
         </div>
       </fieldset>
     </form>
   </div>
 
   <div id="done" hidden></div>
+
+  <footer class="foot"><a href="https://wa.me/66800000000">Prefer to chat? Message James on WhatsApp.</a></footer>
 
   <details class="demo-controls">
     <summary>Demo controls</summary>
@@ -78,14 +101,15 @@
 <div class="bar" id="bar">
   <div>
     <div class="total" aria-live="polite"><strong id="thb"></strong><span id="dur"></span></div>
-    <button class="btn cta" id="book" type="submit" form="form">Book</button>
+    <button class="btn cta" id="book" type="submit" form="form">Request</button>
+    <p class="policy">Changes and cancellations: message James; he'll sort it.</p>
   </div>
 </div>
 
 <script type="module">
-import {computeSlots, isClosedDay, nextDays, dayOf, dayLabel, timeLabel, durationLabel, thbLabel} from './slots.mjs';
-import {parseNow, resolveBusy} from './demo.mjs';
-import {initialState, reduce, addonsVisible, totals, normalisePhone, effectiveStatus, accept} from './state.mjs';
+import {computeSlots, isClosedDay, nextDays, nextFits, tooLong, dayStart, addDays, dayOf, dayLabel, timeLabel, durationLabel, thbLabel} from './slots.mjs';
+import {parseNow, resolveBusy, WA_URL, AREA, ADDRESS, LOOK_FOR, MAP_URL, IG_URL} from './demo.mjs';
+import {initialState, reduce, addonsVisible, totals, normalisePhone, effectiveStatus, current, accept, findClient, prefill} from './state.mjs';
 
 const KEY = 'shadesofbkk.booking';
 const $ = (id) => document.getElementById(id);
@@ -99,55 +123,87 @@ const icons = {
   clock: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>',
   calendar: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2v4M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>',
 };
+// The WhatsApp door: one helper, on every end state (D1).
+const wa = (text) => `<a class="wa" href="${esc(WA_URL)}">${text}</a>`;
 
 const params = new URLSearchParams(location.search);
 const now = parseNow(location.search, Date.now());
+// "Book another" and expiry links keep the demo clock and the personal link, nothing else.
+const keep = (extra = {}) => {
+  const q = new URLSearchParams();
+  for (const k of ['now', 'c']) if (params.has(k)) q.set(k, /** @type {string} */ (params.get(k)));
+  for (const [k, v] of Object.entries(extra)) q.set(k, v);
+  return location.pathname + (q.toString() ? '?' + q : '');
+};
 const getJSON = (url) => fetch(url).then((r) => { if (!r.ok) throw new Error(url); return r.json(); });
 let menu, clients;
 try {
   [menu, clients] = await Promise.all([getJSON('menu.placeholder.json'), getJSON('clients.placeholder.json')]);
 } catch {
-  $('flow').innerHTML = '<h1>Times could not load</h1><p>Reload the page to try again.</p>';
+  $('flow').innerHTML = '<h1>The menu could not load</h1><p>Reload the page to try again.</p>' + wa('Or message James on WhatsApp');
   $('bar').hidden = true;
   throw new Error('menu failed to load');
 }
 const {salon, services} = menu;
 const owner = salon.owner_name;
 
-let state = {...initialState, booking: store.get()};
-let busy = null, busyFail = false, busyVersion = 0, known = false, shownKey = '';
+// A stored booking shows only on its own ?booking=<id> link (or an ?accept link); a plain visit is an empty form.
+const stored = store.get();
+const showStored = stored && (params.has('accept') || params.get('booking') === stored.id);
+let state = {...initialState, booking: showStored ? stored : null};
+let busy = null, busyFail = false, busyVersion = 0, known = false, recog = '', shownKey = '', shownNext = '';
+
+// Personal link ?c=<token>: details filled in, client known.
+const link = prefill(clients, params.get('c'));
+if (link) {
+  state = {...state, ...link};
+  for (const f of ['name', 'phone', 'email']) $(f).value = link[f];
+  known = true;
+  recog = `Hi ${link.name}. Your details are filled in.`;
+}
 
 const dispatch = (action) => { state = reduce(state, {menu, ...action}); render(); };
-const isKnown = () => clients.includes(normalisePhone(state.phone) || '');
 const minutesNow = () => totals(state.selected, menu).minutes;
 
-// ---- static pieces: services and days ----
-const row = (s) => `<label class="svc${s.consult_first ? ' off' : ''}"><input type="checkbox" value="${esc(s.id)}"${s.consult_first ? ' disabled' : ''}>`
-  + `<span class="sw" aria-hidden="true">${(s.swatch || []).map((c) => `<i style="background:var(--shade-${esc(c)})"></i>`).join('')}</span>`
-  + `<span><span class="nm">${esc(s.name)}</span><span class="meta">${s.consult_first ? 'Message ' + esc(owner) + ' first' : durationLabel(s.minutes)}</span></span>`
-  + `<span class="price">${s.consult_first ? '' : thbLabel(s.price_thb)}</span></label>`;
+// ---- intro, services and days ----
+const from = Math.min(...services.filter((s) => !s.addon_only && !s.consult_first).map((s) => s.price_thb));
+$('intro-text').textContent = `Hi, I'm ${owner}. One chair in ${AREA}, Bangkok. Colour, cut and blow-dry, from ${thbLabel(from)}.`;
+$('ig').href = IG_URL;
+$('svc-note').textContent = `Includes wash and finish. Prices are for shoulder-length hair. Long or thick hair may add time and cost; ${owner} tells you before the day.`;
+
+const swatch = (s) => `<span class="sw" aria-hidden="true">${(s.swatch || []).map((c) => `<i style="background:var(--shade-${esc(c)})"></i>`).join('')}</span>`;
+const row = (s) => (s.consult_first
+  ? `<a class="svc off" href="${esc(WA_URL)}">${swatch(s)}<span><span class="nm">${esc(s.name)}</span><span class="meta">${esc(s.desc)}. Message ${esc(owner)} first.</span></span><span class="price">WhatsApp</span></a>`
+  : `<label class="svc"><input type="checkbox" value="${esc(s.id)}">${swatch(s)}<span><span class="nm">${esc(s.name)}</span><span class="meta">${esc(s.desc)}</span></span>`
+    + `<span class="price">${thbLabel(s.price_thb)}<small>${durationLabel(s.minutes)}</small></span></label>`);
 $('mains').innerHTML = services.filter((s) => !s.addon_only).map(row).join('');
 $('addon-rows').innerHTML = services.filter((s) => s.addon_only).map(row).join('');
 
 const days = nextDays(now, salon.max_days_ahead);
 const [d0, dN] = [days[0], days[days.length - 1]];
 $('range').textContent = `${dayLabel(d0)} to ${dayLabel(dN)}`;
-$('days').innerHTML = days.map((d) => `<label class="pick day"><input type="radio" name="day" value="${d}" aria-label="${dayLabel(d)}"><span class="vis" aria-hidden="true">${dayLabel(d).split(' ')[0]}<strong>${Number(d.slice(8))}</strong></span></label>`).join('');
+$('days').innerHTML = days.map((d) => `<label class="pick day" data-day="${d}"><input type="radio" name="day" value="${d}" aria-label="${dayLabel(d)}"><span class="vis" aria-hidden="true">${dayLabel(d).split(' ')[0]}<strong>${Number(d.slice(8))}</strong></span></label>`).join('');
 
 // ---- slots ----
 const slotArgs = () => ({day: state.day, salon, events: busy, totalMinutes: minutesNow(), now, known});
+const inPicker = (slot) => (slot && days.includes(dayOf(slot.start)) ? slot : null);
+const stepBtn = (label, s) => `<button type="button" class="btn quiet nextbtn" data-day="${dayOf(s.start)}" data-start="${s.start}">${label}: ${dayLabel(dayOf(s.start))}, ${s.label}</button>`;
 function slotsView() {
-  if (busyFail) return '<p class="state-line">Times could not load</p><button type="button" class="btn quiet" id="retry">Retry</button>';
-  if (!busy) return '<p class="muted">Loading times.</p>';
+  if (busyFail) return `<p class="state-line">Times could not load</p><button type="button" class="btn quiet" id="retry">Retry</button><p class="wa-line">${wa('Or message ' + esc(owner) + ' on WhatsApp')}</p>`;
+  if (!busy) return '<p class="loading">Loading times.</p>';
   if (!minutesNow()) return '<p class="muted">Choose a service to see times.</p>';
+  if (tooLong(minutesNow(), salon)) return `<p class="state-line">Too long for one day.</p>${wa('Message ' + esc(owner))}`;
   if (!state.day) return '<p class="muted">Choose a day to see times.</p>';
   if (isClosedDay({day: state.day, salon, events: busy})) return '<p class="state-line">Closed</p>';
   const slots = computeSlots(slotArgs());
-  if (!slots.some((s) => s.ok)) return '<p class="state-line">Fully booked</p><p class="muted">Try another day.</p>';
+  if (!slots.some((s) => s.ok)) {
+    const next = inPicker(nextFits({salon, events: busy, totalMinutes: minutesNow(), now, known}, dayStart(addDays(state.day, 1)) - 1, 1)[0]);
+    return '<p class="state-line">Fully booked</p>' + (next ? stepBtn('Next free', next) : '<p class="muted">Try another day.</p>');
+  }
   return '<div class="slots">' + slots.map((s) => `<label class="pick slot"><input type="radio" name="slot" value="${s.start}"${s.ok ? '' : ' disabled'}${s.start === state.slot ? ' checked' : ''}><span class="vis">${s.label}</span></label>`).join('') + '</div>';
 }
 function okStarts() {
-  if (!busy || !state.day || !minutesNow() || isClosedDay({day: state.day, salon, events: busy})) return [];
+  if (!busy || !state.day || !minutesNow() || tooLong(minutesNow(), salon) || isClosedDay({day: state.day, salon, events: busy})) return [];
   return computeSlots(slotArgs()).filter((s) => s.ok).map((s) => s.start);
 }
 
@@ -157,13 +213,21 @@ function render() {
   $('flow').hidden = !showForm;
   $('bar').hidden = !showForm;
   $('done').hidden = showForm;
+  $('main').classList.toggle('plain', !showForm);
   if (showForm) renderForm(); else renderDone();
 }
 
 function renderForm() {
-  document.querySelectorAll('#svcs input, #addons input').forEach((cb) => { cb.checked = state.selected.includes(cb.value); });
-  $('addons').hidden = !addonsVisible(state.selected, menu);
+  document.querySelectorAll('#svcs input, #addon-rows input').forEach((cb) => { cb.checked = state.selected.includes(cb.value); });
+  const addons = addonsVisible(state.selected, menu);
+  $('addon-rows').hidden = !addons;
+  $('addon-hint').hidden = addons;
   document.querySelectorAll('#days input').forEach((r) => { r.checked = r.value === state.day; });
+  document.querySelectorAll('#days .day').forEach((el) => {
+    const closed = !!busy && isClosedDay({day: el.dataset.day, salon, events: busy});
+    el.classList.toggle('closed', closed);
+    el.querySelector('input').setAttribute('aria-label', dayLabel(el.dataset.day) + (closed ? ', closed' : ''));
+  });
 
   const key = [busyVersion, busyFail, state.day, minutesNow(), known].join('|');
   if (key !== shownKey) {
@@ -173,11 +237,22 @@ function renderForm() {
     }
     $('slotbox').innerHTML = slotsView();
   }
+  document.querySelectorAll('#slotbox input[name=slot]').forEach((r) => { r.checked = Number(r.value) === state.slot; }); // a jump button sets the slot without a click on the radio
+
+  // "Next available" above the days: the first time that fits, one tap.
+  const next = busy && minutesNow() && !tooLong(minutesNow(), salon) ? inPicker(nextFits({salon, events: busy, totalMinutes: minutesNow(), now, known}, now, 1)[0]) : null;
+  const nextHtml = next ? stepBtn('Next available', next) : '';
+  if (nextHtml !== shownNext) { shownNext = nextHtml; $('nextavail').innerHTML = nextHtml; }
+
+  $('earlier').hidden = !!normalisePhone(state.phone);
+  $('recog').textContent = recog;
+  $('lbl-email').textContent = known ? 'Email (optional)' : 'Email';
+  $('ready').textContent = state.slot !== null && minutesNow() ? `Ready by ${timeLabel(state.slot + minutesNow() * 60e3)}` : '';
 
   const t = totals(state.selected, menu);
   $('thb').textContent = thbLabel(t.thb);
   $('dur').textContent = t.minutes ? durationLabel(t.minutes) : 'No service yet';
-  $('book').textContent = state.slot === null ? 'Book' : 'Book ' + timeLabel(state.slot);
+  $('book').textContent = (known ? 'Book' : 'Request') + (state.slot === null ? '' : ' ' + timeLabel(state.slot));
 
   for (const f of ['services', 'slot', 'name', 'phone', 'email']) {
     $('err-' + f).textContent = state.errors[f] || '';
@@ -187,52 +262,63 @@ function renderForm() {
 
 function details(b) {
   const day = dayLabel(dayOf(b.start));
-  return `<dl class="detail">`
-    + `<div><dt>${icons.calendar} When</dt><dd>${day}, ${timeLabel(b.start)} to ${timeLabel(b.start + b.totalMinutes * 60e3)}</dd></div>`
-    + b.services.map((s) => `<div><dt>${esc(s.name)}</dt><dd>${thbLabel(s.price_thb)}</dd></div>`).join('')
-    + `<div><dt>${icons.clock} Total</dt><dd>${thbLabel(b.totalThb)}, ${durationLabel(b.totalMinutes)}</dd></div></dl>`;
+  const row = (k, v) => `<div><dt>${k}</dt><dd>${v}</dd></div>`;
+  return '<dl class="detail">'
+    + row(icons.calendar + ' When', `${day}, ${timeLabel(b.start)} to ${timeLabel(b.start + b.totalMinutes * 60e3)}`)
+    + b.services.map((s) => row(esc(s.name), b.consult ? '' : thbLabel(s.price_thb))).join('')
+    + row(icons.clock + ' Total', `${thbLabel(b.totalThb)}, ${durationLabel(b.totalMinutes)}`)
+    + row('Name', esc(b.name)) + row('WhatsApp', esc(b.phone)) + (b.email ? row('Email', esc(b.email)) : '')
+    + (b.note ? row('Your note', esc(b.note)) : '') + (b.ownerNote ? row('Note from ' + esc(owner), esc(b.ownerNote)) : '')
+    + '</dl>' + (b.nextTime ? `<p class="next">Next time: ${esc(b.nextTime)}</p>` : '');
 }
+const where = () => `<div class="where"><p>${esc(ADDRESS)}</p><p>What to look for: ${esc(LOOK_FOR)}</p><a class="link44" href="${esc(MAP_URL)}">Open in Maps</a></div>`;
+const moveLine = () => `<p class="muted">Need to move it?</p>${wa('Message ' + esc(owner) + ' on WhatsApp')}`;
+const another = (label = 'Book another') => `<div class="actions"><a class="btn quiet full" href="${esc(keep())}">${label}</a></div>`;
+const stale = () => `<h1>This proposal is no longer current.</h1><p>${wa('Message ' + esc(owner) + ' on WhatsApp')} if you still want to book.</p>`;
 
 function renderDone() {
-  const b = state.booking, el = $('done'), main = $('main');
-  main.classList.add('plain');
-  const proposed = (x) => `${dayLabel(dayOf(x.start))}, ${timeLabel(x.start)}`;
-  if (!b) { el.innerHTML = '<h1>This proposal is no longer current.</h1><p>Message ' + esc(owner) + ' on WhatsApp if you still want to book.</p>'; return; }
-  const st = effectiveStatus(b, now);
+  const raw = state.booking, el = $('done');
+  if (!raw) { el.innerHTML = stale(); return; }
   if (params.has('accept')) {
-    if (st === 'proposed' && params.get('accept') === b.acceptToken) {
-      el.innerHTML = `<h1>${esc(owner)} proposed ${proposed(b)}</h1><p>Accept it to confirm your booking.</p>`
-        + details(b) + '<p class="err" id="accept-err"></p><div class="actions"><button type="button" class="btn" id="accept">Accept</button></div>';
+    const st = effectiveStatus(raw, now);
+    if (st === 'proposed' && params.get('accept') === raw.acceptToken) {
+      const when = (x) => `${dayLabel(dayOf(x.start))}, ${timeLabel(x.start)}`;
+      el.innerHTML = `<h1>${esc(owner)} proposed ${when(raw)}</h1><p>Accept it to confirm your booking.</p>`
+        + (raw.prior ? `<p class="muted">Your current time, ${when(raw.prior)}, stays held until you accept or this offer lapses.</p>` : '')
+        + details(raw) + '<p class="err" id="accept-err"></p><div class="actions"><button type="button" class="btn full" id="accept">Accept</button></div>'
+        + `<p class="muted">Not right?</p>${wa('Message ' + esc(owner) + ' on WhatsApp')}`;
       $('accept').addEventListener('click', onAccept);
     } else {
-      el.innerHTML = '<h1>This proposal is no longer current.</h1><p>Message ' + esc(owner) + ' on WhatsApp if you still want to book.</p>';
+      el.innerHTML = stale();
     }
     return;
   }
+  const b = current(raw, now), st = effectiveStatus(b, now);
   const held = b.expiresAt === null ? '' : timeLabel(b.expiresAt) + (dayOf(b.expiresAt) !== dayOf(now) ? ' on ' + dayLabel(dayOf(b.expiresAt)) : '');
+  const isKnown = !!findClient(clients, {phone: b.phone});
   const view = {
-    confirmed: ['ok', '', 'Confirmed.', 'A calendar invite with the studio address is on its way to your email.', true],
-    pending: ['hold', '', 'Request received.', `The slot is held until ${held}; ${esc(owner)} will confirm on WhatsApp.`, true],
-    proposed: ['hold', '', esc(owner) + ' proposed another time.', `${proposed(b)}. ${esc(owner)} will send you a link on WhatsApp to accept it.`, false],
-    declined: ['err', '', 'Not confirmed.', `${esc(owner)} could not fit this booking. Message ${esc(owner)} on WhatsApp to find another time.`, false],
-    expired: ['err', '', 'Request expired.', `The hold ended before ${esc(owner)} could confirm.`, false],
+    confirmed: `<h1 class="status ok">Confirmed.</h1><p>${isKnown ? esc(owner) + ' knows you, so no waiting.' : esc(owner) + ' has confirmed your booking.'}</p>`
+      + `<p>${b.email ? 'A calendar invite with the studio address is on its way to your email.' : esc(owner) + ' will send the details on WhatsApp.'}</p>` + details(b) + where() + moveLine() + another(),
+    pending: `<h1 class="status hold">Request received.</h1><p>${esc(owner)} confirms new clients on WhatsApp, usually within the hour.</p>`
+      + `<p>We don't recognise this number yet, so he'll confirm on WhatsApp and by email. The slot is held until ${held}.</p>` + details(b) + where() + moveLine() + another(),
+    proposed: `<h1 class="status hold">${esc(owner)} proposed another time.</h1><p>${esc(owner)} will send you a link on WhatsApp to accept it.</p>` + details(b) + wa('Message ' + esc(owner) + ' on WhatsApp'),
+    declined: `<h1 class="status err">Not confirmed.</h1><p>${esc(owner)} could not fit this booking.</p>` + wa('Message ' + esc(owner) + ' on WhatsApp to find another time') + another('Book for another time'),
+    expired: `<h1 class="status err">Request expired.</h1><p>The hold ended before ${esc(owner)} could confirm.</p>` + wa('Message ' + esc(owner) + ' on WhatsApp') + another('Book for another time'),
+    done: `<h1 class="status ok">Thanks for coming in.</h1>` + (b.nextTime ? `<p class="next">Next time: ${esc(b.nextTime)}</p>` : '') + wa('Message ' + esc(owner) + ' on WhatsApp') + another(),
   }[st];
-  el.innerHTML = `<h1 class="status ${view[0]}">${view[2]}</h1><p>${view[3]}</p>` + (view[4] ? details(b) : '');
+  el.innerHTML = view;
 }
 
 async function onAccept() {
   if (!busy) await loadBusy();
   if (!busy) { $('accept-err').textContent = 'Times could not load. Try again.'; return; }
   const r = accept(state.booking, params.get('accept'), {now, busy});
-  if (r.outcome === 'ok') {
-    store.set(r.booking);
-    params.delete('accept');
-    history.replaceState(null, '', location.pathname + (params.toString() ? '?' + params : ''));
-    state = {...state, booking: r.booking};
-  } else {
-    $('done').innerHTML = '<h1>This proposal is no longer current.</h1><p>Message ' + esc(owner) + ' on WhatsApp if you still want to book.</p>';
-    return;
-  }
+  if (r.outcome !== 'ok') { $('done').innerHTML = stale(); return; }
+  store.set(r.booking);
+  params.delete('accept');
+  params.set('booking', r.booking.id);
+  history.replaceState(null, '', keep({booking: r.booking.id}));
+  state = {...state, booking: r.booking};
   render();
 }
 
@@ -252,27 +338,43 @@ $('mains').addEventListener('change', (e) => dispatch({type: 'toggle', id: e.tar
 $('addon-rows').addEventListener('change', (e) => dispatch({type: 'toggle', id: e.target.value}));
 $('days').addEventListener('change', (e) => dispatch({type: 'day', day: e.target.value}));
 $('slotbox').addEventListener('change', (e) => { if (e.target.name === 'slot') dispatch({type: 'slot', start: Number(e.target.value)}); });
-$('slotbox').addEventListener('click', (e) => { if (e.target.id === 'retry') loadBusy(); });
-for (const f of ['name', 'phone', 'email']) $(f).addEventListener('input', (e) => dispatch({type: 'field', name: f, value: e.target.value}));
-// Notice depends on whether the typed number is a known client: re-evaluate when the field is committed, not per keystroke.
-$('phone').addEventListener('change', () => { known = isKnown(); render(); });
+const jump = (e) => {
+  const b = e.target.closest('button[data-start]');
+  if (b) { dispatch({type: 'day', day: b.dataset.day}); dispatch({type: 'slot', start: Number(b.dataset.start)}); }
+};
+$('slotbox').addEventListener('click', (e) => { if (e.target.id === 'retry') loadBusy(); else jump(e); });
+$('nextavail').addEventListener('click', jump);
+for (const f of ['name', 'phone', 'email', 'note']) $(f).addEventListener('input', (e) => dispatch({type: 'field', name: f, value: e.target.value}));
+// Recognition: a number on the list is picked up as soon as it matches; "new to us" waits until the field is committed.
+function recheck() {
+  const c = findClient(clients, {phone: state.phone});
+  known = !!c;
+  recog = !normalisePhone(state.phone) ? '' : c ? `Welcome back. This number is on ${owner}'s list, so your booking confirms straight away.` : `New to us? ${owner} confirms new clients on WhatsApp, usually within the hour.`;
+  render();
+}
+$('phone').addEventListener('input', () => { if (!known && findClient(clients, {phone: state.phone})) recheck(); });
+$('phone').addEventListener('change', recheck);
 $('fail').addEventListener('change', (e) => { if (e.target.checked) loadBusy(); });
-$('reset').addEventListener('click', () => {
-  store.clear();
-  const q = new URLSearchParams();
-  if (params.has('now')) q.set('now', params.get('now'));
-  location.assign(location.pathname + (q.toString() ? '?' + q : ''));
-});
+$('reset').addEventListener('click', () => { store.clear(); location.assign(keep()); });
 $('form').addEventListener('submit', (e) => {
   e.preventDefault();
-  known = isKnown();
+  known = !!findClient(clients, {phone: state.phone});
   dispatch({type: 'submit', okStarts: okStarts(), clients, now, salon, id: 'b' + now.toString(36) + Math.random().toString(36).slice(2, 8)});
-  if (state.booking) { $('book').disabled = true; store.set(state.booking); render(); return; }
-  const first = ['services', 'slot', 'name', 'phone', 'email'].find((f) => state.errors[f]);
+  if (state.booking) {
+    $('book').disabled = true;
+    store.set(state.booking);
+    params.set('booking', state.booking.id);
+    history.replaceState(null, '', keep({booking: state.booking.id}));
+    render();
+    window.scrollTo(0, 0);
+    return;
+  }
+  const first = ['phone', 'services', 'slot', 'name', 'email'].find((f) => state.errors[f]);
   const target = {
+    phone: () => $('phone'),
     services: () => document.querySelector('#svcs input:not(:disabled)'),
     slot: () => document.querySelector('#slotbox input:not(:disabled)') || document.querySelector('#days input'),
-    name: () => $('name'), phone: () => $('phone'), email: () => $('email'),
+    name: () => $('name'), email: () => $('email'),
   }[first];
   if (target) target()?.focus();
 });

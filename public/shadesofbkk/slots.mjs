@@ -20,7 +20,7 @@ const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
  *   extendedProperties?:{private?:Record<string,string>}}} CalEvent  Google events.list item shape
  * @typedef {{open_hours:Record<string,string[][]>,slot_step_min:number,buffer_min:number,
  *   min_notice_min:number,min_notice_unknown_min:number,max_days_ahead:number,
- *   hold_hours:number,confirm_lead_min:number,owner_name:string}} Salon
+ *   hold_hours:number,confirm_lead_min:number,owner_name:string,return_weeks?:Record<string,number>}} Salon
  * @typedef {{start:number,label:string,ok:boolean}} Slot
  * @typedef {{day:string,salon:Salon,events:CalEvent[],totalMinutes:number,now:number,known:boolean,excludeId?:string}} SlotArgs
  */
@@ -53,8 +53,8 @@ export function durationLabel(minutes) {
   return m ? `${h} h ${m}` : `${h} h`;
 }
 
-/** "฿1,200". @param {number} thb */
-export const thbLabel = (thb) => '฿' + thb.toLocaleString('en-US');
+/** "฿1,200", or "Quoted on the day" for a consultation. @param {number|null} thb */
+export const thbLabel = (thb) => (thb === null ? 'Quoted on the day' : '฿' + thb.toLocaleString('en-US'));
 
 /** The next `n` Bangkok days starting with today. @param {number} now @param {number} n */
 export function nextDays(now, n) {
@@ -162,3 +162,21 @@ export function nextFits(args, fromStart, n = 3) {
 
 /** Hold expiry: the earlier of hold_hours from now and confirm_lead_min before the start. @param {number} now @param {number} start @param {Salon} salon */
 export const expiresAt = (now, start, salon) => Math.min(now + salon.hold_hours * 3600e3, start - salon.confirm_lead_min * MIN);
+
+/** True when the job plus buffer cannot fit in any weekday's longest window. @param {number} totalMinutes @param {Salon} salon */
+export function tooLong(totalMinutes, salon) {
+  const longest = Math.max(0, ...Object.values(salon.open_hours).flat().map(([a, b]) => (Number(b.slice(0, 2)) * 60 + Number(b.slice(3, 5))) - (Number(a.slice(0, 2)) * 60 + Number(a.slice(3, 5)))));
+  return totalMinutes + salon.buffer_min > longest;
+}
+
+/**
+ * Suggested return day: the longest return interval among the services, counted from `fromDay`,
+ * then forward to the first rostered day.
+ * @param {string[]} serviceIds @param {string} fromDay @param {Salon} salon
+ */
+export function nextVisit(serviceIds, fromDay, salon) {
+  const weeks = Math.max(0, ...serviceIds.map((id) => salon.return_weeks?.[id] ?? 6)); // ponytail: fallback for a service with no interval
+  let day = addDays(fromDay, 7 * (serviceIds.length ? weeks : 6));
+  for (let i = 0; i < 7 && !isRostered(day, salon); i++) day = addDays(day, 1);
+  return day;
+}

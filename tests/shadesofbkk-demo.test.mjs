@@ -1,8 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
+import {readFile, readdir, stat} from 'node:fs/promises';
 import {parseNow, resolveBusy} from '../public/shadesofbkk/demo.mjs';
 import {busyFromEvents, isClosedDay, dayOf, weekdayOf} from '../public/shadesofbkk/slots.mjs';
+import {WA_URL} from '../public/shadesofbkk/demo.mjs';
 
 const {salon} = JSON.parse(await readFile(new URL('../public/shadesofbkk/menu.placeholder.json', import.meta.url), 'utf8'));
 const rows = JSON.parse(await readFile(new URL('../public/shadesofbkk/busy.placeholder.json', import.meta.url), 'utf8'));
@@ -35,4 +36,24 @@ test('offsets count rostered days: no event ever lands on the closed weekday, fr
     for (const e of events) assert.notEqual(weekdayOf(e.start.date || dayOf(Date.parse(e.start.dateTime))), 1, today);
     assert.equal(new Set(events.filter((e) => e.start.date).map((e) => e.start.date)).size, events.filter((e) => e.start.date).length);
   }
+});
+
+test('font files stay inside the 180 KB budget', async () => {
+  const dir = new URL('../public/shadesofbkk/fonts/', import.meta.url);
+  const sizes = await Promise.all((await readdir(dir)).filter((f) => f.endsWith('.woff2')).map(async (f) => (await stat(new URL(f, dir))).size));
+  assert.equal(sizes.length, 2);
+  assert(sizes.reduce((a, b) => a + b, 0) < 180000);
+});
+
+test('the hard-coded WhatsApp links in index.html (footer, noscript) match WA_URL', async () => {
+  const html = await readFile(new URL('../public/shadesofbkk/index.html', import.meta.url), 'utf8');
+  assert.equal(html.split(`href="${WA_URL}"`).length - 1, 2);
+});
+
+test('the owner is James everywhere', async () => {
+  const dir = new URL('../public/shadesofbkk/', import.meta.url);
+  for (const f of ['index.html', 'owner.html', 'state.mjs', 'slots.mjs', 'demo.mjs', 'menu.placeholder.json', 'style.css']) {
+    assert(!new RegExp('\\b' + ['Ji', 'm'].join('') + '\\b').test(await readFile(new URL(f, dir), 'utf8')), f);
+  }
+  assert.equal(salon.owner_name, 'James');
 });

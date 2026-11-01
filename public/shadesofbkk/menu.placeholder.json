@@ -15,17 +15,19 @@
     "max_days_ahead": 14,
     "hold_hours": 12,
     "confirm_lead_min": 120,
-    "owner_name": "Jim"
+    "owner_name": "James",
+    "return_weeks": {"cut": 6, "blowdry": 6, "colour_full": 8, "root": 8, "highlights": 8, "balayage": 8, "treatment": 4}
   },
   "services": [
-    {"id": "cut", "name": "Cut & style", "minutes": 45, "price_thb": 800, "addon_only": false, "consult_first": false, "swatch": ["chestnut"]},
-    {"id": "blowdry", "name": "Blow-dry", "minutes": 60, "price_thb": 900, "addon_only": false, "consult_first": false, "swatch": ["chocolate"]},
-    {"id": "colour", "name": "Colour", "minutes": 120, "price_thb": 2500, "addon_only": false, "consult_first": false, "swatch": ["chestnut", "caramel"]},
-    {"id": "highlights", "name": "Highlights", "minutes": 150, "price_thb": 3200, "addon_only": false, "consult_first": false, "swatch": ["caramel", "honey"]},
-    {"id": "balayage", "name": "Balayage", "minutes": 180, "price_thb": 4200, "addon_only": false, "consult_first": false, "swatch": ["chocolate", "honey"]},
-    {"id": "treatment", "name": "Treatment", "minutes": 20, "price_thb": 500, "addon_only": true, "consult_first": false, "swatch": ["ash"]},
-    {"id": "toner", "name": "Toner", "minutes": 20, "price_thb": 400, "addon_only": true, "consult_first": false, "swatch": ["ash", "honey"]},
-    {"id": "fringe", "name": "Fringe trim", "minutes": 10, "price_thb": 200, "addon_only": true, "consult_first": false, "swatch": ["ash"]},
-    {"id": "correction", "name": "Colour correction", "minutes": 240, "price_thb": 6000, "addon_only": false, "consult_first": true, "swatch": ["espresso", "ash"]}
+    {"id": "cut", "name": "Cut & style", "desc": "A cut shaped to your hair", "minutes": 45, "price_thb": 800, "addon_only": false, "consult_first": false, "swatch": ["chestnut"]},
+    {"id": "blowdry", "name": "Blow-dry", "desc": "A smooth, polished finish", "minutes": 60, "price_thb": 900, "addon_only": false, "consult_first": false, "swatch": ["chocolate"]},
+    {"id": "colour_full", "name": "Full colour", "desc": "All over, one shade", "minutes": 120, "price_thb": 2500, "addon_only": false, "consult_first": false, "swatch": ["chestnut", "caramel"]},
+    {"id": "root", "name": "Root touch-up", "desc": "Regrowth only, matched to your shade", "minutes": 75, "price_thb": 1800, "addon_only": false, "consult_first": false, "swatch": ["chestnut"]},
+    {"id": "highlights", "name": "Highlights", "desc": "Woven lightness, toned to suit", "minutes": 150, "price_thb": 3200, "addon_only": false, "consult_first": false, "swatch": ["caramel", "honey"]},
+    {"id": "balayage", "name": "Balayage", "desc": "Hand-painted, soft grow-out", "minutes": 180, "price_thb": 4200, "addon_only": false, "consult_first": false, "swatch": ["chocolate", "honey"]},
+    {"id": "treatment", "name": "Treatment", "desc": "A deep-conditioning boost", "minutes": 20, "price_thb": 500, "addon_only": true, "consult_first": false, "swatch": ["ash"]},
+    {"id": "toner", "name": "Toner", "desc": "Refines the tone after colour", "minutes": 20, "price_thb": 400, "addon_only": true, "consult_first": false, "swatch": ["ash", "honey"]},
+    {"id": "fringe", "name": "Fringe trim", "desc": "A quick shape-up", "minutes": 10, "price_thb": 200, "addon_only": true, "consult_first": false, "swatch": ["ash"]},
+    {"id": "correction", "name": "Colour correction", "desc": "For colour that needs fixing", "minutes": 240, "price_thb": 6000, "addon_only": false, "consult_first": true, "swatch": ["espresso", "ash"]}
   ]
 }

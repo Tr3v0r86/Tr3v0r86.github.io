@@ -1,8 +1,10 @@
-/* Shades booking front-end, Stage 0. Tokens from stage0-design-brief.md.
+/* Shades booking front-end, Stage 0b. Tokens from stage0-design-brief.md (font section superseded: Young Serif + Hanken Grotesk).
    Two tuned values: --ash-ink and --hold-ink are darker than the brief's --ash/--hold
-   because those fail 4.5:1 as text on --paper (3.3 and 4.1); the originals stay for borders and fills. */
-@font-face{font-family:Fraunces;src:url('fonts/fraunces-opsz.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
-@font-face{font-family:Manrope;src:url('fonts/manrope.woff2') format('woff2');font-weight:200 800;font-style:normal;font-display:swap}
+   because those fail 4.5:1 as text on --paper (3.3 and 4.1); the originals stay for borders and fills.
+   Spacing scale: 8 / 16 / 24 / 32 / 40, with 4 as the half-step inside dense controls only. Tap targets 44 px minimum. */
+/* ponytail: Hanken Grotesk italic skipped (nothing on the page is italic); add the 35 KB italic woff2 when copy needs it. */
+@font-face{font-family:'Young Serif';src:url('fonts/young-serif.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Hanken Grotesk';src:url('fonts/hanken-grotesk.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
 
 :root{
   --ink:#2B1D18;--paper:#F3EEE9;--caramel:#C4894A;--plum:#5A2C4F;--ash:#8C817B;
@@ -11,26 +13,28 @@
   --line:rgba(140,129,123,.4);--tint:rgba(196,137,74,.12);
   --shade-espresso:#2B1D18;--shade-chestnut:#6B3F2A;--shade-chocolate:#4A3023;
   --shade-caramel:#C4894A;--shade-honey:#E3B976;--shade-ash:#A89C95;
-  --sans:Manrope,system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
-  --serif:Fraunces,Georgia,system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif; /* baht sign is not in the latin subsets: it falls through to the system sans at the same weight */
-  --bar:92px;
+  --sans:'Hanken Grotesk',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  --serif:'Young Serif',Georgia,system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif; /* baht sign is not in the latin subsets: it falls through to the system font */
+  --bar:112px;
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{scroll-padding-bottom:calc(var(--bar) + 16px);-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 var(--sans)}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 var(--sans);font-synthesis:none}
 main{max-width:440px;margin:0 auto;padding:0 16px calc(var(--bar) + 24px)}
 main.plain{padding-bottom:48px}
-h1,h2,legend{font-family:var(--serif);font-weight:500;margin:0}
-h1{font-size:39px;line-height:1.1;margin:24px 0 8px}
+h1,h2,legend{font-family:var(--serif);font-weight:400;margin:0;text-wrap:balance}
+h1{font-size:39px;line-height:1.1;letter-spacing:-.01em;margin:24px 0 8px}
+main.plain h1{font-size:31px}
 h2,legend{font-size:25px;line-height:1.2;padding:0}
-p{margin:0 0 12px}
-.sub{color:var(--ash-ink)}
-.muted{color:var(--ash-ink)}
+p{margin:0 0 8px}
+.sub,.muted{color:var(--ash-ink)}
 .brand{font-family:var(--serif);font-size:20px;margin:16px 0 0}
 a{color:var(--ink);text-decoration-color:var(--caramel);text-decoration-thickness:2px;text-underline-offset:3px}
 svg{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .sr{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* A link set on its own line so the whole row is a 44 px target */
+.link44{display:inline-flex;align-items:center;min-height:44px;font-weight:600}
 
 /* Focus: 2px caramel ring everywhere; a 1px ink edge keeps it visible on paper (caramel alone is 2.6:1). */
 :focus-visible{outline:2px solid var(--caramel);outline-offset:2px;box-shadow:0 0 0 1px var(--ink)}
@@ -38,15 +42,16 @@ svg{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:
 /* Demo banner, on every page: one slim line. Controls live in a collapsed <details> at the page foot. */
 .demo{background:var(--ink);color:var(--paper);padding:8px 16px}
 .demo p{max-width:440px;margin:0 auto;font-size:14px;line-height:1.4}
-.demo-controls{margin-top:40px;border-top:1px solid var(--line);font-size:14px}
+.demo-controls{margin-top:24px;border-top:1px solid var(--line);font-size:14px}
 .demo-controls summary{display:flex;align-items:center;min-height:44px;color:var(--ash-ink);cursor:pointer}
 .demo-controls .tools{display:flex;flex-wrap:wrap;gap:0 16px;align-items:center;padding-bottom:8px}
 .demo-controls label{display:inline-flex;align-items:center;gap:8px;min-height:44px;cursor:pointer}
-.demo-controls input{width:20px;height:20px;accent-color:var(--ink)}
+.demo-controls input{width:24px;height:24px;accent-color:var(--ink)}
 .demo-controls .btn{min-height:44px;font-size:14px}
 
 /* The shade strip: the one memorable thing */
 .strip{display:grid;grid-template-columns:repeat(6,1fr);height:56px;margin:16px 0 0;border-radius:4px;overflow:hidden}
+main.plain .strip{height:24px}
 .strip span:nth-child(1){background:var(--shade-espresso)}
 .strip span:nth-child(2){background:var(--shade-chestnut)}
 .strip span:nth-child(3){background:var(--shade-chocolate)}
@@ -54,75 +59,117 @@ svg{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:
 .strip span:nth-child(5){background:var(--shade-honey)}
 .strip span:nth-child(6){background:var(--shade-ash)}
 @keyframes settle{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-@keyframes open{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@keyframes open{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:no-preference){
   .strip{animation:settle 350ms ease-out both}
-  #addons:not([hidden]){animation:open 250ms ease-out}
+  #addon-rows:not([hidden]){animation:open 250ms ease-out}
 }
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* Intro: a person on the page before any question is asked */
+.intro{display:flex;gap:16px;align-items:center;margin:8px 0 0}
+.intro svg.avatar{width:64px;height:64px;border-radius:50%;background:var(--shade-honey);stroke:none}
+.intro p{margin:0}
 
 fieldset{border:0;margin:32px 0 0;padding:0;min-width:0}
 fieldset>legend{margin-bottom:8px}
-.group{margin-top:8px}
+.hint{font-size:14px;line-height:1.4;color:var(--ash-ink);margin:0 0 8px}
+.recog{font-weight:600;margin:8px 0 0}
+.recog:empty{display:none}
 
 /* Service rows: hairline-separated, leading swatch block */
-.svc{display:grid;grid-template-columns:24px 28px 1fr auto;gap:12px;align-items:center;min-height:60px;padding:8px 8px;border-bottom:1px solid var(--line);cursor:pointer}
+.svc{display:grid;grid-template-columns:24px 24px 1fr auto;gap:16px;align-items:center;min-height:64px;padding:8px;border-bottom:1px solid var(--line);cursor:pointer;color:inherit;text-decoration:none}
 .svc:has(input:checked){background:var(--tint)}
-.svc input{width:22px;height:22px;margin:0;accent-color:var(--ink)}
-.svc .sw{display:flex;height:28px;width:28px;border-radius:4px;overflow:hidden}
+.svc input{width:24px;height:24px;margin:0;accent-color:var(--ink)}
+.svc .sw{display:flex;height:24px;width:24px;border-radius:4px;overflow:hidden}
 .svc .sw i{flex:1}
 .svc .nm{display:block;font-weight:600}
-.svc .meta{display:block;font-size:14px;color:var(--ash-ink)}
-.svc .price{font-weight:600;white-space:nowrap}
-.svc.off{cursor:default}
-.svc.off .nm{color:var(--ash-ink)}
+.svc .meta{display:block;font-size:14px;line-height:1.4;color:var(--ash-ink)}
+.svc .price{display:block;font-weight:600;text-align:right;white-space:nowrap}
+.svc .price small{display:block;font-size:14px;font-weight:400;color:var(--ash-ink)}
+a.svc.off{grid-template-columns:24px 1fr auto;cursor:pointer}
+a.svc.off .price{text-decoration:underline;text-decoration-color:var(--caramel);text-decoration-thickness:2px;text-underline-offset:3px}
 
 /* Day and slot pickers: hidden native radios, label chips */
 .pick{position:relative}
 .pick input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
 .pick .vis{display:flex;align-items:center;justify-content:center;width:100%;height:100%}
-.days{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
-.day{min-height:60px}
-.day .vis{flex-direction:column;border:1px solid var(--line);border-radius:6px;font-size:13px;line-height:1.2;gap:2px}
-.day strong{font-family:var(--serif);font-size:20px;font-weight:500}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:8px}
+.day{min-height:64px}
+.day .vis{flex-direction:column;border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.2;gap:4px}
+.day strong{font-family:var(--serif);font-size:20px;font-weight:400}
 .day input:checked+.vis{background:var(--caramel);color:var(--ink);border-color:var(--caramel)}
+.day.closed .vis{color:var(--ash-ink);border-style:dashed}
+.day.closed input:checked+.vis{color:var(--ink);border-style:solid}
 .day input:focus-visible+.vis,.slot input:focus-visible+.vis{outline:2px solid var(--caramel);outline-offset:2px;box-shadow:0 0 0 1px var(--ink)}
 .day input:focus-visible,.slot input:focus-visible{outline:0;box-shadow:none}
 .slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}
 .slot{min-height:48px}
-.slot .vis{border:1px solid var(--line);border-radius:6px;font-family:var(--serif);font-size:20px}
+.slot .vis{border:1px solid var(--line);border-radius:8px;font-family:var(--serif);font-size:20px}
 .slot input:checked+.vis{background:var(--caramel);color:var(--ink);border-color:var(--caramel)}
 .slot input:disabled{cursor:not-allowed}
 .slot input:disabled+.vis{color:var(--ash-ink);text-decoration:line-through;text-decoration-color:var(--ash);border-style:dashed}
-.state-line{font-family:var(--serif);font-size:20px;margin:8px 0 0}
+.state-line{font-family:var(--serif);font-size:20px;line-height:1.3;margin:8px 0;text-wrap:balance}
+.ready{margin:16px 0 0;font-weight:600}
+.ready:empty{display:none}
+.nextbtn{width:100%;margin-top:8px}
+.loading{display:flex;align-items:center;gap:8px;min-height:48px;color:var(--ash-ink)}
 
 /* Fields */
 .field{margin-top:16px}
-.field label{display:block;font-weight:600;margin-bottom:4px}
-.field input{width:100%;min-height:48px;padding:8px 12px;font:inherit;color:var(--ink);background:#fff;border:1px solid var(--ash);border-radius:6px}
+.field label{display:block;font-weight:600;margin-bottom:8px}
+.field input,.field textarea,.mrow input[type=time],.mrow input[type=number],.mrow input[type=date],.mrow input[type=text]{width:100%;min-height:48px;padding:8px 16px;font:inherit;color:var(--ink);background:#fff;border:1px solid var(--ash);border-radius:8px}
+.field textarea{display:block;min-height:96px;resize:vertical}
 .field input[aria-invalid=true]{border:2px solid var(--err)}
-.err{color:var(--err);font-size:14px;font-weight:600;margin:4px 0 0}
+.err{color:var(--err);font-size:14px;line-height:1.4;font-weight:600;margin:8px 0 0}
 .err:empty{display:none}
 
 /* Buttons */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 20px;font:inherit;font-weight:700;color:var(--paper);background:var(--ink);border:0;border-radius:6px;cursor:pointer}
-.btn.quiet{background:none;color:var(--ink);border:1px solid var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:8px 24px;font:inherit;font-weight:700;line-height:1.25;text-align:center;color:var(--paper);background:var(--ink);border:1px solid var(--ink);border-radius:8px;cursor:pointer;text-decoration:none}
+.btn.quiet{background:none;color:var(--ink)}
 .btn:disabled{opacity:.6;cursor:not-allowed}
-.cta{background:var(--plum);color:#fff;min-width:140px}
+.cta{background:var(--plum);border-color:var(--plum);color:#fff;min-width:152px}
 
-/* Sticky bar: running total and the one CTA */
-.bar{position:fixed;left:0;right:0;bottom:0;background:var(--paper);border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom))}
-.bar>div{max-width:440px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.total strong{display:block;font-family:var(--serif);font-size:25px;line-height:1.1;font-weight:500}
+/* Sticky bar: running total, the one CTA, the policy line */
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--paper);border-top:1px solid var(--line);padding:8px 16px calc(8px + env(safe-area-inset-bottom))}
+.bar>div{max-width:440px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0 16px}
+.total strong{display:block;font-family:var(--serif);font-size:25px;line-height:1.2;font-weight:400}
 .total span{font-size:14px;color:var(--ash-ink)}
+.policy{flex-basis:100%;margin:0;text-wrap:balance;font-size:14px;line-height:1.4;color:var(--ash-ink)}
 
-/* Confirmation and owner */
+/* Confirmation and end states */
 .status{display:flex;align-items:center;gap:8px;font-weight:700}
-h1.status{font-weight:500}
+h1.status{font-weight:400}
 .status.ok{color:var(--ok)}.status.hold{color:var(--hold-ink)}.status.err{color:var(--err)}
 .detail{margin:16px 0;border-top:1px solid var(--line)}
-.detail div{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--line)}
-.detail dt{color:var(--ash-ink)}.detail dd{margin:0;font-weight:600;text-align:right}
-.actions{display:flex;flex-wrap:wrap;gap:12px;margin:16px 0}
-.proposals{display:grid;gap:8px;margin:12px 0}
-.linkbox{word-break:break-all;background:#fff;border:1px solid var(--line);border-radius:6px;padding:12px;font-size:14px}
+.detail div{display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-bottom:1px solid var(--line)}
+.detail dt{color:var(--ash-ink);white-space:nowrap}.detail dd{margin:0;font-weight:600;text-align:right}
+.where{margin:16px 0}
+.where p{margin:0 0 8px}
+.next{font-weight:600}
+.wa{display:inline-flex;align-items:center;min-height:44px;font-weight:600}
+p.wa-line{margin:8px 0 0}
+.foot{margin-top:24px;border-top:1px solid var(--line);padding-top:8px}
+.foot a{display:flex;align-items:center;min-height:44px}
+.linkbox{word-break:break-all;background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 16px;font-size:14px}
+.linkbox a{display:flex;align-items:center;min-height:44px}
 .note{font-size:14px;color:var(--ash-ink);margin-top:32px}
+
+/* Owner pages: actions first, one primary per screen, Modify and Wrap up share the sticky bar */
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:16px 0}
+.actions .full{grid-column:1/-1}
+.proposals{display:grid;gap:8px;margin:16px 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.chip{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;font:inherit;font-weight:600;color:var(--ink);background:none;border:1px solid var(--ash);border-radius:22px;cursor:pointer}
+.mrow{margin-top:16px}
+.mrow label.t{display:block;font-weight:600;margin-bottom:8px}
+.mrow .check{display:flex;align-items:center;gap:16px;min-height:48px;cursor:pointer}
+.mrow .check input{width:24px;height:24px;accent-color:var(--ink)}
+.stepper{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.stepper .btn{min-width:72px;padding:8px 16px}
+.stepper output{flex:1;min-width:128px;font-weight:600}
+.ob .two{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
+.ob .total{flex-basis:100%;display:flex;align-items:baseline;gap:8px;margin-bottom:8px}
+.ob .total strong{font-size:20px}
+.ob .one{width:100%}
+.ob .err{flex-basis:100%;margin:0 0 8px}

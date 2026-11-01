@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {busyFromEvents, mergeIntervals, computeSlots, isFree, nextFits, expiresAt, nextDays, timeLabel, dayLabel, dayOf, isClosedDay, durationLabel} from '../public/shadesofbkk/slots.mjs';
+import {busyFromEvents, mergeIntervals, computeSlots, isFree, nextFits, expiresAt, nextDays, timeLabel, dayLabel, dayOf, isClosedDay, durationLabel, thbLabel, tooLong, nextVisit} from '../public/shadesofbkk/slots.mjs';
 
 const menu = JSON.parse(await readFile(new URL('../public/shadesofbkk/menu.placeholder.json', import.meta.url), 'utf8'));
 const salon = menu.salon;
@@ -118,4 +118,32 @@ test('isFree treats touching as free; nextFits gives three later ok starts', () 
   assert.equal(next.length, 3);
   assert(next.every((s) => s.ok && s.start > from));
   assert(next[0].start < next[1].start && next[1].start < next[2].start, 'suggestions ascend');
+});
+
+test('tooLong: a job plus buffer must fit the longest window', () => {
+  assert.equal(tooLong(45, salon), false);
+  assert.equal(tooLong(525, salon), false); // 9 h window: 525 + 15 fits exactly
+  assert.equal(tooLong(600, salon), true);
+});
+
+test('nextFits(...,1) gives the first ok start: 11:00 known, 15:00 unknown, and skips a closed day', () => {
+  const args = {...base, events: []};
+  assert.equal(nextFits({...args, known: true}, NOW, 1)[0].label, '11:00');
+  assert.equal(nextFits({...args, known: false}, NOW, 1)[0].label, '15:00');
+  const closedTue = [allDay('2026-11-03', '2026-11-04')];
+  const first = nextFits({...args, events: closedTue}, NOW, 1)[0];
+  assert.equal(dayOf(first.start), '2026-11-04');
+  assert.equal(first.label, '10:00');
+});
+
+test('nextVisit: longest interval wins, falls back to 6 weeks, and a closed Monday lands on Tuesday', () => {
+  assert.equal(nextVisit(['cut', 'colour_full'], '2026-11-03', salon), '2026-12-29'); // +8 w, a Tuesday
+  assert.equal(nextVisit(['cut', 'treatment'], '2026-11-03', salon), '2026-12-15'); // +6 w
+  assert.equal(nextVisit(['toner'], '2026-11-03', salon), '2026-12-15'); // no interval: 6 w
+  assert.equal(nextVisit(['cut'], '2026-11-02', salon), '2026-12-15'); // Mon 2 Nov +6 w = Mon 14 Dec, closed -> Tue 15
+});
+
+test('thbLabel: a null price reads as quoted on the day', () => {
+  assert.equal(thbLabel(null), 'Quoted on the day');
+  assert.equal(thbLabel(1200), '฿1,200');
 });

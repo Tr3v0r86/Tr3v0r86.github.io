@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
 <title>Booking request</title>
-<link rel="preload" href="fonts/fraunces-opsz.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/young-serif.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,7 +14,7 @@
 <main class="plain" id="main">
   <div class="strip" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
   <p class="brand">Shades of BKK</p>
-  <div id="view"><p class="muted">Loading.</p></div>
+  <div id="view"><p class="loading">Loading.</p></div>
 
   <details class="demo-controls">
     <summary>Demo controls</summary>
@@ -24,11 +24,12 @@
     </div>
   </details>
 </main>
+<div class="bar ob" id="bar" hidden></div>
 
 <script type="module">
-import {dayOf, dayLabel, timeLabel, durationLabel, thbLabel} from './slots.mjs';
+import {computeSlots, nextDays, dayStart, addDays, dayOf, dayLabel, timeLabel, durationLabel, thbLabel, nextVisit} from './slots.mjs';
 import {parseNow, resolveBusy} from './demo.mjs';
-import {ownerAct, effectiveStatus, proposalOptions} from './state.mjs';
+import {ownerAct, effectiveStatus, proposalOptions, modify, wrapUp, rebook, current, totals, tokenFor} from './state.mjs';
 
 const KEY = 'shadesofbkk.booking';
 const $ = (id) => document.getElementById(id);
@@ -48,90 +49,330 @@ const now = parseNow(location.search, Date.now());
 const getJSON = (url) => fetch(url).then((r) => { if (!r.ok) throw new Error(url); return r.json(); });
 const [menu, busyRows] = await Promise.all([getJSON('menu.placeholder.json'), getJSON('busy.placeholder.json')]).catch(() => []);
 if (!menu) {
-  $('view').innerHTML = '<h1>Times could not load</h1><p>Reload the page to try again.</p>';
+  $('view').innerHTML = '<h1>The menu could not load</h1><p>Reload the page to try again.</p>';
   throw new Error('data failed to load');
 }
 const {salon, services} = menu;
 const busy = resolveBusy(busyRows, dayOf(now), salon);
 
 // The booking: whatever the client page stored, else the sample hold that also sits in the placeholder calendar.
+// Demo query: ?sample=confirmed starts from a confirmed sample; ?view=modify|wrap opens that screen.
 function sample() {
   const hold = busy.find((e) => e.id === 'demo-alex');
-  const start = Date.parse(hold.start.dateTime), end = Date.parse(hold.end.dateTime);
+  const start = Date.parse(hold.start.dateTime);
   const picked = ['cut', 'blowdry'].map((id) => services.find((s) => s.id === id));
-  return {
+  const confirmed = params.get('sample') === 'confirmed';
+  const b = {
     id: 'demo-alex', services: picked.map((s) => ({id: s.id, name: s.name, minutes: s.minutes, price_thb: s.price_thb})),
-    start, end, totalMinutes: picked.reduce((n, s) => n + s.minutes, 0), totalThb: picked.reduce((n, s) => n + s.price_thb, 0),
-    name: 'Alex', phone: '+66800000001', email: 'alex@example.com', status: 'pending',
-    expiresAt: now + (11 * 60 + 40) * 60e3, acceptToken: 'demo-alex:' + start, createdAt: now,
+    start, end: Date.parse(hold.end.dateTime), totalMinutes: picked.reduce((n, s) => n + s.minutes, 0), totalThb: picked.reduce((n, s) => n + s.price_thb, 0),
+    name: 'Alex', phone: '+66800000001', email: 'alex@example.com', note: 'Keeping the length, mostly a tidy-up.', ownerNote: '', consult: false,
+    status: confirmed ? 'confirmed' : 'pending', expiresAt: confirmed ? null : now + (11 * 60 + 40) * 60e3, acceptToken: '', createdAt: now,
   };
+  b.acceptToken = tokenFor(b);
+  return b;
 }
 let booking = store.get() || sample();
-let proposing = false, taken = false;
+let mode = ['modify', 'wrap'].includes(params.get('view')) ? params.get('view') : 'main';
+let proposing = false, taken = false, draft = null, wrap = null, bookedMsg = null;
 
 // "Simulate expiry" moves this page's clock to the hold's expiry. ponytail: expiry is a clock comparison, no timer.
 const clock = () => ($('expire').checked && booking.expiresAt !== null ? booking.expiresAt : now);
+const cur = () => current(booking, clock());
 const when = (b) => `${dayLabel(dayOf(b.start))}, ${timeLabel(b.start)}`;
 const acceptLink = (b) => {
   const q = new URLSearchParams({accept: b.acceptToken});
   if (params.has('now')) q.set('now', params.get('now'));
   return 'index.html?' + q;
 };
+const newId = () => 'r' + now.toString(36) + Math.random().toString(36).slice(2, 8);
+const commit = (b) => { booking = b; store.set(b); };
+const svcRow = (s, checked) => `<label class="svc"><input type="checkbox" name="msvc" value="${esc(s.id)}"${checked ? ' checked' : ''}>`
+  + `<span class="sw" aria-hidden="true">${(s.swatch || []).map((c) => `<i style="background:var(--shade-${esc(c)})"></i>`).join('')}</span>`
+  + `<span><span class="nm">${esc(s.name)}</span><span class="meta">${esc(s.desc || '')}</span></span>`
+  + `<span class="price">${thbLabel(s.price_thb)}<small>${durationLabel(s.minutes)}</small></span></label>`;
+const dayRadios = (selected) => nextDays(now, salon.max_days_ahead).map((d) => `<label class="pick day"><input type="radio" name="mday" value="${d}" aria-label="${dayLabel(d)}"${d === selected ? ' checked' : ''}><span class="vis" aria-hidden="true">${dayLabel(d).split(' ')[0]}<strong>${Number(d.slice(8))}</strong></span></label>`).join('');
 
 function act(action) {
   const r = ownerAct(booking, action, {now: clock(), busy, salon});
   if (r.outcome === 'taken') { taken = true; proposing = true; } else { taken = false; proposing = false; }
-  booking = r.booking;
-  store.set(booking);
+  commit(r.booking);
   render();
 }
 
 function render() {
-  const b = booking, st = effectiveStatus(b, clock());
-  const rows = `<dl class="detail">`
+  const bar = $('bar');
+  bar.hidden = true;
+  $('main').classList.add('plain');
+  if (mode === 'modify') return renderModify();
+  if (mode === 'wrap') return renderWrap();
+  if (mode === 'booked') return renderBooked();
+  renderMain();
+}
+
+// ---- main: details, status, actions ----
+function renderMain() {
+  const b = cur(), st = effectiveStatus(b, clock());
+  const rows = '<dl class="detail">'
     + `<div><dt>Name</dt><dd>${esc(b.name)}</dd></div>`
     + `<div><dt>WhatsApp</dt><dd>${esc(b.phone)}</dd></div>`
-    + b.services.map((s) => `<div><dt>${esc(s.name)}</dt><dd>${thbLabel(s.price_thb)}</dd></div>`).join('')
+    + b.services.map((s) => `<div><dt>${esc(s.name)}</dt><dd>${b.consult ? '' : thbLabel(s.price_thb)}</dd></div>`).join('')
     + `<div><dt>Total</dt><dd>${thbLabel(b.totalThb)}, ${durationLabel(b.totalMinutes)}</dd></div>`
+    + (b.note ? `<div><dt>Their note</dt><dd>${esc(b.note)}</dd></div>` : '')
+    + (b.ownerNote ? `<div><dt>Your note</dt><dd>${esc(b.ownerNote)}</dd></div>` : '')
     + (st === 'pending' && b.expiresAt !== null ? `<div><dt>${icons.clock} Hold</dt><dd>Expires in ${durationLabel(Math.max(0, Math.round((b.expiresAt - now) / 60e3)))}</dd></div>` : '')
-    + `</dl>`;
-  let body = '';
+    + (st === 'done' && b.visitNote ? `<div><dt>Private note</dt><dd>${esc(b.visitNote)}</dd></div>` : '')
+    + (st === 'done' && b.nextTime ? `<div><dt>Next time</dt><dd>${esc(b.nextTime)}</dd></div>` : '')
+    + '</dl>';
+  let top = '', actions = '', after = '';
   if (st === 'pending' || st === 'proposed') {
     if (st === 'proposed') {
-      body += `<p class="status hold">${icons.clock} Waiting for ${esc(b.name)} to accept.</p>`
+      top += `<p class="status hold">${icons.clock} Waiting for ${esc(b.name)} to accept.</p>`
+        + (b.prior ? `<p class="muted">Their confirmed time, ${when(b.prior)}, stays held until they accept or the offer lapses.</p>` : '')
         + `<p>Send ${esc(b.name)} this link to accept:</p><p class="linkbox"><a href="${esc(acceptLink(b))}">${esc(acceptLink(b))}</a></p>`;
     }
-    if (taken) body += '<p class="err">Slot now taken</p>';
-    body += '<div class="actions">'
+    if (taken) top += '<p class="err" role="alert">Slot now taken</p>';
+    actions = '<div class="actions">'
       + '<button type="button" class="btn" id="confirm">Confirm</button>'
+      + '<button type="button" class="btn quiet" id="modify">Modify</button>'
       + `<button type="button" class="btn quiet" id="propose">${st === 'proposed' ? 'Propose again' : 'Propose another time'}</button>`
       + '<button type="button" class="btn quiet" id="decline">Decline</button></div>';
     if (proposing) {
       const fits = proposalOptions(b, {now: clock(), busy, salon});
-      body += '<div class="proposals" id="proposals">' + (fits.length
+      after = '<div class="proposals" id="proposals">' + (fits.length
         ? fits.map((s) => `<button type="button" class="btn quiet" data-start="${s.start}">${dayLabel(dayOf(s.start))}, ${s.label}</button>`).join('')
         : '<p class="muted">No free time in the next two weeks.</p>') + '</div>';
     }
+  } else if (st === 'confirmed') {
+    top = `<p class="status ok">${icons.check} Confirmed.</p>`;
+    actions = '<div class="actions"><button type="button" class="btn" id="wrap">Wrap up</button><button type="button" class="btn quiet" id="modify">Modify</button></div>';
+  } else if (st === 'done') {
+    top = `<p class="status ok">${icons.check} Done. Visit logged.</p>`;
+    actions = '<div class="actions"><button type="button" class="btn full" id="wrap">Rebook</button></div>';
   } else {
-    const line = {confirmed: `<p class="status ok">${icons.check} Confirmed.</p>`, declined: '<p class="status err">Declined.</p>', expired: '<p class="status err">Expired. The slot is free again.</p>'}[st];
-    body += line;
+    top = {declined: '<p class="status err">Declined.</p>', expired: '<p class="status err">Expired. The slot is free again.</p>'}[st];
   }
-  $('view').innerHTML = `<h1>${st === 'proposed' ? 'Proposed: ' + when(b) : esc(b.name) + ' wants ' + when(b) + '.'}</h1>` + rows + body
+  $('view').innerHTML = `<h1>${st === 'proposed' ? 'Proposed: ' + when(b) : st === 'pending' ? esc(b.name) + ' wants ' + when(b) + '.' : esc(b.name) + ', ' + when(b)}</h1>`
+    + top + actions + after + rows
     + '<p class="note">An all-day event closes the whole day. A timed event titled "Closed" blocks its own hours. Other timed events marked free do not block.</p>';
   $('confirm')?.addEventListener('click', () => act({type: 'confirm'}));
   $('decline')?.addEventListener('click', () => act({type: 'decline'}));
   $('propose')?.addEventListener('click', () => { proposing = true; taken = false; render(); $('proposals')?.querySelector('button')?.focus(); });
   $('proposals')?.addEventListener('click', (e) => { if (e.target.dataset?.start) act({type: 'propose', start: Number(e.target.dataset.start)}); });
+  $('modify')?.addEventListener('click', openModify);
+  $('wrap')?.addEventListener('click', openWrap);
 }
+
+// ---- Modify ----
+function openModify() {
+  const b = cur(), t = totals(b.services.map((s) => s.id), menu);
+  const computed = t.thb;
+  draft = {
+    selected: b.services.map((s) => s.id), day: dayOf(b.start), start: b.start, delta: b.totalMinutes - t.minutes,
+    thb: b.consult || b.totalThb === computed ? '' : String(b.totalThb), ownerNote: b.ownerNote || '', consult: !!b.consult, shown: '',
+  };
+  mode = 'modify';
+  render();
+  $('mform')?.querySelector('input')?.focus();
+}
+const dMinutes = () => Math.max(5, totals(draft.selected, menu).minutes + draft.delta);
+const dPrice = () => (draft.consult ? null : draft.thb === '' ? totals(draft.selected, menu).thb : Number(draft.thb));
+const hhmm = (ms) => timeLabel(ms);
+
+function renderModify() {
+  const b = cur();
+  $('view').innerHTML = `<h1>Modify ${esc(b.name)}'s booking</h1>`
+    + '<form id="mform" novalidate>'
+    + `<fieldset><legend>Services</legend>${services.map((s) => svcRow(s, draft.selected.includes(s.id))).join('')}</fieldset>`
+    + `<fieldset><legend>Day</legend><div class="days" id="mdays">${dayRadios(draft.day)}</div></fieldset>`
+    + '<fieldset><legend>Time</legend><div id="mslots" aria-live="polite"></div>'
+    + '<div class="mrow"><label class="t" for="mstart">Or type a start</label><input id="mstart" type="time" step="300"></div></fieldset>'
+    + '<fieldset><legend>Length and price</legend>'
+    + '<div class="mrow"><span class="t">Length</span><div class="stepper"><button type="button" class="btn quiet" id="m-15" aria-label="15 minutes shorter">&minus;15</button>'
+    + '<output id="mlen" aria-live="polite"></output><button type="button" class="btn quiet" id="p-15" aria-label="15 minutes longer">+15</button></div></div>'
+    + '<div class="mrow"><label class="t" for="mthb">Price in baht (blank = computed)</label><input id="mthb" type="number" min="0" step="1" inputmode="numeric"></div>'
+    + '<div class="mrow"><label class="check"><input type="checkbox" id="mconsult"> Consultation, price quoted on the day</label></div></fieldset>'
+    + '<fieldset><legend>Note to client</legend><div class="mrow"><label class="t" for="mnote">One line, shown in their confirmation</label><input id="mnote" type="text" maxlength="200"></div></fieldset>'
+    + '</form>';
+  $('mthb').value = draft.thb;
+  $('mconsult').checked = draft.consult;
+  $('mnote').value = draft.ownerNote;
+  const bar = $('bar');
+  bar.hidden = false;
+  $('main').classList.remove('plain');
+  bar.innerHTML = '<div><div class="total" aria-live="polite"><strong id="mtot"></strong><span id="msub"></span></div>'
+    + '<p class="err" id="mtaken" role="alert"></p>'
+    + '<div class="two"><button type="button" class="btn cta" id="msend">Send changes</button><button type="button" class="btn quiet" id="mconf">Confirm as changed</button></div></div>';
+  refreshModify();
+}
+
+function slotsHtml() {
+  const slots = computeSlots({day: draft.day, salon, events: busy, totalMinutes: dMinutes(), now: clock(), known: true, excludeId: cur().id});
+  if (!slots.length) return '<p class="state-line">Closed</p><p class="hint">You can still type a start below.</p>';
+  if (!slots.some((s) => s.ok)) return '<p class="state-line">Fully booked</p><p class="hint">Try another day, or type a start below.</p>';
+  return '<div class="slots">' + slots.map((s) => `<label class="pick slot"><input type="radio" name="mslot" value="${s.start}"${s.ok ? '' : ' disabled'}><span class="vis">${s.label}</span></label>`).join('') + '</div>';
+}
+
+function refreshModify() {
+  const m = dMinutes(), key = draft.day + '|' + m;
+  if (key !== draft.shown) { draft.shown = key; $('mslots').innerHTML = slotsHtml(); }
+  document.querySelectorAll('#mslots input').forEach((i) => { i.checked = Number(i.value) === draft.start; });
+  if (document.activeElement !== $('mstart')) $('mstart').value = hhmm(draft.start);
+  const until = hhmm(draft.start + m * 60e3);
+  $('mlen').textContent = `${durationLabel(m)}, runs until ${until}`;
+  $('mthb').disabled = draft.consult;
+  $('mthb').placeholder = 'Computed ' + thbLabel(totals(draft.selected, menu).thb);
+  $('mtot').textContent = thbLabel(dPrice());
+  $('msub').textContent = `${durationLabel(m)}, runs until ${until}`;
+  $('msend').disabled = $('mconf').disabled = !draft.selected.length;
+}
+
+function submitModify(confirm) {
+  const ordered = services.filter((s) => draft.selected.includes(s.id)).map((s) => s.id);
+  const r = modify(cur(), {
+    services: ordered, start: draft.start, minutes: dMinutes(), consult: draft.consult,
+    thb: draft.consult || draft.thb === '' ? undefined : Number(draft.thb), ownerNote: draft.ownerNote, confirm,
+  }, {now: clock(), busy, salon, menu});
+  if (r.outcome === 'taken') { $('mtaken').textContent = 'That time is taken.'; return; }
+  if (r.outcome === 'ok') commit(r.booking);
+  mode = 'main'; taken = false; proposing = false;
+  render();
+  window.scrollTo(0, 0);
+}
+
+// ---- Wrap up and rebook ----
+function openWrap() {
+  const b = cur();
+  wrap = {wk: 0, other: '', note: '', visible: '', ids: b.services.map((s) => s.id)};
+  mode = 'wrap';
+  render();
+  window.scrollTo(0, 0);
+}
+const chipsText = ['Same formula', 'Trim only next time', 'Tone next visit'];
+const target = () => wrap.other || addDays(nextVisit(wrap.ids, dayOf(cur().start), salon), 7 * wrap.wk);
+
+function rebookOptions() {
+  const b = cur(), t = target(), out = [];
+  for (const d of [addDays(t, -1), t, addDays(t, 1)]) {
+    const first = computeSlots({day: d, salon, events: busy, totalMinutes: b.totalMinutes, now: clock(), known: true}).find((s) => s.ok);
+    if (first) out.push(first);
+  }
+  return out;
+}
+function refreshRebook() {
+  $('around').textContent = 'Next visit around ' + dayLabel(target());
+  const opts = rebookOptions();
+  $('rebooks').innerHTML = opts.length
+    ? opts.map((s) => `<button type="button" class="btn quiet" data-start="${s.start}">${dayLabel(dayOf(s.start))}, ${s.label}</button>`).join('')
+    : '<p class="muted">No free time around that day. Try another day.</p>';
+}
+
+function renderWrap() {
+  const b = cur(), isDone = b.status === 'done';
+  $('view').innerHTML = `<h1>${isDone ? 'Rebook' : 'Wrap up'} ${esc(b.name)}</h1>`
+    + (isDone ? '' : '<div class="field"><label for="vnote">Private note (only you see this)</label><textarea id="vnote" rows="3" maxlength="500"></textarea></div>'
+      + '<div class="field"><label for="nnote">Next time (client sees this)</label><textarea id="nnote" rows="2" maxlength="200"></textarea>'
+      + `<div class="chips">${chipsText.map((c) => `<button type="button" class="chip" data-chip="${esc(c)}">${esc(c)}</button>`).join('')}</div></div>`)
+    + '<h2 class="mrow">Rebook</h2><p id="around" class="recog" aria-live="polite"></p>'
+    + '<div class="stepper"><button type="button" class="btn quiet" id="wk-1">&minus;1 week</button><button type="button" class="btn quiet" id="wk1">+1 week</button><button type="button" class="btn quiet" id="other">Another day</button></div>'
+    + '<div class="mrow" id="dayrow" hidden><label class="t" for="otherday">Pick a day</label><input id="otherday" type="date"></div>'
+    + '<div class="proposals" id="rebooks" aria-live="polite"></div><p class="err" id="wraperr" role="alert"></p>'
+    + '<p class="note">Tap a time to book it. The client is known, so it confirms at once and the invite goes out.</p>';
+  $('main').classList.toggle('plain', isDone);
+  const bar = $('bar');
+  bar.hidden = isDone;
+  if (!isDone) {
+    $('main').classList.remove('plain');
+    bar.innerHTML = '<div><button type="button" class="btn cta one" id="mdone">Mark done</button></div>';
+  }
+  refreshRebook();
+}
+
+function doRebook(start) {
+  const b = cur();
+  const wrapped = b.status === 'confirmed' ? wrapUp(b, {note: $('vnote')?.value, visibleNote: $('nnote')?.value}, {now: clock()}) : b;
+  const r = rebook(wrapped, {start}, {now: clock(), busy, salon, menu, id: newId()});
+  if (r.outcome !== 'ok') { $('wraperr').textContent = 'That time is taken.'; return; }
+  // ponytail: Stage 0 stores one booking per browser, so the rebooked booking replaces the finished one; Stage 1 keeps both.
+  commit(r.booking);
+  bookedMsg = r.booking;
+  mode = 'booked';
+  render();
+  window.scrollTo(0, 0);
+}
+
+function renderBooked() {
+  const b = bookedMsg;
+  $('view').innerHTML = `<h1>Booked: ${when(b)}.</h1><p>Invite on its way.</p>`
+    + '<dl class="detail">' + b.services.map((s) => `<div><dt>${esc(s.name)}</dt><dd>${thbLabel(s.price_thb)}</dd></div>`).join('')
+    + `<div><dt>Total</dt><dd>${thbLabel(b.totalThb)}, ${durationLabel(b.totalMinutes)}</dd></div>`
+    + (b.nextTime ? `<div><dt>Client sees</dt><dd>Next time: ${esc(b.nextTime)}</dd></div>` : '') + '</dl>';
+}
+
+// ---- events (delegated: the view is rebuilt on each mode change) ----
+$('view').addEventListener('change', (e) => {
+  const el = e.target;
+  if (mode === 'modify') {
+    if (el.name === 'msvc') {
+      draft.selected = services.filter((s) => (s.id === el.value ? el.checked : draft.selected.includes(s.id))).map((s) => s.id);
+    } else if (el.name === 'mday') {
+      draft.start = dayStart(el.value) + (draft.start - dayStart(draft.day));
+      draft.day = el.value;
+    } else if (el.name === 'mslot') {
+      draft.start = Number(el.value);
+    } else if (el.id === 'mconsult') draft.consult = el.checked;
+    refreshModify();
+  } else if (mode === 'wrap' && el.id === 'otherday' && el.value) {
+    wrap.other = el.value;
+    refreshRebook();
+  }
+});
+$('view').addEventListener('input', (e) => {
+  const el = e.target;
+  if (mode === 'modify') {
+    if (el.id === 'mstart' && /^\d\d:\d\d$/.test(el.value)) draft.start = dayStart(draft.day) + (Number(el.value.slice(0, 2)) * 60 + Number(el.value.slice(3))) * 60e3;
+    else if (el.id === 'mthb') draft.thb = el.value;
+    else if (el.id === 'mnote') draft.ownerNote = el.value;
+    else return;
+    refreshModify();
+  }
+});
+$('view').addEventListener('click', (e) => {
+  const el = e.target.closest('button');
+  if (!el) return;
+  if (mode === 'modify') {
+    if (el.id === 'm-15') draft.delta -= 15;
+    else if (el.id === 'p-15') draft.delta += 15;
+    else return;
+    refreshModify();
+  } else if (mode === 'wrap') {
+    if (el.dataset.chip) { const f = $('nnote'); f.value = (f.value ? f.value.trim() + '. ' : '') + el.dataset.chip; f.focus(); }
+    else if (el.id === 'wk-1') { wrap.other = ''; wrap.wk -= 1; refreshRebook(); }
+    else if (el.id === 'wk1') { wrap.other = ''; wrap.wk += 1; refreshRebook(); }
+    else if (el.id === 'other') { $('dayrow').hidden = false; $('otherday').value = target(); $('otherday').focus(); }
+    else if (el.dataset.start) doRebook(Number(el.dataset.start));
+  }
+});
+$('bar').addEventListener('click', (e) => {
+  const id = e.target.closest('button')?.id;
+  if (id === 'msend') submitModify(false);
+  else if (id === 'mconf') submitModify(true);
+  else if (id === 'mdone') {
+    commit(wrapUp(cur(), {note: $('vnote').value, visibleNote: $('nnote').value}, {now: clock()}));
+    mode = 'main';
+    render();
+    window.scrollTo(0, 0);
+  }
+});
 
 $('expire').addEventListener('change', render);
 $('reset').addEventListener('click', () => {
   store.clear();
   const q = new URLSearchParams();
-  if (params.has('now')) q.set('now', params.get('now'));
+  for (const k of ['now', 'sample']) if (params.has(k)) q.set(k, params.get(k));
   location.assign(location.pathname + (q.toString() ? '?' + q : ''));
 });
-render();
+// Demo deep links (?view=modify|wrap) go through the same openers as the buttons so their state exists.
+if (mode === 'modify') openModify(); else if (mode === 'wrap') openWrap(); else render();
 </script>
 </body>
 </html>

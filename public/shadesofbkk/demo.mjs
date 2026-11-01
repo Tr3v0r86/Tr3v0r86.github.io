@@ -39,3 +39,12 @@ export function resolveBusy(rows, today, salon) {
     return e;
   });
 }
+
+// Placeholder contact and place details. Every line is replaced at the owner sit-down; the launch gate removes this block with the demo banner.
+export const WA_NUMBER = '66800000000'; // [placeholder]
+export const WA_URL = 'https://wa.me/' + WA_NUMBER; // [placeholder]
+export const AREA = 'Sathorn'; // [placeholder]
+export const ADDRESS = '12 Soi Example, Sathorn, Bangkok 10120'; // [placeholder]
+export const LOOK_FOR = 'the green door next to the coffee cart, second floor'; // [placeholder]
+export const MAP_URL = 'https://maps.google.com/?q=Bangkok'; // [placeholder]
+export const IG_URL = 'https://www.instagram.com/shadesofbkk/'; // [placeholder]
