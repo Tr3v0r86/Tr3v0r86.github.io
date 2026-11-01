@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Book your chair</title>
+<link rel="preload" href="fonts/fraunces-opsz.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="demo" role="note">
+  <div>
+    <p>Demo. Prices and times are placeholders until the menu is final.</p>
+    <div class="tools">
+      <label><input type="checkbox" id="fail"> Simulate lookup failure</label>
+      <button type="button" id="reset">Reset demo</button>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+  <div class="strip" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  <p class="brand">Shades of BKK</p>
+
+  <div id="flow">
+    <h1>Book your chair.</h1>
+    <p class="sub">Pick what you need, pick a time. The slot is the real length of the job.</p>
+
+    <form id="form" novalidate>
+      <fieldset id="svcs">
+        <legend>What do you need?</legend>
+        <div id="mains"></div>
+        <p class="err" id="err-services" role="alert"></p>
+      </fieldset>
+
+      <fieldset id="addons" hidden>
+        <legend>Add to it</legend>
+        <div id="addon-rows"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Day</legend>
+        <p class="muted" id="range"></p>
+        <div class="days" id="days"></div>
+      </fieldset>
+
+      <fieldset id="slotset">
+        <legend>Time</legend>
+        <div id="slotbox" aria-live="polite"></div>
+        <p class="err" id="err-slot" role="alert"></p>
+      </fieldset>
+
+      <fieldset>
+        <legend>Your details</legend>
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" autocomplete="name" aria-describedby="err-name">
+          <p class="err" id="err-name"></p>
+        </div>
+        <div class="field">
+          <label for="phone">WhatsApp number</label>
+          <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" aria-describedby="err-phone">
+          <p class="err" id="err-phone"></p>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" aria-describedby="err-email">
+          <p class="err" id="err-email"></p>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+
+  <div id="done" hidden></div>
+</main>
+
+<div class="bar" id="bar">
+  <div>
+    <div class="total" aria-live="polite"><strong id="thb"></strong><span id="dur"></span></div>
+    <button class="btn cta" id="book" type="submit" form="form">Book</button>
+  </div>
+</div>
+
+<script type="module">
+import {computeSlots, isClosedDay, resolveBusy, parseNow, nextDays, dayOf, dayLabel, timeLabel, durationLabel, thbLabel} from './slots.mjs';
+import {initialState, reduce, addonsVisible, totals, normalisePhone, effectiveStatus, accept} from './state.mjs';
+
+const KEY = 'shadesofbkk.booking';
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+const store = {
+  get() { try { return JSON.parse(sessionStorage.getItem(KEY)); } catch { return null; } },
+  set(b) { try { sessionStorage.setItem(KEY, JSON.stringify(b)); } catch { /* private mode: booking lives in memory only */ } },
+  clear() { try { sessionStorage.removeItem(KEY); } catch { /* nothing to clear */ } },
+};
+const icons = {
+  check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>',
+  clock: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>',
+  calendar: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2v4M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>',
+};
+
+const params = new URLSearchParams(location.search);
+const now = parseNow(location.search, Date.now());
+const getJSON = (url) => fetch(url).then((r) => { if (!r.ok) throw new Error(url); return r.json(); });
+let menu, clients;
+try {
+  [menu, clients] = await Promise.all([getJSON('menu.placeholder.json'), getJSON('clients.placeholder.json')]);
+} catch {
+  $('flow').innerHTML = '<h1>Times could not load</h1><p>Reload the page to try again.</p>';
+  $('bar').hidden = true;
+  throw new Error('menu failed to load');
+}
+const {salon, services} = menu;
+const owner = salon.owner_name;
+
+let state = {...initialState, booking: store.get()};
+let busy = null, busyFail = false, busyVersion = 0, known = false, shownKey = '';
+
+const dispatch = (action) => { state = reduce(state, {menu, ...action}); render(); };
+const isKnown = () => clients.includes(normalisePhone(state.phone) || '');
+const minutesNow = () => totals(state.selected, menu).minutes;
+
+// ---- static pieces: services and days ----
+const row = (s) => `<label class="svc${s.consult_first ? ' off' : ''}"><input type="checkbox" value="${esc(s.id)}"${s.consult_first ? ' disabled' : ''}>`
+  + `<span class="sw" aria-hidden="true">${(s.swatch || []).map((c) => `<i style="background:var(--shade-${esc(c)})"></i>`).join('')}</span>`
+  + `<span><span class="nm">${esc(s.name)}</span><span class="meta">${s.consult_first ? 'Message ' + esc(owner) + ' first' : durationLabel(s.minutes)}</span></span>`
+  + `<span class="price">${s.consult_first ? '' : thbLabel(s.price_thb)}</span></label>`;
+$('mains').innerHTML = services.filter((s) => !s.addon_only).map(row).join('');
+$('addon-rows').innerHTML = services.filter((s) => s.addon_only).map(row).join('');
+
+const days = nextDays(now, salon.max_days_ahead);
+const [d0, dN] = [days[0], days[days.length - 1]];
+$('range').textContent = `${dayLabel(d0)} to ${dayLabel(dN)}`;
+$('days').innerHTML = days.map((d) => `<label class="pick day"><input type="radio" name="day" value="${d}" aria-label="${dayLabel(d)}"><span class="vis" aria-hidden="true">${dayLabel(d).split(' ')[0]}<strong>${Number(d.slice(8))}</strong></span></label>`).join('');
+
+// ---- slots ----
+const slotArgs = () => ({day: state.day, salon, events: busy, totalMinutes: minutesNow(), now, known});
+function slotsView() {
+  if (busyFail) return '<p class="state-line">Times could not load</p><button type="button" class="btn quiet" id="retry">Retry</button>';
+  if (!busy) return '<p class="muted">Loading times.</p>';
+  if (!minutesNow()) return '<p class="muted">Choose a service to see times.</p>';
+  if (!state.day) return '<p class="muted">Choose a day to see times.</p>';
+  if (isClosedDay({day: state.day, salon, events: busy})) return '<p class="state-line">Closed</p>';
+  const slots = computeSlots(slotArgs());
+  if (!slots.some((s) => s.ok)) return '<p class="state-line">Fully booked</p><p class="muted">Try another day.</p>';
+  return '<div class="slots">' + slots.map((s) => `<label class="pick slot"><input type="radio" name="slot" value="${s.start}"${s.ok ? '' : ' disabled'}${s.start === state.slot ? ' checked' : ''}><span class="vis">${s.label}</span></label>`).join('') + '</div>';
+}
+function okStarts() {
+  if (!busy || !state.day || !minutesNow() || isClosedDay({day: state.day, salon, events: busy})) return [];
+  return computeSlots(slotArgs()).filter((s) => s.ok).map((s) => s.start);
+}
+
+// ---- render ----
+function render() {
+  const showForm = !state.booking && !params.has('accept');
+  $('flow').hidden = !showForm;
+  $('bar').hidden = !showForm;
+  $('done').hidden = showForm;
+  if (showForm) renderForm(); else renderDone();
+}
+
+function renderForm() {
+  document.querySelectorAll('#svcs input, #addons input').forEach((cb) => { cb.checked = state.selected.includes(cb.value); });
+  $('addons').hidden = !addonsVisible(state.selected, menu);
+  document.querySelectorAll('#days input').forEach((r) => { r.checked = r.value === state.day; });
+
+  const key = [busyVersion, busyFail, state.day, minutesNow(), known].join('|');
+  if (key !== shownKey) {
+    shownKey = key;
+    if (state.slot !== null && !okStarts().includes(state.slot)) {
+      state = {...state, slot: null, errors: {...state.errors, slot: 'That time is no longer available. Choose another.'}};
+    }
+    $('slotbox').innerHTML = slotsView();
+  }
+
+  const t = totals(state.selected, menu);
+  $('thb').textContent = thbLabel(t.thb);
+  $('dur').textContent = t.minutes ? durationLabel(t.minutes) : 'No service yet';
+  $('book').textContent = state.slot === null ? 'Book' : 'Book ' + timeLabel(state.slot);
+
+  for (const f of ['services', 'slot', 'name', 'phone', 'email']) {
+    $('err-' + f).textContent = state.errors[f] || '';
+    if ($(f)) $(f).setAttribute('aria-invalid', state.errors[f] ? 'true' : 'false');
+  }
+}
+
+function details(b) {
+  const day = dayLabel(dayOf(b.start));
+  return `<dl class="detail">`
+    + `<div><dt>${icons.calendar} When</dt><dd>${day}, ${timeLabel(b.start)} to ${timeLabel(b.start + b.totalMinutes * 60e3)}</dd></div>`
+    + b.services.map((s) => `<div><dt>${esc(s.name)}</dt><dd>${thbLabel(s.price_thb)}</dd></div>`).join('')
+    + `<div><dt>${icons.clock} Total</dt><dd>${thbLabel(b.totalThb)}, ${durationLabel(b.totalMinutes)}</dd></div></dl>`;
+}
+
+function renderDone() {
+  const b = state.booking, el = $('done'), main = $('main');
+  main.classList.add('plain');
+  const proposed = (x) => `${dayLabel(dayOf(x.start))}, ${timeLabel(x.start)}`;
+  if (!b) { el.innerHTML = '<h1>This proposal is no longer current.</h1><p>Message ' + esc(owner) + ' on WhatsApp if you still want to book.</p>'; return; }
+  const st = effectiveStatus(b, now);
+  if (params.has('accept')) {
+    if (st === 'proposed' && params.get('accept') === b.acceptToken) {
+      el.innerHTML = `<h1>${esc(owner)} proposed ${proposed(b)}</h1><p>Accept it to confirm your booking.</p>`
+        + details(b) + '<p class="err" id="accept-err"></p><div class="actions"><button type="button" class="btn" id="accept">Accept</button></div>';
+      $('accept').addEventListener('click', onAccept);
+    } else {
+      el.innerHTML = '<h1>This proposal is no longer current.</h1><p>Message ' + esc(owner) + ' on WhatsApp if you still want to book.</p>';
+    }
+    return;
+  }
+  const held = b.expiresAt === null ? '' : timeLabel(b.expiresAt) + (dayOf(b.expiresAt) !== dayOf(now) ? ' on ' + dayLabel(dayOf(b.expiresAt)) : '');
+  const view = {
+    confirmed: ['ok', icons.check, 'Confirmed.', 'A calendar invite with the studio address is on its way to your email.', true],
+    pending: ['hold', icons.clock, 'Request received.', `The slot is held until ${held}; ${esc(owner)} will confirm on WhatsApp.`, true],
+    proposed: ['hold', icons.clock, esc(owner) + ' proposed another time.', `${proposed(b)}. ${esc(owner)} will send you a link on WhatsApp to accept it.`, false],
+    declined: ['err', '', 'Not confirmed.', `${esc(owner)} could not fit this booking. Message ${esc(owner)} on WhatsApp to find another time.`, false],
+    expired: ['err', '', 'Request expired.', `The hold ended before ${esc(owner)} could confirm.`, false],
+  }[st];
+  el.innerHTML = `<h1 class="status ${view[0]}">${view[1]}${view[2]}</h1><p>${view[3]}</p>` + (view[4] ? details(b) : '');
+}
+
+async function onAccept() {
+  if (!busy) await loadBusy();
+  if (!busy) { $('accept-err').textContent = 'Times could not load. Try again.'; return; }
+  const r = accept(state.booking, params.get('accept'), {now, busy});
+  if (r.outcome === 'ok') {
+    store.set(r.booking);
+    params.delete('accept');
+    history.replaceState(null, '', location.pathname + (params.toString() ? '?' + params : ''));
+    state = {...state, booking: r.booking};
+  } else {
+    $('done').innerHTML = '<h1>This proposal is no longer current.</h1><p>Message ' + esc(owner) + ' on WhatsApp if you still want to book.</p>';
+    return;
+  }
+  render();
+}
+
+async function loadBusy() {
+  busy = null; busyFail = false; busyVersion++;
+  render();
+  try {
+    if ($('fail').checked) throw new Error('Simulated lookup failure');
+    busy = resolveBusy(await getJSON('busy.placeholder.json'), dayOf(now));
+  } catch { busyFail = true; }
+  busyVersion++;
+  render();
+}
+
+// ---- events ----
+$('mains').addEventListener('change', (e) => dispatch({type: 'toggle', id: e.target.value}));
+$('addon-rows').addEventListener('change', (e) => dispatch({type: 'toggle', id: e.target.value}));
+$('days').addEventListener('change', (e) => dispatch({type: 'day', day: e.target.value}));
+$('slotbox').addEventListener('change', (e) => { if (e.target.name === 'slot') dispatch({type: 'slot', start: Number(e.target.value)}); });
+$('slotbox').addEventListener('click', (e) => { if (e.target.id === 'retry') loadBusy(); });
+for (const f of ['name', 'phone', 'email']) $(f).addEventListener('input', (e) => dispatch({type: 'field', name: f, value: e.target.value}));
+// Notice depends on whether the typed number is a known client: re-evaluate when the field is committed, not per keystroke.
+$('phone').addEventListener('change', () => { known = isKnown(); render(); });
+$('fail').addEventListener('change', (e) => { if (e.target.checked) loadBusy(); });
+$('reset').addEventListener('click', () => {
+  store.clear();
+  const q = new URLSearchParams();
+  if (params.has('now')) q.set('now', params.get('now'));
+  location.assign(location.pathname + (q.toString() ? '?' + q : ''));
+});
+$('form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  known = isKnown();
+  dispatch({type: 'submit', okStarts: okStarts(), clients, now, salon, id: 'b' + now.toString(36) + Math.random().toString(36).slice(2, 8)});
+  if (state.booking) { $('book').disabled = true; store.set(state.booking); render(); return; }
+  const first = ['services', 'slot', 'name', 'phone', 'email'].find((f) => state.errors[f]);
+  const target = {
+    services: () => document.querySelector('#svcs input:not(:disabled)'),
+    slot: () => document.querySelector('#slotbox input:not(:disabled)') || document.querySelector('#days input'),
+    name: () => $('name'), phone: () => $('phone'), email: () => $('email'),
+  }[first];
+  if (target) target()?.focus();
+});
+
+render();
+loadBusy();
+</script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Booking request</title>
+<link rel="preload" href="fonts/fraunces-opsz.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="demo" role="note">
+  <div>
+    <p>Demo. Prices and times are placeholders until the menu is final.</p>
+    <div class="tools">
+      <label><input type="checkbox" id="expire"> Simulate expiry</label>
+      <button type="button" id="reset">Reset demo</button>
+    </div>
+  </div>
+</div>
+
+<main class="plain" id="main">
+  <div class="strip" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  <p class="brand">Shades of BKK</p>
+  <div id="view"><p class="muted">Loading.</p></div>
+</main>
+
+<script type="module">
+import {resolveBusy, parseNow, nextFits, dayOf, dayLabel, timeLabel, durationLabel, thbLabel} from './slots.mjs';
+import {ownerAct, effectiveStatus} from './state.mjs';
+
+const KEY = 'shadesofbkk.booking';
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+const store = {
+  get() { try { return JSON.parse(sessionStorage.getItem(KEY)); } catch { return null; } },
+  set(b) { try { sessionStorage.setItem(KEY, JSON.stringify(b)); } catch { /* private mode: state lives in memory only */ } },
+  clear() { try { sessionStorage.removeItem(KEY); } catch { /* nothing to clear */ } },
+};
+const icons = {
+  check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>',
+  clock: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>',
+};
+
+const params = new URLSearchParams(location.search);
+const now = parseNow(location.search, Date.now());
+const getJSON = (url) => fetch(url).then((r) => { if (!r.ok) throw new Error(url); return r.json(); });
+const [menu, busyRows] = await Promise.all([getJSON('menu.placeholder.json'), getJSON('busy.placeholder.json')]).catch(() => []);
+if (!menu) {
+  $('view').innerHTML = '<h1>Times could not load</h1><p>Reload the page to try again.</p>';
+  throw new Error('data failed to load');
+}
+const {salon, services} = menu;
+const busy = resolveBusy(busyRows, dayOf(now));
+
+// The booking: whatever the client page stored, else the sample hold that also sits in the placeholder calendar.
+function sample() {
+  const hold = busy.find((e) => e.id === 'demo-alex');
+  const start = Date.parse(hold.start.dateTime), end = Date.parse(hold.end.dateTime);
+  const picked = ['cut', 'blowdry'].map((id) => services.find((s) => s.id === id));
+  return {
+    id: 'demo-alex', services: picked.map((s) => ({id: s.id, name: s.name, minutes: s.minutes, price_thb: s.price_thb})),
+    start, end, totalMinutes: picked.reduce((n, s) => n + s.minutes, 0), totalThb: picked.reduce((n, s) => n + s.price_thb, 0),
+    name: 'Alex', phone: '+66800000001', email: 'alex@example.com', status: 'pending',
+    expiresAt: now + (11 * 60 + 40) * 60e3, acceptToken: 'demo-alex:' + start, createdAt: now,
+  };
+}
+let booking = store.get() || sample();
+let proposing = false, taken = false;
+
+// "Simulate expiry" moves this page's clock to the hold's expiry. ponytail: expiry is a clock comparison, no timer.
+const clock = () => ($('expire').checked && booking.expiresAt !== null ? booking.expiresAt : now);
+const when = (b) => `${dayLabel(dayOf(b.start))}, ${timeLabel(b.start)}`;
+const acceptLink = (b) => {
+  const q = new URLSearchParams({accept: b.acceptToken});
+  if (params.has('now')) q.set('now', params.get('now'));
+  return 'index.html?' + q;
+};
+
+function act(action) {
+  const r = ownerAct(booking, action, {now: clock(), busy, salon});
+  if (r.outcome === 'taken') { taken = true; proposing = true; } else { taken = false; proposing = false; }
+  booking = r.booking;
+  store.set(booking);
+  render();
+}
+
+function render() {
+  const b = booking, st = effectiveStatus(b, clock());
+  const rows = `<dl class="detail">`
+    + `<div><dt>Name</dt><dd>${esc(b.name)}</dd></div>`
+    + `<div><dt>WhatsApp</dt><dd>${esc(b.phone)}</dd></div>`
+    + b.services.map((s) => `<div><dt>${esc(s.name)}</dt><dd>${thbLabel(s.price_thb)}</dd></div>`).join('')
+    + `<div><dt>Total</dt><dd>${thbLabel(b.totalThb)}, ${durationLabel(b.totalMinutes)}</dd></div>`
+    + (st === 'pending' && b.expiresAt !== null ? `<div><dt>${icons.clock} Hold</dt><dd>Expires in ${durationLabel(Math.max(0, Math.round((b.expiresAt - now) / 60e3)))}</dd></div>` : '')
+    + `</dl>`;
+  let body = '';
+  if (st === 'pending' || st === 'proposed') {
+    if (st === 'proposed') {
+      body += `<p class="status hold">${icons.clock} Proposed ${when(b)}, waiting for ${esc(b.name)}</p>`
+        + `<p>Send ${esc(b.name)} this link to accept:</p><p class="linkbox"><a href="${esc(acceptLink(b))}">${esc(acceptLink(b))}</a></p>`;
+    }
+    if (taken) body += '<p class="err">Slot now taken</p>';
+    body += '<div class="actions">'
+      + (st === 'pending' ? '<button type="button" class="btn" id="confirm">Confirm</button>' : '')
+      + `<button type="button" class="btn quiet" id="propose">${st === 'proposed' ? 'Propose again' : 'Propose another time'}</button>`
+      + '<button type="button" class="btn quiet" id="decline">Decline</button></div>';
+    if (proposing) {
+      const fits = nextFits({salon, events: busy, totalMinutes: b.totalMinutes, now: clock(), known: true, excludeId: b.id}, b.start);
+      body += '<div class="proposals" id="proposals">' + (fits.length
+        ? fits.map((s) => `<button type="button" class="btn quiet" data-start="${s.start}">${dayLabel(dayOf(s.start))}, ${s.label}</button>`).join('')
+        : '<p class="muted">No free time in the next two weeks.</p>') + '</div>';
+    }
+  } else {
+    const line = {confirmed: `<p class="status ok">${icons.check} Confirmed.</p>`, declined: '<p class="status err">Declined.</p>', expired: '<p class="status err">Expired. The slot is free again.</p>'}[st];
+    body += line;
+  }
+  $('view').innerHTML = `<h1>${esc(b.name)} wants ${when(b)}.</h1>` + rows + body
+    + '<p class="note">Events titled "Closed" and all-day events block the whole day in the calendar. Timed events marked free do not.</p>';
+  $('confirm')?.addEventListener('click', () => act({type: 'confirm'}));
+  $('decline')?.addEventListener('click', () => act({type: 'decline'}));
+  $('propose')?.addEventListener('click', () => { proposing = true; taken = false; render(); $('proposals')?.querySelector('button')?.focus(); });
+  $('proposals')?.addEventListener('click', (e) => { if (e.target.dataset?.start) act({type: 'propose', start: Number(e.target.dataset.start)}); });
+}
+
+$('expire').addEventListener('change', render);
+$('reset').addEventListener('click', () => {
+  store.clear();
+  const q = new URLSearchParams();
+  if (params.has('now')) q.set('now', params.get('now'));
+  location.assign(location.pathname + (q.toString() ? '?' + q : ''));
+});
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{
+  "salon": {
+    "open_hours": {
+      "0": [["10:00", "19:00"]],
+      "2": [["10:00", "19:00"]],
+      "3": [["10:00", "19:00"]],
+      "4": [["10:00", "19:00"]],
+      "5": [["10:00", "19:00"]],
+      "6": [["10:00", "19:00"]]
+    },
+    "slot_step_min": 30,
+    "buffer_min": 15,
+    "min_notice_min": 120,
+    "min_notice_unknown_min": 360,
+    "max_days_ahead": 14,
+    "hold_hours": 12,
+    "confirm_lead_min": 120,
+    "owner_name": "Jim"
+  },
+  "services": [
+    {"id": "cut", "name": "Cut & style", "minutes": 45, "price_thb": 800, "addon_only": false, "consult_first": false, "swatch": ["chestnut"]},
+    {"id": "blowdry", "name": "Blow-dry", "minutes": 60, "price_thb": 900, "addon_only": false, "consult_first": false, "swatch": ["chocolate"]},
+    {"id": "colour", "name": "Colour", "minutes": 120, "price_thb": 2500, "addon_only": false, "consult_first": false, "swatch": ["chestnut", "caramel"]},
+    {"id": "highlights", "name": "Highlights", "minutes": 150, "price_thb": 3200, "addon_only": false, "consult_first": false, "swatch": ["caramel", "honey"]},
+    {"id": "balayage", "name": "Balayage", "minutes": 180, "price_thb": 4200, "addon_only": false, "consult_first": false, "swatch": ["chocolate", "honey"]},
+    {"id": "treatment", "name": "Treatment", "minutes": 20, "price_thb": 500, "addon_only": true, "consult_first": false, "swatch": ["ash"]},
+    {"id": "toner", "name": "Toner", "minutes": 20, "price_thb": 400, "addon_only": true, "consult_first": false, "swatch": ["ash", "honey"]},
+    {"id": "fringe", "name": "Fringe trim", "minutes": 10, "price_thb": 200, "addon_only": true, "consult_first": false, "swatch": ["ash"]},
+    {"id": "correction", "name": "Colour correction", "minutes": 240, "price_thb": 6000, "addon_only": false, "consult_first": true, "swatch": ["espresso", "ash"]}
+  ]
+}
