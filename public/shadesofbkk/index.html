@@ -7,9 +7,10 @@
 <title>Book your chair</title>
 <link rel="preload" href="fonts/young-serif.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
+<noscript><style>#flow,#bar{display:none}</style></noscript>
 </head>
 <body>
-<div class="demo" role="note"><p>Demo. Prices and times are placeholders until the menu is final.</p></div>
+<div class="demo" role="note"><p>Demo. Prices, times, address and the WhatsApp number are placeholders.</p></div>
 
 <main id="main">
   <div class="strip" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
@@ -101,7 +102,7 @@
 <div class="bar" id="bar">
   <div>
     <div class="total" aria-live="polite"><strong id="thb"></strong><span id="dur"></span></div>
-    <button class="btn cta" id="book" type="submit" form="form">Request</button>
+    <button class="btn cta idle" id="book" type="submit" form="form" aria-disabled="true">Pick a time</button>
     <p class="policy">Changes and cancellations: message James; he'll sort it.</p>
   </div>
 </div>
@@ -109,7 +110,7 @@
 <script type="module">
 import {computeSlots, isClosedDay, nextDays, nextFits, tooLong, dayStart, addDays, dayOf, dayLabel, timeLabel, durationLabel, thbLabel} from './slots.mjs';
 import {parseNow, resolveBusy, WA_URL, AREA, ADDRESS, LOOK_FOR, MAP_URL, IG_URL} from './demo.mjs';
-import {initialState, reduce, addonsVisible, totals, normalisePhone, effectiveStatus, current, accept, findClient, prefill} from './state.mjs';
+import {initialState, reduce, addonsVisible, totals, normalisePhone, effectiveStatus, current, accept, findClient, prefill, formatPhone, holds} from './state.mjs';
 
 const KEY = 'shadesofbkk.booking';
 const $ = (id) => document.getElementById(id);
@@ -121,6 +122,7 @@ const store = {
 };
 const icons = {
   clock: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>',
+  chat: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.8A8 8 0 1 1 21 12z"/></svg>',
   calendar: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2v4M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>',
 };
 // The WhatsApp door: one helper, on every end state (D1).
@@ -173,7 +175,7 @@ $('svc-note').textContent = `Includes wash and finish. Prices are for shoulder-l
 
 const swatch = (s) => `<span class="sw" aria-hidden="true">${(s.swatch || []).map((c) => `<i style="background:var(--shade-${esc(c)})"></i>`).join('')}</span>`;
 const row = (s) => (s.consult_first
-  ? `<a class="svc off" href="${esc(WA_URL)}">${swatch(s)}<span><span class="nm">${esc(s.name)}</span><span class="meta">${esc(s.desc)}. Message ${esc(owner)} first.</span></span><span class="price">WhatsApp</span></a>`
+  ? `<a class="svc off" href="${esc(WA_URL)}"><span class="ico">${icons.chat}</span>${swatch(s)}<span><span class="nm">${esc(s.name)}</span><span class="meta">${esc(s.desc)}. Message ${esc(owner)} first.</span></span><span class="price">WhatsApp</span></a>`
   : `<label class="svc"><input type="checkbox" value="${esc(s.id)}">${swatch(s)}<span><span class="nm">${esc(s.name)}</span><span class="meta">${esc(s.desc)}</span></span>`
     + `<span class="price">${thbLabel(s.price_thb)}<small>${durationLabel(s.minutes)}</small></span></label>`);
 $('mains').innerHTML = services.filter((s) => !s.addon_only).map(row).join('');
@@ -188,18 +190,23 @@ $('days').innerHTML = days.map((d) => `<label class="pick day" data-day="${d}"><
 const slotArgs = () => ({day: state.day, salon, events: busy, totalMinutes: minutesNow(), now, known});
 const inPicker = (slot) => (slot && days.includes(dayOf(slot.start)) ? slot : null);
 const stepBtn = (label, s) => `<button type="button" class="btn quiet nextbtn" data-day="${dayOf(s.start)}" data-start="${s.start}">${label}: ${dayLabel(dayOf(s.start))}, ${s.label}</button>`;
+// 'closed' | 'full' | 'ok' for the chosen day once a service, a day and the calendar are known; else null.
+function dayStatus() {
+  if (!busy || !minutesNow() || tooLong(minutesNow(), salon) || !state.day) return null;
+  if (isClosedDay({day: state.day, salon, events: busy})) return 'closed';
+  return computeSlots(slotArgs()).some((s) => s.ok) ? 'ok' : 'full';
+}
+const nextAfterDay = () => inPicker(nextFits({salon, events: busy, totalMinutes: minutesNow(), now, known}, dayStart(addDays(state.day, 1)) - 1, 1)[0]);
 function slotsView() {
   if (busyFail) return `<p class="state-line">Times could not load</p><button type="button" class="btn quiet" id="retry">Retry</button><p class="wa-line">${wa('Or message ' + esc(owner) + ' on WhatsApp')}</p>`;
   if (!busy) return '<p class="loading">Loading times.</p>';
   if (!minutesNow()) return '<p class="muted">Choose a service to see times.</p>';
   if (tooLong(minutesNow(), salon)) return `<p class="state-line">Too long for one day.</p>${wa('Message ' + esc(owner))}`;
   if (!state.day) return '<p class="muted">Choose a day to see times.</p>';
-  if (isClosedDay({day: state.day, salon, events: busy})) return '<p class="state-line">Closed</p>';
+  const status = dayStatus(), next = status === 'ok' ? null : nextAfterDay();
+  if (status === 'closed') return '<p class="state-line">Closed</p>' + (next ? stepBtn('Next open', next) : '');
   const slots = computeSlots(slotArgs());
-  if (!slots.some((s) => s.ok)) {
-    const next = inPicker(nextFits({salon, events: busy, totalMinutes: minutesNow(), now, known}, dayStart(addDays(state.day, 1)) - 1, 1)[0]);
-    return '<p class="state-line">Fully booked</p>' + (next ? stepBtn('Next free', next) : '<p class="muted">Try another day.</p>');
-  }
+  if (status === 'full') return '<p class="state-line">Fully booked</p>' + (next ? stepBtn('Next free', next) : '<p class="muted">Try another day.</p>');
   return '<div class="slots">' + slots.map((s) => `<label class="pick slot"><input type="radio" name="slot" value="${s.start}"${s.ok ? '' : ' disabled'}${s.start === state.slot ? ' checked' : ''}><span class="vis">${s.label}</span></label>`).join('') + '</div>';
 }
 function okStarts() {
@@ -240,7 +247,7 @@ function renderForm() {
   document.querySelectorAll('#slotbox input[name=slot]').forEach((r) => { r.checked = Number(r.value) === state.slot; }); // a jump button sets the slot without a click on the radio
 
   // "Next available" above the days: the first time that fits, one tap.
-  const next = busy && minutesNow() && !tooLong(minutesNow(), salon) ? inPicker(nextFits({salon, events: busy, totalMinutes: minutesNow(), now, known}, now, 1)[0]) : null;
+  const next = busy && minutesNow() && !tooLong(minutesNow(), salon) && dayStatus() !== 'full' ? inPicker(nextFits({salon, events: busy, totalMinutes: minutesNow(), now, known}, now, 1)[0]) : null;
   const nextHtml = next ? stepBtn('Next available', next) : '';
   if (nextHtml !== shownNext) { shownNext = nextHtml; $('nextavail').innerHTML = nextHtml; }
 
@@ -252,7 +259,10 @@ function renderForm() {
   const t = totals(state.selected, menu);
   $('thb').textContent = thbLabel(t.thb);
   $('dur').textContent = t.minutes ? durationLabel(t.minutes) : 'No service yet';
-  $('book').textContent = (known ? 'Book' : 'Request') + (state.slot === null ? '' : ' ' + timeLabel(state.slot));
+  // No time chosen: the button is quiet and aria-disabled (still focusable; a press shows the reason) and says why.
+  $('book').textContent = state.slot === null ? 'Pick a time' : (known ? 'Book ' : 'Request ') + timeLabel(state.slot);
+  $('book').classList.toggle('idle', state.slot === null);
+  $('book').setAttribute('aria-disabled', state.slot === null ? 'true' : 'false');
 
   for (const f of ['services', 'slot', 'name', 'phone', 'email']) {
     $('err-' + f).textContent = state.errors[f] || '';
@@ -260,21 +270,36 @@ function renderForm() {
   }
 }
 
-function details(b) {
-  const day = dayLabel(dayOf(b.start));
+const when = (x) => `${dayLabel(dayOf(x.start))}, ${timeLabel(x.start)}`;
+const endOf = (x) => timeLabel(x.start + x.totalMinutes * 60e3);
+function details(b, withWhen = true) {
   const row = (k, v) => `<div><dt>${k}</dt><dd>${v}</dd></div>`;
   return '<dl class="detail">'
-    + row(icons.calendar + ' When', `${day}, ${timeLabel(b.start)} to ${timeLabel(b.start + b.totalMinutes * 60e3)}`)
+    + (withWhen ? row(icons.calendar + ' When', `${dayLabel(dayOf(b.start))}, ${timeLabel(b.start)} to ${endOf(b)}`) : '')
     + b.services.map((s) => row(esc(s.name), b.consult ? '' : thbLabel(s.price_thb))).join('')
     + row(icons.clock + ' Total', `${thbLabel(b.totalThb)}, ${durationLabel(b.totalMinutes)}`)
-    + row('Name', esc(b.name)) + row('WhatsApp', esc(b.phone)) + (b.email ? row('Email', esc(b.email)) : '')
+    + row('Name', esc(b.name)) + row('WhatsApp', esc(formatPhone(b.phone))) + (b.email ? row('Email', esc(b.email)) : '')
     + (b.note ? row('Your note', esc(b.note)) : '') + (b.ownerNote ? row('Note from ' + esc(owner), esc(b.ownerNote)) : '')
     + '</dl>' + (b.nextTime ? `<p class="next">Next time: ${esc(b.nextTime)}</p>` : '');
+}
+// One line per change between the confirmed booking and the suggested one.
+function diff(a, b) {
+  const has = (x, id) => x.services.some((s) => s.id === id), out = [];
+  const added = b.services.filter((s) => !has(a, s.id)).map((s) => s.name), removed = a.services.filter((s) => !has(b, s.id)).map((s) => s.name);
+  if (added.length) out.push('Added: ' + added.join(', '));
+  if (removed.length) out.push('Removed: ' + removed.join(', '));
+  if (a.start !== b.start) out.push('New time: ' + when(b));
+  if (a.totalThb !== b.totalThb) out.push('New total: ' + thbLabel(b.totalThb));
+  if (a.start + a.totalMinutes * 60e3 !== b.start + b.totalMinutes * 60e3) out.push('New end: ' + endOf(b));
+  if ((a.ownerNote || '') !== (b.ownerNote || '') && b.ownerNote) out.push(`Note from ${owner}: ${b.ownerNote}`);
+  return '<ul class="diff">' + (out.length ? out : ['Small changes to the details']).map((l) => `<li>${esc(l)}</li>`).join('') + '</ul>';
 }
 const where = () => `<div class="where"><p>${esc(ADDRESS)}</p><p>What to look for: ${esc(LOOK_FOR)}</p><a class="link44" href="${esc(MAP_URL)}">Open in Maps</a></div>`;
 const moveLine = () => `<p class="muted">Need to move it?</p>${wa('Message ' + esc(owner) + ' on WhatsApp')}`;
 const another = (label = 'Book another') => `<div class="actions"><a class="btn quiet full" href="${esc(keep())}">${label}</a></div>`;
-const stale = () => `<h1>This proposal is no longer current.</h1><p>${wa('Message ' + esc(owner) + ' on WhatsApp')} if you still want to book.</p>`;
+const stale = () => `<h1 tabindex="-1">This proposal is no longer current.</h1><p>${wa('Message ' + esc(owner) + ' on WhatsApp')} if you still want to book.</p>`;
+const hero = (b) => `<p class="when">${when(b)}</p><p class="ready">Ready by ${endOf(b)}</p>`;
+const focusH1 = () => { const h = document.querySelector('#done:not([hidden]) h1, #flow:not([hidden]) h1'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({preventScroll: true}); } };
 
 function renderDone() {
   const raw = state.booking, el = $('done');
@@ -282,9 +307,9 @@ function renderDone() {
   if (params.has('accept')) {
     const st = effectiveStatus(raw, now);
     if (st === 'proposed' && params.get('accept') === raw.acceptToken) {
-      const when = (x) => `${dayLabel(dayOf(x.start))}, ${timeLabel(x.start)}`;
-      el.innerHTML = `<h1>${esc(owner)} proposed ${when(raw)}</h1><p>Accept it to confirm your booking.</p>`
-        + (raw.prior ? `<p class="muted">Your current time, ${when(raw.prior)}, stays held until you accept or this offer lapses.</p>` : '')
+      el.innerHTML = (raw.prior
+        ? `<h1 tabindex="-1">${esc(owner)} suggested a change to your booking</h1>${diff(raw.prior, raw)}<p class="muted">Your current time, ${when(raw.prior)}, stays held until you accept or this offer lapses.</p>`
+        : `<h1 tabindex="-1">${esc(owner)} proposed ${when(raw)}</h1><p>Accept it to confirm your booking.</p>`)
         + details(raw) + '<p class="err" id="accept-err"></p><div class="actions"><button type="button" class="btn full" id="accept">Accept</button></div>'
         + `<p class="muted">Not right?</p>${wa('Message ' + esc(owner) + ' on WhatsApp')}`;
       $('accept').addEventListener('click', onAccept);
@@ -296,15 +321,25 @@ function renderDone() {
   const b = current(raw, now), st = effectiveStatus(b, now);
   const held = b.expiresAt === null ? '' : timeLabel(b.expiresAt) + (dayOf(b.expiresAt) !== dayOf(now) ? ' on ' + dayLabel(dayOf(b.expiresAt)) : '');
   const isKnown = !!findClient(clients, {phone: b.phone});
+  const move = wa('Message ' + esc(owner) + ' on WhatsApp');
+  const lapsed = raw.prior && raw.status === 'proposed' && effectiveStatus(raw, now) === 'expired';
+  if (raw.prior && raw.status === 'proposed' && st === 'proposed') {
+    el.innerHTML = `<h1 class="status ok" tabindex="-1">Confirmed: ${when(raw.prior)}</h1><p class="ready">Ready by ${endOf(raw.prior)}</p>` + details(raw.prior, false) + where() + moveLine()
+      + `<h2>${esc(owner)} suggested a change</h2>${diff(raw.prior, raw)}<p class="muted">${esc(owner)} will send you a link on WhatsApp to accept it.</p>`;
+    return;
+  }
   const view = {
-    confirmed: `<h1 class="status ok">Confirmed.</h1><p>${isKnown ? esc(owner) + ' knows you, so no waiting.' : esc(owner) + ' has confirmed your booking.'}</p>`
-      + `<p>${b.email ? 'A calendar invite with the studio address is on its way to your email.' : esc(owner) + ' will send the details on WhatsApp.'}</p>` + details(b) + where() + moveLine() + another(),
-    pending: `<h1 class="status hold">Request received.</h1><p>${esc(owner)} confirms new clients on WhatsApp, usually within the hour.</p>`
-      + `<p>We don't recognise this number yet, so he'll confirm on WhatsApp and by email. The slot is held until ${held}.</p>` + details(b) + where() + moveLine() + another(),
-    proposed: `<h1 class="status hold">${esc(owner)} proposed another time.</h1><p>${esc(owner)} will send you a link on WhatsApp to accept it.</p>` + details(b) + wa('Message ' + esc(owner) + ' on WhatsApp'),
-    declined: `<h1 class="status err">Not confirmed.</h1><p>${esc(owner)} could not fit this booking.</p>` + wa('Message ' + esc(owner) + ' on WhatsApp to find another time') + another('Book for another time'),
-    expired: `<h1 class="status err">Request expired.</h1><p>The hold ended before ${esc(owner)} could confirm.</p>` + wa('Message ' + esc(owner) + ' on WhatsApp') + another('Book for another time'),
-    done: `<h1 class="status ok">Thanks for coming in.</h1>` + (b.nextTime ? `<p class="next">Next time: ${esc(b.nextTime)}</p>` : '') + wa('Message ' + esc(owner) + ' on WhatsApp') + another(),
+    confirmed: `<h1 class="status ok" tabindex="-1">Confirmed.</h1>` + hero(b) + `<p>${isKnown ? esc(owner) + ' knows you, so no waiting.' : esc(owner) + ' has confirmed your booking.'}</p>`
+      + `<p>${b.email ? 'A calendar invite with the studio address is on its way to your email.' : esc(owner) + ' will send the details on WhatsApp.'}</p>`
+      + (lapsed ? `<p class="muted">${esc(owner)}'s suggested change has lapsed; your booking on ${when(b)} stands.</p>` : '')
+      + details(b, false) + where() + moveLine() + another(),
+    pending: `<h1 class="status hold" tabindex="-1">Request received.</h1>` + hero(b)
+      + `<p>We don't recognise this number yet, so ${esc(owner)} will confirm on WhatsApp and by email, usually within the hour. If he hasn't confirmed by ${held}, the time is released; please don't come in until it's confirmed.</p>`
+      + details(b, false) + where() + moveLine() + another(),
+    proposed: `<h1 class="status hold" tabindex="-1">${esc(owner)} proposed another time.</h1><p>${esc(owner)} will send you a link on WhatsApp to accept it.</p>` + details(b) + move,
+    declined: `<h1 class="status err" tabindex="-1">Not confirmed.</h1><p>${esc(owner)} could not fit this booking.</p>` + wa('Message ' + esc(owner) + ' on WhatsApp to find another time') + another('Book for another time'),
+    expired: `<h1 class="status err" tabindex="-1">Request expired.</h1><p>The hold ended before ${esc(owner)} could confirm.</p>` + move + another('Book for another time'),
+    done: `<h1 class="status ok" tabindex="-1">Thanks for coming in.</h1>` + (b.nextTime ? `<p class="next">Next time: ${esc(b.nextTime)}</p>` : '') + move + another(),
   }[st];
   el.innerHTML = view;
 }
@@ -320,6 +355,7 @@ async function onAccept() {
   history.replaceState(null, '', keep({booking: r.booking.id}));
   state = {...state, booking: r.booking};
   render();
+  focusH1();
 }
 
 async function loadBusy() {
@@ -328,6 +364,7 @@ async function loadBusy() {
   try {
     if ($('fail').checked) throw new Error('Simulated lookup failure');
     busy = resolveBusy(await getJSON('busy.placeholder.json'), dayOf(now), salon);
+    if (stored) busy = [...busy, ...holds(stored, now)]; // a second booking in this browser sees the first one's time(s) as taken
   } catch { busyFail = true; }
   busyVersion++;
   render();
@@ -340,7 +377,9 @@ $('days').addEventListener('change', (e) => dispatch({type: 'day', day: e.target
 $('slotbox').addEventListener('change', (e) => { if (e.target.name === 'slot') dispatch({type: 'slot', start: Number(e.target.value)}); });
 const jump = (e) => {
   const b = e.target.closest('button[data-start]');
-  if (b) { dispatch({type: 'day', day: b.dataset.day}); dispatch({type: 'slot', start: Number(b.dataset.start)}); }
+  if (!b) return;
+  dispatch({type: 'day', day: b.dataset.day}); dispatch({type: 'slot', start: Number(b.dataset.start)});
+  requestAnimationFrame(() => document.querySelector('#slotbox input:checked')?.closest('label')?.scrollIntoView({block: 'center'}));
 };
 $('slotbox').addEventListener('click', (e) => { if (e.target.id === 'retry') loadBusy(); else jump(e); });
 $('nextavail').addEventListener('click', jump);
@@ -367,6 +406,7 @@ $('form').addEventListener('submit', (e) => {
     history.replaceState(null, '', keep({booking: state.booking.id}));
     render();
     window.scrollTo(0, 0);
+    focusH1();
     return;
   }
   const first = ['phone', 'services', 'slot', 'name', 'email'].find((f) => state.errors[f]);

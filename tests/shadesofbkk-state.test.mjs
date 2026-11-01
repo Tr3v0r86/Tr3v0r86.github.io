@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {initialState, reduce, addonsVisible, totals, validate, normalisePhone, effectiveStatus, ownerAct, accept, proposalOptions, findClient, prefill, tokenFor, modify, wrapUp, rebook, current} from '../public/shadesofbkk/state.mjs';
+import {initialState, reduce, addonsVisible, totals, validate, normalisePhone, effectiveStatus, ownerAct, accept, proposalOptions, findClient, prefill, tokenFor, modify, wrapUp, rebook, current, holds, formatPhone, rebookPlan} from '../public/shadesofbkk/state.mjs';
 
 const menu = JSON.parse(await readFile(new URL('../public/shadesofbkk/menu.placeholder.json', import.meta.url), 'utf8'));
 const clients = JSON.parse(await readFile(new URL('../public/shadesofbkk/clients.placeholder.json', import.meta.url), 'utf8'));
@@ -127,7 +127,7 @@ test('propose is refused for a taken time, an already-expired hold, and a finish
   assert.equal(r1.booking, pending);
   // start 1 h away: hold = start - 2 h is already in the past
   const r2 = ownerAct(pending, {type: 'propose', start: NOW + 3600e3}, ctx);
-  assert.equal(r2.outcome, 'taken');
+  assert.equal(r2.outcome, 'tooSoon');
   assert.equal(r2.booking, pending);
   for (const type of ['confirm', 'decline', 'propose']) {
     for (const status of ['confirmed', 'declined', 'expired']) {
@@ -220,7 +220,8 @@ test('modify keeps the booking\'s own slot selectable, allows off-grid starts, a
   assert.equal(plus.booking.end, START + (60 + 15) * 60e3);
   const clash = [{id: 'x', summary: 'Mia', start: {dateTime: '2026-11-07T11:00:00+07:00'}, end: {dateTime: '2026-11-07T12:00:00+07:00'}}];
   assert.equal(mod(b, {minutes: 60}, ctx({busy: clash})).outcome, 'taken', '60 + 15 min from 10:00 reaches 11:15');
-  assert.equal(mod(b, {start: NOW + 3600e3}).outcome, 'taken', 'a hold that would already be over');
+  assert.equal(mod(b, {start: NOW + 3600e3}).outcome, 'tooSoon', 'a hold that would already be over: distinct from a clash');
+  assert.equal(mod(b, {start: NOW + 3600e3, confirm: true}).outcome, 'ok', 'Save, already agreed has no hold to expire');
 });
 
 test('modify price override and consultation, and the note survives accept', () => {
@@ -328,4 +329,90 @@ test('rebook into a taken slot is refused', () => {
   const clash = [{id: 'x', summary: 'Mia', start: {dateTime: '2026-12-29T14:30:00+07:00'}, end: {dateTime: '2026-12-29T15:30:00+07:00'}}];
   const r = rebook(confirmed(), {start: next}, {...ctx({busy: clash}), id: 'b9'});
   assert.equal(r.outcome, 'taken');
+});
+
+// ---- fix round ----
+test('+660 reads as +66; a Thai number formats with spaces', () => {
+  for (const raw of ['+660812345678', '+66 (0)81 234 5678', '660812345678']) assert.equal(normalisePhone(raw), '+66812345678', raw);
+  assert.equal(formatPhone('+66812345678'), '+66 81 234 5678');
+  assert.equal(formatPhone('+447700900123'), '+447700900123');
+});
+
+test('accept token equals tokenFor(proposal); a pending token is stale after propose', () => {
+  const p = pending();
+  const proposed = ownerAct(p, {type: 'propose', start: T('2026-11-07', '12:00')}, ctx()).booking;
+  assert.equal(proposed.acceptToken, tokenFor(proposed));
+  assert.equal(accept(proposed, p.acceptToken, ctx()).outcome, 'stale');
+  assert.equal(accept(proposed, proposed.acceptToken, ctx()).outcome, 'ok');
+});
+
+test('Decline on a change proposal withdraws it and restores the confirmed booking; Confirm clears prior', () => {
+  const c = confirmed();
+  const sent = mod(c, {services: ['cut', 'toner'], start: T('2026-11-07', '12:00')}).booking;
+  const w = ownerAct(sent, {type: 'decline'}, ctx());
+  assert.equal(w.outcome, 'ok');
+  assert.equal(w.booking.status, 'confirmed');
+  assert.equal(w.booking.start, c.start);
+  assert.equal(w.booking.totalMinutes, c.totalMinutes);
+  assert.equal(w.booking.prior, null);
+  const plain = ownerAct(pending(), {type: 'decline'}, ctx()).booking;
+  assert.equal(plain.status, 'declined', 'no prior: a real decline');
+  const ok = ownerAct(sent, {type: 'confirm'}, ctx()).booking;
+  assert.equal(ok.status, 'confirmed');
+  assert.equal(ok.prior, null);
+  assert.equal(ok.start, T('2026-11-07', '12:00'));
+});
+
+test('a lapsed proposal from a pending booking is expired, not restored; expiry is exact', () => {
+  const sent = mod(pending(), {services: ['cut', 'toner']}).booking;
+  assert.equal(sent.prior, null);
+  const at = sent.expiresAt;
+  assert.equal(effectiveStatus(sent, at - 1), 'proposed');
+  assert.equal(effectiveStatus(sent, at), 'expired', 'expires at the exact instant');
+  assert.equal(current(sent, at), sent);
+  const fromConfirmed = mod(confirmed(), {services: ['cut', 'toner'], start: T('2026-11-07', '12:00')}).booking;
+  assert.equal(current(fromConfirmed, fromConfirmed.expiresAt - 1), fromConfirmed);
+  assert.equal(current(fromConfirmed, fromConfirmed.expiresAt), fromConfirmed.prior);
+});
+
+test('the client note survives a second modify; the owner note is cut at 200 characters and kept when not given', () => {
+  const b = submit(filled({note: 'window seat please'})).booking;
+  const m1 = mod(b, {services: ['cut', 'toner'], ownerNote: 'x'.repeat(250)}).booking;
+  assert.equal(m1.ownerNote.length, 200);
+  const m2 = mod(m1, {services: ['cut']}).booking;
+  assert.equal(m2.note, 'window seat please');
+  assert.equal(m2.ownerNote.length, 200, 'not given: kept');
+  assert.equal(mod(m2, {ownerNote: ''}).booking.ownerNote, '');
+});
+
+test('rebook carries a hand-set price, length and consultation when services are unchanged, and recomputes when they change', () => {
+  const hand = wrapUp(mod(confirmed(), {thb: 2000, minutes: 90, confirm: true}).booking, {note: 'n'}, {now: NOW});
+  assert.equal(hand.totalThb, 2000);
+  const same = rebook(hand, {start: T('2026-12-29', '14:00'), services: ['cut']}, {...ctx(), id: 'r1'}).booking;
+  assert.equal(same.totalThb, 2000);
+  assert.equal(same.totalMinutes, 90);
+  const none = rebook(hand, {start: T('2026-12-29', '14:00')}, {...ctx(), id: 'r2'}).booking;
+  assert.equal(none.totalThb, 2000);
+  const consult = wrapUp(mod(confirmed(), {consult: true, confirm: true}).booking, {}, {now: NOW});
+  const c = rebook(consult, {start: T('2026-12-29', '14:00')}, {...ctx(), id: 'r3'}).booking;
+  assert.equal(c.consult, true);
+  assert.equal(c.totalThb, null);
+  const changed = rebook(hand, {start: T('2026-12-29', '14:00'), services: ['cut', 'toner']}, {...ctx(), id: 'r4'}).booking;
+  assert.equal(changed.totalMinutes, 65);
+  assert.equal(changed.totalThb, 1200);
+  assert.equal(changed.consult, false);
+  assert.equal(rebookPlan(hand, ['cut'], menu).totalMinutes, 90, 'same services: the hand-set length stands');
+  assert.equal(rebookPlan(hand, ['nope'], menu), null);
+});
+
+test('a change proposal from a confirmed booking holds both times', () => {
+  const c = confirmed();
+  assert.equal(holds(c, NOW).length, 1);
+  const sent = mod(c, {services: ['cut', 'toner'], start: T('2026-11-07', '12:00')}).booking;
+  const h = holds(sent, NOW);
+  assert.equal(h.length, 2);
+  assert.deepEqual(h.map((e) => Date.parse(e.start.dateTime)).sort(), [c.start, T('2026-11-07', '12:00')].sort());
+  assert.equal(holds(sent, sent.expiresAt).length, 1, 'after the lapse only the original stands');
+  assert.equal(holds({...c, status: 'declined'}, NOW).length, 0);
+  assert.equal(holds(sent, NOW).every((e) => e.id === c.id), true);
 });

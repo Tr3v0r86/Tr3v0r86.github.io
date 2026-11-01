@@ -51,8 +51,12 @@ export function normalisePhone(raw) {
   if (p.startsWith('00')) p = '+' + p.slice(2);
   else if (p.startsWith('0')) p = '+66' + p.slice(1);
   else if (p.startsWith('66')) p = '+' + p;
+  if (p.startsWith('+660')) p = '+66' + p.slice(4); // +66 (0)81…: the trunk zero is not part of the number
   return /^\+\d{8,15}$/.test(p) ? p : null;
 }
+
+/** "+66 81 234 5678" for a Thai E.164 number, anything else unchanged. @param {string} p */
+export const formatPhone = (p) => { const m = /^\+66(\d{2})(\d{3})(\d{4})$/.exec(p); return m ? `+66 ${m[1]} ${m[2]} ${m[3]}` : p; };
 
 /**
  * The listed client for a typed number or a personal-link token, else null.
@@ -171,21 +175,23 @@ function slotFree(b, start, end, busy) {
 /**
  * Owner actions: confirm (pending or proposed), propose (pending or proposed), decline.
  * Confirm checks overlap and expiry only, never minimum notice (ADR-0004 §6).
- * Propose refuses ("taken") a time that is no longer free or whose hold would already be over at creation.
+ * Propose refuses a time that is no longer free ("taken") or whose hold would already be over at creation ("tooSoon").
  * @param {Booking} b @param {{type:'confirm'|'propose'|'decline',start?:number}} act
  * @param {{now:number,busy:import('./slots.mjs').CalEvent[],salon:import('./slots.mjs').Salon}} ctx
- * @returns {{booking:Booking,outcome:'ok'|'taken'|'noop'}}
+ * @returns {{booking:Booking,outcome:'ok'|'taken'|'tooSoon'|'noop'}}
  */
 export function ownerAct(b, act, {now, busy, salon}) {
   const live = effectiveStatus(b, now);
   if (live !== 'pending' && live !== 'proposed') return {booking: b, outcome: 'noop'};
-  if (act.type === 'decline') return {booking: {...b, status: 'declined'}, outcome: 'ok'};
+  // Declining a change proposal withdraws the change: the confirmed booking it grew out of is restored.
+  if (act.type === 'decline') return {booking: live === 'proposed' && b.prior ? {...b.prior} : {...b, status: 'declined'}, outcome: 'ok'};
   if (act.type === 'confirm') {
     return slotFree(b, b.start, b.end, busy) ? {booking: {...b, status: 'confirmed', expiresAt: null, prior: null}, outcome: 'ok'} : {booking: b, outcome: 'taken'};
   }
   if (act.type === 'propose' && act.start !== undefined) {
     const end = act.start + b.end - b.start, hold = expiresAt(now, act.start, salon);
-    if (hold <= now || !slotFree(b, act.start, end, busy)) return {booking: b, outcome: 'taken'};
+    if (hold <= now) return {booking: b, outcome: 'tooSoon'};
+    if (!slotFree(b, act.start, end, busy)) return {booking: b, outcome: 'taken'};
     return {
       booking: {
         ...b, start: act.start, end, status: 'proposed', expiresAt: hold,
@@ -226,7 +232,7 @@ export function accept(b, token, {now, busy}) {
  * @param {Booking} b
  * @param {{services:string[],start:number,minutes?:number,thb?:number|null,ownerNote?:string,consult?:boolean,confirm?:boolean}} ch
  * @param {{now:number,busy:import('./slots.mjs').CalEvent[],salon:import('./slots.mjs').Salon,menu:Menu}} ctx
- * @returns {{booking:Booking,outcome:'ok'|'taken'|'noop'}}
+ * @returns {{booking:Booking,outcome:'ok'|'taken'|'tooSoon'|'noop'}}
  */
 export function modify(b, ch, {now, busy, salon, menu}) {
   const live = effectiveStatus(b, now);
@@ -247,7 +253,7 @@ export function modify(b, ch, {now, busy, salon, menu}) {
     return {booking: {...booking, acceptToken: tokenFor(booking)}, outcome: 'ok'};
   }
   const hold = expiresAt(now, ch.start, salon);
-  if (hold <= now) return {booking: b, outcome: 'taken'};
+  if (hold <= now) return {booking: b, outcome: 'tooSoon'};
   const prior = live === 'confirmed' ? {...b, prior: null} : (b.prior ?? null);
   const booking = {...next, status: /** @type {Status} */ ('proposed'), expiresAt: hold, prior};
   return {booking: {...booking, acceptToken: tokenFor(booking)}, outcome: 'ok'};
@@ -265,6 +271,21 @@ export function wrapUp(b, {note = '', visibleNote = ''}, {now}) {
 }
 
 /**
+ * What a rebook looks like for a set of service ids: unchanged services carry the booking's hand-set length,
+ * price and consultation flag; changed services recompute from the menu.
+ * @param {Booking} b @param {string[]|undefined} ids @param {Menu} menu
+ * @returns {{services:Booking['services'],totalMinutes:number,totalThb:number|null,consult:boolean}|null}
+ */
+export function rebookPlan(b, ids, menu) {
+  const same = !ids || (ids.length === b.services.length && ids.every((x) => b.services.some((s) => s.id === x)));
+  if (same) return {services: b.services, totalMinutes: b.totalMinutes, totalThb: b.totalThb, consult: !!b.consult};
+  const picked = ids.map((x) => byId(menu, x));
+  if (!picked.length || picked.some((s) => !s)) return null;
+  const services = picked.map((s) => snap(/** @type {Service} */ (s)));
+  return {services, totalMinutes: services.reduce((n, s) => n + s.minutes, 0), totalThb: services.reduce((n, s) => n + s.price_thb, 0), consult: false};
+}
+
+/**
  * Book the next visit from a confirmed or done booking: same services unless ids are given, confirmed at once
  * (the client is known by definition). Carries `nextTime` to the client; never the private `visitNote`.
  * @param {Booking} b @param {{start:number,services?:string[]}} r
@@ -273,18 +294,29 @@ export function wrapUp(b, {note = '', visibleNote = ''}, {now}) {
  */
 export function rebook(b, {start, services: ids}, {now, busy, salon, menu, id}) {
   if (b.status !== 'confirmed' && b.status !== 'done') return {booking: b, outcome: 'noop'};
-  const picked = ids ? ids.map((x) => byId(menu, x)) : null;
-  if (picked && (!picked.length || picked.some((s) => !s))) return {booking: b, outcome: 'noop'};
-  const services = picked ? picked.map((s) => snap(/** @type {Service} */ (s))) : b.services;
-  const totalMinutes = picked ? services.reduce((n, s) => n + s.minutes, 0) : b.totalMinutes;
-  const end = start + (totalMinutes + salon.buffer_min) * 60e3;
+  const plan = rebookPlan(b, ids, menu);
+  if (!plan) return {booking: b, outcome: 'noop'};
+  const end = start + (plan.totalMinutes + salon.buffer_min) * 60e3;
   if (!isFree(start, end, busyFromEvents(busy, dayOf(start)))) return {booking: b, outcome: 'taken'};
   /** @type {Booking} */
   const booking = {
-    id, services, start, end, totalMinutes, totalThb: services.reduce((n, s) => n + s.price_thb, 0),
-    name: b.name, phone: b.phone, email: b.email, note: '', ownerNote: '', consult: false, nextTime: b.nextTime || '',
+    id, ...plan, start, end,
+    name: b.name, phone: b.phone, email: b.email, note: '', ownerNote: '', nextTime: b.nextTime || '',
     status: 'confirmed', expiresAt: null, acceptToken: '', createdAt: now,
   };
   booking.acceptToken = tokenFor(booking);
   return {booking, outcome: 'ok'};
+}
+
+/**
+ * Calendar-style events a booking holds at `now`: its own slot while pending, proposed or confirmed, and, while a
+ * change proposal from a confirmed booking is open, the original slot too (both times held until accept or lapse).
+ * All carry the booking's id, so the booking's own decisions still ignore them.
+ * @param {Booking} b @param {number} now @returns {import('./slots.mjs').CalEvent[]}
+ */
+export function holds(b, now) {
+  const c = current(b, now), st = effectiveStatus(c, now);
+  if (!['pending', 'proposed', 'confirmed'].includes(st)) return [];
+  const ev = (x) => ({id: c.id, summary: x.name, start: {dateTime: new Date(x.start).toISOString()}, end: {dateTime: new Date(x.end).toISOString()}});
+  return c.prior && st === 'proposed' ? [ev(c), ev(c.prior)] : [ev(c)];
 }

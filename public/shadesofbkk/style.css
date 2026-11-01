@@ -28,6 +28,8 @@ h1{font-size:39px;line-height:1.1;letter-spacing:-.01em;margin:24px 0 8px}
 main.plain h1{font-size:31px}
 h2,legend{font-size:25px;line-height:1.2;padding:0}
 p{margin:0 0 8px}
+p,.meta{text-wrap:pretty}
+.day strong,.slot .vis,.total strong,.state-line,.slotb{font-variant-numeric:lining-nums tabular-nums}
 .sub,.muted{color:var(--ash-ink)}
 .brand{font-family:var(--serif);font-size:20px;margin:16px 0 0}
 a{color:var(--ink);text-decoration-color:var(--caramel);text-decoration-thickness:2px;text-underline-offset:3px}
@@ -87,30 +89,34 @@ fieldset>legend{margin-bottom:8px}
 .svc .meta{display:block;font-size:14px;line-height:1.4;color:var(--ash-ink)}
 .svc .price{display:block;font-weight:600;text-align:right;white-space:nowrap}
 .svc .price small{display:block;font-size:14px;font-weight:400;color:var(--ash-ink)}
-a.svc.off{grid-template-columns:24px 1fr auto;cursor:pointer}
+a.svc.off{cursor:pointer}
+.svc .ico{display:flex;align-items:center;justify-content:center;width:24px;height:24px}
 a.svc.off .price{text-decoration:underline;text-decoration-color:var(--caramel);text-decoration-thickness:2px;text-underline-offset:3px}
 
 /* Day and slot pickers: hidden native radios, label chips */
 .pick{position:relative}
 .pick input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
 .pick .vis{display:flex;align-items:center;justify-content:center;width:100%;height:100%}
-.days{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:8px}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin:8px -16px 0} /* full-bleed: 7 chips are 44 px wide at 320 */
 .day{min-height:64px}
 .day .vis{flex-direction:column;border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.2;gap:4px}
 .day strong{font-family:var(--serif);font-size:20px;font-weight:400}
-.day input:checked+.vis{background:var(--caramel);color:var(--ink);border-color:var(--caramel)}
+.day input:checked+.vis,.slot input:checked+.vis{background:var(--caramel);color:var(--ink);border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
 .day.closed .vis{color:var(--ash-ink);border-style:dashed}
-.day.closed input:checked+.vis{color:var(--ink);border-style:solid}
+.day.closed input:checked+.vis{border-style:solid}
 .day input:focus-visible+.vis,.slot input:focus-visible+.vis{outline:2px solid var(--caramel);outline-offset:2px;box-shadow:0 0 0 1px var(--ink)}
 .day input:focus-visible,.slot input:focus-visible{outline:0;box-shadow:none}
 .slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}
 .slot{min-height:48px}
 .slot .vis{border:1px solid var(--line);border-radius:8px;font-family:var(--serif);font-size:20px}
-.slot input:checked+.vis{background:var(--caramel);color:var(--ink);border-color:var(--caramel)}
 .slot input:disabled{cursor:not-allowed}
 .slot input:disabled+.vis{color:var(--ash-ink);text-decoration:line-through;text-decoration-color:var(--ash);border-style:dashed}
 .state-line{font-family:var(--serif);font-size:20px;line-height:1.3;margin:8px 0;text-wrap:balance}
 .ready{margin:16px 0 0;font-weight:600}
+.when{font-family:var(--serif);font-size:25px;line-height:1.2;margin:0 0 8px;font-variant-numeric:lining-nums tabular-nums}
+.when+.ready{margin:0 0 16px}
+.warn{color:var(--hold-ink);font-weight:600;font-size:14px;line-height:1.4;margin:8px 0 0}
+.warn:empty{display:none}
 .ready:empty{display:none}
 .nextbtn{width:100%;margin-top:8px}
 .loading{display:flex;align-items:center;gap:8px;min-height:48px;color:var(--ash-ink)}
@@ -129,6 +135,7 @@ a.svc.off .price{text-decoration:underline;text-decoration-color:var(--caramel);
 .btn.quiet{background:none;color:var(--ink)}
 .btn:disabled{opacity:.6;cursor:not-allowed}
 .cta{background:var(--plum);border-color:var(--plum);color:#fff;min-width:152px}
+.cta.idle{background:none;border-color:var(--ink);color:var(--ink)} /* no time chosen yet: aria-disabled, still focusable */
 
 /* Sticky bar: running total, the one CTA, the policy line */
 .bar{position:fixed;left:0;right:0;bottom:0;background:var(--paper);border-top:1px solid var(--line);padding:8px 16px calc(8px + env(safe-area-inset-bottom))}
@@ -142,7 +149,7 @@ a.svc.off .price{text-decoration:underline;text-decoration-color:var(--caramel);
 h1.status{font-weight:400}
 .status.ok{color:var(--ok)}.status.hold{color:var(--hold-ink)}.status.err{color:var(--err)}
 .detail{margin:16px 0;border-top:1px solid var(--line)}
-.detail div{display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-bottom:1px solid var(--line)}
+.detail div{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:8px 0;border-bottom:1px solid var(--line)}
 .detail dt{color:var(--ash-ink);white-space:nowrap}.detail dd{margin:0;font-weight:600;text-align:right}
 .where{margin:16px 0}
 .where p{margin:0 0 8px}
@@ -169,7 +176,28 @@ p.wa-line{margin:8px 0 0}
 .stepper .btn{min-width:72px;padding:8px 16px}
 .stepper output{flex:1;min-width:128px;font-weight:600}
 .ob .two{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
-.ob .total{flex-basis:100%;display:flex;align-items:baseline;gap:8px;margin-bottom:8px}
-.ob .total strong{font-size:20px}
+.ob .totalbtn{display:block;width:100%;min-height:52px;padding:4px 0;margin-bottom:8px;text-align:left;font:inherit;color:var(--ink);background:none;border:0;cursor:pointer}
+.ob .totalbtn span{display:block;font-size:14px;line-height:1.4;color:var(--ash-ink)}
+.ob .totalbtn strong{display:block;font-family:var(--serif);font-size:20px;font-weight:400;line-height:1.3}
 .ob .one{width:100%}
 .ob .err{flex-basis:100%;margin:0 0 8px}
+.ob .explain{flex-basis:100%;margin:8px 0 0;font-size:14px;line-height:1.4;color:var(--ash-ink);text-wrap:balance}
+.back{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin:8px 0 0;padding:0;font:inherit;font-weight:600;color:var(--ink);background:none;border:0;cursor:pointer}
+.linkbtn{display:flex;align-items:center;justify-content:center;width:100%;min-height:44px;padding:0;font:inherit;font-weight:600;color:var(--ink);background:none;border:0;text-decoration:underline;text-decoration-color:var(--caramel);text-decoration-thickness:2px;text-underline-offset:3px;cursor:pointer}
+label.chip{position:relative;cursor:pointer}
+.chip input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.chip:has(input:checked){background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chip:has(input:focus-visible){outline:2px solid var(--caramel);outline-offset:2px;box-shadow:0 0 0 1px var(--ink)}
+.chip.day-chip{flex:1;justify-content:center;min-width:96px}
+.slotb{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;padding:4px;font-family:var(--serif);font-size:20px;line-height:1.2;color:var(--ink);background:none;border:1px solid var(--ash);border-radius:8px;cursor:pointer}
+.slotb small{font:14px/1.2 var(--sans);color:var(--ash-ink)}
+.toast{color:var(--ok);font-weight:600;font-size:14px;margin:0}
+.toast:empty{display:none}
+h1:focus{outline:0}
+.diff{margin:8px 0 16px;padding-left:24px}
+.diff li{margin:0 0 4px}
+.chip.day-chip{padding:0 8px;font-size:14px;min-width:0}
+.wsvc summary{display:flex;align-items:center;min-height:44px;font-weight:600;cursor:pointer}
+h1:focus-visible{outline:0;box-shadow:none}
+.wsvc summary::after{content:'Change';margin-left:auto;padding-left:16px;font-weight:600;text-decoration:underline;text-decoration-color:var(--caramel);text-decoration-thickness:2px;text-underline-offset:3px}
+#done h2{margin-top:32px}
