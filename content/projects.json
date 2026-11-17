@@ -2496,37 +2496,47 @@
       "slug": "minutes",
       "title": "Minutes",
       "descriptor": "A one-button meeting recorder that encrypts on the device",
-      "status": "In development",
+      "status": "Hardware/software prototype",
       "role": "Product design, firmware and laptop software",
       "order": 19,
       "featured": true,
       "collectionFrame": "photo",
-      "summary": "Minutes is a one-button meeting recorder for my desk. Press REC and a red light comes on, and audio is encrypted on the device the moment it is recorded. The device holds only a public key, so it can lock a recording but never unlock it. A USB cable carries recordings to one approved laptop, which transcribes them locally the same day and files the transcript privately into my notes. Version 0.2, in use since November 2026, keeps audio off every network. These are original illustrations, not photos.",
+      "summary": "Minutes is a one-button meeting recorder for my desk. Press REC and a red light comes on, and audio is encrypted on the device the moment it is recorded. The device holds only a public key, so it can lock a recording but never unlock it. A USB cable carries recordings to one approved laptop, which transcribes them locally the same day and files the transcript privately into my notes. Version 0.2 keeps audio off every network. Photos show the working prototype; drawings show the earlier version.",
       "cover": {
-        "src": "/media/minutes-hero-1600-17130e314a.webp",
-        "width": 1600,
-        "height": 1200,
+        "src": "/media/minutes-device-448-4f7decc97f.webp",
+        "width": 448,
+        "height": 560,
         "variants": [
           {
-            "src": "/media/minutes-hero-480-435bbce446.webp",
-            "width": 480,
-            "type": "image/webp"
-          },
-          {
-            "src": "/media/minutes-hero-960-e4dbe98082.webp",
-            "width": 960,
-            "type": "image/webp"
-          },
-          {
-            "src": "/media/minutes-hero-1600-17130e314a.webp",
-            "width": 1600,
+            "src": "/media/minutes-device-448-4f7decc97f.webp",
+            "width": 448,
             "type": "image/webp"
           }
         ],
-        "alt": "Illustration of a small square black device whose four-colour e-paper screen shows a red REC band, the meeting start time 10:00 and a meeting title, with a red light lit",
-        "caption": "Original illustration of the recording state · not a photo"
+        "alt": "Photo of the working prototype: a small white device on a notebook page, its e-paper screen showing READY, the next meeting at 07:50 and a battery reading of 86 percent",
+        "caption": "The working prototype, version 0.2 · photo"
       },
       "gallery": [
+        {
+          "src": "/media/minutes-notebook-902-5d9d54745d.webp",
+          "width": 902,
+          "height": 1600,
+          "variants": [
+            {
+              "src": "/media/minutes-notebook-480-3c7064f596.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/minutes-notebook-902-5d9d54745d.webp",
+              "width": 902,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Photo of a notebook page dated 17 November 2026 with the first sketch of the device and handwritten design questions about on-device transcription, Wi-Fi, microphone quality and consent, with the working prototype and a pen resting on the page",
+          "caption": "The first sketch, with the prototype on top · photo",
+          "layout": "detail"
+        },
         {
           "src": "/media/minutes-states-1600-6b40ea455c.webp",
           "width": 1600,

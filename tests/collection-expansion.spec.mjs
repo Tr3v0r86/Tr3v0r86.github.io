@@ -50,8 +50,8 @@ test('Jarvis case renders its status, section, media and no links',async({page})
 test('Minutes shows its product hero, three steps, spec sheet and honest status',async({page})=>{
  const p=projects.find(p=>p.slug==='minutes');await page.goto('/work/minutes/');
  await expect(page.locator('.case-hero img')).toHaveAttribute('src',p.cover.src);
- await expect(page.locator('.case-meta')).toContainText('In development');
+ await expect(page.locator('.case-meta')).toContainText('Hardware/software prototype');
  await expect(page.locator('.minutes-steps h3')).toHaveText(['Press','It locks','One cable','The transcript lands']);
  await expect(page.locator('.minutes-sheet dt')).toContainText(['Board','Screen','Recording','Battery','Privacy']);
- await expect(page.locator('.case-story')).toContainText('not photos');
+ await expect(page.locator('.case-story')).toContainText('working prototype');
 });
