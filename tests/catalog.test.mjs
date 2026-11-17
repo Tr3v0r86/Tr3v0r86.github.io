@@ -47,3 +47,11 @@ test('Jarvis case stays public-safe and renders its bespoke section',()=>{
  assert(!section.includes('—'));assert(!section.includes('!'));assert.doesNotMatch(section,priv);
  assert(!renderCase(catalog.projects.find(p=>p.slug==='second-brain-builder'),validateCatalog(catalog)).includes('jarvis-harness'));
 });
+test('Minutes case stays public-safe and renders its steps and spec sheet',()=>{
+ const p=catalog.projects.find(p=>p.slug==='minutes'),priv=/\belc\b|school|vault|jarvis|gbrain|\/srv\/|\/users\/|192\.168|tailnet|token|hr\b/i;
+ assert(p);assert.equal(p.status,'In development');assert.deepEqual(p.links,[]);
+ assert.doesNotMatch(JSON.stringify(p),priv);
+ const html=renderCase(p,validateCatalog(catalog)),section=html.match(/<section class="minutes"[\s\S]*?<\/section>/)[0];
+ for(const s of ['Press','It records','The transcript lands','Board','Screen','Battery','Privacy','never uploaded to a cloud service','does leave home as a cloud document','only when the match is certain','in development'])assert(section.includes(s),s);
+ assert(!section.includes('—'));assert.doesNotMatch(section,priv);assert(!p.summary.includes('—'));
+});

@@ -21,7 +21,8 @@
     "project-dashboard",
     "esp32-experiments",
     "trips",
-    "custom-media-databank"
+    "custom-media-databank",
+    "minutes"
   ],
   "projects": [
     {
@@ -2490,6 +2491,96 @@
           "href": "/work/trevos/"
         }
       ]
+    },
+    {
+      "slug": "minutes",
+      "title": "Minutes",
+      "descriptor": "A one-button meeting recorder that transcribes at home",
+      "status": "In development",
+      "role": "Product design, firmware and home server",
+      "order": 19,
+      "featured": true,
+      "collectionFrame": "photo",
+      "summary": "Minutes is a one-button meeting recorder for my desk. Press REC and a red light comes on, the e-paper screen shows the meeting from my calendar, and audio saves to a card. At home it uploads to a small server that transcribes it locally, so audio never leaves home. The transcript files privately into my notes, and a view-only cloud copy goes quietly to invited colleagues when the meeting match is certain; anything uncertain waits for my OK. The screen runs on the board. These are original illustrations, not photos.",
+      "cover": {
+        "src": "/media/minutes-hero-1600-17130e314a.webp",
+        "width": 1600,
+        "height": 1200,
+        "variants": [
+          {
+            "src": "/media/minutes-hero-480-435bbce446.webp",
+            "width": 480,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/minutes-hero-960-e4dbe98082.webp",
+            "width": 960,
+            "type": "image/webp"
+          },
+          {
+            "src": "/media/minutes-hero-1600-17130e314a.webp",
+            "width": 1600,
+            "type": "image/webp"
+          }
+        ],
+        "alt": "Illustration of a small square black device whose four-colour e-paper screen shows a red REC band, the meeting start time 10:00 and a meeting title, with a red light lit",
+        "caption": "Original illustration of the recording state · not a photo"
+      },
+      "gallery": [
+        {
+          "src": "/media/minutes-states-1600-6b40ea455c.webp",
+          "width": 1600,
+          "height": 540,
+          "variants": [
+            {
+              "src": "/media/minutes-states-480-1ab857d0e5.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/minutes-states-960-552ae5e689.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/minutes-states-1600-6b40ea455c.webp",
+              "width": 1600,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Four e-paper screen states side by side: READY with the next meeting, REC in a red band, Stopped with one recording to upload, and Low battery in a yellow band",
+          "caption": "Screen states drawn at panel scale · original illustration",
+          "layout": "wide",
+          "textEquivalent": "Four screens. READY: Next, 10:00, Design review with the studio, footer Battery 92%. REC on red: Now, 10:00, Design review with the studio, footer Battery 91%. Stopped: Now, 10:00, Design review with the studio, footer 1 to upload. Low battery on yellow: Next, 14:30, Budget check-in, footer Charge to upload. Four colours: black, white, red, yellow; 200 by 200 pixels."
+        },
+        {
+          "src": "/media/minutes-anatomy-1600-e1abd4adcb.webp",
+          "width": 1600,
+          "height": 820,
+          "variants": [
+            {
+              "src": "/media/minutes-anatomy-480-7b5dbfdfb9.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/minutes-anatomy-960-498b034eeb.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/minutes-anatomy-1600-e1abd4adcb.webp",
+              "width": 1600,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Front view of the device with labelled callouts for the screen, buttons, light, speaker, microphone and USB-C port",
+          "caption": "Anatomy of the device · original illustration",
+          "layout": "wide",
+          "textEquivalent": "Callouts: 1.54 in four-colour e-paper, 200 by 200. REC button: press to start or stop. SYNC / PWR button: sync now, hold for off. Red light: on only while recording. Speaker for start and stop sounds. Microphone. USB-C charging."
+        }
+      ],
+      "links": []
     }
   ]
 }

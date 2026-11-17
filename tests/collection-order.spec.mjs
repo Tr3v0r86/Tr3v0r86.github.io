@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test';
 test('?order=catalog keeps the requested order and preserve remaining relative order',async({page})=>{
  await page.goto('/?order=catalog');
- const order=['moss','pocketframe','trevos','turnkeep','padlano','papercolor-cal','elc-portal','second-brain-builder','jarvis','bodybrain','reggio-projects','learning-and-making','pomodoist','cal','project-dashboard','esp32-experiments','trips','custom-media-databank'];
+ const order=['moss','pocketframe','trevos','turnkeep','padlano','papercolor-cal','elc-portal','second-brain-builder','jarvis','bodybrain','reggio-projects','learning-and-making','pomodoist','cal','project-dashboard','esp32-experiments','trips','custom-media-databank','minutes'];
  expect(await page.locator('[data-project]').evaluateAll(nodes=>nodes.map(n=>n.dataset.project))).toEqual(order);
  await page.locator('.project-picker select').selectOption('9');await expect(page.locator('[data-project="bodybrain"]')).toHaveAttribute('aria-current','true');
  await page.goto('/work/bodybrain/');await expect(page.locator('.case-pagination a').first()).toHaveAttribute('href','/work/jarvis/');await expect(page.locator('.case-pagination a').last()).toHaveAttribute('href','/work/reggio-projects/');
