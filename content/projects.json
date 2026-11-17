@@ -2501,7 +2501,7 @@
       "order": 19,
       "featured": true,
       "collectionFrame": "photo",
-      "summary": "Minutes is a one-button meeting recorder for my desk. Press REC and a red light comes on, and audio is encrypted on the device the moment it is recorded. The device holds only a public key, so it can lock a recording but never unlock it. A USB cable carries recordings to one approved laptop, which transcribes them locally the same day and files the transcript privately into my notes. Audio never touches a network. Version 0.2 is in bench testing. These are original illustrations, not photos.",
+      "summary": "Minutes is a one-button meeting recorder for my desk. Press REC and a red light comes on, and audio is encrypted on the device the moment it is recorded. The device holds only a public key, so it can lock a recording but never unlock it. A USB cable carries recordings to one approved laptop, which transcribes them locally the same day and files the transcript privately into my notes. Version 0.2, now in bench testing, keeps audio off every network. These are original illustrations, not photos.",
       "cover": {
         "src": "/media/minutes-hero-1600-17130e314a.webp",
         "width": 1600,
@@ -2575,9 +2575,9 @@
             }
           ],
           "alt": "Front view of the device with labelled callouts for the screen, buttons, light, speaker, microphone and USB-C port",
-          "caption": "Anatomy of the device · original illustration",
+          "caption": "Anatomy of the earlier version · original illustration",
           "layout": "wide",
-          "textEquivalent": "Callouts: 1.54 in four-colour e-paper, 200 by 200. REC button: press to start or stop. SYNC / PWR button: sync now, hold for off. Red light: on only while recording. Speaker for start and stop sounds. Microphone. USB-C charging."
+          "textEquivalent": "Callouts: 1.54 in four-colour e-paper, 200 by 200. REC button: press to start or stop. SYNC / PWR button: sync now, hold for off. Red light: on only while recording. Speaker for start and stop sounds. Microphone. USB-C charging. Sync now belongs to the earlier version; in the USB version a short press of that button does nothing and the cable also carries recordings."
         }
       ],
       "links": []

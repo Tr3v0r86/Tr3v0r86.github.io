@@ -2,7 +2,7 @@
 const steps = [
  ['Press','Press REC as the meeting starts. The red light comes on and the screen shows REC with the meeting from my calendar.'],
  ['It locks','Audio is encrypted on the device the moment it is recorded, in one-minute pieces. The device holds only a public key, so it can lock a recording but never unlock it.'],
- ['One cable','Recordings leave only over a USB cable, to one approved laptop. The key that opens them lives in that laptop’s secure chip and cannot be copied out.'],
+ ['One cable','Recordings leave only over a USB cable, to one approved laptop. The key that opens them is meant to live in that laptop’s secure chip, where it cannot be copied out; that step is still being tested.'],
  ['The transcript lands','The laptop transcribes locally the same day and files the transcript privately into my notes. Audio never touches any network. A private cloud copy of the transcript is made for the meeting.']
 ];
 const spec = [
