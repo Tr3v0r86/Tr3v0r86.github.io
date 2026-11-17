@@ -51,7 +51,7 @@ test('Minutes shows its product hero, three steps, spec sheet and honest status'
  const p=projects.find(p=>p.slug==='minutes');await page.goto('/work/minutes/');
  await expect(page.locator('.case-hero img')).toHaveAttribute('src',p.cover.src);
  await expect(page.locator('.case-meta')).toContainText('In development');
- await expect(page.locator('.minutes-steps h3')).toHaveText(['Press','It records','The transcript lands']);
+ await expect(page.locator('.minutes-steps h3')).toHaveText(['Press','It locks','One cable','The transcript lands']);
  await expect(page.locator('.minutes-sheet dt')).toContainText(['Board','Screen','Recording','Battery','Privacy']);
  await expect(page.locator('.case-story')).toContainText('not photos');
 });

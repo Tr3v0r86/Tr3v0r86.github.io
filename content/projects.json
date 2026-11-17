@@ -2495,13 +2495,13 @@
     {
       "slug": "minutes",
       "title": "Minutes",
-      "descriptor": "A one-button meeting recorder that transcribes at home",
+      "descriptor": "A one-button meeting recorder that encrypts on the device",
       "status": "In development",
-      "role": "Product design, firmware and home server",
+      "role": "Product design, firmware and laptop software",
       "order": 19,
       "featured": true,
       "collectionFrame": "photo",
-      "summary": "Minutes is a one-button meeting recorder for my desk. Press REC and a red light comes on, the e-paper screen shows the meeting from my calendar, and audio saves to a card. At home it uploads to a small server that transcribes it locally, so audio never leaves home. The transcript files privately into my notes, and a view-only cloud copy goes quietly to invited colleagues when the meeting match is certain; anything uncertain waits for my OK. The screen runs on the board. These are original illustrations, not photos.",
+      "summary": "Minutes is a one-button meeting recorder for my desk. Press REC and a red light comes on, and audio is encrypted on the device the moment it is recorded. The device holds only a public key, so it can lock a recording but never unlock it. A USB cable carries recordings to one approved laptop, which transcribes them locally the same day and files the transcript privately into my notes. Audio never touches a network. Version 0.2 is in bench testing. These are original illustrations, not photos.",
       "cover": {
         "src": "/media/minutes-hero-1600-17130e314a.webp",
         "width": 1600,
@@ -2549,9 +2549,9 @@
             }
           ],
           "alt": "Four e-paper screen states side by side: READY with the next meeting, REC in a red band, Stopped with one recording to upload, and Low battery in a yellow band",
-          "caption": "Screen states drawn at panel scale · original illustration",
+          "caption": "Screen states of the earlier version, panel scale · original illustration",
           "layout": "wide",
-          "textEquivalent": "Four screens. READY: Next, 10:00, Design review with the studio, footer Battery 92%. REC on red: Now, 10:00, Design review with the studio, footer Battery 91%. Stopped: Now, 10:00, Design review with the studio, footer 1 to upload. Low battery on yellow: Next, 14:30, Budget check-in, footer Charge to upload. Four colours: black, white, red, yellow; 200 by 200 pixels."
+          "textEquivalent": "Four screens. READY: Next, 10:00, Design review with the studio, footer Battery 92%. REC on red: Now, 10:00, Design review with the studio, footer Battery 91%. Stopped: Now, 10:00, Design review with the studio, footer 1 to upload. Low battery on yellow: Next, 14:30, Budget check-in, footer Charge to upload. Four colours: black, white, red, yellow; 200 by 200 pixels. Upload wording belongs to the earlier version; the USB version will say copying instead."
         },
         {
           "src": "/media/minutes-anatomy-1600-e1abd4adcb.webp",
