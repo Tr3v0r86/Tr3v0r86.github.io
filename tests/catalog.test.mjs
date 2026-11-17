@@ -52,6 +52,6 @@ test('Minutes case stays public-safe and renders its steps and spec sheet',()=>{
  assert(p);assert.equal(p.status,'In development');assert.deepEqual(p.links,[]);
  assert.doesNotMatch(JSON.stringify(p),priv);
  const html=renderCase(p,validateCatalog(catalog)),section=html.match(/<section class="minutes"[\s\S]*?<\/section>/)[0];
- for(const s of ['Press','It locks','One cable','The transcript lands','Board','Screen','Battery','Privacy','never unlock','USB cable','Audio never touches any network','bench testing'])assert(section.includes(s),s);
+ for(const s of ['Press','It locks','One cable','The transcript lands','Board','Screen','Battery','Privacy','never unlock','USB cable','Audio never touches any network','version 0.2 in use'])assert(section.includes(s),s);
  assert(!section.includes('—'));assert.doesNotMatch(section,priv);assert(!p.summary.includes('—'));
 });
