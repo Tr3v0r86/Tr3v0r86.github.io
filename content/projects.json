@@ -2612,8 +2612,7 @@
           ],
           "alt": "Minutes review window for a meeting called Weekly Ops, with guests Alice, Bob and Carol. Two yellow cards ask who spoke: Is this Carol with Yes and No buttons, and Who is this with Alice, Bob and Carol buttons and a box to type a name",
           "caption": "Review window, two speakers to confirm · screenshot, demo data",
-          "layout": "detail",
-          "textEquivalent": "Menu-bar popover: 3 meetings need you; 3 more ready to approve; Review meetings button. Recorder 81 percent, about 6 hours of recording left, 10 hours when full. All figures are demo data. The recording-time estimate learns from the recorder’s battery readings."
+          "layout": "detail"
         },
         {
           "src": "/media/minutes-menu-popover-600-9f48f4d14b.webp",
@@ -2631,9 +2630,10 @@
               "type": "image/webp"
             }
           ],
-          "alt": "Menu-bar popover reading 3 meetings need you, 3 more ready to approve, with a Review meetings button, then Recorder 81 percent and About 6 h of recording left (10 h when full)",
+          "alt": "Menu-bar popover reading 3 meetings need you, 3 more ready to approve, with a Review meetings button, then Recorder 81 percent and About 6 h of recording left (10 h when full), plus Oldest recorded 1 hour ago and a standby estimate pending one more idle stretch",
           "caption": "Demo figures; time left learns from battery readings · screenshot",
-          "layout": "detail"
+          "layout": "detail",
+          "textEquivalent": "Menu-bar popover: 3 meetings need you; 3 more ready to approve; Review meetings button. Recorder 81 percent, about 6 hours of recording left, 10 hours when full. All figures are demo data. The recording-time estimate learns from the recorder’s battery readings."
         }
       ],
       "links": []
