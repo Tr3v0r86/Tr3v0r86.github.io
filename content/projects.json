@@ -2495,13 +2495,13 @@
     {
       "slug": "minutes",
       "title": "Minutes",
-      "descriptor": "A one-button meeting recorder that encrypts on the device",
+      "descriptor": "A one-button meeting recorder that encrypts on the device, being prepared as open source",
       "status": "Hardware/software prototype",
       "role": "Product design, firmware and laptop software",
       "order": 19,
       "featured": true,
       "collectionFrame": "photo",
-      "summary": "Minutes is a one-button meeting recorder for my desk. Press REC and a red light comes on, and audio is encrypted on the device the moment it is recorded. The device holds only a public key, so it can lock a recording but never unlock it. A USB cable carries recordings to one approved laptop, which transcribes them locally the same day and files the transcript privately into my notes. Version 0.2 keeps audio off every network. Photos show the working prototype; drawings show the earlier version.",
+      "summary": "Minutes is a working prototype of a one-button meeting recorder for my desk. Press REC and the screen turns red; audio is encrypted on the device as it records, so the device can lock a recording but never unlock it. A USB cable carries recordings to one paired laptop, which transcribes them locally, names the speakers from the invite and waits for my approval before filing a private transcript. I am preparing the hardware, firmware and laptop software as an open-source project, with a build walkthrough.",
       "cover": {
         "src": "/media/minutes-device-448-4f7decc97f.webp",
         "width": 448,
@@ -2513,8 +2513,8 @@
             "type": "image/webp"
           }
         ],
-        "alt": "Photo of the working prototype: a small white device on a notebook page, its e-paper screen showing READY, the next meeting at 07:50 and a battery reading of 86 percent",
-        "caption": "The working prototype, version 0.2 · photo"
+        "alt": "Photo of the working prototype: a small white device on a notebook page, its e-paper screen showing the earlier design, with READY, the next meeting at 07:50 and a battery reading of 86 percent",
+        "caption": "The prototype showing the earlier screen · photo"
       },
       "gallery": [
         {
@@ -2538,30 +2538,30 @@
           "layout": "detail"
         },
         {
-          "src": "/media/minutes-states-1600-6b40ea455c.webp",
+          "src": "/media/minutes-states-status-1600-2db7d944e0.webp",
           "width": 1600,
-          "height": 540,
+          "height": 330,
           "variants": [
             {
-              "src": "/media/minutes-states-480-1ab857d0e5.webp",
+              "src": "/media/minutes-states-status-480-d79401a118.webp",
               "width": 480,
               "type": "image/webp"
             },
             {
-              "src": "/media/minutes-states-960-552ae5e689.webp",
+              "src": "/media/minutes-states-status-960-3c0febd096.webp",
               "width": 960,
               "type": "image/webp"
             },
             {
-              "src": "/media/minutes-states-1600-6b40ea455c.webp",
+              "src": "/media/minutes-states-status-1600-2db7d944e0.webp",
               "width": 1600,
               "type": "image/webp"
             }
           ],
-          "alt": "Four e-paper screen states side by side: READY with the next meeting, REC in a red band, Stopped with one recording to upload, and Low battery in a yellow band",
-          "caption": "Screen states of the earlier version, panel scale · original illustration",
+          "alt": "Five status-only e-paper screens side by side: READY, RECORDING in a red band with a start time, Saved with 1 to copy, READY with 3 to copy, and Low battery in a yellow band",
+          "caption": "Current screen states, panel scale · rendered from firmware",
           "layout": "wide",
-          "textEquivalent": "Four screens. READY: Next, 10:00, Design review with the studio, footer Battery 92%. REC on red: Now, 10:00, Design review with the studio, footer Battery 91%. Stopped: Now, 10:00, Design review with the studio, footer 1 to upload. Low battery on yellow: Next, 14:30, Budget check-in, footer Charge to upload. Four colours: black, white, red, yellow; 200 by 200 pixels. Upload wording belongs to the earlier version; the USB version says copying instead."
+          "textEquivalent": "Five screens, each showing status only. READY. RECORDING on red, with STARTED 14:05 beneath. Saved, with footer 1 to copy. READY, with footer 3 to copy. Low battery on yellow. Four colours: black, white, red, yellow; 200 by 200 pixels. There is no clock, battery percentage or agenda, and the screen redraws once per event, never during a recording."
         },
         {
           "src": "/media/minutes-anatomy-1600-e1abd4adcb.webp",
@@ -2584,10 +2584,10 @@
               "type": "image/webp"
             }
           ],
-          "alt": "Front view of the device with labelled callouts for the screen, buttons, light, speaker, microphone and USB-C port",
+          "alt": "Front view of the earlier version of the device with labelled callouts for the screen, buttons, light, speaker, microphone and USB-C port; the current device has no light",
           "caption": "Anatomy of the earlier version · original illustration",
           "layout": "wide",
-          "textEquivalent": "Callouts: 1.54 in four-colour e-paper, 200 by 200. REC button: press to start or stop. SYNC / PWR button: sync now, hold for off. Red light: on only while recording. Speaker for start and stop sounds. Microphone. USB-C charging. Sync now belongs to the earlier version; in the USB version a short press of that button does nothing and the cable also carries recordings."
+          "textEquivalent": "Callouts: 1.54 in four-colour e-paper, 200 by 200. REC button: press to start or stop. SYNC / PWR button: sync now, hold for off. Red light: on only while recording (earlier version; the current device has no light and the screen shows RECORDING). Speaker for start and stop sounds. Microphone. USB-C charging. Sync now belongs to the earlier version; in the USB version a short press of that button does nothing and the cable also carries recordings."
         }
       ],
       "links": []
