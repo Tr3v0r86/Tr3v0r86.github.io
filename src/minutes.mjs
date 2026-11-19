@@ -1,6 +1,6 @@
 // Public description only. No hostnames, accounts, file paths or workplace detail.
 const steps = [
- ['Press','Press REC as the meeting starts. The screen turns to a red RECORDING band; there is no light to forget. It stays still until I stop, so nothing flickers in the room.'],
+ ['Press','Press REC as the meeting starts. The screen turns to a red RECORDING band and stays still until I stop, so nothing flickers in the room.'],
  ['It locks','Audio is encrypted on the device as it records, in one-minute pieces. The device holds only a public key, so it can lock a recording but never unlock it.'],
  ['One cable','Recordings leave only over a USB cable, to one paired laptop. The key that opens them lives in that laptop’s secure chip, where it cannot be copied out.'],
  ['The transcript lands','The laptop transcribes locally, splits the speakers and names them from the calendar invite and from introductions at the start. Anything uncertain is shown with a confidence level and short clips, and I confirm it. Nothing is filed until I approve. Audio never touches any network.']

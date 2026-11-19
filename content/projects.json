@@ -2495,7 +2495,7 @@
     {
       "slug": "minutes",
       "title": "Minutes",
-      "descriptor": "A one-button meeting recorder that encrypts on the device, being prepared as open source",
+      "descriptor": "A one-button meeting recorder that encrypts on the device",
       "status": "Hardware/software prototype",
       "role": "Product design, firmware and laptop software",
       "order": 19,
@@ -2559,7 +2559,7 @@
             }
           ],
           "alt": "Five status-only e-paper screens side by side: READY, RECORDING in a red band with a start time, Saved with 1 to copy, READY with 3 to copy, and Low battery in a yellow band",
-          "caption": "Current screen states, panel scale · rendered from firmware",
+          "caption": "Current screen states, panel scale · rendered from the firmware screen layouts",
           "layout": "wide",
           "textEquivalent": "Five screens, each showing status only. READY. RECORDING on red, with STARTED 14:05 beneath. Saved, with footer 1 to copy. READY, with footer 3 to copy. Low battery on yellow. Four colours: black, white, red, yellow; 200 by 200 pixels. There is no clock, battery percentage or agenda, and the screen redraws once per event, never during a recording."
         },
