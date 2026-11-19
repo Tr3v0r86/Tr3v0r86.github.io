@@ -2588,6 +2588,52 @@
           "caption": "Anatomy of the earlier version · original illustration",
           "layout": "wide",
           "textEquivalent": "Callouts: 1.54 in four-colour e-paper, 200 by 200. REC button: press to start or stop. SYNC / PWR button: sync now, hold for off. Red light: on only while recording (earlier version; the current device has no light and the screen shows RECORDING). Speaker for start and stop sounds. Microphone. USB-C charging. Sync now belongs to the earlier version; in the USB version a short press of that button does nothing and the cable also carries recordings."
+        },
+        {
+          "src": "/media/minutes-review-window-1100-10929f4a20.webp",
+          "width": 1100,
+          "height": 810,
+          "variants": [
+            {
+              "src": "/media/minutes-review-window-480-94ab37dde7.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/minutes-review-window-960-aad26bbc15.webp",
+              "width": 960,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/minutes-review-window-1100-10929f4a20.webp",
+              "width": 1100,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Minutes review window for a meeting called Weekly Ops, with guests Alice, Bob and Carol. Two yellow cards ask who spoke: Is this Carol with Yes and No buttons, and Who is this with Alice, Bob and Carol buttons and a box to type a name",
+          "caption": "Review window, two speakers to confirm · screenshot, demo data",
+          "layout": "detail",
+          "textEquivalent": "Menu-bar popover: 3 meetings need you; 3 more ready to approve; Review meetings button. Recorder 81 percent, about 6 hours of recording left, 10 hours when full. All figures are demo data. The recording-time estimate learns from the recorder’s battery readings."
+        },
+        {
+          "src": "/media/minutes-menu-popover-600-9f48f4d14b.webp",
+          "width": 600,
+          "height": 432,
+          "variants": [
+            {
+              "src": "/media/minutes-menu-popover-480-fedda9405a.webp",
+              "width": 480,
+              "type": "image/webp"
+            },
+            {
+              "src": "/media/minutes-menu-popover-600-9f48f4d14b.webp",
+              "width": 600,
+              "type": "image/webp"
+            }
+          ],
+          "alt": "Menu-bar popover reading 3 meetings need you, 3 more ready to approve, with a Review meetings button, then Recorder 81 percent and About 6 h of recording left (10 h when full)",
+          "caption": "Demo figures; time left learns from battery readings · screenshot",
+          "layout": "detail"
         }
       ],
       "links": []
