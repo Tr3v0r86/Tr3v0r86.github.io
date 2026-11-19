@@ -47,11 +47,12 @@ test('Jarvis case renders its status, section, media and no links',async({page})
  expect(await page.locator('main').innerText()).not.toMatch(/\belc\b|(?<![-\w])\d{9,}(?![\w])|\/srv\/|\btail[0-9a-f]{4,}\b|tailnet|ts\.net|gbrain/i);
 });
 
-test('Minutes shows its product hero, three steps, spec sheet and honest status',async({page})=>{
+test('Minutes shows its product hero, four steps with screenshots, spec sheet and honest status',async({page})=>{
  const p=projects.find(p=>p.slug==='minutes');await page.goto('/work/minutes/');
  await expect(page.locator('.case-hero img')).toHaveAttribute('src',p.cover.src);
  await expect(page.locator('.case-meta')).toContainText('Hardware/software prototype');
- await expect(page.locator('.minutes-steps h3')).toHaveText(['Press','It locks','One cable','The transcript lands']);
+ await expect(page.locator('.minutes-steps h3')).toHaveText(['Press REC','Locked on device','Copy, then transcribe','Review and approve']);
+ await expect(page.locator('.minutes-shot img')).toHaveCount(3);
  await expect(page.locator('.minutes-sheet dt')).toContainText(['Board','Screen','Recording','Battery','Privacy']);
- await expect(page.locator('.case-story')).toContainText('working prototype');
+ await expect(page.locator('.case-story')).toContainText('open-source release is in preparation');
 });

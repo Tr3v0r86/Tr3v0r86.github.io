@@ -6,6 +6,8 @@ import os from 'node:os';
 import {gzipSync} from 'node:zlib';
 import {validateCatalog,safeURL,verifyMedia} from '../scripts/build.mjs';
 import {renderCase,renderHome} from '../src/templates.mjs';
+import {stepMedia} from '../src/minutes.mjs';
+import {existsSync} from 'node:fs';
 const catalog=JSON.parse(await readFile(new URL('../content/projects.json',import.meta.url),'utf8'));
 const changed=fn=>{const c=structuredClone(catalog);fn(c);return c;};
 test('real catalog includes the complete requested collection and decoded media',async()=>{const p=validateCatalog(catalog);assert.deepEqual(p.map(p=>p.slug),catalog.expectedSlugs);assert(p.some(p=>p.slug==='second-brain-builder'));assert(p.some(p=>p.slug==='trips'));assert(!p.some(p=>/face-tracking|espcam/.test(p.slug)));await verifyMedia(p);});
@@ -52,6 +54,8 @@ test('Minutes case stays public-safe and renders its steps and spec sheet',()=>{
  assert(p);assert.equal(p.status,'Hardware/software prototype');assert.deepEqual(p.links,[]);
  assert.doesNotMatch(JSON.stringify(p),priv);
  const html=renderCase(p,validateCatalog(catalog)),section=html.match(/<section class="minutes"[\s\S]*?<\/section>/)[0];
- for(const s of ['Press','It locks','One cable','The transcript lands','Board','Screen','Battery','Privacy','never unlock','USB cable','Audio never touches any network','version 0.2 in use'])assert(section.includes(s),s);
+ for(const s of ['Press REC','Locked on device','Copy, then transcribe','Review and approve','Board','Screen','Battery','Privacy','never unlock','USB cable','Audio is never uploaded','version 0.2 in use','demo data'])assert(section.includes(s),s);
  assert(!section.includes('—'));assert.doesNotMatch(section,priv);assert(!p.summary.includes('—'));
+ for(const t of [section,p.summary,p.descriptor])assert.doesNotMatch(t,/by voice|voiceprint|voice learning|recognis/i);
+ for(const m of Object.values(stepMedia))for(const v of m.variants)assert(existsSync('public'+v.src),v.src);
 });
